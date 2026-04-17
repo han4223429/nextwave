@@ -1,0 +1,373 @@
+/* NextWave Entrepreneurship Club - Custom Styles */
+
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 100px;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 70%),
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+        linear-gradient(to right, rgba(55, 65, 81, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(55, 65, 81, 0.1) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 4px, 40px 40px, 40px 40px;
+    background-color: #0b0f1a;
+    color: #e2e8f0;
+    min-height: 100vh;
+}
+
+/* CRT Monitor Effect */
+.crt-overlay {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    z-index: 9999;
+    opacity: 0.2;
+}
+
+.crt-flicker {
+    animation: flicker 0.15s infinite;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.01);
+    z-index: 9998;
+}
+
+/* Utility Classes */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Blinking Cursor */
+.blink {
+    animation: blinker 1s step-end infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes flicker {
+    0% { opacity: 0.95; }
+    50% { opacity: 1; }
+    100% { opacity: 0.9; }
+}
+
+/* Glitch Effect */
+.glitch {
+    position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -1px 0 #ff003c;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -1px 0 #00ffff;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(74px, 9999px, 83px, 0); }
+    5% { clip: rect(32px, 9999px, 5px, 0); }
+    10% { clip: rect(8px, 9999px, 95px, 0); }
+    15% { clip: rect(25px, 9999px, 14px, 0); }
+    20% { clip: rect(49px, 9999px, 81px, 0); }
+    25% { clip: rect(100px, 9999px, 73px, 0); }
+    30% { clip: rect(16px, 9999px, 46px, 0); }
+    35% { clip: rect(86px, 9999px, 43px, 0); }
+    40% { clip: rect(41px, 9999px, 13px, 0); }
+    45% { clip: rect(98px, 9999px, 20px, 0); }
+    50% { clip: rect(62px, 9999px, 89px, 0); }
+    55% { clip: rect(3px, 9999px, 2px, 0); }
+    60% { clip: rect(81px, 9999px, 51px, 0); }
+    65% { clip: rect(54px, 9999px, 76px, 0); }
+    70% { clip: rect(99px, 9999px, 90px, 0); }
+    75% { clip: rect(23px, 9999px, 27px, 0); }
+    80% { clip: rect(70px, 9999px, 34px, 0); }
+    85% { clip: rect(11px, 9999px, 63px, 0); }
+    90% { clip: rect(48px, 9999px, 59px, 0); }
+    95% { clip: rect(38px, 9999px, 19px, 0); }
+    100% { clip: rect(92px, 9999px, 80px, 0); }
+}
+
+@keyframes glitch-anim2 {
+    0% { clip: rect(18px, 9999px, 54px, 0); }
+    5% { clip: rect(65px, 9999px, 85px, 0); }
+    10% { clip: rect(96px, 9999px, 22px, 0); }
+    15% { clip: rect(4px, 9999px, 7px, 0); }
+    20% { clip: rect(33px, 9999px, 91px, 0); }
+    25% { clip: rect(89px, 9999px, 40px, 0); }
+    30% { clip: rect(12px, 9999px, 68px, 0); }
+    35% { clip: rect(78px, 9999px, 15px, 0); }
+    40% { clip: rect(29px, 9999px, 50px, 0); }
+    45% { clip: rect(55px, 9999px, 98px, 0); }
+    50% { clip: rect(84px, 9999px, 26px, 0); }
+    55% { clip: rect(2px, 9999px, 71px, 0); }
+    60% { clip: rect(45px, 9999px, 36px, 0); }
+    65% { clip: rect(91px, 9999px, 82px, 0); }
+    70% { clip: rect(17px, 9999px, 60px, 0); }
+    75% { clip: rect(61px, 9999px, 9px, 0); }
+    80% { clip: rect(37px, 9999px, 44px, 0); }
+    85% { clip: rect(80px, 9999px, 31px, 0); }
+    90% { clip: rect(24px, 9999px, 79px, 0); }
+    95% { clip: rect(52px, 9999px, 10px, 0); }
+    100% { clip: rect(97px, 9999px, 57px, 0); }
+}
+
+/* Neon Effects */
+.neon-text {
+    text-shadow: 0 0 5px rgba(37, 99, 235, 0.2), 0 0 10px rgba(37, 99, 235, 0.1);
+}
+
+.neon-border {
+    box-shadow: inset 0 0 10px rgba(37, 99, 235, 0.05), 0 0 10px rgba(37, 99, 235, 0.05);
+}
+
+/* Active Navigation */
+.nav-link-active {
+    color: var(--secondary) !important;
+    border-bottom: 2px solid var(--secondary);
+    background: rgba(251, 191, 36, 0.1);
+}
+
+/* Scrolling Log */
+.scroll-log {
+    animation: scroll-up 15s linear infinite;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+@keyframes scroll-up {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+/* Terminal Window */
+.terminal-header {
+    display: flex;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(30, 41, 59, 0.5);
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.terminal-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot-red { background: #ef4444; }
+.dot-yellow { background: #f59e0b; }
+.dot-green { background: #10b981; }
+
+/* Typewriter Cursor */
+.typewriter::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    margin-left: 4px;
+    color: var(--primary);
+}
+
+@keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* HUD Corners */
+.hud-corner {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(96, 165, 250, 0.3);
+    z-index: 100;
+    pointer-events: none;
+}
+
+.hud-corner-tl { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
+.hud-corner-tr { top: 20px; right: 20px; border-left: 0; border-bottom: 0; }
+.hud-corner-bl { bottom: 20px; left: 20px; border-right: 0; border-top: 0; }
+.hud-corner-br { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
+
+/* Side Rails */
+.side-rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 45;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.side-rail-left { left: 0; border-right: 1px border-outline-variant/20; }
+.side-rail-right { right: 0; border-left: 1px border-outline-variant/20; }
+
+/* Vertical Ticker */
+.ticker-vertical {
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: rgba(96, 165, 250, 0.4);
+    animation: slide-v 10s linear infinite;
+}
+
+@keyframes slide-v {
+    from { transform: translateY(100%); }
+    to { transform: translateY(-100%); }
+}
+
+/* Slow Rotation */
+@keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.rotate-slow {
+    animation: rotate-slow 60s linear infinite;
+}
+
+/* 3D Assembling Text Styles */
+.scene-3d {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.assemble-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15vw;
+    font-weight: 800;
+    color: rgba(37, 99, 235, 0.05);
+    text-shadow: 0 0 20px rgba(37, 99, 235, 0.1);
+    white-space: nowrap;
+    transform-style: preserve-3d;
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(20deg) rotateY(-10deg);
+}
+
+.assemble-char {
+    display: inline-block;
+    transform-style: preserve-3d;
+    animation: assemble-anim 8s infinite alternate ease-in-out;
+    position: relative;
+}
+
+.assemble-char::before,
+.assemble-char::after {
+    content: attr(data-char);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
+.assemble-char::before {
+    transform: translateZ(-10px);
+    color: rgba(0, 252, 64, 0.1);
+}
+
+.assemble-char::after {
+    transform: translateZ(-20px);
+    color: rgba(255, 215, 9, 0.1);
+}
+
+@keyframes assemble-anim {
+    0% {
+        transform: translate3d(calc(var(--rx) * 500px), calc(var(--ry) * 500px), calc(var(--rz) * 1000px)) rotateX(calc(var(--rx) * 360deg)) rotateY(calc(var(--ry) * 360deg)) rotateZ(calc(var(--rz) * 360deg));
+        opacity: 0;
+        filter: blur(10px);
+    }
+    30%, 70% {
+        transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+    100% {
+        transform: translate3d(calc(var(--rx) * -500px), calc(var(--ry) * -500px), calc(var(--rz) * -1000px)) rotateX(calc(var(--rx) * -360deg)) rotateY(calc(var(--ry) * -360deg)) rotateZ(calc(var(--rz) * -360deg));
+        opacity: 0;
+        filter: blur(10px);
+    }
+}
+
+/* Character animation delays */
+.assemble-char:nth-child(1) { --rx: 0.8; --ry: -0.5; --rz: 0.2; animation-delay: 0.1s; }
+.assemble-char:nth-child(2) { --rx: -0.4; --ry: 0.7; --rz: -0.9; animation-delay: 0.3s; }
+.assemble-char:nth-child(3) { --rx: 0.6; --ry: 0.2; --rz: 0.5; animation-delay: 0.2s; }
+.assemble-char:nth-child(4) { --rx: -0.7; --ry: -0.8; --rz: 0.1; animation-delay: 0.4s; }
+.assemble-char:nth-child(5) { --rx: 0.3; --ry: 0.9; --rz: -0.6; animation-delay: 0.15s; }
+.assemble-char:nth-child(6) { --rx: -0.2; --ry: -0.4; --rz: 0.8; animation-delay: 0.35s; }
+.assemble-char:nth-child(7) { --rx: 0.9; --ry: 0.1; --rz: -0.3; animation-delay: 0.25s; }
+.assemble-char:nth-child(8) { --rx: -0.5; --ry: 0.6; --rz: 0.7; animation-delay: 0.45s; }
