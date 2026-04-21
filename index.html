@@ -10,6 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+    <script src="firebase.config.js" defer></script>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
@@ -2932,7 +2933,7 @@ $ init_hub --env production
 
         sections.forEach(section => observer.observe(section));
 
-        const portalConfig = {
+        const portalConfig = window.NEXTWAVE_FIREBASE_CONFIG && typeof window.NEXTWAVE_FIREBASE_CONFIG === 'object' ? window.NEXTWAVE_FIREBASE_CONFIG : {
             apiKey: 'PASTE_YOUR_API_KEY',
             authDomain: 'PASTE_YOUR_AUTH_DOMAIN',
             projectId: 'PASTE_YOUR_PROJECT_ID',
