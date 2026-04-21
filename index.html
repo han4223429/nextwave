@@ -2281,7 +2281,7 @@
                 </li>
             </ul>
             <div class="flex items-center space-x-4 text-primary">
-                <button aria-label="terminal" class="hover:text-tertiary transition-colors"><span
+                <button id="terminal-toggle-btn" aria-label="terminal" class="hover:text-tertiary transition-colors"><span
                         class="material-symbols-outlined" data-icon="terminal">terminal</span></button>
                 <button aria-label="sensors" class="hover:text-tertiary transition-colors"><span
                         class="material-symbols-outlined" data-icon="sensors">sensors</span></button>
@@ -2403,17 +2403,19 @@
             </div>
         </section>
         <!-- Code Log Overlay Simulation -->
-        <div
-            class="fixed right-6 bottom-6 w-72 h-56 bg-surface-container-low/90 backdrop-blur-md border border-outline-variant/50 rounded-lg shadow-2xl overflow-hidden hidden xl:flex flex-col z-30 opacity-90 hover:opacity-100 transition-opacity">
+        <div id="terminal-window"
+            class="fixed right-6 bottom-6 w-[360px] max-w-[85vw] h-[310px] bg-surface-container-low/95 backdrop-blur-md border border-outline-variant/50 rounded-lg shadow-2xl overflow-hidden hidden flex-col z-30 opacity-95 hover:opacity-100 transition-all">
             <div class="terminal-header">
                 <div class="terminal-dot dot-red"></div>
                 <div class="terminal-dot dot-yellow"></div>
                 <div class="terminal-dot dot-green"></div>
                 <span
-                    class="ml-2 font-label text-[9px] text-outline uppercase tracking-widest">system_monitor.log</span>
+                    class="ml-2 font-label text-[9px] text-outline uppercase tracking-widest">member_console.sh</span>
+                <button id="terminal-close-btn"
+                    class="ml-auto text-outline hover:text-secondary text-xs px-2 py-1 font-label">×</button>
             </div>
-            <div class="p-3 font-label text-[10px] text-outline/80 flex-grow relative overflow-hidden">
-                <div class="scroll-log absolute inset-x-3 w-full">
+            <div class="p-3 font-label text-[10px] text-outline/80 flex-grow relative overflow-hidden flex flex-col gap-3">
+                <div id="terminal-log-stream" class="scroll-log absolute inset-x-3 top-3 w-full">
                     <div class=""><span class="text-tertiary mr-1">[INFO]</span> socket_connected:8080</div>
                     <div class=""><span class="text-secondary mr-1">[WARN]</span> memory_leak_detected:null</div>
                     <div class=""><span class="text-primary mr-1">[AUTH]</span> user_anonymous:granted</div>
@@ -2435,6 +2437,12 @@
                     <div class=""><span class="text-primary mr-1">[AUTH]</span> session_renewed</div>
                     <div class=""><span class="text-tertiary mr-1">[INFO]</span> heartbeat_pulse:stable</div>
                     <div class=""><span class="text-outline mr-1">[SYS]</span> kernel_patch_applied</div>
+                </div>
+                <div class="mt-auto pt-3 border-t border-outline-variant/50 space-y-2">
+                    <p id="terminal-login-state" class="text-tertiary text-[10px]">> 터미널을 통해 인증 상태를 확인하세요.</p>
+                    <p id="terminal-lock-message" class="text-outline/80 text-[11px]">Google 계정으로 로그인하면 멤버 승인 여부를 확인합니다.</p>
+                    <button id="terminal-login-btn"
+                        class="portal-login-btn bg-primary/20 text-primary text-[10px] px-3 py-1 rounded border border-primary hover:bg-primary hover:text-background transition-colors">Google 로그인</button>
                 </div>
             </div>
         </div>
@@ -2800,6 +2808,37 @@ $ init_hub --env production
                         <p class="text-on-surface-variant text-sm">현재 승인된 부원 계정으로 접속되어 팀원 전용 안내와 알림을 확인할 수 있습니다.</p>
                     </div>
                 </div>
+                <div id="member-admin-panel" class="hidden">
+                    <div class="bg-surface border border-outline-variant rounded-lg p-6 space-y-4">
+                        <h3 class="font-headline text-lg text-secondary uppercase">[ 관리자 설정 ]</h3>
+                        <p class="text-on-surface-variant text-sm">승인/권한은 관리자만 변경할 수 있습니다.</p>
+                        <div class="grid gap-2 sm:grid-cols-[1fr_auto_auto_auto]">
+                            <input id="admin-target-input" type="text"
+                                class="border border-outline-variant bg-surface-container-low/50 text-xs px-3 py-2 text-on-surface rounded"
+                                placeholder="UID 또는 이메일" />
+                            <button id="admin-approve-btn"
+                                class="px-3 py-2 border border-primary text-primary text-xs rounded hover:bg-primary hover:text-background transition-colors">
+                                승인 부여
+                            </button>
+                            <button id="admin-make-admin-btn"
+                                class="px-3 py-2 border border-secondary text-secondary text-xs rounded hover:bg-secondary hover:text-background transition-colors">
+                                관리자 부여
+                            </button>
+                            <button id="admin-revoke-btn"
+                                class="px-3 py-2 border border-tertiary text-tertiary text-xs rounded hover:bg-tertiary hover:text-background transition-colors">
+                                권한 회수
+                            </button>
+                        </div>
+                        <p id="admin-status-message" class="text-xs text-outline-variant"></p>
+                        <div class="space-y-2">
+                            <h4 class="font-headline text-sm text-tertiary uppercase">[ 회원 목록 ]</h4>
+                            <div id="admin-member-list"
+                                class="max-h-56 overflow-y-auto border border-outline-variant/40 rounded p-2 bg-background/20 text-xs space-y-2">
+                                <div class="text-outline-variant">목록 불러오는 중...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -2913,36 +2952,74 @@ $ init_hub --env production
         const memberGreeting = document.getElementById('member-greeting');
         const memberEmail = document.getElementById('member-email');
         const memberRole = document.getElementById('member-role');
+        const terminalWindow = document.getElementById('terminal-window');
+        const terminalToggleButton = document.getElementById('terminal-toggle-btn');
+        const terminalCloseButton = document.getElementById('terminal-close-btn');
+        const terminalLoginState = document.getElementById('terminal-login-state');
+        const terminalStatusMessage = document.getElementById('terminal-lock-message');
+        const adminPanel = document.getElementById('member-admin-panel');
+        const adminTargetInput = document.getElementById('admin-target-input');
+        const adminApproveBtn = document.getElementById('admin-approve-btn');
+        const adminMakeAdminBtn = document.getElementById('admin-make-admin-btn');
+        const adminRevokeBtn = document.getElementById('admin-revoke-btn');
+        const adminStatusMessage = document.getElementById('admin-status-message');
+        const adminMemberList = document.getElementById('admin-member-list');
 
         let authInstance = null;
         let dbInstance = null;
+        let currentProfile = null;
 
-        function showPortalState({ state, user = null, message = '' }) {
-            if (!authStatus || !memberLock || !memberAuthorized) {
-                return;
+        function roleLabel(profile) {
+            if (profile?.isAdmin) return '관리자';
+            if (profile?.isMember) return profile.role ? `부원 (${profile.role})` : '부원';
+            return '승인 대기';
+        }
+
+        function setTerminalWindowVisible(isOpen) {
+            if (!terminalWindow) return;
+            if (isOpen) {
+                terminalWindow.classList.remove('hidden');
+            } else {
+                terminalWindow.classList.add('hidden');
             }
+        }
+
+        function setTerminalMessage(roleState) {
+            if (!terminalLoginState || !terminalStatusMessage) return;
+            terminalLoginState.textContent = roleState ? `> 접속중: ${roleState.email || '알 수 없음'}` : '> 로그인 대기중';
+            terminalStatusMessage.textContent = roleState ? `권한 상태: ${roleState.roleText}` : 'Google 계정으로 로그인하면 멤버 승인 여부를 확인합니다.';
+        }
+
+        function showPortalState({ state, user = null, profile = null, message = '' }) {
+            if (!authStatus || !memberLock || !memberAuthorized) return;
 
             if (!hasFirebaseConfig || typeof firebase === 'undefined') {
                 authStatus.textContent = '인증 미설정';
                 authStatus.classList.remove('hidden');
                 memberLockMessage.textContent = 'Firebase 프로젝트 설정이 필요합니다.';
                 loginButtons.forEach(button => button.classList.add('hidden'));
-                logoutButton.classList.add('hidden');
-                portalNavItem.classList.add('hidden');
+                if (logoutButton) logoutButton.classList.add('hidden');
+                if (portalNavItem) portalNavItem.classList.add('hidden');
                 memberLock.classList.remove('hidden');
                 memberAuthorized.classList.add('hidden');
+                if (adminPanel) adminPanel.classList.add('hidden');
+                setTerminalMessage(null);
                 return;
             }
 
             if (state === 'signed-out' || state === 'need-login') {
+                currentProfile = null;
                 authStatus.textContent = '로그인 필요';
                 authStatus.classList.remove('hidden');
                 loginButtons.forEach(button => button.classList.remove('hidden'));
                 if (logoutButton) logoutButton.classList.add('hidden');
                 memberLock.classList.remove('hidden');
                 memberAuthorized.classList.add('hidden');
-                portalNavItem.classList.add('hidden');
+                if (portalNavItem) portalNavItem.classList.add('hidden');
+                if (adminPanel) adminPanel.classList.add('hidden');
                 memberLockMessage.textContent = message || '로그인 후 운영진 승인된 계정만 부원 전용 페이지를 확인할 수 있습니다.';
+                if (memberRole) memberRole.textContent = '권한: 승인 대기';
+                setTerminalMessage(null);
                 return;
             }
 
@@ -2952,37 +3029,163 @@ $ init_hub --env production
             if (logoutButton) logoutButton.classList.remove('hidden');
             memberGreeting.textContent = `${user?.displayName || '부원'}님, 환영합니다.`;
             memberEmail.textContent = `이메일: ${user?.email || ''}`;
+            memberRole.textContent = `권한: ${roleLabel(profile)}`;
+            const roleState = { email: user?.email || '', roleText: roleLabel(profile) };
+            setTerminalMessage(roleState);
 
             if (state === 'pending' || state === 'not-approved') {
                 memberLock.classList.remove('hidden');
                 memberAuthorized.classList.add('hidden');
-                portalNavItem.classList.add('hidden');
+                if (portalNavItem) portalNavItem.classList.add('hidden');
                 memberLockMessage.textContent = message || '승인 대기 중입니다. 운영진 승인 후 접근 가능합니다.';
-                memberRole.textContent = '권한: 승인 대기';
+                if (adminPanel) adminPanel.classList.add('hidden');
                 return;
             }
 
             if (state === 'approved') {
                 memberLock.classList.add('hidden');
                 memberAuthorized.classList.remove('hidden');
-                portalNavItem.classList.remove('hidden');
-                memberRole.textContent = memberRole.textContent || '권한: 부원';
+                if (portalNavItem) portalNavItem.classList.remove('hidden');
+                if (profile?.isAdmin) {
+                    if (adminPanel) adminPanel.classList.remove('hidden');
+                    renderAdminMemberList();
+                } else {
+                    if (adminPanel) adminPanel.classList.add('hidden');
+                }
+                return;
             }
         }
 
-        async function checkMemberPermission(user) {
-            if (!dbInstance) return false;
+        async function ensureMemberProfile(user) {
+            if (!dbInstance || !user?.uid) return null;
+            const memberRef = dbInstance.collection('members').doc(user.uid);
             try {
-                const memberDoc = await dbInstance.collection('members').doc(user.uid).get();
-                if (!memberDoc.exists) return false;
-                const memberData = memberDoc.data() || {};
-                if (memberData.role) {
-                    memberRole.textContent = `권한: ${memberData.role}`;
+                const existingSnap = await memberRef.get();
+                if (!existingSnap.exists) {
+                    await memberRef.set({
+                        uid: user.uid,
+                        email: user.email || '',
+                        displayName: user.displayName || '',
+                        isMember: false,
+                        isAdmin: false,
+                        role: 'pending',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    const createdSnap = await memberRef.get();
+                    return { uid: user.uid, ...(createdSnap.data() || {}) };
                 }
-                return Boolean(memberData.isMember);
+
+                const data = existingSnap.data() || {};
+                await memberRef.set({
+                    uid: user.uid,
+                    email: data.email || user.email || '',
+                    displayName: data.displayName || user.displayName || '',
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                return {
+                    uid: user.uid,
+                    isMember: Boolean(data.isMember),
+                    isAdmin: Boolean(data.isAdmin),
+                    role: data.role || 'pending',
+                    email: data.email || user.email || '',
+                    displayName: data.displayName || user.displayName || ''
+                };
             } catch (error) {
-                console.error('멤버 승인 확인 실패:', error);
-                return false;
+                console.error('멤버 프로필 동기화 실패:', error);
+                return {
+                    uid: user.uid,
+                    email: user.email || '',
+                    displayName: user.displayName || '',
+                    isMember: false,
+                    isAdmin: false,
+                    role: 'pending'
+                };
+            }
+        }
+
+        async function findTargetMember(identifier) {
+            if (!dbInstance || !identifier) return null;
+            const value = identifier.trim();
+            if (!value) return null;
+
+            const direct = await dbInstance.collection('members').doc(value).get();
+            if (direct.exists) {
+                return { ref: direct.ref, data: direct.data(), id: direct.id };
+            }
+
+            const byEmail = await dbInstance.collection('members').where('email', '==', value).limit(1).get();
+            if (!byEmail.empty) {
+                const doc = byEmail.docs[0];
+                return { ref: doc.ref, data: doc.data(), id: doc.id };
+            }
+            return null;
+        }
+
+        async function updateMemberAccess(identifier, patch) {
+            if (!currentProfile?.isAdmin) {
+                if (adminStatusMessage) {
+                    adminStatusMessage.textContent = '권한 오류: 관리자만 멤버 권한을 변경할 수 있습니다.';
+                    adminStatusMessage.classList.remove('text-outline-variant');
+                    adminStatusMessage.classList.add('text-secondary');
+                }
+                return;
+            }
+
+            const target = await findTargetMember(identifier);
+            if (!target) {
+                if (adminStatusMessage) {
+                    adminStatusMessage.textContent = '사용자를 찾지 못했습니다. UID 또는 가입된 이메일을 입력하세요.';
+                    adminStatusMessage.classList.remove('text-outline-variant');
+                    adminStatusMessage.classList.add('text-secondary');
+                }
+                return;
+            }
+
+            try {
+                await target.ref.set({
+                    ...patch,
+                    uid: target.id,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    updatedBy: currentProfile.uid
+                }, { merge: true });
+                if (adminStatusMessage) {
+                    adminStatusMessage.textContent = `처리 완료: ${target.data?.email || target.id}`;
+                    adminStatusMessage.classList.remove('text-outline-variant');
+                    adminStatusMessage.classList.add('text-secondary');
+                }
+                await refreshPortalSession();
+            } catch (error) {
+                console.error('권한 변경 실패:', error);
+                if (adminStatusMessage) {
+                    adminStatusMessage.textContent = '권한 변경에 실패했습니다. 규칙 또는 권한을 확인하세요.';
+                    adminStatusMessage.classList.remove('text-outline-variant');
+                    adminStatusMessage.classList.add('text-secondary');
+                }
+            }
+        }
+
+        async function renderAdminMemberList() {
+            if (!adminMemberList || !currentProfile?.isAdmin) return;
+            adminMemberList.innerHTML = '<div class="text-outline-variant">목록 로드 중...</div>';
+            try {
+                const snapshot = await dbInstance.collection('members').get();
+                const rows = [];
+                snapshot.forEach(doc => {
+                    const data = doc.data() || {};
+                    const badge = data.isAdmin ? '관리자' : data.isMember ? '부원' : '대기';
+                    rows.push(
+                        `<div class=\"border border-outline-variant/30 rounded p-2\">
+                            <div class=\"text-on-surface-variant\">UID: ${doc.id}</div>
+                            <div class=\"text-outline\">${data.email || '이메일 미등록'}</div>
+                            <div class=\"text-xs text-tertiary\">권한: ${badge}${data.role ? ' (' + data.role + ')' : ''}</div>
+                        </div>`
+                    );
+                });
+                adminMemberList.innerHTML = rows.length ? rows.join('') : '<div class=\"text-outline-variant\">등록된 멤버가 없습니다.</div>';
+            } catch (error) {
+                console.error('관리자 목록 조회 실패:', error);
+                adminMemberList.innerHTML = '<div class=\"text-secondary\">목록 조회 실패</div>';
             }
         }
 
@@ -2998,11 +3201,13 @@ $ init_hub --env production
                 return;
             }
 
-            const isApproved = await checkMemberPermission(user);
+            const profile = await ensureMemberProfile(user);
+            currentProfile = profile;
             showPortalState({
-                state: isApproved ? 'approved' : 'not-approved',
+                state: profile?.isMember ? 'approved' : 'not-approved',
                 user,
-                message: isApproved ? '' : '승인 대기 중입니다. 운영진 승인 후 접근 가능합니다.'
+                profile,
+                message: profile?.isMember ? '' : '승인 대기 중입니다. 운영진 승인 후 접근 가능합니다.'
             });
         }
 
@@ -3042,6 +3247,39 @@ $ init_hub --env production
                         } catch (error) {
                             console.error('로그아웃 실패:', error);
                         }
+                    });
+                }
+
+                if (terminalToggleButton) {
+                    terminalToggleButton.addEventListener('click', () => {
+                        if (!terminalWindow) return;
+                        const isOpen = !terminalWindow.classList.contains('hidden');
+                        setTerminalWindowVisible(!isOpen);
+                        if (!terminalWindow.classList.contains('hidden')) {
+                            setTerminalMessage(currentProfile ? { email: currentProfile.email, roleText: roleLabel(currentProfile) } : null);
+                        }
+                    });
+                }
+                if (terminalCloseButton) {
+                    terminalCloseButton.addEventListener('click', () => setTerminalWindowVisible(false));
+                }
+
+                if (adminApproveBtn) {
+                    adminApproveBtn.addEventListener('click', () => {
+                        const identifier = adminTargetInput?.value || '';
+                        updateMemberAccess(identifier, { isMember: true, isAdmin: false, role: 'member' });
+                    });
+                }
+                if (adminMakeAdminBtn) {
+                    adminMakeAdminBtn.addEventListener('click', () => {
+                        const identifier = adminTargetInput?.value || '';
+                        updateMemberAccess(identifier, { isMember: true, isAdmin: true, role: 'admin' });
+                    });
+                }
+                if (adminRevokeBtn) {
+                    adminRevokeBtn.addEventListener('click', () => {
+                        const identifier = adminTargetInput?.value || '';
+                        updateMemberAccess(identifier, { isMember: false, isAdmin: false, role: 'pending' });
                     });
                 }
 

@@ -6,14 +6,39 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    function currentMemberData() {
+      return isSignedIn() ?
+        get(/databases/$(database)/documents/members/$(request.auth.uid)).data : null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && currentMemberData() != null && currentMemberData().isAdmin == true;
+    }
+
     function isApprovedMember() {
       return isSignedIn() &&
-        get(/databases/$(database)/documents/members/$(request.auth.uid)).data.isMember == true;
+        currentMemberData() != null &&
+        currentMemberData().isMember == true;
+    }
+
+    function isSafeSelfProfileUpdate() {
+      return request.resource.data.isAdmin == resource.data.isAdmin &&
+        request.resource.data.isMember == resource.data.isMember &&
+        request.resource.data.role == resource.data.role;
     }
 
     match /members/{memberId} {
-      allow read: if isSignedIn() && request.auth.uid == memberId;
-      allow write: if false;
+      allow read: if isSignedIn() && (request.auth.uid == memberId || isAdmin());
+      allow create: if isSignedIn() &&
+        request.auth.uid == memberId &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.isAdmin == false &&
+        request.resource.data.role in ['pending', 'member'];
+      allow update: if isSignedIn() && (
+        (request.auth.uid == memberId && isSafeSelfProfileUpdate()) ||
+        isAdmin()
+      );
+      allow delete: if false;
     }
 
     // Example member-only content store. Replace/add collections as needed.
