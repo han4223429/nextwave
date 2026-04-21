@@ -1,0 +1,25 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isApprovedMember() {
+      return isSignedIn() &&
+        get(/databases/$(database)/documents/members/$(request.auth.uid)).data.isMember == true;
+    }
+
+    match /members/{memberId} {
+      allow read: if isSignedIn() && request.auth.uid == memberId;
+      allow write: if false;
+    }
+
+    // Example member-only content store. Replace/add collections as needed.
+    match /memberPosts/{postId} {
+      allow read: if isApprovedMember();
+      allow write: if false;
+    }
+  }
+}
