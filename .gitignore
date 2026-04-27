@@ -1,3 +1,4 @@
 firebase.config.js
 *.env
 *.local
+.github/workflows/
