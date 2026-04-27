@@ -116,4 +116,76 @@ mobileNavLinks.forEach(link => {
 
 sections.forEach(section => observer.observe(section));
 
+// ===========================
+// Executive Profile Modal
+// ===========================
+const adminCards = document.querySelectorAll('.admin-card');
+const adminModal = document.getElementById('admin-modal');
+const adminModalBackdrop = document.getElementById('admin-modal-backdrop');
+const adminModalContent = document.getElementById('admin-modal-content');
+const modalImg = document.getElementById('modal-img');
+const modalName = document.getElementById('modal-name');
+const modalRole = document.getElementById('modal-role');
+const modalUid = document.getElementById('modal-uid');
+const modalBio = document.getElementById('modal-bio');
+const modalPortfolio = document.getElementById('modal-portfolio');
+const modalClose = document.getElementById('modal-close');
+
+function openAdminModal(card) {
+    if (!adminModal || !adminModalBackdrop || !adminModalContent) return;
+
+    // Populate data
+    const name = card.getAttribute('data-name');
+    const role = card.getAttribute('data-role');
+    const uid = card.getAttribute('data-uid');
+    const img = card.getAttribute('data-img');
+    const portfolio = card.getAttribute('data-portfolio');
+    const bio = card.getAttribute('data-bio');
+
+    modalName.innerText = `[ ${name} ]`;
+    modalRole.innerText = role;
+    modalUid.innerText = uid;
+    modalImg.src = img;
+    modalImg.alt = `${name} profile picture`;
+    modalBio.innerHTML = bio;
+    modalPortfolio.href = portfolio;
+
+    // Show modal
+    adminModal.classList.remove('hidden');
+    // Force reflow
+    adminModal.offsetHeight;
+
+    adminModalBackdrop.classList.remove('opacity-0');
+    adminModalBackdrop.classList.add('opacity-100');
+    adminModalContent.classList.remove('scale-90', 'opacity-0');
+    adminModalContent.classList.add('scale-100', 'opacity-100');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeAdminModal() {
+    if (!adminModal || !adminModalBackdrop || !adminModalContent) return;
+
+    adminModalBackdrop.classList.remove('opacity-100');
+    adminModalBackdrop.classList.add('opacity-0');
+    adminModalContent.classList.remove('scale-100', 'opacity-100');
+    adminModalContent.classList.add('scale-90', 'opacity-0');
+
+    setTimeout(() => {
+        adminModal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }, 300);
+}
+
+adminCards.forEach(card => {
+    card.addEventListener('click', () => openAdminModal(card));
+});
+
+if (modalClose) {
+    modalClose.addEventListener('click', closeAdminModal);
+}
+
+if (adminModalBackdrop) {
+    adminModalBackdrop.addEventListener('click', closeAdminModal);
+}
+
 

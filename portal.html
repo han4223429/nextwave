@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextWave Portal</title>
+    <meta name="description" content="NextWave IT Union 부원 전용 포털 – 채팅, 공지사항, 출석, 부원 관리">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+    <script src="firebase.config.js"></script>
+    <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+
+    <!-- ====== LOGIN SCREEN ====== -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-logo">NextWave Portal</div>
+        <div class="login-sub">&gt; secure_member_terminal</div>
+        <div class="login-box">
+            <h2>[ Access Required ]</h2>
+            <p>NextWave IT Union 부원 전용 포털입니다.<br>Google 계정으로 로그인해 주세요.</p>
+            <button id="login-btn" class="google-btn">
+                <span class="material-symbols-outlined">login</span>
+                Google 로그인
+            </button>
+            <p id="login-error" style="color: var(--p-danger); margin-top: 16px; font-size: 11px;"></p>
+        </div>
+    </div>
+
+    <!-- ====== PENDING SCREEN ====== -->
+    <div id="pending-screen" class="pending-screen" style="display: none;">
+        <div class="pending-icon">⏳</div>
+        <h2>승인 대기 중</h2>
+        <p>운영진이 계정을 확인하고 있습니다. 승인되면 자동으로 접속됩니다.</p>
+        <button id="pending-logout" class="btn-secondary" style="margin-top: 24px;">로그아웃</button>
+    </div>
+
+    <!-- ====== PORTAL DASHBOARD ====== -->
+    <div id="portal-app" style="display: none;">
+        <!-- Top Bar -->
+        <header class="portal-topbar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="mobile-menu-btn" id="mobile-sidebar-btn" style="background:none;border:none;color:var(--p-primary);cursor:pointer;">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <a href="index.html" class="logo" style="text-decoration:none;">nextwave_portal</a>
+            </div>
+            <div class="user-info">
+                <span class="user-name" id="topbar-username">User</span>
+                <img id="topbar-avatar" src="" alt="avatar">
+                <button id="topbar-logout" class="btn-secondary" style="padding:5px 12px;font-size:10px;">Logout</button>
+            </div>
+        </header>
+
+        <!-- Mobile Backdrop -->
+        <div class="mobile-backdrop" id="mobile-backdrop" style="position:fixed;inset:0;z-index:35;background:rgba(0,0,0,0.6);display:none;"></div>
+
+        <div class="portal-layout">
+            <!-- Sidebar -->
+            <aside class="portal-sidebar" id="portal-sidebar">
+                <div class="nav-section">
+                    <div class="nav-section-title">&gt; navigation</div>
+                    <div class="nav-item active" data-tab="chat">
+                        <span class="material-symbols-outlined">chat</span>
+                        채팅
+                    </div>
+                    <div class="nav-item" data-tab="announcements">
+                        <span class="material-symbols-outlined">campaign</span>
+                        공지사항
+                    </div>
+                    <div class="nav-item" data-tab="attendance">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        출석 체크
+                    </div>
+                    <div class="nav-item" data-tab="members">
+                        <span class="material-symbols-outlined">group</span>
+                        부원 명단
+                    </div>
+                    <div class="nav-item" data-tab="admin" id="admin-nav" style="display:none;">
+                        <span class="material-symbols-outlined">admin_panel_settings</span>
+                        관리자
+                    </div>
+                </div>
+                <div class="nav-bottom">
+                    <a href="index.html" class="back-link">
+                        <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span>
+                        메인 페이지로 돌아가기
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="portal-main">
+
+                <!-- ── Chat Tab ── -->
+                <div class="tab-panel active" id="tab-chat">
+                    <div class="portal-card">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">chat</span> 부원 채팅</h3>
+                        <div class="chat-container">
+                            <div class="chat-messages" id="chat-messages">
+                                <div style="text-align:center;color:var(--p-outline);font-size:11px;padding:20px;">
+                                    <div class="loading-spinner" style="margin:0 auto 8px;"></div>
+                                    메시지를 불러오는 중...
+                                </div>
+                            </div>
+                            <div class="chat-input-bar">
+                                <input type="text" id="chat-input" placeholder="> 메시지를 입력하세요..." autocomplete="off">
+                                <button id="chat-send" class="btn-primary">전송</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Announcements Tab ── -->
+                <div class="tab-panel" id="tab-announcements">
+                    <div class="portal-card" id="announcement-form-card" style="display:none;">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">edit</span> 공지 작성 (관리자)</h3>
+                        <div class="announcement-form">
+                            <input type="text" id="ann-title-input" placeholder="공지 제목">
+                            <textarea id="ann-body-input" placeholder="공지 내용을 작성하세요..."></textarea>
+                            <button id="ann-submit" class="btn-primary">공지 등록</button>
+                        </div>
+                    </div>
+                    <div class="portal-card">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">campaign</span> 공지사항</h3>
+                        <div id="announcements-list">
+                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;">
+                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
+                                공지사항을 불러오는 중...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Attendance Tab ── -->
+                <div class="tab-panel" id="tab-attendance">
+                    <div class="portal-card">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">calendar_today</span> 오늘의 출석</h3>
+                        <div class="attendance-today" id="attendance-today">
+                            <div class="date-display" id="attendance-date"></div>
+                            <div id="attendance-status"></div>
+                            <button id="attendance-btn" class="btn-primary" style="margin-top:16px;">출석 체크</button>
+                        </div>
+                    </div>
+                    <div class="portal-card">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">history</span> 출석 기록</h3>
+                        <table class="attendance-log">
+                            <thead><tr><th>날짜</th><th>시간</th><th>상태</th></tr></thead>
+                            <tbody id="attendance-history"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ── Members Tab ── -->
+                <div class="tab-panel" id="tab-members">
+                    <div class="portal-card">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">group</span> 승인된 부원 목록</h3>
+                        <div class="member-grid" id="member-grid">
+                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;grid-column:1/-1;">
+                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
+                                부원 목록을 불러오는 중...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Admin Tab ── -->
+                <div class="tab-panel" id="tab-admin">
+                    <div class="portal-card">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">admin_panel_settings</span> 부원 관리</h3>
+                        <p style="font-size:12px;color:var(--p-on-surface-variant);margin-bottom:16px;">UID 또는 이메일을 입력하여 부원 권한을 관리합니다.</p>
+                        <input type="text" class="admin-input" id="admin-target" placeholder="UID 또는 이메일 입력">
+                        <div class="admin-actions">
+                            <button id="admin-approve" class="btn-secondary">승인 부여</button>
+                            <button id="admin-make-admin" class="btn-secondary" style="border-color:var(--p-secondary);color:var(--p-secondary);">관리자 부여</button>
+                            <button id="admin-revoke" class="btn-danger">권한 회수</button>
+                        </div>
+                        <p id="admin-status" style="font-size:11px;color:var(--p-outline);margin-top:12px;"></p>
+                    </div>
+                    <div class="portal-card">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">assignment_turned_in</span> 전체 부원 출석 기록</h3>
+                        <div id="admin-attendance-container" style="max-height:300px;overflow-y:auto;margin-top:10px;">
+                            <table class="attendance-log">
+                                <thead><tr><th>이름</th><th>날짜</th><th>시간</th></tr></thead>
+                                <tbody id="admin-attendance-body">
+                                    <tr><td colspan="3" style="text-align:center;color:var(--p-outline);">데이터를 불러오는 중...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="portal-card">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">list</span> 전체 회원 목록</h3>
+                        <div id="admin-member-list" style="max-height:400px;overflow-y:auto;">
+                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;">
+                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
+                                회원 목록을 불러오는 중...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="portal.js"></script>
+</body>
+</html>

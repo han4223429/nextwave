@@ -10,7 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
-    <script src="firebase.config.js" defer></script>
+    <script src="firebase.config.js"></script>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
@@ -2282,8 +2282,8 @@
                 </li>
             </ul>
             <div class="flex items-center space-x-4 text-primary">
-                <button id="terminal-toggle-btn" aria-label="terminal" class="hover:text-tertiary transition-colors"><span
-                        class="material-symbols-outlined" data-icon="terminal">terminal</span></button>
+                <a href="portal.html" id="terminal-toggle-btn" aria-label="terminal" class="hover:text-tertiary transition-colors"><span
+                        class="material-symbols-outlined" data-icon="terminal">terminal</span></a>
                 <button aria-label="sensors" class="hover:text-tertiary transition-colors"><span
                         class="material-symbols-outlined" data-icon="sensors">sensors</span></button>
                 <span id="auth-status"
@@ -2585,36 +2585,35 @@ $ init_hub --env production
                         class="ml-2 font-label text-[10px] text-outline uppercase tracking-widest">hall_of_fame.log</span>
                 </div>
                 <div class="p-6 md:p-10 font-label text-sm md:text-base space-y-4">
-                    <div
-                        class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 border-b border-outline-variant/30 pb-4">
-                        <span class="text-secondary font-bold">[ 2024.11 ]</span>
-                        <span class="text-on-surface flex-grow">교내 창업 경진대회 - 최우수상 (NEXT_STEP)</span>
-                        <span
-                            class="px-3 py-1 bg-secondary/10 text-secondary border border-secondary/30 rounded text-xs">STATUS:
-                            WINNER</span>
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 border-b border-outline-variant/30 pb-4">
+                        <span class="text-secondary font-bold">[ 2025.12 ]</span>
+                        <span class="text-on-surface flex-grow">제품제작역량 창업대회 - 최우수상 &amp; 캠프 수료</span>
+                        <span class="px-3 py-1 bg-secondary/10 text-secondary border border-secondary/30 rounded text-xs">STATUS: GRAND_PRIX</span>
                     </div>
-                    <div
-                        class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 border-b border-outline-variant/30 pb-4">
-                        <span class="text-secondary font-bold">[ 2024.08 ]</span>
-                        <span class="text-on-surface flex-grow">전국 대학생 연합 해커톤 - 우수상 (CLOUD_SYNC)</span>
-                        <span
-                            class="px-3 py-1 bg-secondary/10 text-secondary border border-secondary/30 rounded text-xs">STATUS:
-                            SILVER</span>
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 border-b border-outline-variant/30 pb-4">
+                        <span class="text-secondary font-bold">[ 2025.11 ]</span>
+                        <span class="text-on-surface flex-grow">SCHU AI·SW Festival 게임개발경진대회 - 최우수상 (MAYHEM)</span>
+                        <span class="px-3 py-1 bg-secondary/10 text-secondary border border-secondary/30 rounded text-xs">STATUS: GRAND_PRIX</span>
                     </div>
-                    <div
-                        class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 border-b border-outline-variant/30 pb-4">
-                        <span class="text-secondary font-bold">[ 2023.12 ]</span>
-                        <span class="text-on-surface flex-grow">순천향 혁신 챌린지 - 대상 (WAVE_PROTOCOL)</span>
-                        <span
-                            class="px-3 py-1 bg-primary/10 text-primary border border-primary/30 rounded text-xs">STATUS:
-                            GRAND_PRIX</span>
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 border-b border-outline-variant/30 pb-4">
+                        <span class="text-secondary font-bold">[ 2025.08 ]</span>
+                        <span class="text-on-surface flex-grow">제1회 올담 데이터 활용 해커톤 - 최우수상</span>
+                        <span class="px-3 py-1 bg-secondary/10 text-secondary border border-secondary/30 rounded text-xs">STATUS: GRAND_PRIX</span>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 border-b border-outline-variant/30 pb-4">
+                        <span class="text-primary font-bold">[ 2025 ]</span>
+                        <span class="text-on-surface flex-grow">로컬 창업동아리 아이디어 리그 START-UP Track-1 - 은상</span>
+                        <span class="px-3 py-1 bg-primary/10 text-primary border border-primary/30 rounded text-xs">STATUS: SILVER</span>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 border-b border-outline-variant/30 pb-4">
+                        <span class="text-primary font-bold">[ 2025 ]</span>
+                        <span class="text-on-surface flex-grow">로컬 창업동아리 아이디어 리그 START-UP Track-1 - 동상</span>
+                        <span class="px-3 py-1 bg-primary/10 text-primary border border-primary/30 rounded text-xs">STATUS: BRONZE</span>
                     </div>
                     <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 opacity-60">
-                        <span class="text-secondary font-bold">[ 2023.05 ]</span>
-                        <span class="text-on-surface flex-grow">지역 창업 해커톤 - 장려상 (CORE_INIT)</span>
-                        <span
-                            class="px-3 py-1 bg-outline-variant/20 text-outline border border-outline-variant/30 rounded text-xs">STATUS:
-                            HONORABLE</span>
+                        <span class="text-outline font-bold">[ 2025 ]</span>
+                        <span class="text-on-surface flex-grow">순천향대학교 나눔토론대회 - 장려상</span>
+                        <span class="px-3 py-1 bg-outline-variant/20 text-outline border border-outline-variant/30 rounded text-xs">STATUS: HONORABLE</span>
                     </div>
                 </div>
             </div>
@@ -2628,12 +2627,18 @@ $ init_hub --env production
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Admin 1 -->
                 <div
-                    class="bg-surface border-2 border-outline-variant p-6 hover:border-tertiary transition-colors duration-200 relative overflow-hidden flex flex-col items-center text-center">
+                    class="bg-surface border-2 border-outline-variant p-6 hover:border-tertiary transition-colors duration-200 relative overflow-hidden flex flex-col items-center text-center cursor-pointer admin-card"
+                    data-name="손성"
+                    data-role="PRESIDENT"
+                    data-uid="UID: 0001"
+                    data-img="assets/son.jpg"
+                    data-portfolio="#"
+                    data-bio="&gt; 순천향대학교 사물인터넷학과<br>&gt; KAKAO 엠버서더 KANANA<br>&gt; 삼성전자 1차벤더 근무">
                     <div
                         class="w-24 h-24 mb-4 border-2 border-tertiary bg-surface-container flex items-center justify-center overflow-hidden neon-border">
                         <img alt="President Son Seong profile picture"
-                            class="w-full h-full object-cover mix-blend-multiply opacity-90"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi2LYUBW1F93LYdonCKNkMYWwF0FVDTskvzj2ReDVnNisKZHQ16wnTItZX5ZP6iUbdU23UmAw7neKTouShVpuMX5P82_TrXVYNB7jdaoVDSYkU0xRGlyD3jJrTEBs_Z6HHKPm5zlGW4C9frGZGVMw9dCkjHcSx0LMC0iQxW0f_qBp1kI-t-rXKVWEqnQEck4PCsQklvc8iJLh935hHyCKHhJQ-Jjtd9Fx9DVPOjzr7dcDwQOjsHXiNoFA0KGnQFmmoRxQF5jsuyJg" />
+                            class="w-full h-full object-cover opacity-100"
+                            src="assets/son.jpg" />
                     </div>
                     <div class="font-label text-xs text-tertiary mb-1">UID: 0001</div>
                     <h3 class="font-headline text-xl text-on-surface font-bold uppercase">[ 회장 손성 ]</h3>
@@ -2646,12 +2651,18 @@ $ init_hub --env production
                 </div>
                 <!-- Admin 2 -->
                 <div
-                    class="bg-surface border-2 border-outline-variant p-6 hover:border-secondary transition-colors duration-200 relative overflow-hidden flex flex-col items-center text-center">
+                    class="bg-surface border-2 border-outline-variant p-6 hover:border-secondary transition-colors duration-200 relative overflow-hidden flex flex-col items-center text-center cursor-pointer admin-card"
+                    data-name="김한용"
+                    data-role="VICE PRESIDENT"
+                    data-uid="UID: 0002"
+                    data-img="assets/kim.jpg"
+                    data-portfolio="https://han4223429.github.io/portfolio/"
+                    data-bio="&gt; 순천향대학교 사물인터넷학과<br>&gt; 삼성전자 갤럭시 서포터즈 / ROTC 66th<br>&gt; 디스플레이 시스템 제어 C++ 캠프 수료<br>&gt; 개발팀 근무 (삼성 1차벤더)<br>&gt; 교내 창업동아리 회장 등">
                     <div
                         class="w-24 h-24 mb-4 border-2 border-secondary bg-surface-container flex items-center justify-center overflow-hidden neon-border">
                         <img alt="Vice President Kim Hanyong profile picture"
-                            class="w-full h-full object-cover mix-blend-multiply opacity-90"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAheDcQzuxHRlpf3fCwXRqV-8L0bxYu22VX9tOKMGpiqpecn1_bhuZQlyiRXKXPElX2QZiojoeLOEwfF6igTON_sR1ScJgHYYNsVx-mKmdAqom70j30jUqL-r2l31KBj4zXASp0AWrC5iBW1L6VUXU3k61euOnqD5wbzT0UxAo5E60J4dqMS9DeGGptCdZjmmaUvrzIruVGfiWPhm_aBML3banowYe1IWZlMhcOmR0SMBRc7JHcIaV1-hIl1RfGRWAX52fhdNcMjHY" />
+                            class="w-full h-full object-cover opacity-100"
+                            src="assets/kim.jpg" />
                     </div>
                     <div class="font-label text-xs text-secondary mb-1">UID: 0002</div>
                     <h3 class="font-headline text-xl text-on-surface font-bold uppercase">[ 부회장 김한용 ]</h3>
@@ -2660,22 +2671,30 @@ $ init_hub --env production
                         <div>&gt; 순천향대학교 사물인터넷학과</div>
                         <div>&gt; 삼성전자 갤럭시 서포터즈 / ROTC 66th</div>
                         <div>&gt; 디스플레이 시스템 제어 C++ 캠프 수료</div>
-                        <div>&gt; 개발팀 근무 (삼성 1차벤더) 등</div>
+                        <div>&gt; 개발팀 근무 (삼성 1차벤더)</div>
+                        <div>&gt; 교내 창업동아리 회장 등</div>
                     </div>
                 </div>
                 <!-- Admin 3 -->
                 <div
-                    class="bg-surface border-2 border-outline-variant p-6 hover:border-primary transition-colors duration-200 relative overflow-hidden flex flex-col items-center text-center">
+                    class="bg-surface border-2 border-outline-variant p-6 hover:border-primary transition-colors duration-200 relative overflow-hidden flex flex-col items-center text-center cursor-pointer admin-card"
+                    data-name="이학주"
+                    data-role="HR DIRECTOR"
+                    data-uid="UID: 0003"
+                    data-img="assets/lee.jpg"
+                    data-portfolio="https://badwordfilter.github.io/portfolio/"
+                    data-bio="&gt; 순천향대학교 메타버스&amp;게임학과<br>&gt; RAMIC STUDIO 대표<br>&gt; Unity 게임 2편 Steam 출시<br>&gt; AI·SW 페스티벌 최우수상<br>&gt; 교내 창업동아리 회장 등">
                     <div
                         class="w-24 h-24 mb-4 border-2 border-primary bg-surface-container flex items-center justify-center overflow-hidden neon-border">
                         <img alt="HR Lead Lee Hakju profile picture"
-                            class="w-full h-full object-cover mix-blend-multiply opacity-90"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvFY5iyISDOh3wPz1uvwOIopxeUSpBIJx8C06qN7A6DmlSZx1Yyrbnq8c_rW__IcHM00H2CUS8-mbyaPW_bxr5sjGiXOjKtcDONuxcQenq9kBqfWsSBRJpzJqIGD4TkGE2dSue8f3xojrzMlSG2IdsQ5Pt3D3ivNVLnGH6im3uIBzbEfOE5m9jKdhRT_PmdtBDlokZLu_hPPWroa51xskQVhlA-mlQDMH0uricZMuIigW6eSJ_IcaZy6uBbsBRvkE1IgujVIAK8RY" />
+                            class="w-full h-full object-cover opacity-100"
+                            src="assets/lee.jpg" />
                     </div>
                     <div class="font-label text-xs text-primary mb-1">UID: 0003</div>
                     <h3 class="font-headline text-xl text-on-surface font-bold uppercase">[ 인사총괄 이학주 ]</h3>
                     <div class="w-full h-px bg-outline-variant/50 my-4"></div>
                     <div class="font-body text-sm text-on-surface-variant text-left w-full space-y-1">
+                        <div>&gt; 순천향대학교 메타버스&amp;게임학과</div>
                         <div>&gt; RAMIC STUDIO 대표</div>
                         <div>&gt; Unity 게임 2편 Steam 출시</div>
                         <div>&gt; AI·SW 페스티벌 최우수상</div>
@@ -2719,7 +2738,7 @@ $ init_hub --env production
                                 <span class="material-symbols-outlined text-secondary mt-1">calendar_today</span>
                                 <div>
                                     <h4 class="font-headline text-lg text-on-surface font-bold uppercase">모집 기간</h4>
-                                    <p class="text-on-surface-variant text-sm mt-1">2025.03.01 ~ 2025.03.15 (예정)</p>
+                                    <p class="text-on-surface-variant text-sm mt-1">2026학년도 2학기 (예정)</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
@@ -3227,7 +3246,11 @@ $ init_hub --env production
         }
 
         function initializeMemberPortal() {
-            if (!hasFirebaseConfig || typeof firebase === 'undefined') {
+            // Re-check config if it was loaded later
+            const currentConfig = window.NEXTWAVE_FIREBASE_CONFIG || portalConfig;
+            const configValid = Object.values(currentConfig).every(value => typeof value === 'string' && !value.includes('PASTE_YOUR'));
+
+            if (!configValid || typeof firebase === 'undefined') {
                 showPortalState({ state: 'need-login' });
                 return;
             }
@@ -3299,7 +3322,114 @@ $ init_hub --env production
             refreshPortalSession();
         }
 
-        initializeMemberPortal();
+        window.addEventListener('DOMContentLoaded', function() {
+            initializeMemberPortal();
+        });
+    </script>
+    <!-- Admin Detailed Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6">
+        <div id="admin-modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-md opacity-0 transition-opacity duration-300"></div>
+        <div id="admin-modal-content" class="relative w-full max-w-2xl bg-surface border-2 border-primary/40 rounded-xl overflow-hidden shadow-2xl scale-90 opacity-0 transition-all duration-300 flex flex-col md:flex-row">
+            <div class="w-full md:w-2/5 h-64 md:h-auto overflow-hidden bg-surface-container flex items-center justify-center">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover opacity-90" />
+            </div>
+            <div class="flex-grow p-8 flex flex-col justify-between space-y-6">
+                <div>
+                    <div id="modal-uid" class="font-label text-xs text-primary tracking-widest mb-1">UID: 0000</div>
+                    <h2 id="modal-name" class="font-headline text-3xl text-on-surface font-black uppercase mb-1">[ NAME ]</h2>
+                    <div id="modal-role" class="font-label text-xs text-outline tracking-widest uppercase mb-4">ROLE_TITLE</div>
+                    <div class="w-16 h-1 bg-primary/40 mb-6"></div>
+                    <div id="modal-bio" class="font-body text-sm md:text-base text-on-surface-variant leading-relaxed space-y-2">
+                        <!-- Bio content -->
+                    </div>
+                </div>
+                <div class="flex gap-4 pt-6">
+                    <a id="modal-portfolio" href="#" target="_blank" class="flex-grow bg-primary text-background font-headline text-center py-4 uppercase tracking-widest font-bold hover:scale-105 active:scale-95 transition-all shadow-lg">
+                        View Portfolio
+                    </a>
+                    <button id="modal-close" class="px-6 border border-outline-variant text-outline hover:text-white transition-colors uppercase font-label text-xs">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // ===========================
+        // Executive Profile Modal (inline to guarantee DOM availability)
+        // ===========================
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminCards = document.querySelectorAll('.admin-card');
+            const adminModal = document.getElementById('admin-modal');
+            const adminModalBackdrop = document.getElementById('admin-modal-backdrop');
+            const adminModalContent = document.getElementById('admin-modal-content');
+            const modalImg = document.getElementById('modal-img');
+            const modalName = document.getElementById('modal-name');
+            const modalRole = document.getElementById('modal-role');
+            const modalUid = document.getElementById('modal-uid');
+            const modalBio = document.getElementById('modal-bio');
+            const modalPortfolio = document.getElementById('modal-portfolio');
+            const modalCloseBtn = document.getElementById('modal-close');
+
+            function openAdminModal(card) {
+                if (!adminModal) return;
+                var name = card.getAttribute('data-name');
+                var role = card.getAttribute('data-role');
+                var uid = card.getAttribute('data-uid');
+                var img = card.getAttribute('data-img');
+                var portfolio = card.getAttribute('data-portfolio');
+                var bio = card.getAttribute('data-bio');
+
+                if (modalName) modalName.innerText = '[ ' + name + ' ]';
+                if (modalRole) modalRole.innerText = role;
+                if (modalUid) modalUid.innerText = uid;
+                if (modalImg) { modalImg.src = img; modalImg.alt = name + ' profile picture'; }
+                if (modalBio) modalBio.innerHTML = bio;
+                if (modalPortfolio) modalPortfolio.href = portfolio;
+
+                adminModal.classList.remove('hidden');
+                adminModal.offsetHeight; // force reflow
+                if (adminModalBackdrop) {
+                    adminModalBackdrop.classList.remove('opacity-0');
+                    adminModalBackdrop.classList.add('opacity-100');
+                }
+                if (adminModalContent) {
+                    adminModalContent.classList.remove('scale-90', 'opacity-0');
+                    adminModalContent.classList.add('scale-100', 'opacity-100');
+                }
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeAdminModal() {
+                if (!adminModal) return;
+                if (adminModalBackdrop) {
+                    adminModalBackdrop.classList.remove('opacity-100');
+                    adminModalBackdrop.classList.add('opacity-0');
+                }
+                if (adminModalContent) {
+                    adminModalContent.classList.remove('scale-100', 'opacity-100');
+                    adminModalContent.classList.add('scale-90', 'opacity-0');
+                }
+                setTimeout(function() {
+                    adminModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+
+            adminCards.forEach(function(card) {
+                card.addEventListener('click', function() { openAdminModal(card); });
+            });
+
+            if (modalCloseBtn) {
+                modalCloseBtn.addEventListener('click', closeAdminModal);
+            }
+            if (adminModalBackdrop) {
+                adminModalBackdrop.addEventListener('click', closeAdminModal);
+            }
+
+            console.log('[Admin Modal] Initialized. Found ' + adminCards.length + ' admin cards.');
+        });
     </script>
 </body>
 

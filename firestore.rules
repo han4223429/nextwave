@@ -6,19 +6,23 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    // 슈퍼 관리자 이메일 지정 (최초 승인용)
+    function isSuperAdmin() {
+      return request.auth.token.email == 'hupatv@gmail.com';
+    }
+
     function currentMemberData() {
       return isSignedIn() ?
         get(/databases/$(database)/documents/members/$(request.auth.uid)).data : null;
     }
 
     function isAdmin() {
-      return isSignedIn() && currentMemberData() != null && currentMemberData().isAdmin == true;
+      return isSignedIn() && ((currentMemberData() != null && currentMemberData().isAdmin == true) || isSuperAdmin());
     }
 
     function isApprovedMember() {
       return isSignedIn() &&
-        currentMemberData() != null &&
-        currentMemberData().isMember == true;
+        ((currentMemberData() != null && currentMemberData().isMember == true) || isSuperAdmin());
     }
 
     function isSafeSelfProfileUpdate() {
@@ -27,13 +31,16 @@ service cloud.firestore {
         request.resource.data.role == resource.data.role;
     }
 
+    // ── Members ──
     match /members/{memberId} {
-      allow read: if isSignedIn() && (request.auth.uid == memberId || isAdmin());
+      allow read: if isSignedIn() && (request.auth.uid == memberId || isAdmin() || isApprovedMember());
       allow create: if isSignedIn() &&
         request.auth.uid == memberId &&
         request.resource.data.uid == request.auth.uid &&
-        request.resource.data.isAdmin == false &&
-        request.resource.data.role in ['pending', 'member'];
+        (
+          (request.resource.data.isAdmin == false && request.resource.data.isMember == false && request.resource.data.role == 'pending') ||
+          isSuperAdmin()
+        );
       allow update: if isSignedIn() && (
         (request.auth.uid == memberId && isSafeSelfProfileUpdate()) ||
         isAdmin()
@@ -41,7 +48,32 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    // Example member-only content store. Replace/add collections as needed.
+    // ── Messages (Chat) ──
+    match /messages/{messageId} {
+      allow read: if isApprovedMember();
+      allow create: if isApprovedMember() &&
+        request.resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // ── Announcements ──
+    match /announcements/{announcementId} {
+      allow read: if isApprovedMember();
+      allow create: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // ── Attendance ──
+    match /attendance/{attendanceId} {
+      allow read: if isSignedIn() && (
+        resource.data.uid == request.auth.uid || isAdmin()
+      );
+      allow create: if isApprovedMember() &&
+        request.resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // ── Member-only content (legacy) ──
     match /memberPosts/{postId} {
       allow read: if isApprovedMember();
       allow write: if false;
