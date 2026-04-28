@@ -511,7 +511,7 @@
 
                     var deleteBtn = '';
                     if (currentProfile && currentProfile.isAdmin) {
-                        deleteBtn = '<button class="opp-delete-btn" onclick="window.deleteOpportunity(\'' + oppId + '\')" title="삭제"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>';
+                        deleteBtn = '<button class="opp-delete-btn" data-opp-id="' + oppId + '" title="삭제"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>';
                     }
 
                     var linkBtn = '';
@@ -605,17 +605,25 @@
         });
     }
 
-    window.deleteOpportunity = function(docId) {
-        if (!confirm('이 기회 정보를 삭제하시겠습니까?')) return;
-        if (!db || !currentProfile || !currentProfile.isAdmin) return;
+    // 기회 정보 삭제 (이벤트 위임 방식)
+    var oppGrid = $('opp-grid');
+    if (oppGrid) {
+        oppGrid.addEventListener('click', function(e) {
+            var btn = e.target.closest('.opp-delete-btn');
+            if (!btn) return;
+            var docId = btn.getAttribute('data-opp-id');
+            if (!docId) return;
+            if (!confirm('이 기회 정보를 삭제하시겠습니까?')) return;
+            if (!db || !currentProfile || !currentProfile.isAdmin) return;
 
-        db.collection('opportunities').doc(docId).delete().then(function() {
-            showToast('삭제되었습니다.');
-        }).catch(function(err) {
-            console.error('Opp delete error:', err);
-            showToast('삭제 실패: ' + err.message);
+            db.collection('opportunities').doc(docId).delete().then(function() {
+                showToast('삭제되었습니다.');
+            }).catch(function(err) {
+                console.error('Opp delete error:', err);
+                showToast('삭제 실패: ' + err.message);
+            });
         });
-    };
+    }
 
     // =========================================================
     // ATTENDANCE MODULE
