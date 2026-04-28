@@ -483,14 +483,21 @@
         if (oppUnsubscribe) oppUnsubscribe();
 
         oppUnsubscribe = db.collection('opportunities')
-            .orderBy('createdAt', 'desc')
             .onSnapshot(function (snapshot) {
                 grid.innerHTML = '';
                 var hasItems = false;
+                var items = [];
+                snapshot.forEach(function (doc) { items.push({ id: doc.id, data: doc.data() }); });
+                // 클라이언트 정렬: createdAt 최신순
+                items.sort(function(a, b) {
+                    var ta = a.data.createdAt ? (a.data.createdAt.seconds || 0) : 0;
+                    var tb = b.data.createdAt ? (b.data.createdAt.seconds || 0) : 0;
+                    return tb - ta;
+                });
 
-                snapshot.forEach(function (doc) {
-                    var opp = doc.data();
-                    var oppId = doc.id;
+                items.forEach(function (item) {
+                    var opp = item.data;
+                    var oppId = item.id;
                     var dday = calcDday(opp.deadline);
 
                     // 마감된 정보 자동 숨기기 (마감일 지난 지 3일 이상)
