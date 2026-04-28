@@ -1,3 +1,4 @@
 *.env
 *.local
-.github/workflows/
+serviceAccountKey.json
+__pycache__/

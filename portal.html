@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NextWave Portal</title>
-    <meta name="description" content="NextWave IT Union 부원 전용 포털 – 채팅, 공지사항, 출석, 부원 관리">
+    <meta name="description" content="NextWave IT Union 부원 전용 포털 – 채팅, 공지사항, 출석, 기회 정보">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="NextWave Portal">
+    <meta property="og:description" content="NextWave IT Union 부원 전용 포털 – 채팅, 공지사항, 출석, 기회 정보">
+    <meta property="og:image" content="assets/logo.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NextWave Portal">
+    <meta name="twitter:image" content="assets/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <!-- Firebase -->
@@ -79,6 +88,10 @@
                     <div class="nav-item" data-tab="members">
                         <span class="material-symbols-outlined">group</span>
                         부원 명단
+                    </div>
+                    <div class="nav-item" data-tab="opportunities">
+                        <span class="material-symbols-outlined">rocket_launch</span>
+                        기회 정보
                     </div>
                     <div class="nav-item" data-tab="admin" id="admin-nav" style="display:none;">
                         <span class="material-symbols-outlined">admin_panel_settings</span>
@@ -168,18 +181,61 @@
                     </div>
                 </div>
 
+                <!-- ── Opportunities Tab ── -->
+                <div class="tab-panel" id="tab-opportunities">
+                    <div class="portal-card" id="opp-form-card" style="display:none;">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">add_circle</span> 기회 정보 등록 (관리자)</h3>
+                        <div class="opp-form">
+                            <input type="text" id="opp-title-input" placeholder="제목 (예: 2026 AI 해커톤)">
+                            <textarea id="opp-desc-input" placeholder="간단한 설명을 작성하세요..."></textarea>
+                            <div class="opp-form-row">
+                                <select id="opp-category-input">
+                                    <option value="contest">🏆 공모전</option>
+                                    <option value="hackathon">💻 해커톤</option>
+                                    <option value="dev">⚙️ 개발</option>
+                                    <option value="gamedev">🎮 게임개발</option>
+                                    <option value="marketing">📢 마케팅</option>
+                                    <option value="activity">🤝 대외활동</option>
+                                </select>
+                                <input type="date" id="opp-deadline-input" placeholder="마감일">
+                            </div>
+                            <input type="url" id="opp-link-input" placeholder="관련 링크 (https://...)">
+                            <input type="text" id="opp-source-input" placeholder="출처 (예: 캠퍼스픽, 링커리어...)">
+                            <button id="opp-submit" class="btn-primary">등록</button>
+                        </div>
+                    </div>
+                    <div class="portal-card">
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">rocket_launch</span> 기회 정보 센터</h3>
+                        <p style="font-size:11px;color:var(--p-on-surface-variant);margin-bottom:16px;">공모전, 마케팅 트렌드, 대외활동 등 유용한 정보를 한 곳에서 확인하세요. 마감된 정보는 자동으로 사라집니다.</p>
+                        <div class="opp-filters" id="opp-filters">
+                            <button class="opp-filter-btn active" data-filter="all">전체</button>
+                            <button class="opp-filter-btn" data-filter="contest">🏆 공모전</button>
+                            <button class="opp-filter-btn" data-filter="hackathon">💻 해커톤</button>
+                            <button class="opp-filter-btn" data-filter="dev">⚙️ 개발</button>
+                            <button class="opp-filter-btn" data-filter="gamedev">🎮 게임개발</button>
+                            <button class="opp-filter-btn" data-filter="marketing">📢 마케팅</button>
+                            <button class="opp-filter-btn" data-filter="activity">🤝 대외활동</button>
+                        </div>
+                        <div class="opp-grid" id="opp-grid">
+                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:30px;grid-column:1/-1;">
+                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
+                                기회 정보를 불러오는 중...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- ── Admin Tab ── -->
                 <div class="tab-panel" id="tab-admin">
                     <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">admin_panel_settings</span> 부원 관리</h3>
-                        <p style="font-size:12px;color:var(--p-on-surface-variant);margin-bottom:16px;">UID 또는 이메일을 입력하여 부원 권한을 관리합니다.</p>
-                        <input type="text" class="admin-input" id="admin-target" placeholder="UID 또는 이메일 입력">
-                        <div class="admin-actions">
-                            <button id="admin-approve" class="btn-secondary">승인 부여</button>
-                            <button id="admin-make-admin" class="btn-secondary" style="border-color:var(--p-secondary);color:var(--p-secondary);">관리자 부여</button>
-                            <button id="admin-revoke" class="btn-danger">권한 회수</button>
+                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">admin_panel_settings</span> 부원 관리 및 권한 설정</h3>
+                        <p style="font-size:12px;color:var(--p-on-surface-variant);margin-bottom:16px;">아래 목록에서 부원의 이름(닉네임)을 수정하거나 권한을 관리할 수 있습니다.</p>
+                        <div id="admin-member-list" style="max-height:500px;overflow-y:auto;border:1px solid var(--p-outline-variant);background:rgba(11,15,26,0.3);">
+                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;">
+                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
+                                회원 목록을 불러오는 중...
+                            </div>
                         </div>
-                        <p id="admin-status" style="font-size:11px;color:var(--p-outline);margin-top:12px;"></p>
                     </div>
                     <div class="portal-card">
                         <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">assignment_turned_in</span> 전체 부원 출석 기록</h3>
@@ -190,15 +246,6 @@
                                     <tr><td colspan="3" style="text-align:center;color:var(--p-outline);">데이터를 불러오는 중...</td></tr>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">list</span> 전체 회원 목록</h3>
-                        <div id="admin-member-list" style="max-height:400px;overflow-y:auto;">
-                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;">
-                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                회원 목록을 불러오는 중...
-                            </div>
                         </div>
                     </div>
                 </div>

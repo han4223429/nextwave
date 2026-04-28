@@ -13,6 +13,8 @@
     let currentProfile = null;
     let chatUnsubscribe = null;
     let announcementsUnsubscribe = null;
+    let oppUnsubscribe = null;
+    let currentOppFilter = 'all';
 
     // ── DOM Refs ──
     const $ = (id) => document.getElementById(id);
@@ -124,9 +126,7 @@
         $('attendance-btn').addEventListener('click', doAttendance);
 
         // Admin
-        $('admin-approve').addEventListener('click', function () { adminAction('approve'); });
-        $('admin-make-admin').addEventListener('click', function () { adminAction('makeAdmin'); });
-        $('admin-revoke').addEventListener('click', function () { adminAction('revoke'); });
+        // Inline actions will be handled by window level functions: window.adminInlineAction, window.adminRename
 
         // Mobile sidebar
         var mobileBtn = $('mobile-sidebar-btn');
@@ -163,6 +163,7 @@
         if (!auth) return;
         if (chatUnsubscribe) chatUnsubscribe();
         if (announcementsUnsubscribe) announcementsUnsubscribe();
+        if (oppUnsubscribe) oppUnsubscribe();
         auth.signOut();
     }
 
@@ -250,10 +251,11 @@
             avatar.style.display = 'none';
         }
 
-        // Admin nav
+        // Admin nav & opp form
         if (currentProfile && currentProfile.isAdmin) {
             $('admin-nav').style.display = '';
             $('announcement-form-card').style.display = '';
+            $('opp-form-card').style.display = '';
         }
 
         // Load data
@@ -261,10 +263,15 @@
         loadAnnouncements();
         loadAttendance();
         loadMembers();
+        loadOpportunities();
+        setupOppFilters();
         if (currentProfile && currentProfile.isAdmin) {
             loadAdminMembers();
             loadAllAttendance();
         }
+
+        // Opp submit
+        $('opp-submit').addEventListener('click', submitOpportunity);
     }
 
     // =========================================================
@@ -374,11 +381,21 @@
                 }
                 snapshot.forEach(function (doc) {
                     var ann = doc.data();
+                    var annId = doc.id;
                     var el = document.createElement('div');
                     el.className = 'announcement-item';
+                    
+                    var deleteHtml = '';
+                    if (currentProfile && currentProfile.isAdmin) {
+                        deleteHtml = '<button class="ann-delete-btn" onclick="window.deleteAnnouncement(\'' + annId + '\')" title="공지 삭제"><span class="material-symbols-outlined" style="font-size:16px;">delete</span></button>';
+                    }
+
                     el.innerHTML =
                         '<div class="ann-header">' +
-                        '  <div class="ann-title">' + escapeHtml(ann.title || '제목 없음') + '</div>' +
+                        '  <div class="ann-title-wrap">' +
+                        '    <div class="ann-title">' + escapeHtml(ann.title || '제목 없음') + '</div>' +
+                        deleteHtml +
+                        '  </div>' +
                         '  <div class="ann-date">' + formatDate(ann.createdAt) + '</div>' +
                         '</div>' +
                         '<div class="ann-body">' + escapeHtml(ann.body || '').replace(/\n/g, '<br>') + '</div>';
@@ -414,6 +431,184 @@
             showToast('공지 등록 실패');
         });
     }
+
+    // =========================================================
+    // DELETE ANNOUNCEMENT
+    // =========================================================
+    window.deleteAnnouncement = function(docId) {
+        if (!confirm('정말 이 공지사항을 삭제하시겠습니까?')) return;
+        if (!db || !currentProfile || !currentProfile.isAdmin) return;
+
+        db.collection('announcements').doc(docId).delete().then(function() {
+            showToast('공지사항이 삭제되었습니다.');
+        }).catch(function(err) {
+            console.error('Delete error:', err);
+            showToast('삭제 실패: ' + err.message);
+        });
+    };
+
+    // =========================================================
+    // OPPORTUNITIES MODULE
+    // =========================================================
+    var CATEGORY_LABELS = {
+        contest: '🏆 공모전',
+        hackathon: '💻 해커톤',
+        dev: '⚙️ 개발',
+        gamedev: '🎮 게임개발',
+        marketing: '📢 마케팅',
+        activity: '🤝 대외활동'
+    };
+
+    function calcDday(deadlineStr) {
+        if (!deadlineStr) return null;
+        var deadline = new Date(deadlineStr + 'T23:59:59');
+        var now = new Date();
+        var diff = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
+        return diff;
+    }
+
+    function ddayLabel(dday) {
+        if (dday === null) return { text: '상시', cls: 'normal' };
+        if (dday < 0) return { text: '마감', cls: 'urgent' };
+        if (dday === 0) return { text: 'D-DAY', cls: 'urgent' };
+        if (dday <= 7) return { text: 'D-' + dday, cls: 'urgent' };
+        if (dday <= 14) return { text: 'D-' + dday, cls: 'soon' };
+        return { text: 'D-' + dday, cls: 'normal' };
+    }
+
+    function loadOpportunities() {
+        if (!db) return;
+        var grid = $('opp-grid');
+
+        if (oppUnsubscribe) oppUnsubscribe();
+
+        oppUnsubscribe = db.collection('opportunities')
+            .orderBy('deadline', 'asc')
+            .onSnapshot(function (snapshot) {
+                grid.innerHTML = '';
+                var hasItems = false;
+
+                snapshot.forEach(function (doc) {
+                    var opp = doc.data();
+                    var oppId = doc.id;
+                    var dday = calcDday(opp.deadline);
+
+                    // 마감된 정보 자동 숨기기 (마감일 지난 지 3일 이상)
+                    if (dday !== null && dday < -3) return;
+
+                    // 카테고리 필터
+                    if (currentOppFilter !== 'all' && opp.category !== currentOppFilter) return;
+
+                    hasItems = true;
+                    var dd = ddayLabel(dday);
+
+                    var deleteBtn = '';
+                    if (currentProfile && currentProfile.isAdmin) {
+                        deleteBtn = '<button class="opp-delete-btn" onclick="window.deleteOpportunity(\'' + oppId + '\')" title="삭제"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>';
+                    }
+
+                    var linkBtn = '';
+                    if (opp.link) {
+                        linkBtn = '<a href="' + escapeHtml(opp.link) + '" target="_blank" rel="noopener" class="opp-link-btn"><span class="material-symbols-outlined" style="font-size:12px;">open_in_new</span> 바로가기</a>';
+                    }
+
+                    var card = document.createElement('div');
+                    card.className = 'opp-card';
+                    card.setAttribute('data-category', opp.category || '');
+                    card.innerHTML =
+                        '<div class="opp-card-header">' +
+                        '  <div class="opp-card-title">' + escapeHtml(opp.title || '') + '</div>' +
+                        '  <div class="opp-dday ' + dd.cls + '">' + dd.text + '</div>' +
+                        '</div>' +
+                        '<div class="opp-card-desc">' + escapeHtml(opp.description || '').replace(/\n/g, '<br>') + '</div>' +
+                        '<div class="opp-card-meta">' +
+                        '  <span class="opp-tag ' + (opp.category || '') + '">' + (CATEGORY_LABELS[opp.category] || opp.category || '') + '</span>' +
+                        (opp.source ? '  <span class="opp-source">출처: ' + escapeHtml(opp.source) + '</span>' : '') +
+                        (opp.deadline ? '  <span class="opp-source">마감: ' + escapeHtml(opp.deadline) + '</span>' : '') +
+                        '</div>' +
+                        '<div class="opp-card-actions">' + linkBtn + deleteBtn + '</div>';
+
+                    grid.appendChild(card);
+                });
+
+                if (!hasItems) {
+                    grid.innerHTML = '<div class="opp-empty">' +
+                        '<span class="material-symbols-outlined" style="font-size:48px;display:block;margin-bottom:8px;">search_off</span>' +
+                        '등록된 기회 정보가 없습니다.' +
+                        (currentOppFilter !== 'all' ? '<br><span style="font-size:10px;">다른 카테고리를 선택해 보세요.</span>' : '') +
+                        '</div>';
+                }
+            }, function (err) {
+                console.error('Opportunities error:', err);
+                grid.innerHTML = '<div class="opp-empty" style="color:var(--p-danger);">기회 정보 로드 실패: ' + escapeHtml(err.message) + '</div>';
+            });
+    }
+
+    function setupOppFilters() {
+        var filtersDiv = $('opp-filters');
+        if (!filtersDiv) return;
+        filtersDiv.addEventListener('click', function(e) {
+            var btn = e.target.closest('.opp-filter-btn');
+            if (!btn) return;
+            var filter = btn.getAttribute('data-filter');
+            currentOppFilter = filter;
+
+            filtersDiv.querySelectorAll('.opp-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+
+            loadOpportunities();
+        });
+    }
+
+    function submitOpportunity() {
+        if (!db || !currentProfile || !currentProfile.isAdmin) return;
+
+        var title = $('opp-title-input').value.trim();
+        var description = $('opp-desc-input').value.trim();
+        var category = $('opp-category-input').value;
+        var deadline = $('opp-deadline-input').value;
+        var link = $('opp-link-input').value.trim();
+        var source = $('opp-source-input').value.trim();
+
+        if (!title) {
+            showToast('제목을 입력해 주세요.');
+            return;
+        }
+
+        db.collection('opportunities').add({
+            title: title,
+            description: description,
+            category: category,
+            deadline: deadline || null,
+            link: link || null,
+            source: source || null,
+            authorUid: currentUser.uid,
+            authorName: currentUser.displayName || currentUser.email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(function () {
+            $('opp-title-input').value = '';
+            $('opp-desc-input').value = '';
+            $('opp-deadline-input').value = '';
+            $('opp-link-input').value = '';
+            $('opp-source-input').value = '';
+            showToast('기회 정보가 등록되었습니다!');
+        }).catch(function (err) {
+            console.error('Opp submit error:', err);
+            showToast('등록 실패: ' + err.message);
+        });
+    }
+
+    window.deleteOpportunity = function(docId) {
+        if (!confirm('이 기회 정보를 삭제하시겠습니까?')) return;
+        if (!db || !currentProfile || !currentProfile.isAdmin) return;
+
+        db.collection('opportunities').doc(docId).delete().then(function() {
+            showToast('삭제되었습니다.');
+        }).catch(function(err) {
+            console.error('Opp delete error:', err);
+            showToast('삭제 실패: ' + err.message);
+        });
+    };
 
     // =========================================================
     // ATTENDANCE MODULE
@@ -536,16 +731,36 @@
                 listDiv.innerHTML = '';
                 snapshot.forEach(function (doc) {
                     var m = doc.data();
+                    var mId = m.uid;
                     var row = document.createElement('div');
                     row.className = 'admin-member-row';
-                    var statusColor = m.isMember ? 'var(--p-tertiary)' : 'var(--p-secondary)';
+                    
+                    var statusColor = m.isAdmin ? 'var(--p-secondary)' : (m.isMember ? 'var(--p-tertiary)' : 'var(--p-outline)');
                     var statusText = m.isAdmin ? 'ADMIN' : (m.isMember ? 'MEMBER' : 'PENDING');
+                    
+                    var actionsHtml = '';
+                    if (!m.isMember) {
+                        actionsHtml += '<button class="btn-tiny primary" onclick="window.adminInlineAction(\'' + mId + '\', \'approve\')">승인</button>';
+                    } else if (!m.isAdmin) {
+                        actionsHtml += '<button class="btn-tiny secondary" onclick="window.adminInlineAction(\'' + mId + '\', \'makeAdmin\')">관리자 부여</button>';
+                        actionsHtml += '<button class="btn-tiny danger" onclick="window.adminInlineAction(\'' + mId + '\', \'revoke\')">회수</button>';
+                    } else {
+                        // Admin
+                        if (m.email !== 'hupatv@gmail.com') { // superadmin protection
+                            actionsHtml += '<button class="btn-tiny danger" onclick="window.adminInlineAction(\'' + mId + '\', \'revoke\')">권한 회수</button>';
+                        }
+                    }
+
                     row.innerHTML =
-                        '<div>' +
-                        '  <div style="color:var(--p-on-surface);font-weight:600;">' + escapeHtml(m.displayName || 'N/A') + '</div>' +
-                        '  <div style="color:var(--p-outline);font-size:10px;">' + escapeHtml(m.email || '') + '</div>' +
+                        '<div class="admin-member-info">' +
+                        '  <div class="admin-name-edit">' +
+                        '    <input type="text" class="admin-name-input" id="admin-name-' + mId + '" value="' + escapeHtml(m.displayName || '') + '" placeholder="이름 없음">' +
+                        '    <button class="btn-tiny" onclick="window.adminRename(\'' + mId + '\')">저장</button>' +
+                        '  </div>' +
+                        '  <div style="color:var(--p-outline);font-size:10px;">' + escapeHtml(m.email || '') + ' <span style="color:' + statusColor + ';font-weight:700;margin-left:4px;">[' + statusText + ']</span></div>' +
                         '</div>' +
-                        '<div style="color:' + statusColor + ';font-weight:700;font-size:10px;text-transform:uppercase;">' + statusText + '</div>';
+                        '<div class="admin-row-actions">' + actionsHtml + '</div>';
+                    
                     listDiv.appendChild(row);
                 });
             })
@@ -583,39 +798,35 @@
             });
     }
 
-    async function adminAction(action) {
+    window.adminRename = async function(uid) {
         if (!db || !currentProfile || !currentProfile.isAdmin) return;
-        var target = $('admin-target').value.trim();
-        var statusEl = $('admin-status');
-
-        if (!target) {
-            statusEl.textContent = 'UID 또는 이메일을 입력해 주세요.';
+        var newName = $('admin-name-' + uid).value.trim();
+        if (!newName) {
+            showToast('이름을 입력해 주세요.');
             return;
         }
 
-        statusEl.textContent = '처리 중...';
+        try {
+            await db.collection('members').doc(uid).update({
+                displayName: newName,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            showToast('이름이 변경되었습니다.');
+            loadMembers();
+            // Optional: update chat messages where author is this user (too complex for now, just future msgs will have new name)
+        } catch (err) {
+            console.error('Rename error:', err);
+            showToast('이름 변경 실패: ' + err.message);
+        }
+    };
+
+    window.adminInlineAction = async function(uid, action) {
+        if (!db || !currentProfile || !currentProfile.isAdmin) return;
+        
+        if (action === 'revoke' && !confirm('정말 이 유저의 권한을 회수하시겠습니까?')) return;
 
         try {
-            // Find member by UID or email
-            var memberDoc = null;
-            var docRef = db.collection('members').doc(target);
-            var doc = await docRef.get();
-
-            if (doc.exists) {
-                memberDoc = docRef;
-            } else {
-                // Search by email
-                var query = await db.collection('members').where('email', '==', target).limit(1).get();
-                if (!query.empty) {
-                    memberDoc = query.docs[0].ref;
-                }
-            }
-
-            if (!memberDoc) {
-                statusEl.textContent = '해당 사용자를 찾을 수 없습니다.';
-                return;
-            }
-
+            var memberDoc = db.collection('members').doc(uid);
             var updateData = {};
             if (action === 'approve') {
                 updateData = { isMember: true, role: 'member', updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
@@ -626,25 +837,16 @@
             }
 
             await memberDoc.update(updateData);
-            statusEl.textContent = '✓ 권한이 업데이트되었습니다.';
-            statusEl.style.color = 'var(--p-tertiary)';
-            $('admin-target').value = '';
+            showToast('권한이 변경되었습니다.');
 
             // Refresh lists
             loadMembers();
             loadAdminMembers();
-            loadAllAttendance();
-            showToast('권한 변경 완료');
-
-            setTimeout(function () {
-                statusEl.style.color = '';
-            }, 3000);
         } catch (err) {
-            console.error('Admin action error:', err);
-            statusEl.textContent = '오류: ' + err.message;
-            statusEl.style.color = 'var(--p-danger)';
+            console.error('Action error:', err);
+            showToast('오류: ' + err.message);
         }
-    }
+    };
 
     // =========================================================
     // BOOT
