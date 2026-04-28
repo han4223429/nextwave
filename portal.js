@@ -483,7 +483,7 @@
         if (oppUnsubscribe) oppUnsubscribe();
 
         oppUnsubscribe = db.collection('opportunities')
-            .orderBy('deadline', 'asc')
+            .orderBy('createdAt', 'desc')
             .onSnapshot(function (snapshot) {
                 grid.innerHTML = '';
                 var hasItems = false;
