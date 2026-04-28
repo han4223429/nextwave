@@ -86,67 +86,6 @@ def classify_category(title, description=''):
 
 
 # ====================================================
-# 크롤러: 캠퍼스픽 (Campuspick) - 공모전
-# ====================================================
-def crawl_campuspick():
-    results = []
-    url = 'https://campuspick.com/contest'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
-    }
-
-    try:
-        resp = requests.get(url, headers=headers, timeout=10)
-        resp.raise_for_status()
-        soup = BeautifulSoup(resp.text, 'html.parser')
-
-        items = soup.select('.list-item')[:20]
-
-        for item in items:
-            title_el = item.select_one('.title')
-            dday_el = item.select_one('.dday')
-
-            if not title_el:
-                continue
-
-            title = title_el.get_text(strip=True)
-
-            # 카테고리 자동 분류
-            category = classify_category(title)
-            if category is None:
-                continue  # 교육 등 제외 항목
-
-            # D-Day 파싱
-            deadline = None
-            if dday_el:
-                dday_text = dday_el.get_text(strip=True)
-                match = re.search(r'D-(\d+)', dday_text)
-                if match:
-                    days = int(match.group(1))
-                    deadline = (datetime.now() + timedelta(days=days)).strftime('%Y-%m-%d')
-
-            link = ''
-            link_el = item.get('href') or (item.select_one('a') and item.select_one('a').get('href'))
-            if link_el:
-                link = 'https://campuspick.com' + link_el if link_el.startswith('/') else link_el
-
-            results.append({
-                'title': title,
-                'description': f'캠퍼스픽에서 수집된 정보입니다.',
-                'category': category,
-                'deadline': deadline,
-                'link': link,
-                'source': '캠퍼스픽',
-            })
-
-        print(f"✅ 캠퍼스픽: {len(results)}건 수집 ({len(items)}건 중 필터링 후)")
-    except Exception as e:
-        print(f"❌ 캠퍼스픽 크롤링 실패: {e}")
-
-    return results
-
-
-# ====================================================
 # 크롤러: 링커리어 (Linkareer) - 대외활동/공모전
 # ====================================================
 def crawl_linkareer():
@@ -267,7 +206,6 @@ def main():
     print("=" * 50 + "\n")
 
     all_items = []
-    all_items.extend(crawl_campuspick())
     all_items.extend(crawl_linkareer())
 
     print(f"\n📦 총 {len(all_items)}건 수집")
