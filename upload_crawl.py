@@ -146,51 +146,7 @@ def crawl_linkareer():
     print(f"   → 총 {len(unique)}건 (중복 제거 후)")
     return unique
 
-# ── 올콘 (All-con) 크롤링 ──
-def crawl_allcon():
-    results = []
-    # 공모전, 대외활동 리스트 페이지 (1: 공모전, 2: 대외활동)
-    urls = [
-        ('https://www.all-con.co.kr/list/contest/1', 'contest'),
-        ('https://www.all-con.co.kr/list/contest/2', 'activity')
-    ]
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}
 
-    for url, default_cat in urls:
-        try:
-            resp = requests.get(url, headers=headers, timeout=10)
-            resp.raise_for_status()
-            soup = BeautifulSoup(resp.text, 'html.parser')
-            # 올콘 리스트 아이템 선택자
-            rows = soup.select('.list_card li, .contest_list li, tr')[:20]
-
-            for item in rows:
-                title_el = item.select_one('.title a, dt a, h3 a, a')
-                if not title_el: continue
-                title = title_el.get_text(strip=True)
-                if not title or len(title) < 3: continue
-
-                category = classify(title) or default_cat
-                
-                link_el = item.select_one('a[href]')
-                link = ''
-                if link_el:
-                    href = link_el.get('href', '')
-                    if href.startswith('/'): link = 'https://www.all-con.co.kr' + href
-                    else: link = href
-
-                results.append({
-                    'title': title,
-                    'description': '올콘에서 수집된 정보입니다.',
-                    'category': category,
-                    'deadline': None,
-                    'link': link,
-                    'source': '올콘',
-                })
-            print(f"✅ 올콘 ({default_cat}): {len(items)}건 스캔")
-        except Exception as e:
-            print(f"❌ 올콘 ({default_cat}) 실패: {e}")
-    return results
 
 # ── 위비티 (Wevity) 크롤링 ──
 def crawl_wevity():
@@ -230,49 +186,48 @@ def crawl_wevity():
         print(f"❌ 위비티 실패: {e}")
     return results
 
-# ── 캠퍼스픽 (Campuspick) 크롤링 ──
-def crawl_campuspick():
+
+
+
+# ── 콘테스트코리아 (Contest Korea) 크롤링 ──
+def crawl_contestkorea():
     results = []
     urls = [
-        ('https://www.campuspick.com/activity', 'activity'),
-        ('https://www.campuspick.com/contest', 'contest')
+        ('https://www.contestkorea.com/sub/list.php?int_gbn=1', 'contest'),
+        ('https://www.contestkorea.com/sub/list.php?int_gbn=2', 'activity')
     ]
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
-    }
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}
 
     for url, default_cat in urls:
         try:
-            # 캠퍼스픽 보안 우회를 위해 Referer와 더 상세한 헤더 추가
-            headers['Referer'] = 'https://www.campuspick.com/'
             resp = requests.get(url, headers=headers, timeout=10)
             resp.raise_for_status()
             soup = BeautifulSoup(resp.text, 'html.parser')
-            # 캠퍼스픽 아이템 선택자 재확인 (item 클래스를 가진 a 태그 내부의 h3)
-            items = soup.select('a.item')[:20]
+            items = soup.select('.list_style_2 li')[:20]
 
             for item in items:
-                title_el = item.select_one('h3')
+                title_el = item.select_one('.txt')
                 if not title_el: continue
                 title = title_el.get_text(strip=True)
                 if not title or len(title) < 2: continue
 
                 category = classify(title) or default_cat
-                href = item.get('href', '')
-                link = 'https://www.campuspick.com' + href if href.startswith('/') else href
+                
+                a_tag = item.select_one('a')
+                href = a_tag.get('href', '') if a_tag else ''
+                link = 'https://www.contestkorea.com/sub/' + href if href else ''
 
                 results.append({
                     'title': title,
-                    'description': '캠퍼스픽에서 수집된 정보입니다.',
+                    'description': '콘테스트코리아에서 수집된 정보입니다.',
                     'category': category,
                     'deadline': None,
                     'link': link,
-                    'source': '캠퍼스픽',
+                    'source': '콘테스트코리아',
                 })
-            print(f"✅ 캠퍼스픽 ({default_cat}): {len(items)}건 스캔")
+            print(f"✅ 콘테스트코리아 ({default_cat}): {len(items)}건 스캔")
         except Exception as e:
-            print(f"❌ 캠퍼스픽 ({default_cat}) 실패: {e}")
+            print(f"❌ 콘테스트코리아 ({default_cat}) 실패: {e}")
     return results
 
 # ── Firestore REST API로 업로드 ──
@@ -334,7 +289,7 @@ def upload_to_firestore(items, token):
 # ── 메인 ──
 if __name__ == '__main__':
     print("=" * 50)
-    print("🚀 NextWave Mega Crawler (Linkareer, All-con, Wevity, Campuspick)")
+    print("🚀 NextWave Mega Crawler (Linkareer, Wevity, ContestKorea)")
     print(f"⏰ {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 50 + "\n")
     
@@ -351,9 +306,8 @@ if __name__ == '__main__':
     # 수집 소스 리스트
     sources = [
         ("링커리어", crawl_linkareer),
-        ("올콘", crawl_allcon),
         ("위비티", crawl_wevity),
-        ("캠퍼스픽", crawl_campuspick)
+        ("콘테스트코리아", crawl_contestkorea)
     ]
     
     for name, fetch_func in sources:
