@@ -511,7 +511,7 @@
 
                     var deleteBtn = '';
                     if (currentProfile && currentProfile.isAdmin) {
-                        deleteBtn = '<button class="opp-delete-btn" data-opp-id="' + oppId + '" title="삭제"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>';
+                        deleteBtn = '<button type="button" class="opp-delete-btn" data-opp-id="' + oppId + '" title="삭제"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>';
                     }
 
                     var linkBtn = '';
@@ -611,6 +611,9 @@
         oppGrid.addEventListener('click', function(e) {
             var btn = e.target.closest('.opp-delete-btn');
             if (!btn) return;
+            e.preventDefault();
+            e.stopPropagation();
+            
             var docId = btn.getAttribute('data-opp-id');
             if (!docId) return;
             if (!confirm('이 기회 정보를 삭제하시겠습니까?')) return;
