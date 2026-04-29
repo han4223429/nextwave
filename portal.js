@@ -190,7 +190,7 @@
                 currentProfile = { isMember: isSuperAdmin, isAdmin: isSuperAdmin, role: isSuperAdmin ? 'admin' : 'pending' };
             } else {
                 currentProfile = doc.data();
-                var isSuperAdmin = (user.email === 'hupatv@gmail.com');
+                var isSuperAdmin = (user.email === 'hupatv@gmail.com' || user.email === 'hanyong.kk1@gmail.com' || user.email === 'handak@10.nate.com');
 
                 // Auto-upgrade super admin if not already upgraded
                 if (isSuperAdmin && (!currentProfile.isAdmin || !currentProfile.isMember)) {
@@ -372,9 +372,15 @@
     // =========================================================
     window.deleteChat = function(docId) {
         if (!confirm('이 메시지를 삭제하시겠습니까?')) return;
-        if (!db || !currentProfile || !currentProfile.isAdmin) return;
+        if (!db) return;
+        if (!currentProfile || !currentProfile.isAdmin) {
+            showToast('삭제 권한이 없습니다. (관리자 전용)');
+            return;
+        }
 
-        db.collection('messages').doc(docId).delete().catch(function(err) {
+        db.collection('messages').doc(docId).delete().then(function() {
+            showToast('메시지가 삭제되었습니다.');
+        }).catch(function(err) {
             console.error('Chat delete error:', err);
             showToast('삭제 실패: ' + err.message);
         });
@@ -456,7 +462,11 @@
     // =========================================================
     window.deleteAnnouncement = function(docId) {
         if (!confirm('정말 이 공지사항을 삭제하시겠습니까?')) return;
-        if (!db || !currentProfile || !currentProfile.isAdmin) return;
+        if (!db) return;
+        if (!currentProfile || !currentProfile.isAdmin) {
+            showToast('삭제 권한이 없습니다. (관리자 전용)');
+            return;
+        }
 
         db.collection('announcements').doc(docId).delete().then(function() {
             showToast('공지사항이 삭제되었습니다.');
@@ -636,10 +646,14 @@
             var docId = btn.getAttribute('data-opp-id');
             if (!docId) return;
             if (!confirm('이 기회 정보를 삭제하시겠습니까?')) return;
-            if (!db || !currentProfile || !currentProfile.isAdmin) return;
+            if (!db) return;
+            if (!currentProfile || !currentProfile.isAdmin) {
+                showToast('삭제 권한이 없습니다. (관리자 전용)');
+                return;
+            }
 
             db.collection('opportunities').doc(docId).delete().then(function() {
-                showToast('삭제되었습니다.');
+                showToast('기회 정보가 삭제되었습니다.');
             }).catch(function(err) {
                 console.error('Opp delete error:', err);
                 showToast('삭제 실패: ' + err.message);
