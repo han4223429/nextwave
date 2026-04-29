@@ -34,6 +34,32 @@
         setTimeout(function () { toast.classList.remove('show'); }, duration);
     }
 
+    // ── Custom Confirm Modal (DOM 재렌더링에 영향받지 않음) ──
+    function showConfirmModal(message, onConfirm) {
+        var overlay = $('confirm-modal');
+        var msgEl = $('confirm-modal-msg');
+        var okBtn = $('confirm-modal-ok');
+        var cancelBtn = $('confirm-modal-cancel');
+        if (!overlay) return;
+
+        msgEl.textContent = message;
+        overlay.style.display = 'flex';
+
+        // 기존 이벤트 제거를 위해 클론 교체
+        var newOk = okBtn.cloneNode(true);
+        okBtn.parentNode.replaceChild(newOk, okBtn);
+        var newCancel = cancelBtn.cloneNode(true);
+        cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+
+        newCancel.addEventListener('click', function() {
+            overlay.style.display = 'none';
+        });
+        newOk.addEventListener('click', function() {
+            overlay.style.display = 'none';
+            onConfirm();
+        });
+    }
+
     // ── Utility: Format timestamp ──
     function formatTime(ts) {
         if (!ts) return '';
@@ -371,18 +397,18 @@
     // DELETE CHAT
     // =========================================================
     window.deleteChat = function(docId) {
-        if (!confirm('이 메시지를 삭제하시겠습니까?')) return;
         if (!db) return;
         if (!currentProfile || !currentProfile.isAdmin) {
             showToast('삭제 권한이 없습니다. (관리자 전용)');
             return;
         }
-
-        db.collection('messages').doc(docId).delete().then(function() {
-            showToast('메시지가 삭제되었습니다.');
-        }).catch(function(err) {
-            console.error('Chat delete error:', err);
-            showToast('삭제 실패: ' + err.message);
+        showConfirmModal('이 메시지를 삭제하시겠습니까?', function() {
+            db.collection('messages').doc(docId).delete().then(function() {
+                showToast('메시지가 삭제되었습니다.');
+            }).catch(function(err) {
+                console.error('Chat delete error:', err);
+                showToast('삭제 실패: ' + err.message);
+            });
         });
     };
 
@@ -461,18 +487,18 @@
     // DELETE ANNOUNCEMENT
     // =========================================================
     window.deleteAnnouncement = function(docId) {
-        if (!confirm('정말 이 공지사항을 삭제하시겠습니까?')) return;
         if (!db) return;
         if (!currentProfile || !currentProfile.isAdmin) {
             showToast('삭제 권한이 없습니다. (관리자 전용)');
             return;
         }
-
-        db.collection('announcements').doc(docId).delete().then(function() {
-            showToast('공지사항이 삭제되었습니다.');
-        }).catch(function(err) {
-            console.error('Delete error:', err);
-            showToast('삭제 실패: ' + err.message);
+        showConfirmModal('정말 이 공지사항을 삭제하시겠습니까?', function() {
+            db.collection('announcements').doc(docId).delete().then(function() {
+                showToast('공지사항이 삭제되었습니다.');
+            }).catch(function(err) {
+                console.error('Delete error:', err);
+                showToast('삭제 실패: ' + err.message);
+            });
         });
     };
 
@@ -645,18 +671,19 @@
             
             var docId = btn.getAttribute('data-opp-id');
             if (!docId) return;
-            if (!confirm('이 기회 정보를 삭제하시겠습니까?')) return;
             if (!db) return;
             if (!currentProfile || !currentProfile.isAdmin) {
                 showToast('삭제 권한이 없습니다. (관리자 전용)');
                 return;
             }
 
-            db.collection('opportunities').doc(docId).delete().then(function() {
-                showToast('기회 정보가 삭제되었습니다.');
-            }).catch(function(err) {
-                console.error('Opp delete error:', err);
-                showToast('삭제 실패: ' + err.message);
+            showConfirmModal('이 기회 정보를 삭제하시겠습니까?', function() {
+                db.collection('opportunities').doc(docId).delete().then(function() {
+                    showToast('기회 정보가 삭제되었습니다.');
+                }).catch(function(err) {
+                    console.error('Opp delete error:', err);
+                    showToast('삭제 실패: ' + err.message);
+                });
             });
         });
     }
