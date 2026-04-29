@@ -189,6 +189,49 @@ def crawl_wevity():
 
 
 
+# ── 올콘 (All-con) 크롤링 ──
+def crawl_allcon():
+    results = []
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}
+
+    try:
+        resp = requests.get('https://www.all-con.co.kr', headers=headers, timeout=10)
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.text, 'html.parser')
+
+        for a in soup.select('a[href*="/hit/contest/"]'):
+            title = a.get_text(strip=True)
+            if not title or len(title) < 5:
+                continue
+            href = a.get('href', '')
+            link = 'https://www.all-con.co.kr' + href if href.startswith('/') else href
+
+            category = classify(title) or 'contest'
+
+            results.append({
+                'title': title,
+                'description': '올콘에서 수집된 공모전 정보입니다.',
+                'category': category,
+                'deadline': None,
+                'link': link,
+                'source': '올콘',
+            })
+
+        # 중복 제거
+        seen = set()
+        unique = []
+        for item in results:
+            if item['title'] not in seen:
+                seen.add(item['title'])
+                unique.append(item)
+        results = unique
+
+        print(f"✅ 올콘: {len(results)}건 수집")
+    except Exception as e:
+        print(f"❌ 올콘 실패: {e}")
+    return results
+
+
 # ── 콘테스트코리아 (Contest Korea) 크롤링 ──
 def crawl_contestkorea():
     results = []
@@ -307,6 +350,7 @@ if __name__ == '__main__':
     sources = [
         ("링커리어", crawl_linkareer),
         ("위비티", crawl_wevity),
+        ("올콘", crawl_allcon),
         ("콘테스트코리아", crawl_contestkorea)
     ]
     
