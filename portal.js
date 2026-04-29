@@ -324,12 +324,18 @@
                     var msg = doc.data();
                     var el = document.createElement('div');
                     el.className = 'chat-msg';
+                    var chatDeleteHtml = '';
+                    if (currentProfile && currentProfile.isAdmin) {
+                        chatDeleteHtml = '<button type="button" class="chat-delete-btn" onclick="event.preventDefault(); event.stopPropagation(); window.deleteChat(\'' + doc.id + '\')" title="삭제" style="background:none;border:none;color:var(--p-danger);cursor:pointer;margin-left:auto;"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>';
+                    }
+                    
                     el.innerHTML =
                         '<img class="avatar" src="' + escapeHtml(msg.photoURL || '') + '" alt="" onerror="this.style.display=\'none\'">' +
-                        '<div class="msg-body">' +
-                        '  <div class="msg-header">' +
+                        '<div class="msg-body" style="flex-grow:1;">' +
+                        '  <div class="msg-header" style="display:flex;">' +
                         '    <span class="msg-name">' + escapeHtml(msg.displayName || 'Unknown') + '</span>' +
                         '    <span class="msg-time">' + formatTime(msg.createdAt) + '</span>' +
+                        chatDeleteHtml +
                         '  </div>' +
                         '  <div class="msg-text">' + escapeHtml(msg.text || '') + '</div>' +
                         '</div>';
@@ -362,6 +368,19 @@
     }
 
     // =========================================================
+    // DELETE CHAT
+    // =========================================================
+    window.deleteChat = function(docId) {
+        if (!confirm('이 메시지를 삭제하시겠습니까?')) return;
+        if (!db || !currentProfile || !currentProfile.isAdmin) return;
+
+        db.collection('messages').doc(docId).delete().catch(function(err) {
+            console.error('Chat delete error:', err);
+            showToast('삭제 실패: ' + err.message);
+        });
+    };
+
+    // =========================================================
     // ANNOUNCEMENTS MODULE
     // =========================================================
     function loadAnnouncements() {
@@ -387,7 +406,7 @@
                     
                     var deleteHtml = '';
                     if (currentProfile && currentProfile.isAdmin) {
-                        deleteHtml = '<button class="ann-delete-btn" onclick="window.deleteAnnouncement(\'' + annId + '\')" title="공지 삭제"><span class="material-symbols-outlined" style="font-size:16px;">delete</span></button>';
+                        deleteHtml = '<button type="button" class="ann-delete-btn" onclick="event.preventDefault(); event.stopPropagation(); window.deleteAnnouncement(\'' + annId + '\')" title="공지 삭제"><span class="material-symbols-outlined" style="font-size:16px;">delete</span></button>';
                     }
 
                     el.innerHTML =
