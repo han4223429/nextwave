@@ -2830,10 +2830,8 @@ $ init_hub --env production
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-surface border border-outline-variant rounded-lg p-6">
                         <h3 class="font-headline text-lg text-tertiary uppercase mb-3">[ 최신 공지 ]</h3>
-                        <ul class="space-y-2 font-label text-sm text-on-surface-variant">
-                            <li>• 주간 회의: 매주 화요일 19:00 / 3층 라운지</li>
-                            <li>• 멤버 출석 체크: 동아리 채널 고정 공지 확인</li>
-                            <li>• 신규 프로젝트 신청은 멤버 포털 양식으로 진행</li>
+                        <ul id="latest-announcements-list" class="space-y-2 font-label text-sm text-on-surface-variant">
+                            <li class="animate-pulse text-xs">공지사항 로딩 중...</li>
                         </ul>
                     </div>
                     <div class="bg-surface border border-outline-variant rounded-lg p-6">
@@ -3222,6 +3220,35 @@ $ init_hub --env production
             }
         }
 
+        async function loadLatestAnnouncements() {
+            if (!dbInstance) return;
+            const listEl = document.getElementById('latest-announcements-list');
+            if (!listEl) return;
+
+            try {
+                const snapshot = await dbInstance.collection('announcements')
+                    .orderBy('createdAt', 'desc')
+                    .limit(3)
+                    .get();
+
+                if (snapshot.empty) {
+                    listEl.innerHTML = '<li class="text-xs text-outline italic">현재 등록된 공지가 없습니다.</li>';
+                    return;
+                }
+
+                let html = '';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const title = data.title || '제목 없음';
+                    html += `<li class="truncate">• ${title}</li>`;
+                });
+                listEl.innerHTML = html;
+            } catch (error) {
+                console.error('Latest announcements load failed:', error);
+                listEl.innerHTML = '<li class="text-xs text-secondary">공지사항을 불러오지 못했습니다.</li>';
+            }
+        }
+
         async function refreshPortalSession() {
             if (!authInstance) {
                 showPortalState({ state: 'signed-out' });
@@ -3242,6 +3269,10 @@ $ init_hub --env production
                 profile,
                 message: profile?.isMember ? '' : '승인 대기 중입니다. 운영진 승인 후 접근 가능합니다.'
             });
+
+            if (profile?.isMember) {
+                loadLatestAnnouncements();
+            }
         }
 
         async function signInWithGoogle() {
