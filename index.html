@@ -158,43 +158,73 @@
     </div>
 
     <main class="pt-16">
-        <!-- ===================== HERO (3D wordmark) ===================== -->
-        <section id="home" class="relative px-5 lg:px-6 overflow-hidden">
-            <div class="max-w-6xl mx-auto pt-10 md:pt-14 pb-14">
-                <div class="text-center reveal">
-                    <span class="pill bg-brand-light text-brand-dark text-sm px-4 py-1.5 font-mono" data-i18n="hero.eyebrow">📍 순천향대학교 IT·창업 연합 동아리</span>
+        <!-- ===================== HERO (cinematic scroll stage) ===================== -->
+        <section id="hero-stage" class="relative" style="height:340vh">
+            <!-- pinned viewport -->
+            <div id="hero-pin" class="sticky top-16 h-[calc(100vh-4rem)] overflow-hidden">
+                <!-- 3D canvas mount -->
+                <div id="hero-3d" class="absolute inset-0"></div>
+
+                <!-- top eyebrow -->
+                <div id="hero-eyebrow" class="absolute top-6 inset-x-0 flex justify-center px-6 pointer-events-none">
+                    <span class="pill bg-white/80 backdrop-blur border border-brand/10 text-brand-dark text-sm px-4 py-1.5 font-mono" data-i18n="hero.eyebrow">📍 순천향대학교 IT·창업 연합 동아리</span>
                 </div>
 
-                <!-- 3D NEXTWAVE -->
-                <div id="hero-3d" class="relative w-full my-2 md:my-4" style="height:clamp(230px,40vh,440px)">
-                    <div id="hero-3d-fallback"
-                        class="absolute inset-0 grid place-items-center select-none pointer-events-none">
-                        <span class="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-gradient">NEXTWAVE</span>
+                <!-- bottom scrim for caption legibility -->
+                <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#fbfbff] via-[#fbfbff]/85 to-transparent pointer-events-none"></div>
+
+                <!-- Caption 1: headline -->
+                <div class="absolute inset-x-0 bottom-0 pb-16 flex justify-center px-6 pointer-events-none">
+                    <div class="hero-cap" data-from="0.0" data-to="0.30">
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.12] tracking-tight" data-i18n="hero.title">전공은 달라도,<br />우리는 <span class="text-gradient">같이 만든다.</span></h1>
                     </div>
                 </div>
-                <div class="text-center -mt-2 mb-8">
-                    <span class="font-mono text-xs text-muted/70" data-i18n="hero.scroll">스크롤하면 글자가 살아 움직여요 ↓</span>
+                <!-- Caption 2: what -->
+                <div class="absolute inset-x-0 bottom-0 pb-16 flex justify-center px-6 pointer-events-none">
+                    <div class="hero-cap" data-from="0.40" data-to="0.66">
+                        <h2 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-snug tracking-tight" data-i18n="hero.stage2">개발 · 게임개발 · 해커톤 · 마케팅<br />아이디어를 코드로, 코드를 결과로.</h2>
+                    </div>
+                </div>
+                <!-- Caption 3: CTA -->
+                <div class="absolute inset-x-0 bottom-0 pb-14 flex justify-center px-6 pointer-events-none">
+                    <div class="hero-cap" data-from="0.74" data-to="1.0">
+                        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-6" data-i18n="hero.stage3">우리, 같이 만들래요?</h2>
+                        <div class="flex flex-wrap gap-3 justify-center mb-5">
+                            <button data-apply class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-base">
+                                <span class="material-symbols-rounded">rocket_launch</span> <span data-i18n="btn.apply">지원하기</span>
+                            </button>
+                            <a href="#activities" class="btn-ghost inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-base">
+                                <span class="material-symbols-rounded">explore</span> <span data-i18n="btn.explore">활동 둘러보기</span>
+                            </a>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted font-medium">
+                            <span data-i18n="hero.chip1">🏆 전국·교내 대회 수상 6회</span>
+                            <span data-i18n="hero.chip2">🎓 전공 무관</span>
+                            <span data-i18n="hero.chip3">🤝 함께 성장하는 문화</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="text-center max-w-3xl mx-auto reveal reveal-delay-1">
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight mb-5"
-                        data-i18n="hero.title">전공은 달라도,<br />우리는 <span class="text-gradient">같이 만든다.</span></h1>
-                    <p class="text-base md:text-lg text-muted leading-relaxed mb-8" data-i18n="hero.subtitle">
-                        개발 · 게임개발 · 해커톤 · 마케팅까지.<br class="hidden sm:block" />아이디어를 코드로, 코드를 결과로 바꾸는 사람들이 모였어요.
-                        <span class="text-ink font-semibold">실력보다 중요한 건 함께하려는 마음 — 초보도 환영합니다.</span>
-                    </p>
-                    <div class="flex flex-wrap gap-3 justify-center mb-7">
+                <!-- scroll hint -->
+                <div id="hero-scrollhint" class="absolute bottom-4 inset-x-0 flex flex-col items-center gap-0.5 pointer-events-none">
+                    <span class="material-symbols-rounded text-brand animate-bounce">keyboard_arrow_down</span>
+                </div>
+            </div>
+
+            <!-- Fallback static hero (no WebGL) -->
+            <div id="hero-fallback" class="hidden px-5 lg:px-6 pt-10 pb-14">
+                <div class="max-w-4xl mx-auto text-center">
+                    <span class="pill bg-brand-light text-brand-dark text-sm px-4 py-1.5 font-mono" data-i18n="hero.eyebrow">📍 순천향대학교 IT·창업 연합 동아리</span>
+                    <div class="my-8"><span class="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-gradient">NEXTWAVE</span></div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight mb-5" data-i18n="hero.title">전공은 달라도,<br />우리는 <span class="text-gradient">같이 만든다.</span></h1>
+                    <p class="text-base md:text-lg text-muted leading-relaxed mb-8" data-i18n="hero.subtitle">개발 · 게임개발 · 해커톤 · 마케팅까지. 아이디어를 코드로, 코드를 결과로 바꾸는 사람들이 모였어요.</p>
+                    <div class="flex flex-wrap gap-3 justify-center">
                         <button data-apply class="btn-primary inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-bold text-base">
                             <span class="material-symbols-rounded">rocket_launch</span> <span data-i18n="btn.apply">지원하기</span>
                         </button>
                         <a href="#activities" class="btn-ghost inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-bold text-base">
                             <span class="material-symbols-rounded">explore</span> <span data-i18n="btn.explore">활동 둘러보기</span>
                         </a>
-                    </div>
-                    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted font-medium">
-                        <span data-i18n="hero.chip1">🏆 전국·교내 대회 수상 6회</span>
-                        <span data-i18n="hero.chip2">🎓 전공 무관</span>
-                        <span data-i18n="hero.chip3">🤝 함께 성장하는 문화</span>
                     </div>
                 </div>
             </div>

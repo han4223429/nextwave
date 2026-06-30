@@ -16,7 +16,9 @@ window.I18N = (function () {
             'btn.langLabel': 'EN',
 
             'hero.eyebrow': '📍 순천향대학교 IT·창업 연합 동아리',
-            'hero.scroll': '스크롤하면 글자가 살아 움직여요 ↓',
+            'hero.scroll': '스크롤하면 장면이 바뀌어요 ↓',
+            'hero.stage2': '개발 · 게임개발 · 해커톤 · 마케팅<br />아이디어를 코드로, 코드를 결과로.',
+            'hero.stage3': '우리, 같이 만들래요?',
             'hero.title': '전공은 달라도,<br>우리는 <span class="text-gradient">같이 만든다.</span>',
             'hero.subtitle': '개발 · 게임개발 · 해커톤 · 마케팅까지.<br class="hidden sm:block" />아이디어를 코드로, 코드를 결과로 바꾸는 사람들이 모였어요. <span class="text-ink font-semibold">실력보다 중요한 건 함께하려는 마음 — 초보도 환영합니다.</span>',
             'hero.chip1': '🏆 전국·교내 대회 수상 6회', 'hero.chip2': '🎓 전공 무관', 'hero.chip3': '🤝 함께 성장하는 문화',
@@ -87,7 +89,9 @@ window.I18N = (function () {
             'btn.langLabel': '한국어',
 
             'hero.eyebrow': '📍 IT & Startup Club · Soonchunhyang University',
-            'hero.scroll': 'Scroll — the letters come alive ↓',
+            'hero.scroll': 'Scroll — the scene transforms ↓',
+            'hero.stage2': 'Development · Game dev · Hackathons · Marketing<br />Ideas into code, code into results.',
+            'hero.stage3': 'Want to build with us?',
             'hero.title': 'Different majors,<br>we <span class="text-gradient">build together.</span>',
             'hero.subtitle': 'Development · Game dev · Hackathons · Marketing.<br class="hidden sm:block" />A crew that turns ideas into code, and code into results. <span class="text-ink font-semibold">What matters more than skill is the will to build together — beginners welcome.</span>',
             'hero.chip1': '🏆 6 competition awards', 'hero.chip2': '🎓 All majors', 'hero.chip3': '🤝 Grow together',

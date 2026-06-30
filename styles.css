@@ -223,6 +223,26 @@ body {
     color: var(--brand-dark);
 }
 
+/* --- Cinematic hero captions ------------------------------------------- */
+.hero-cap {
+    width: 100%;
+    max-width: 60rem;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    will-change: opacity, transform;
+}
+.hero-cap.cap-on a,
+.hero-cap.cap-on button {
+    pointer-events: auto;
+}
+#hero-scrollhint { transition: opacity 0.3s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+    /* 정적 폴백처럼 첫 캡션만 보이도록 */
+    .hero-cap[data-from="0.0"] { opacity: 1 !important; transform: none !important; }
+}
+
 /* --- Activity icon tile ------------------------------------------------- */
 .icon-tile {
     width: 56px;
