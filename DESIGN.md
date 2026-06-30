@@ -1,97 +1,48 @@
-```markdown
-# Design System Document: The Terminal Aesthetic
+# Design System — NextWave (Bright · Friendly · Future)
 
-## 1. Overview & Creative North Star
+> 2026 리디자인. 기존 "터미널/브루탈리스트" 컨셉을 대체합니다.
+> 목표: **누구나 다가오기 쉬운(친근)** + **IT 동아리다운 미래지향(3D)** + **진짜 성과로 신뢰**.
 
-### Creative North Star: "The Brutalist Command Center"
-This design system moves away from the soft, rounded edges of modern consumer web design and embraces the rigid, high-performance world of the command line interface. It is a "High-End Editorial" interpretation of a terminal—not a literal 1980s recreation, but a sophisticated, layered environment where technical precision meets high-energy academic culture.
+## 1. 톤 & 무드
+밝은 배경 위 생기 있는 컬러, 둥근 모서리, 부드러운 그림자, 넉넉한 여백.
+히어로의 3D 워드마크로 "미래지향" 인상을 주되, 본문은 따뜻하고 읽기 쉽게.
 
-We break the "template" look by utilizing **intentional asymmetry**, **monolithic layouts**, and **typographic dominance**. While most websites strive for "friendliness," this system strives for **authority and energy**. We use fixed-width constraints and box-drawing logic to create a digital workspace that feels like a powerful tool in the hands of a professional hacker.
+## 2. 컬러
+| 토큰 | 값 | 용도 |
+|---|---|---|
+| `brand` | `#5b6cff` | 메인(인디고-블루) |
+| `brand-dark` | `#4338ca` | 강조 텍스트/호버 |
+| `brand-light` | `#eef0ff` | 옅은 배경/칩 |
+| `accent` | `#ff6b6b` | 포인트(코랄) |
+| `mint` | `#18c29c` | 보조(민트) |
+| `amber` | `#ffb020` | 수상/하이라이트 |
+| `ink` | `#1a1c2e` | 본문 텍스트 |
+| `muted` | `#5b6178` | 보조 텍스트 |
+| 배경 | `#fbfbff` | 페이지 바탕 |
 
----
+그라데이션: `brand → #8b5cf6 → accent` (텍스트 `.text-gradient`, 버튼 `.btn-primary`).
+배경 오로라: 화면 뒤 은은한 컬러 블롭 3개(`.aurora`).
 
-## 2. Colors & Surface Logic
+## 3. 타이포그래피
+- **Pretendard Variable** — 본문/제목 전반 (한글 가독성).
+- **JetBrains Mono** — 라벨/뱃지/작은 기술 텍스트(`.font-mono`)로 IT 느낌의 악센트.
+- 제목은 `font-extrabold`, `tracking-tight`. 본문은 `leading-relaxed`.
 
-The palette is rooted in deep obsidian tones, punctuated by high-frequency electric accents. 
+## 4. 컴포넌트
+- **카드**: `.card`(반투명 글래스 + 부드러운 그림자), 호버 시 `.card-hover`로 살짝 떠오름.
+- **버튼**: `.btn-primary`(그라데이션) / `.btn-ghost`(아웃라인). 둥근 `rounded-2xl`.
+- **칩/뱃지**: `.pill` + `brand-light`/`white/15`.
+- **아이콘**: Material Symbols Rounded + 친근한 이모지.
+- 둥근 모서리 적극 사용(`rounded-2xl`/`3xl`/`4xl`). 0px 직각 금지(과거 컨셉과 반대).
 
-### The Palette
-- **Primary High-Voltage:** `primary` (#94aaff) and `primary_dim` (#3768fa) serve as our "Electric Blue" core.
-- **The Warning Signal:** `secondary` (#ffd709) provides the "Yellow Accent" for high-priority alerts and CTAs.
-- **Terminal Green:** `tertiary` (#9cff93) is reserved for success states, active connections, and "system ready" indicators.
-- **The Void:** `background` (#0e0e0e) and `surface` (#0e0e0e) create the deep-space foundation.
+## 5. 모션
+- 스크롤 등장(`.reveal`), 숫자 카운트업(`[data-count]`), 마퀴 리본(`.marquee`), 둥둥(`.floaty`).
+- **3D 히어로**: 글자별 회전(시간+스크롤+마우스). `three-hero.js`.
+- `prefers-reduced-motion` 존중 — 모든 애니메이션/3D 회전 자동 정지.
 
-### The "No-Line" Rule
-Standard 1px solid CSS borders are strictly prohibited for sectioning. To define boundaries, use:
-1.  **Box-Drawing Characters:** Use Unicode characters (┌ ─ ┐ │ └ ─ ┘) for decorative containers.
-2.  **Tonal Shifts:** Separate a section by moving from `surface` (#0e0e0e) to `surface_container_low` (#131313).
-3.  **Grid Overlays:** Use a subtle CSS repeating linear gradient to create a 24px grid pattern instead of border lines.
+## 6. 다국어
+`data-i18n` 속성 + `i18n.js` 사전(ko/en). 🌐 버튼으로 전환, 선택 저장.
 
-### Surface Hierarchy & Nesting
-Treat the UI as a series of hardware modules. 
-- **Base Layer:** `surface` (The terminal backdrop).
-- **Secondary Module:** `surface_container` (A code block or side panel).
-- **Active Component:** `surface_bright` (A floating modal or active input).
-
-### Signature Textures
-Apply a global `CRT scanline` overlay using a subtle linear gradient: `rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%`, with a background-size of 100% 2px. This adds "visual soul" to the flat dark surfaces.
-
----
-
-## 3. Typography
-
-Typography is the primary driver of the brand’s "Professional Hacker" tone. We utilize a mix of technical monospacing and high-impact grotesque.
-
-### Typography Scale
-- **Display (Space Grotesk):** Large, aggressive, and tech-forward. Use `display-lg` (3.5rem) for hero titles. Always lowercase for a "config file" feel.
-- **Headlines (Space Grotesk):** `headline-md` (1.75rem) for section headers. Prepend with a `>` command prompt character.
-- **Body (Inter):** While the theme is terminal-based, we use `Inter` for long-form reading to ensure "Energetic College Student" accessibility. Use `body-lg` (1rem) for general content.
-- **Labels (Space Grotesk):** `label-md` (0.75rem) in all-caps for metadata, tags, and small technical readouts.
-
----
-
-## 4. Elevation & Depth
-
-We reject the "Soft Shadow" aesthetic. Depth in this system is achieved through **Tonal Layering** and **Hard Offsets**.
-
-- **The Layering Principle:** Use `surface_container_highest` (#262626) to "lift" a component. Instead of a shadow, use a 2px hard-offset shadow using the `primary` color at 20% opacity to mimic a screen glow.
-- **The "Ghost Border":** For interactive states, use the `outline_variant` (#484847) at 20% opacity. It should feel like a faint phosphor trace on a screen, not a physical border.
-- **Glassmorphism:** For floating terminal windows (modals), use `surface_container` with a `backdrop-filter: blur(12px)`. This allows the "code" behind the window to bleed through, creating a sense of a complex, multi-tasking environment.
-
----
-
-## 5. Components
-
-### Buttons
-- **Primary:** Solid `primary_container` (#809bff) with `on_primary_container` text. Sharp 0px corners. On hover, trigger a `primary` glow.
-- **Secondary (The Prompt):** Transparent background with a `>` character prefix. Text uses `secondary` (#ffd709).
-- **Tertiary:** Text-only, using `label-md` styles. All-caps.
-
-### Terminal Inputs
-- **Text Fields:** Background `surface_container_lowest`. No borders. A blinking underscore cursor `_` (`@keyframes blink`) follows the text.
-- **Error State:** The entire input container flashes `error_container` (#a70138) with `on_error` text.
-
-### Cards & Modules
-- **Rule:** No divider lines. 
-- **Style:** Use a "Box-Drawing" header. The title of the card should be wrapped in `[ ]` or preceded by `::`.
-- **Spacing:** Use exaggerated vertical white space (32px or 48px) from our spacing scale to separate modules.
-
-### Status Indicators (Chips)
-- **Active:** `tertiary_container` (Terminal Green) text with a small "●" glyph.
-- **Idle:** `outline` (#767575) text with a "○" glyph.
-
----
-
-## 6. Do's and Don'ts
-
-### Do:
-- **Use Fixed-Width Layouts:** Center the main content in a 1200px container, but use `surface_container` bars that span the full viewport width to mimic terminal headers/footers.
-- **Embrace Monospace:** Use monospace for any number, date, or "technical" data point.
-- **Incorporate Micro-interactions:** Buttons should feel "mechanical." Use instant state changes (0ms transitions) or very fast (100ms) linear easing.
-
-### Don't:
-- **No Border Radius:** `0px` is the absolute rule. Any rounding breaks the "Terminal" immersion.
-- **No Soft Gradients:** Avoid "sunset" or "organic" gradients. Use high-contrast steps or subtle tonal shifts between `surface` tokens.
-- **No Standard Iconography:** Avoid rounded "Material" icons. Use ASCII-inspired icons or sharp, geometric SVG icons with a 2px stroke.
-
-### Accessibility Note:
-While we use high-contrast accents, ensure that `on_surface_variant` (#adaaaa) is only used for non-essential decorative text. All functional text must meet a 4.5:1 contrast ratio against the `background`.
+## 7. 원칙 (Do / Don't)
+**Do** — 진짜 콘텐츠(수상·운영진·활동)를 앞세운다 · 명확한 가입 동선(지원하기 CTA 반복) · 따뜻하고 환영하는 문장.
+**Don't** — 가짜 데이터/지표 · 위압적·배타적 표현 · 가독성을 해치는 과한 효과.

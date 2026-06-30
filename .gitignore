@@ -2,3 +2,7 @@
 *.local
 serviceAccountKey.json
 __pycache__/
+
+# redesign local backups & editor session
+*.terminal.backup.*
+.claude/
