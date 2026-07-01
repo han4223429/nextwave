@@ -1,7 +1,7 @@
 // =============================================================================
 // NextWave — Scroll-driven cinematic 3D hero (Three.js)
 //   Apple/Samsung 제품 페이지처럼, 스크롤 진행도(p: 0→1)에 따라
-//   "NEXTWAVE" 글자들이  완성 → 폭발/방황 → 재조립 으로 변합니다.
+//   "NEXTWAVE" 전체 워드마크가 N/W 두 글자로 압축되고 의미 카피와 맞물립니다.
 //   WebGL/폰트 실패 시 #hero-fallback(정적 히어로)로 자동 전환.
 // =============================================================================
 import * as THREE from 'three';
@@ -87,7 +87,7 @@ function boot() {
                 roughness: 0.2,
                 envMapIntensity: 1.15,
                 transparent: true,
-                opacity: 0.46
+                opacity: 0.94
             });
             const pivot = new THREE.Group();
             pivot.add(new THREE.Mesh(geo, mat));
@@ -96,7 +96,7 @@ function boot() {
                 ex: { x: (rnd(i * 3 + 1) - 0.5) * 42, y: (rnd(i * 3 + 2) - 0.5) * 24, z: rnd(i * 3 + 3) * 18 - 5,
                       rx: (rnd(i + 10) - 0.5) * 14, ry: (rnd(i + 20) - 0.5) * 14, rz: (rnd(i + 30) - 0.5) * 14 },
                 s1: 0.5 + rnd(i + 4) * 1.4, s2: 0.5 + rnd(i + 5) * 1.4, s3: 0.5 + rnd(i + 6) * 1.4,
-                phase: i * 0.7, bx: 0, by: 0
+                phase: i * 0.7, bx: 0, by: 0, nw: null, bg: null
             };
             group.add(pivot);
             letters.push(pivot);
@@ -107,7 +107,7 @@ function boot() {
             const mat = new THREE.MeshBasicMaterial({
                 color: palette[i % palette.length],
                 transparent: true,
-                opacity: 0.32
+                opacity: 0.04
             });
             const spark = new THREE.Mesh(sparkGeo, mat);
             spark.userData = {
@@ -159,6 +159,27 @@ function boot() {
             });
             fitCamera(maxW, 8.0);
         }
+        const nwSpread = twoLines ? 2.28 : 5.25;
+        const nwY = twoLines ? 1.55 : 0.32;
+        const anchorScale = twoLines ? 1.16 : 1.42;
+        letters.forEach((l, i) => {
+            const u = l.userData;
+            if (i === 0 || i === 4) {
+                u.nw = {
+                    x: (i === 0 ? -1 : 1) * nwSpread,
+                    y: nwY,
+                    z: -0.72,
+                    scale: anchorScale
+                };
+            } else {
+                u.bg = {
+                    x: (rnd(i + 210) - 0.5) * (twoLines ? 10 : 23),
+                    y: (rnd(i + 230) - 0.5) * (twoLines ? 10 : 15),
+                    z: -8 - rnd(i + 250) * 14,
+                    scale: 0.34 + rnd(i + 270) * 0.34
+                };
+            }
+        });
         if (reduce) { applyFrame(0, 0); renderer.render(scene, camera); }
     }
 
@@ -167,7 +188,7 @@ function boot() {
     const scrollHint = document.getElementById('hero-scrollhint');
     const eyebrow = document.getElementById('hero-eyebrow');
     function updateCaptions(p) {
-        const fade = 0.06;
+        const fade = 0.035;
         caps.forEach((c) => {
             const from = parseFloat(c.dataset.from), to = parseFloat(c.dataset.to);
             let o = 0;
@@ -176,7 +197,8 @@ function boot() {
                 o = Math.min(fadeIn, 1 - smooth(to - fade, to + fade, p));
             }
             c.style.opacity = o;
-            c.style.transform = 'translateY(' + ((1 - o) * 18) + 'px)';
+            const introOffset = c.classList.contains('hero-cap-intro') ? Math.min(window.innerHeight * 0.24, 170) : 0;
+            c.style.transform = 'translateY(' + (introOffset + ((1 - o) * 18)) + 'px)';
             c.classList.toggle('cap-on', o > 0.5);
         });
         if (scrollHint) scrollHint.style.opacity = String(1 - smooth(0.0, 0.08, p));
@@ -197,36 +219,60 @@ function boot() {
     }, { passive: true });
 
     function applyFrame(p, t) {
-        // explode bump: 0 (formed) → 1 (scattered) → 0 (reformed)
-        const e = clamp(smooth(0.36, 0.60, p) - smooth(0.72, 0.94, p), 0, 1);
-        const ambient = 0.35 + e * 0.85;
+        const split = smooth(0.12, 0.42, p);
+        const story = smooth(0.34, 0.72, p);
+        const finale = smooth(0.78, 0.98, p);
+        const dark = clamp(smooth(0.17, 0.32, p) - smooth(0.72, 0.84, p), 0, 1);
+        const ambient = 0.26 + split * 0.66;
+        stage.style.setProperty('--hero-progress', String(p));
+        stage.style.setProperty('--hero-dark', dark.toFixed(3));
+        stage.style.setProperty('--hero-scrim', lerp(1, 0.24, dark).toFixed(3));
+        stage.style.setProperty('--hero-mood-shift', lerp(-52, -28, dark).toFixed(2) + '%');
+        stage.style.setProperty('--hero-mood-sweep', lerp(0, 0.72, dark).toFixed(3));
+        stage.classList.toggle('is-dark', dark > 0.18);
+        mount.style.opacity = String(lerp(1, 0.62, smooth(0.30, 0.78, p)));
         for (let i = 0; i < letters.length; i++) {
             const l = letters[i], u = l.userData, g = u.ex;
-            let px = lerp(u.bx, g.x, e);
-            let py = lerp(u.by, g.y, e);
-            let pz = lerp(-1.8, g.z, e);
-            // 완성 상태에서도 배경처럼 천천히 떠 있고, 흩어진 동안 더 크게 움직임
-            px += Math.sin(t * u.s1 + u.phase) * ambient * 0.82;
-            py += Math.cos(t * u.s2 + u.phase * 1.3) * ambient * 0.72;
-            l.position.set(px, py, pz);
-            // 회전: 완성 상태엔 은은한 웨이브, 흩어지면 텀블링
-            l.rotation.x = (1 - e) * Math.sin(t * 0.35 + i) * 0.08 + e * (t * u.s1 + g.rx);
-            l.rotation.y = (1 - e) * Math.sin(t * 0.5 + i * 0.6) * 0.18 + e * (t * u.s2 + g.ry);
-            l.rotation.z = (1 - e) * Math.sin(t * 0.28 + i * 0.4) * 0.05 + e * (g.rz + t * u.s3 * 0.5);
-            if (u.mat) u.mat.opacity = lerp(0.34, 0.5, e);
+            const isAnchor = i === 0 || i === 4;
+            if (isAnchor && u.nw) {
+                let px = lerp(u.bx, u.nw.x, split);
+                let py = lerp(u.by, u.nw.y, split);
+                let pz = lerp(-0.55, u.nw.z, split);
+                px += Math.sin(t * u.s1 + u.phase) * ambient * 0.28;
+                py += Math.cos(t * u.s2 + u.phase * 1.3) * ambient * 0.2;
+                l.position.set(px, py, pz);
+                l.rotation.x = Math.sin(t * 0.34 + i) * lerp(0.06, 0.11, split);
+                l.rotation.y = Math.sin(t * 0.46 + i * 0.6) * lerp(0.14, 0.24, split) + mx * 0.18 * (1 - finale);
+                l.rotation.z = Math.sin(t * 0.28 + i * 0.4) * 0.045;
+                l.scale.setScalar(lerp(1, u.nw.scale, split) * lerp(1, 0.92, finale));
+                if (u.mat) u.mat.opacity = lerp(0.96, 0.76, split) * lerp(1, 0.84, finale);
+            } else {
+                const bg = u.bg || g;
+                let px = lerp(u.bx, bg.x, split);
+                let py = lerp(u.by, bg.y, split);
+                let pz = lerp(-0.55, bg.z, split);
+                px += Math.sin(t * u.s1 + u.phase) * ambient * lerp(0.2, 1.1, split);
+                py += Math.cos(t * u.s2 + u.phase * 1.3) * ambient * lerp(0.16, 0.9, split);
+                l.position.set(px, py, pz);
+                l.rotation.x = (1 - split) * Math.sin(t * 0.35 + i) * 0.08 + split * (t * u.s1 + g.rx);
+                l.rotation.y = (1 - split) * Math.sin(t * 0.5 + i * 0.6) * 0.16 + split * (t * u.s2 + g.ry);
+                l.rotation.z = (1 - split) * Math.sin(t * 0.28 + i * 0.4) * 0.05 + split * (g.rz + t * u.s3 * 0.5);
+                l.scale.setScalar(lerp(1, bg.scale || 0.45, split));
+                if (u.mat) u.mat.opacity = lerp(0.92, 0.13, split) * lerp(1, 0.62, story);
+            }
         }
         for (let i = 0; i < sparks.length; i++) {
             const s = sparks[i], u = s.userData;
-            const a = t * u.speed + u.phase + p * Math.PI * 1.4;
+            const a = t * u.speed + u.phase + p * Math.PI * 1.6;
             s.position.set(Math.cos(a) * u.radius, u.y + Math.sin(a * 1.7) * 1.6, u.z + Math.sin(a) * 1.2);
             s.rotation.x = t * u.speed * 2;
             s.rotation.y = t * u.speed * 1.4;
-            if (u.mat) u.mat.opacity = 0.18 + e * 0.18 + Math.sin(a) * 0.04;
+            if (u.mat) u.mat.opacity = 0.04 + split * 0.22 + Math.sin(a) * 0.035;
         }
-        camera.position.z = baseZ + e * 5.5 + 1.8 - smooth(0.0, 0.36, p) * 0.4;
-        group.position.y = -0.35 + Math.sin(t * 0.34) * 0.12;
-        group.rotation.y = mx * 0.12 * (1 - e) + Math.sin(t * 0.18) * 0.08;
-        group.rotation.x = my * 0.08 * (1 - e);
+        camera.position.z = baseZ + 0.55 + split * 2.3 + story * 1.25;
+        group.position.y = lerp(0.08, -0.72, story) + Math.sin(t * 0.34) * 0.08;
+        group.rotation.y = mx * 0.16 * (1 - split * 0.35) + Math.sin(t * 0.18) * 0.06;
+        group.rotation.x = my * 0.08 * (1 - split * 0.3);
         updateCaptions(p);
     }
 

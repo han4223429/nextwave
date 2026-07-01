@@ -224,24 +224,55 @@ body {
 }
 
 /* --- Cinematic hero captions ------------------------------------------- */
+#hero-stage {
+    --hero-dark: 0;
+    --hero-scrim: 1;
+    --hero-mood-shift: -52%;
+    --hero-mood-sweep: 0;
+}
+
 #hero-3d {
     z-index: 0;
-    opacity: 0.54;
+    opacity: 1;
+}
+
+#hero-mood {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: var(--hero-dark);
+    background:
+        radial-gradient(circle at 50% 42%, rgba(91, 108, 255, 0.26), transparent 34%),
+        radial-gradient(circle at 72% 56%, rgba(255, 107, 107, 0.22), transparent 32%),
+        linear-gradient(180deg, rgba(7, 10, 28, 0.9), rgba(13, 18, 44, 0.82));
+    transition: opacity 0.18s linear;
+}
+
+#hero-mood::before {
+    content: "";
+    position: absolute;
+    inset: -18% -24%;
+    background: linear-gradient(105deg, transparent 34%, rgba(255, 255, 255, 0.18) 44%, transparent 54%);
+    transform: translateX(var(--hero-mood-shift));
+    opacity: var(--hero-mood-sweep);
+    filter: blur(1px);
 }
 
 .hero-copy-scrim {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 2;
+    opacity: var(--hero-scrim);
     background:
-        radial-gradient(circle at 50% 48%, rgba(251, 251, 255, 0.94) 0%, rgba(251, 251, 255, 0.82) 28%, rgba(251, 251, 255, 0.38) 52%, transparent 76%),
-        linear-gradient(180deg, rgba(251, 251, 255, 0.34), rgba(251, 251, 255, 0.84));
+        radial-gradient(circle at 50% 48%, rgba(251, 251, 255, 0.74) 0%, rgba(251, 251, 255, 0.52) 30%, rgba(251, 251, 255, 0.2) 52%, transparent 76%),
+        linear-gradient(180deg, rgba(251, 251, 255, 0.18), rgba(251, 251, 255, 0.64));
+    transition: opacity 0.18s linear;
 }
 
 .hero-copy-layer {
     position: absolute;
     inset: 0;
-    z-index: 2;
+    z-index: 3;
     display: grid;
     place-items: center;
     padding: clamp(5.5rem, 13vh, 8rem) 1.25rem clamp(4.5rem, 9vh, 6rem);
@@ -254,7 +285,37 @@ body {
     text-align: center;
     opacity: 0;
     pointer-events: none;
+    position: relative;
     will-change: opacity, transform, filter;
+}
+
+.hero-cap::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(68rem, 112vw);
+    height: min(24rem, 42vh);
+    border-radius: 9999px;
+    pointer-events: none;
+    background: linear-gradient(100deg, transparent 24%, rgba(255, 255, 255, 0.72) 44%, rgba(139, 92, 246, 0.28) 50%, transparent 68%);
+    filter: blur(18px);
+    opacity: 0;
+    transform: translate(-140%, -50%) skewX(-12deg);
+}
+
+.hero-cap.cap-on::before {
+    animation: heroSweep 0.92s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes heroSweep {
+    0% { opacity: 0; transform: translate(-150%, -50%) skewX(-12deg); }
+    22% { opacity: 0.92; }
+    100% { opacity: 0; transform: translate(54%, -50%) skewX(-12deg); }
+}
+
+.hero-cap-intro {
+    width: min(100%, 34rem);
 }
 
 .hero-cap.cap-on a,
@@ -277,6 +338,33 @@ body {
     font-weight: 700;
     letter-spacing: 0;
     box-shadow: 0 12px 34px -24px rgba(67, 56, 202, 0.65);
+    transition: color 0.22s ease, background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.hero-symbol {
+    display: inline-grid;
+    place-items: center;
+    min-width: clamp(4.2rem, 10vw, 7rem);
+    height: clamp(4.2rem, 10vw, 7rem);
+    margin: 0 auto 1rem;
+    border-radius: 1.35rem;
+    border: 1px solid rgba(91, 108, 255, 0.18);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.76), rgba(238, 240, 255, 0.7)),
+        radial-gradient(circle at 30% 20%, rgba(255, 107, 107, 0.22), transparent 58%);
+    color: var(--brand-dark);
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: clamp(2.5rem, 7vw, 4.8rem);
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 22px 50px -34px rgba(67, 56, 202, 0.75);
+    transition: color 0.22s ease, background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.hero-symbol-wide {
+    min-width: clamp(6.5rem, 16vw, 11rem);
+    padding: 0 0.8rem;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
 }
 
 .hero-title {
@@ -288,6 +376,12 @@ body {
     font-weight: 800;
     letter-spacing: 0;
     text-wrap: balance;
+    transition: color 0.22s ease, text-shadow 0.22s ease;
+}
+
+.hero-meaning .hero-title {
+    max-width: 16.5ch;
+    font-size: clamp(2.35rem, 6.4vw, 5.35rem);
 }
 
 .hero-body {
@@ -298,6 +392,14 @@ body {
     line-height: 1.72;
     font-weight: 600;
     text-wrap: balance;
+    transition: color 0.22s ease, text-shadow 0.22s ease;
+}
+
+.hero-body-compact {
+    max-width: 30rem;
+    color: var(--brand-dark);
+    font-size: clamp(0.98rem, 1.8vw, 1.08rem);
+    line-height: 1.68;
 }
 
 .hero-chip-row {
@@ -311,8 +413,38 @@ body {
 }
 
 #hero-scrollhint {
-    z-index: 3;
+    z-index: 4;
     transition: opacity 0.3s ease;
+}
+
+#hero-stage.is-dark .hero-meaning .hero-kicker {
+    color: #dfe7ff;
+    border-color: rgba(161, 176, 255, 0.28);
+    background: rgba(12, 17, 40, 0.68);
+    box-shadow: 0 18px 50px -28px rgba(120, 137, 255, 0.8);
+}
+
+#hero-stage.is-dark .hero-meaning .hero-symbol {
+    color: #eef3ff;
+    border-color: rgba(173, 187, 255, 0.26);
+    background:
+        linear-gradient(135deg, rgba(24, 31, 68, 0.76), rgba(79, 93, 190, 0.48)),
+        radial-gradient(circle at 30% 20%, rgba(255, 107, 107, 0.3), transparent 58%);
+    box-shadow: 0 24px 68px -28px rgba(105, 125, 255, 0.95);
+}
+
+#hero-stage.is-dark .hero-meaning .hero-title {
+    color: #f8fbff;
+    text-shadow: 0 20px 60px rgba(4, 7, 19, 0.7);
+}
+
+#hero-stage.is-dark .hero-meaning .hero-body {
+    color: rgba(229, 235, 255, 0.86);
+    text-shadow: 0 16px 44px rgba(4, 7, 19, 0.7);
+}
+
+#hero-stage.is-dark #hero-scrollhint {
+    color: rgba(226, 232, 255, 0.85);
 }
 
 @media (max-width: 640px) {
@@ -324,6 +456,14 @@ body {
         max-width: 11ch;
         font-size: clamp(2.25rem, 12vw, 3.55rem);
         line-height: 1.08;
+    }
+    .hero-meaning .hero-title {
+        max-width: 11.5ch;
+        font-size: clamp(2.2rem, 11vw, 3.35rem);
+    }
+    .hero-symbol {
+        margin-bottom: 0.8rem;
+        border-radius: 1rem;
     }
     .hero-body {
         max-width: 19rem;
@@ -340,6 +480,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
     /* 정적 폴백처럼 첫 캡션만 보이도록 */
     .hero-cap[data-from="0.00"] { opacity: 1 !important; transform: none !important; }
+    .hero-cap.cap-on::before { animation: none; }
 }
 
 /* --- Activity icon tile ------------------------------------------------- */

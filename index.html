@@ -136,11 +136,12 @@
 
     <main class="pt-16">
         <!-- ===================== HERO (cinematic scroll stage) ===================== -->
-        <section id="hero-stage" class="relative" style="height:340vh">
+        <section id="hero-stage" class="relative" style="height:380vh">
             <!-- pinned viewport -->
             <div id="hero-pin" class="sticky top-16 h-[calc(100vh-4rem)] overflow-hidden">
                 <!-- 3D canvas mount -->
                 <div id="hero-3d" class="absolute inset-0"></div>
+                <div id="hero-mood" class="pointer-events-none" aria-hidden="true"></div>
 
                 <!-- top eyebrow -->
                 <div id="hero-eyebrow" class="absolute top-6 inset-x-0 flex justify-center px-6 pointer-events-none">
@@ -151,27 +152,29 @@
 
                 <!-- Centered scroll story captions -->
                 <div class="hero-copy-layer">
-                    <div class="hero-cap" data-from="0.00" data-to="0.22">
-                        <p class="hero-kicker" data-i18n="hero.stage1.kicker">처음이어도 괜찮아</p>
-                        <h1 class="hero-title" data-i18n="hero.stage1.title">전공은 달라도,<br />우리는 <span class="text-gradient">같이 만든다.</span></h1>
-                        <p class="hero-body" data-i18n="hero.stage1.body">코드를 처음 만지는 사람도, 이미 만들고 있는 사람도 같은 테이블에서 시작해요.</p>
+                    <div class="hero-cap hero-cap-intro" data-from="0.00" data-to="0.17">
+                        <p class="hero-kicker" data-i18n="hero.stage1.kicker">NEXTWAVE</p>
+                        <p class="hero-body hero-body-compact" data-i18n="hero.stage1.body">스크롤하면 이름이 두 글자로 압축돼요. N과 W가 남고, 그 안에 우리가 하는 일이 드러납니다.</p>
                     </div>
-                    <div class="hero-cap" data-from="0.20" data-to="0.42">
-                        <p class="hero-kicker" data-i18n="hero.stage2.kicker">한 팀 안에 네 가지 엔진</p>
-                        <h2 class="hero-title" data-i18n="hero.stage2.title">개발 · 게임개발<br />해커톤 · 마케팅</h2>
-                        <p class="hero-body" data-i18n="hero.stage2.body">기획하는 사람, 만드는 사람, 알리는 사람이 섞일 때 결과물이 빨라져요.</p>
+                    <div class="hero-cap hero-meaning" data-from="0.21" data-to="0.39">
+                        <p class="hero-symbol" aria-hidden="true">N</p>
+                        <p class="hero-kicker" data-i18n="hero.stage2.kicker">N = NEXT · NEW · NETWORK</p>
+                        <h1 class="hero-title" data-i18n="hero.stage2.title">N은,<br />다음 장면을 여는 <span class="text-gradient">시작점.</span></h1>
+                        <p class="hero-body" data-i18n="hero.stage2.body">처음 배우는 사람도, 이미 만들던 사람도 새로운 시도를 먼저 던지는 팀이에요.</p>
                     </div>
-                    <div class="hero-cap" data-from="0.40" data-to="0.62">
-                        <p class="hero-kicker" data-i18n="hero.stage3.kicker">아이디어가 움직이는 순간</p>
-                        <h2 class="hero-title" data-i18n="hero.stage3.title">작게 만들고,<br />빠르게 보여주고, 같이 고친다.</h2>
-                        <p class="hero-body" data-i18n="hero.stage3.body">하루짜리 실험도 좋고, 대회용 프로토타입도 좋아요. 멈춰 있는 아이디어를 화면으로 꺼냅니다.</p>
+                    <div class="hero-cap hero-meaning" data-from="0.43" data-to="0.61">
+                        <p class="hero-symbol" aria-hidden="true">W</p>
+                        <p class="hero-kicker" data-i18n="hero.stage3.kicker">W = WAVE · WITH · WE</p>
+                        <h2 class="hero-title" data-i18n="hero.stage3.title">W는,<br />같이 밀려오는 <span class="text-gradient">물결.</span></h2>
+                        <p class="hero-body" data-i18n="hero.stage3.body">개발, 게임개발, 해커톤, 마케팅이 섞이면서 아이디어가 움직이는 결과물이 됩니다.</p>
                     </div>
-                    <div class="hero-cap" data-from="0.60" data-to="0.82">
-                        <p class="hero-kicker" data-i18n="hero.stage4.kicker">수업 밖에서 남는 것</p>
-                        <h2 class="hero-title" data-i18n="hero.stage4.title">서비스, 게임, 수상 경험까지<br />진짜 결과물로 남겨요.</h2>
-                        <p class="hero-body" data-i18n="hero.stage4.body">포트폴리오에 쓸 수 있는 장면을 만들고, 같이 만든 동료도 함께 남습니다.</p>
+                    <div class="hero-cap hero-meaning" data-from="0.65" data-to="0.79">
+                        <p class="hero-symbol hero-symbol-wide" aria-hidden="true">N/W</p>
+                        <p class="hero-kicker" data-i18n="hero.stage4.kicker">NEXT + WAVE</p>
+                        <h2 class="hero-title" data-i18n="hero.stage4.title">다음 물결은,<br />같이 만들 때 진짜가 돼요.</h2>
+                        <p class="hero-body" data-i18n="hero.stage4.body">서비스, 게임, 대회, 포트폴리오까지. 수업 밖에서 오래 남는 장면을 같이 만듭니다.</p>
                     </div>
-                    <div class="hero-cap" data-from="0.80" data-to="1.00">
+                    <div class="hero-cap hero-meaning" data-from="0.83" data-to="1.00">
                         <p class="hero-kicker" data-i18n="hero.stage5.kicker">다음 물결은 지금 시작</p>
                         <h2 class="hero-title" data-i18n="hero.stage5.title">우리, 같이 만들래요?</h2>
                         <p class="hero-body" data-i18n="hero.stage5.body">잘해야 들어오는 곳이 아니라, 같이 해보려고 들어오는 곳이에요.</p>
