@@ -42,11 +42,20 @@
 
 ## 5) GitHub Pages 배포
 
-이 레포에 `/.github/workflows/deploy-pages.yml`이 추가되어 있습니다.
-- main 브랜치 push 시 자동 배포
-- `Settings > Pages`에서 Source를 `GitHub Actions`로 설정하면 배포가 동작합니다.
+현재 Pages 설정은 `main` 브랜치의 `/` 루트를 배포 소스로 사용합니다.
 
-## 6) 커스텀 도메인 HTTPS 점검
+- main 브랜치 push 시 GitHub Pages가 정적 파일을 빌드/배포합니다.
+- `Settings > Pages`에서 Source가 `Deploy from a branch`, Branch가 `main / root`인지 확인하세요.
+
+## 6) Tailwind CSS 빌드
+
+메인 페이지는 프로덕션에서 Tailwind Play CDN을 쓰지 않도록 `tailwind.css`를 커밋합니다. `index.html`, `i18n.js`, `script.js`, `three-hero.js`의 Tailwind 클래스가 바뀌면 아래 명령으로 CSS를 다시 생성하세요.
+
+```bash
+npx -y tailwindcss@3.4.17 -c tailwind.config.cjs -i tailwind.input.css -o tailwind.css --minify
+```
+
+## 7) 커스텀 도메인 HTTPS 점검
 
 브라우저에서 `wenw.ceo`에 `주의 요함` 또는 `ERR_CERT_COMMON_NAME_INVALID`가 뜨면 GitHub Pages가 아직 `wenw.ceo` 인증서를 내주지 못한 상태입니다.
 
