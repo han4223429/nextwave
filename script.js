@@ -159,13 +159,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // --- FAQ 아코디언 --------------------------------------------------------
-    document.querySelectorAll('.faq-item').forEach(function (item) {
+    document.querySelectorAll('.faq-item').forEach(function (item, i) {
         const btn = item.querySelector('.faq-trigger');
+        const ans = item.querySelector('.faq-answer');
         if (!btn) return;
+        if (ans && !ans.id) ans.id = 'faq-answer-' + (i + 1);
+        btn.setAttribute('aria-expanded', 'false');
+        if (ans) btn.setAttribute('aria-controls', ans.id);
         btn.addEventListener('click', function () {
             const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item.open').forEach((o) => o.classList.remove('open'));
-            if (!isOpen) item.classList.add('open');
+            document.querySelectorAll('.faq-item.open').forEach(function (o) {
+                o.classList.remove('open');
+                const t = o.querySelector('.faq-trigger');
+                if (t) t.setAttribute('aria-expanded', 'false');
+            });
+            if (!isOpen) {
+                item.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
         });
     });
 
@@ -246,6 +257,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.member-card').forEach(function (card) {
         card.addEventListener('click', () => openModal(card));
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
+        });
     });
     if (modalClose) modalClose.addEventListener('click', closeModal);
     if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);

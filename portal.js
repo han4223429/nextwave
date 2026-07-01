@@ -300,6 +300,11 @@
     function setupSidebar() {
         var items = document.querySelectorAll('.portal-sidebar .nav-item');
         items.forEach(function (item) {
+            item.setAttribute('role', 'button');
+            item.setAttribute('tabindex', '0');
+            item.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
+            });
             item.addEventListener('click', function () {
                 var tab = item.getAttribute('data-tab');
                 if (!tab) return;
@@ -337,7 +342,7 @@
             .onSnapshot(function (snapshot) {
                 messagesDiv.innerHTML = '';
                 if (snapshot.empty) {
-                    messagesDiv.innerHTML = '<div style="text-align:center;color:var(--p-outline);font-size:12px;padding:40px;">아직 메시지가 없습니다. 첫 메시지를 보내보세요!</div>';
+                    messagesDiv.innerHTML = '<div style="text-align:center;color:var(--p-outline);font-size:12px;padding:40px;">아직 메시지가 없어요. 먼저 인사 남겨볼까요?</div>';
                     return;
                 }
                 snapshot.forEach(function (doc) {
@@ -364,7 +369,7 @@
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
             }, function (err) {
                 console.error('Chat listener error:', err);
-                messagesDiv.innerHTML = '<div style="text-align:center;color:var(--p-danger);font-size:12px;padding:20px;">채팅 로드 실패: ' + escapeHtml(err.message) + '</div>';
+                messagesDiv.innerHTML = '<div style="text-align:center;color:var(--p-danger);font-size:12px;padding:20px;">채팅을 불러오지 못했어요: ' + escapeHtml(err.message) + '</div>';
             });
     }
 
@@ -383,7 +388,7 @@
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         }).catch(function (err) {
             console.error('Send error:', err);
-            showToast('메시지 전송 실패');
+            showToast('메시지를 못 보냈어요');
         });
     }
 
@@ -393,15 +398,15 @@
     window.deleteChat = function(docId) {
         if (!db) return;
         if (!currentProfile || !currentProfile.isAdmin) {
-            showToast('삭제 권한이 없습니다. (관리자 전용)');
+            showToast('삭제는 관리자만 할 수 있어요');
             return;
         }
         showConfirmModal('이 메시지를 삭제하시겠습니까?', function() {
             db.collection('messages').doc(docId).delete().then(function() {
-                showToast('메시지가 삭제되었습니다.');
+                showToast('메시지를 지웠어요');
             }).catch(function(err) {
                 console.error('Chat delete error:', err);
-                showToast('삭제 실패: ' + err.message);
+                showToast('삭제에 실패했어요: ' + err.message);
             });
         });
     };
@@ -421,7 +426,7 @@
             .onSnapshot(function (snapshot) {
                 listDiv.innerHTML = '';
                 if (snapshot.empty) {
-                    listDiv.innerHTML = '<div style="text-align:center;color:var(--p-outline);font-size:12px;padding:30px;">등록된 공지사항이 없습니다.</div>';
+                    listDiv.innerHTML = '<div style="text-align:center;color:var(--p-outline);font-size:12px;padding:30px;">아직 공지가 없어요.</div>';
                     return;
                 }
                 snapshot.forEach(function (doc) {
@@ -448,7 +453,7 @@
                 });
             }, function (err) {
                 console.error('Announcements error:', err);
-                listDiv.innerHTML = '<div style="color:var(--p-danger);font-size:12px;padding:20px;">공지사항 로드 실패</div>';
+                listDiv.innerHTML = '<div style="color:var(--p-danger);font-size:12px;padding:20px;">공지를 불러오지 못했어요</div>';
             });
     }
 
@@ -457,7 +462,7 @@
         var title = $('ann-title-input').value.trim();
         var body = $('ann-body-input').value.trim();
         if (!title || !body) {
-            showToast('제목과 내용을 모두 입력해 주세요.');
+            showToast('제목이랑 내용을 모두 입력해 주세요');
             return;
         }
 
@@ -470,10 +475,10 @@
         }).then(function () {
             $('ann-title-input').value = '';
             $('ann-body-input').value = '';
-            showToast('공지가 등록되었습니다.');
+            showToast('공지를 올렸어요');
         }).catch(function (err) {
             console.error('Announcement submit error:', err);
-            showToast('공지 등록 실패');
+            showToast('공지 등록에 실패했어요');
         });
     }
 
@@ -483,15 +488,15 @@
     window.deleteAnnouncement = function(docId) {
         if (!db) return;
         if (!currentProfile || !currentProfile.isAdmin) {
-            showToast('삭제 권한이 없습니다. (관리자 전용)');
+            showToast('삭제는 관리자만 할 수 있어요');
             return;
         }
         showConfirmModal('정말 이 공지사항을 삭제하시겠습니까?', function() {
             db.collection('announcements').doc(docId).delete().then(function() {
-                showToast('공지사항이 삭제되었습니다.');
+                showToast('공지를 지웠어요');
             }).catch(function(err) {
                 console.error('Delete error:', err);
-                showToast('삭제 실패: ' + err.message);
+                showToast('삭제에 실패했어요: ' + err.message);
             });
         });
     };
@@ -579,7 +584,7 @@
                         '</div>' +
                         '<div class="opp-card-desc">' + escapeHtml(opp.description || '').replace(/\n/g, '<br>') + '</div>' +
                         '<div class="opp-card-meta">' +
-                        '  <span class="opp-tag ' + (opp.category || '') + '">' + (CATEGORY_LABELS[opp.category] || opp.category || '') + '</span>' +
+                        '  <span class="opp-tag ' + (CATEGORY_LABELS[opp.category] ? opp.category : '') + '">' + (CATEGORY_LABELS[opp.category] || escapeHtml(opp.category || '')) + '</span>' +
                         (opp.source ? '  <span class="opp-source">출처: ' + escapeHtml(opp.source) + '</span>' : '') +
                         (opp.deadline ? '  <span class="opp-source">마감: ' + escapeHtml(opp.deadline) + '</span>' : '') +
                         '</div>' +
@@ -591,13 +596,13 @@
                 if (!hasItems) {
                     grid.innerHTML = '<div class="opp-empty">' +
                         '<span class="material-symbols-outlined" style="font-size:48px;display:block;margin-bottom:8px;">search_off</span>' +
-                        '등록된 기회 정보가 없습니다.' +
-                        (currentOppFilter !== 'all' ? '<br><span style="font-size:10px;">다른 카테고리를 선택해 보세요.</span>' : '') +
+                        '아직 올라온 정보가 없어요.' +
+                        (currentOppFilter !== 'all' ? '<br><span style="font-size:10px;">다른 카테고리도 눌러보세요.</span>' : '') +
                         '</div>';
                 }
             }, function (err) {
                 console.error('Opportunities error:', err);
-                grid.innerHTML = '<div class="opp-empty" style="color:var(--p-danger);">기회 정보 로드 실패: ' + escapeHtml(err.message) + '</div>';
+                grid.innerHTML = '<div class="opp-empty" style="color:var(--p-danger);">기회 정보를 불러오지 못했어요: ' + escapeHtml(err.message) + '</div>';
             });
     }
 
@@ -648,10 +653,10 @@
             $('opp-deadline-input').value = '';
             $('opp-link-input').value = '';
             $('opp-source-input').value = '';
-            showToast('기회 정보가 등록되었습니다!');
+            showToast('기회 정보를 올렸어요');
         }).catch(function (err) {
             console.error('Opp submit error:', err);
-            showToast('등록 실패: ' + err.message);
+            showToast('등록에 실패했어요: ' + err.message);
         });
     }
 
@@ -668,16 +673,16 @@
             if (!docId) return;
             if (!db) return;
             if (!currentProfile || !currentProfile.isAdmin) {
-                showToast('삭제 권한이 없습니다. (관리자 전용)');
+                showToast('삭제는 관리자만 할 수 있어요');
                 return;
             }
 
             showConfirmModal('이 기회 정보를 삭제하시겠습니까?', function() {
                 db.collection('opportunities').doc(docId).delete().then(function() {
-                    showToast('기회 정보가 삭제되었습니다.');
+                    showToast('기회 정보를 지웠어요');
                 }).catch(function(err) {
                     console.error('Opp delete error:', err);
-                    showToast('삭제 실패: ' + err.message);
+                    showToast('삭제에 실패했어요: ' + err.message);
                 });
             });
         });
@@ -698,7 +703,7 @@
             if (doc.exists) {
                 $('attendance-status').innerHTML = '<div class="status-badge checked">✓ 출석 완료</div>';
                 $('attendance-btn').disabled = true;
-                $('attendance-btn').textContent = '이미 출석했습니다';
+                $('attendance-btn').textContent = '오늘은 이미 출석했어요';
             } else {
                 $('attendance-status').innerHTML = '<div class="status-badge not-checked">미출석</div>';
                 $('attendance-btn').disabled = false;
@@ -715,7 +720,7 @@
                 var tbody = $('attendance-history');
                 tbody.innerHTML = '';
                 if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--p-outline);">출석 기록이 없습니다.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--p-outline);">아직 출석 기록이 없어요.</td></tr>';
                     return;
                 }
                 snapshot.forEach(function (doc) {
@@ -744,11 +749,11 @@
             date: today,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         }).then(function () {
-            showToast('출석이 완료되었습니다!');
+            showToast('출석 완료!');
             loadAttendance();
         }).catch(function (err) {
             console.error('Attendance error:', err);
-            showToast('출석 체크 실패: ' + err.message);
+            showToast('출석 체크에 실패했어요: ' + err.message);
         });
     }
 
@@ -765,7 +770,7 @@
             .then(function (snapshot) {
                 grid.innerHTML = '';
                 if (snapshot.empty) {
-                    grid.innerHTML = '<div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;grid-column:1/-1;">승인된 부원이 없습니다.</div>';
+                    grid.innerHTML = '<div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;grid-column:1/-1;">아직 승인된 부원이 없어요.</div>';
                     return;
                 }
                 snapshot.forEach(function (doc) {
@@ -786,7 +791,7 @@
             })
             .catch(function (err) {
                 console.error('Members error:', err);
-                grid.innerHTML = '<div style="color:var(--p-danger);font-size:12px;padding:20px;grid-column:1/-1;">부원 목록 로드 실패</div>';
+                grid.innerHTML = '<div style="color:var(--p-danger);font-size:12px;padding:20px;grid-column:1/-1;">부원 목록을 불러오지 못했어요</div>';
             });
     }
 
@@ -852,7 +857,7 @@
             .then(function (snapshot) {
                 tbody.innerHTML = '';
                 if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--p-outline);">출석 기록이 없습니다.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--p-outline);">아직 출석 기록이 없어요.</td></tr>';
                     return;
                 }
                 snapshot.forEach(function (doc) {
@@ -884,7 +889,7 @@
                 displayName: newName,
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             });
-            showToast('이름이 변경되었습니다.');
+            showToast('이름을 바꿨어요');
             loadMembers();
             // Optional: update chat messages where author is this user (too complex for now, just future msgs will have new name)
         } catch (err) {
@@ -910,7 +915,7 @@
             }
 
             await memberDoc.update(updateData);
-            showToast('권한이 변경되었습니다.');
+            showToast('권한을 바꿨어요');
 
             // Refresh lists
             loadMembers();

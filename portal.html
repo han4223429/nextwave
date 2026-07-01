@@ -23,17 +23,17 @@
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
     <script src="firebase.config.js"></script>
-    <link rel="stylesheet" href="portal.css?v=2026bright">
+    <link rel="stylesheet" href="portal.css?v=2026bright3">
 </head>
 <body>
 
     <!-- ====== LOGIN SCREEN ====== -->
     <div id="login-screen" class="login-screen">
         <div class="login-logo">NextWave Portal</div>
-        <div class="login-sub">secure member workspace</div>
+        <div class="login-sub">부원 전용 공간</div>
         <div class="login-box">
-            <h2>[ Access Required ]</h2>
-            <p>NextWave IT Union 부원 전용 포털입니다.<br>Google 계정으로 로그인해 주세요.</p>
+            <h2>부원 로그인</h2>
+            <p>부원만 들어올 수 있는 공간이에요.<br>구글 계정으로 로그인해 주세요.</p>
             <button id="login-btn" class="google-btn">
                 <span class="material-symbols-outlined">login</span>
                 Google 로그인
@@ -45,8 +45,8 @@
     <!-- ====== PENDING SCREEN ====== -->
     <div id="pending-screen" class="pending-screen" style="display: none;">
         <div class="pending-icon">⏳</div>
-        <h2>승인 대기 중</h2>
-        <p>운영진이 계정을 확인하고 있습니다. 승인되면 자동으로 접속됩니다.</p>
+        <h2>승인 기다리는 중이에요</h2>
+        <p>운영진이 확인하고 있어요. 승인되면 바로 들어올 수 있어요.</p>
         <button id="pending-logout" class="btn-secondary" style="margin-top: 24px;">로그아웃</button>
     </div>
 
@@ -68,7 +68,7 @@
         </header>
 
         <!-- Mobile Backdrop -->
-        <div class="mobile-backdrop" id="mobile-backdrop" style="position:fixed;inset:0;z-index:35;background:rgba(0,0,0,0.6);display:none;"></div>
+        <div class="mobile-backdrop" id="mobile-backdrop" style="position:fixed;inset:0;z-index:35;background:rgba(26,28,46,0.45);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);display:none;"></div>
 
         <div class="portal-layout">
             <!-- Sidebar -->
@@ -119,7 +119,7 @@
                             <div class="chat-messages" id="chat-messages">
                                 <div style="text-align:center;color:var(--p-outline);font-size:11px;padding:20px;">
                                     <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                    메시지를 불러오는 중...
+                                    메시지 불러오는 중…
                                 </div>
                             </div>
                             <div class="chat-input-bar">
@@ -145,7 +145,7 @@
                         <div id="announcements-list">
                             <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;">
                                 <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                공지사항을 불러오는 중...
+                                공지 불러오는 중…
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                         <div class="member-grid" id="member-grid">
                             <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;grid-column:1/-1;">
                                 <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                부원 목록을 불러오는 중...
+                                부원 목록 불러오는 중…
                             </div>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
                         <div class="opp-grid" id="opp-grid">
                             <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:30px;grid-column:1/-1;">
                                 <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                기회 정보를 불러오는 중...
+                                정보 불러오는 중…
                             </div>
                         </div>
                     </div>
@@ -235,7 +235,7 @@
                         <div id="admin-member-list" style="max-height:500px;overflow-y:auto;border:1px solid var(--p-outline-variant);background:#f7f8fc;">
                             <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;">
                                 <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                회원 목록을 불러오는 중...
+                                회원 목록 불러오는 중…
                             </div>
                         </div>
                     </div>
@@ -245,7 +245,7 @@
                             <table class="attendance-log">
                                 <thead><tr><th>이름</th><th>날짜</th><th>시간</th></tr></thead>
                                 <tbody id="admin-attendance-body">
-                                    <tr><td colspan="3" style="text-align:center;color:var(--p-outline);">데이터를 불러오는 중...</td></tr>
+                                    <tr><td colspan="3" style="text-align:center;color:var(--p-outline);">불러오는 중…</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -271,6 +271,6 @@
         </div>
     </div>
 
-    <script src="portal.js?v=4"></script>
+    <script src="portal.js?v=5"></script>
 </body>
 </html>

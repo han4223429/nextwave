@@ -23,6 +23,8 @@ function fallback() {
 
 function boot() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // 동작 최소화 설정 사용자는 380vh 스크롤 스토리 대신 정적 히어로를 바로 보여줌
+    if (reduce) { fallback(); return; }
     const palette = [0x5b6cff, 0x8b5cf6, 0xff6b6b, 0x18c29c, 0xffb020, 0x4f7cff, 0xa855f7, 0xff8f6b];
     const WORD = 'NEXTWAVE';
 
