@@ -224,23 +224,122 @@ body {
 }
 
 /* --- Cinematic hero captions ------------------------------------------- */
+#hero-3d {
+    z-index: 0;
+    opacity: 0.54;
+}
+
+.hero-copy-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        radial-gradient(circle at 50% 48%, rgba(251, 251, 255, 0.94) 0%, rgba(251, 251, 255, 0.82) 28%, rgba(251, 251, 255, 0.38) 52%, transparent 76%),
+        linear-gradient(180deg, rgba(251, 251, 255, 0.34), rgba(251, 251, 255, 0.84));
+}
+
+.hero-copy-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    padding: clamp(5.5rem, 13vh, 8rem) 1.25rem clamp(4.5rem, 9vh, 6rem);
+    pointer-events: none;
+}
+
 .hero-cap {
-    width: 100%;
-    max-width: 60rem;
+    grid-area: 1 / 1;
+    width: min(100%, 64rem);
     text-align: center;
     opacity: 0;
     pointer-events: none;
-    will-change: opacity, transform;
+    will-change: opacity, transform, filter;
 }
+
 .hero-cap.cap-on a,
 .hero-cap.cap-on button {
     pointer-events: auto;
 }
-#hero-scrollhint { transition: opacity 0.3s ease; }
+
+.hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    padding: 0.42rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(91, 108, 255, 0.18);
+    background: rgba(255, 255, 255, 0.76);
+    color: var(--brand-dark);
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: clamp(0.72rem, 1.4vw, 0.88rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    box-shadow: 0 12px 34px -24px rgba(67, 56, 202, 0.65);
+}
+
+.hero-title {
+    margin: 0 auto;
+    max-width: 15ch;
+    color: var(--ink);
+    font-size: clamp(2.35rem, 7vw, 5.8rem);
+    line-height: 1.04;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-wrap: balance;
+}
+
+.hero-body {
+    max-width: 38rem;
+    margin: 1.2rem auto 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.72;
+    font-weight: 600;
+    text-wrap: balance;
+}
+
+.hero-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 650;
+}
+
+#hero-scrollhint {
+    z-index: 3;
+    transition: opacity 0.3s ease;
+}
+
+@media (max-width: 640px) {
+    .hero-copy-layer {
+        padding-top: 5.25rem;
+        padding-bottom: 4.25rem;
+    }
+    .hero-title {
+        max-width: 11ch;
+        font-size: clamp(2.25rem, 12vw, 3.55rem);
+        line-height: 1.08;
+    }
+    .hero-body {
+        max-width: 19rem;
+        margin-top: 1rem;
+        font-size: 0.96rem;
+        line-height: 1.62;
+    }
+    .hero-chip-row {
+        font-size: 0.82rem;
+        gap: 0.35rem 0.65rem;
+    }
+}
 
 @media (prefers-reduced-motion: reduce) {
     /* 정적 폴백처럼 첫 캡션만 보이도록 */
-    .hero-cap[data-from="0.0"] { opacity: 1 !important; transform: none !important; }
+    .hero-cap[data-from="0.00"] { opacity: 1 !important; transform: none !important; }
 }
 
 /* --- Activity icon tile ------------------------------------------------- */

@@ -55,6 +55,7 @@ function boot() {
     const group = new THREE.Group();
     scene.add(group);
     const letters = [];
+    const sparks = [];
     let baseZ = 18;
 
     function rnd(s) { const x = Math.sin(s * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
@@ -80,18 +81,47 @@ function boot() {
             const bb = geo.boundingBox;
             geo.translate(-(bb.max.x + bb.min.x) / 2, -(bb.max.y + bb.min.y) / 2, 0);
             const w = bb.max.x - bb.min.x;
-            const mat = new THREE.MeshStandardMaterial({ color: palette[i % palette.length], metalness: 0.82, roughness: 0.17, envMapIntensity: 1.3 });
+            const mat = new THREE.MeshStandardMaterial({
+                color: palette[i % palette.length],
+                metalness: 0.82,
+                roughness: 0.2,
+                envMapIntensity: 1.15,
+                transparent: true,
+                opacity: 0.46
+            });
             const pivot = new THREE.Group();
             pivot.add(new THREE.Mesh(geo, mat));
             pivot.userData = {
-                w,
-                ex: { x: (rnd(i * 3 + 1) - 0.5) * 30, y: (rnd(i * 3 + 2) - 0.5) * 18, z: rnd(i * 3 + 3) * 12 - 2,
+                w, mat,
+                ex: { x: (rnd(i * 3 + 1) - 0.5) * 42, y: (rnd(i * 3 + 2) - 0.5) * 24, z: rnd(i * 3 + 3) * 18 - 5,
                       rx: (rnd(i + 10) - 0.5) * 14, ry: (rnd(i + 20) - 0.5) * 14, rz: (rnd(i + 30) - 0.5) * 14 },
                 s1: 0.5 + rnd(i + 4) * 1.4, s2: 0.5 + rnd(i + 5) * 1.4, s3: 0.5 + rnd(i + 6) * 1.4,
                 phase: i * 0.7, bx: 0, by: 0
             };
             group.add(pivot);
             letters.push(pivot);
+        }
+
+        const sparkGeo = new THREE.IcosahedronGeometry(0.08, 0);
+        for (let i = 0; i < 48; i++) {
+            const mat = new THREE.MeshBasicMaterial({
+                color: palette[i % palette.length],
+                transparent: true,
+                opacity: 0.32
+            });
+            const spark = new THREE.Mesh(sparkGeo, mat);
+            spark.userData = {
+                mat,
+                radius: 6 + rnd(i + 70) * 11,
+                speed: 0.12 + rnd(i + 80) * 0.24,
+                phase: rnd(i + 90) * Math.PI * 2,
+                y: (rnd(i + 100) - 0.5) * 10,
+                z: -6 - rnd(i + 110) * 18,
+                scale: 0.75 + rnd(i + 120) * 1.8
+            };
+            spark.scale.setScalar(spark.userData.scale);
+            scene.add(spark);
+            sparks.push(spark);
         }
     }
 
@@ -169,24 +199,34 @@ function boot() {
     function applyFrame(p, t) {
         // explode bump: 0 (formed) → 1 (scattered) → 0 (reformed)
         const e = clamp(smooth(0.36, 0.60, p) - smooth(0.72, 0.94, p), 0, 1);
+        const ambient = 0.35 + e * 0.85;
         for (let i = 0; i < letters.length; i++) {
             const l = letters[i], u = l.userData, g = u.ex;
             let px = lerp(u.bx, g.x, e);
             let py = lerp(u.by, g.y, e);
-            let pz = lerp(0, g.z, e);
-            // 흩어진 동안 둥실둥실 떠다님
-            px += e * Math.sin(t * u.s1 + u.phase) * 1.3;
-            py += e * Math.cos(t * u.s2 + u.phase * 1.3) * 1.1;
+            let pz = lerp(-1.8, g.z, e);
+            // 완성 상태에서도 배경처럼 천천히 떠 있고, 흩어진 동안 더 크게 움직임
+            px += Math.sin(t * u.s1 + u.phase) * ambient * 0.82;
+            py += Math.cos(t * u.s2 + u.phase * 1.3) * ambient * 0.72;
             l.position.set(px, py, pz);
             // 회전: 완성 상태엔 은은한 웨이브, 흩어지면 텀블링
-            l.rotation.x = e * (t * u.s1 + g.rx);
-            l.rotation.y = (1 - e) * Math.sin(t * 0.5 + i * 0.6) * 0.22 + e * (t * u.s2 + g.ry);
-            l.rotation.z = e * (g.rz + t * u.s3 * 0.5);
+            l.rotation.x = (1 - e) * Math.sin(t * 0.35 + i) * 0.08 + e * (t * u.s1 + g.rx);
+            l.rotation.y = (1 - e) * Math.sin(t * 0.5 + i * 0.6) * 0.18 + e * (t * u.s2 + g.ry);
+            l.rotation.z = (1 - e) * Math.sin(t * 0.28 + i * 0.4) * 0.05 + e * (g.rz + t * u.s3 * 0.5);
+            if (u.mat) u.mat.opacity = lerp(0.34, 0.5, e);
         }
-        camera.position.z = baseZ + e * 4.5 - smooth(0.0, 0.36, p) * 1.2;
-        group.position.y = 1.7 * (1 - e); // 완성 상태엔 위로 올려 하단 캡션과 분리
-        group.rotation.y = mx * 0.22 * (1 - e);
-        group.rotation.x = my * 0.12 * (1 - e);
+        for (let i = 0; i < sparks.length; i++) {
+            const s = sparks[i], u = s.userData;
+            const a = t * u.speed + u.phase + p * Math.PI * 1.4;
+            s.position.set(Math.cos(a) * u.radius, u.y + Math.sin(a * 1.7) * 1.6, u.z + Math.sin(a) * 1.2);
+            s.rotation.x = t * u.speed * 2;
+            s.rotation.y = t * u.speed * 1.4;
+            if (u.mat) u.mat.opacity = 0.18 + e * 0.18 + Math.sin(a) * 0.04;
+        }
+        camera.position.z = baseZ + e * 5.5 + 1.8 - smooth(0.0, 0.36, p) * 0.4;
+        group.position.y = -0.35 + Math.sin(t * 0.34) * 0.12;
+        group.rotation.y = mx * 0.12 * (1 - e) + Math.sin(t * 0.18) * 0.08;
+        group.rotation.x = my * 0.08 * (1 - e);
         updateCaptions(p);
     }
 

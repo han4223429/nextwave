@@ -147,26 +147,35 @@
                     <span class="pill bg-white/80 backdrop-blur border border-brand/10 text-brand-dark text-sm px-4 py-1.5 font-mono" data-i18n="hero.eyebrow">📍 순천향대학교 IT·창업 연합 동아리</span>
                 </div>
 
-                <!-- bottom scrim for caption legibility -->
-                <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#fbfbff] via-[#fbfbff]/85 to-transparent pointer-events-none"></div>
+                <div class="hero-copy-scrim pointer-events-none"></div>
 
-                <!-- Caption 1: headline -->
-                <div class="absolute inset-x-0 bottom-0 pb-16 flex justify-center px-6 pointer-events-none">
-                    <div class="hero-cap" data-from="0.0" data-to="0.30">
-                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.12] tracking-tight" data-i18n="hero.title">전공은 달라도,<br />우리는 <span class="text-gradient">같이 만든다.</span></h1>
+                <!-- Centered scroll story captions -->
+                <div class="hero-copy-layer">
+                    <div class="hero-cap" data-from="0.00" data-to="0.22">
+                        <p class="hero-kicker" data-i18n="hero.stage1.kicker">처음이어도 괜찮아</p>
+                        <h1 class="hero-title" data-i18n="hero.stage1.title">전공은 달라도,<br />우리는 <span class="text-gradient">같이 만든다.</span></h1>
+                        <p class="hero-body" data-i18n="hero.stage1.body">코드를 처음 만지는 사람도, 이미 만들고 있는 사람도 같은 테이블에서 시작해요.</p>
                     </div>
-                </div>
-                <!-- Caption 2: what -->
-                <div class="absolute inset-x-0 bottom-0 pb-16 flex justify-center px-6 pointer-events-none">
-                    <div class="hero-cap" data-from="0.40" data-to="0.66">
-                        <h2 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-snug tracking-tight" data-i18n="hero.stage2">개발 · 게임개발 · 해커톤 · 마케팅<br />아이디어를 코드로, 코드를 결과로.</h2>
+                    <div class="hero-cap" data-from="0.20" data-to="0.42">
+                        <p class="hero-kicker" data-i18n="hero.stage2.kicker">한 팀 안에 네 가지 엔진</p>
+                        <h2 class="hero-title" data-i18n="hero.stage2.title">개발 · 게임개발<br />해커톤 · 마케팅</h2>
+                        <p class="hero-body" data-i18n="hero.stage2.body">기획하는 사람, 만드는 사람, 알리는 사람이 섞일 때 결과물이 빨라져요.</p>
                     </div>
-                </div>
-                <!-- Caption 3: CTA -->
-                <div class="absolute inset-x-0 bottom-0 pb-14 flex justify-center px-6 pointer-events-none">
-                    <div class="hero-cap" data-from="0.74" data-to="1.0">
-                        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-6" data-i18n="hero.stage3">우리, 같이 만들래요?</h2>
-                        <div class="flex flex-wrap gap-3 justify-center mb-5">
+                    <div class="hero-cap" data-from="0.40" data-to="0.62">
+                        <p class="hero-kicker" data-i18n="hero.stage3.kicker">아이디어가 움직이는 순간</p>
+                        <h2 class="hero-title" data-i18n="hero.stage3.title">작게 만들고,<br />빠르게 보여주고, 같이 고친다.</h2>
+                        <p class="hero-body" data-i18n="hero.stage3.body">하루짜리 실험도 좋고, 대회용 프로토타입도 좋아요. 멈춰 있는 아이디어를 화면으로 꺼냅니다.</p>
+                    </div>
+                    <div class="hero-cap" data-from="0.60" data-to="0.82">
+                        <p class="hero-kicker" data-i18n="hero.stage4.kicker">수업 밖에서 남는 것</p>
+                        <h2 class="hero-title" data-i18n="hero.stage4.title">서비스, 게임, 수상 경험까지<br />진짜 결과물로 남겨요.</h2>
+                        <p class="hero-body" data-i18n="hero.stage4.body">포트폴리오에 쓸 수 있는 장면을 만들고, 같이 만든 동료도 함께 남습니다.</p>
+                    </div>
+                    <div class="hero-cap" data-from="0.80" data-to="1.00">
+                        <p class="hero-kicker" data-i18n="hero.stage5.kicker">다음 물결은 지금 시작</p>
+                        <h2 class="hero-title" data-i18n="hero.stage5.title">우리, 같이 만들래요?</h2>
+                        <p class="hero-body" data-i18n="hero.stage5.body">잘해야 들어오는 곳이 아니라, 같이 해보려고 들어오는 곳이에요.</p>
+                        <div class="flex flex-wrap gap-3 justify-center mt-7 mb-5">
                             <button data-apply class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-base">
                                 <span class="material-symbols-rounded">rocket_launch</span> <span data-i18n="btn.apply">지원하기</span>
                             </button>
@@ -174,7 +183,7 @@
                                 <span class="material-symbols-rounded">explore</span> <span data-i18n="btn.explore">활동 둘러보기</span>
                             </a>
                         </div>
-                        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted font-medium">
+                        <div class="hero-chip-row">
                             <span data-i18n="hero.chip1">🏆 전국·교내 대회 수상 6회</span>
                             <span data-i18n="hero.chip2">🎓 전공 무관</span>
                             <span data-i18n="hero.chip3">🤝 함께 성장하는 문화</span>
