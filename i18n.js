@@ -34,7 +34,7 @@ window.I18N = (function () {
             'hero.stage2': '개발 · 게임개발 · 해커톤 · 마케팅<br />아이디어를 코드로, 코드를 결과로.',
             'hero.stage3': '우리, 같이 만들래요?',
             'hero.title': '전공은 달라도,<br>우리는 <span class="text-gradient">같이 만든다.</span>',
-            'hero.subtitle': '개발, 게임개발, 해커톤, 마케팅까지 다 같이 해요.<br class="hidden sm:block" />아직 잘 몰라도 괜찮아요. <span class="text-ink font-semibold">만들어보고 싶은 마음만 있으면 돼요.</span>',
+            'hero.subtitle': '개발, 게임개발, 해커톤, 마케팅까지 다 같이 해요. <br class="hidden sm:block" />아직 잘 몰라도 괜찮아요. <span class="text-ink font-semibold">만들어보고 싶은 마음만 있으면 돼요.</span>',
             'hero.chip1': '🏆 전국·교내 대회 수상 6회', 'hero.chip2': '🎓 전공 무관', 'hero.chip3': '🤝 함께 성장하는 문화',
             'hero.badge': '🎉 신입 모집 중!',
 
@@ -121,7 +121,7 @@ window.I18N = (function () {
             'hero.stage2': 'Development · Game dev · Hackathons · Marketing<br />Ideas into code, code into results.',
             'hero.stage3': 'Want to build with us?',
             'hero.title': 'Different majors,<br>we <span class="text-gradient">build together.</span>',
-            'hero.subtitle': 'Development · Game dev · Hackathons · Marketing.<br class="hidden sm:block" />A crew that turns ideas into code, and code into results. <span class="text-ink font-semibold">What matters more than skill is the will to build together — beginners welcome.</span>',
+            'hero.subtitle': 'Development · Game dev · Hackathons · Marketing. <br class="hidden sm:block" />A crew that turns ideas into code, and code into results. <span class="text-ink font-semibold">What matters more than skill is the will to build together — beginners welcome.</span>',
             'hero.chip1': '🏆 6 competition awards', 'hero.chip2': '🎓 All majors', 'hero.chip3': '🤝 Grow together',
             'hero.badge': '🎉 Now recruiting!',
 
