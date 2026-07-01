@@ -142,7 +142,8 @@ function boot() {
             const from = parseFloat(c.dataset.from), to = parseFloat(c.dataset.to);
             let o = 0;
             if (p >= from - fade && p <= to + fade) {
-                o = Math.min(smooth(from - fade, from + fade, p), 1 - smooth(to - fade, to + fade, p));
+                const fadeIn = from <= 0 ? 1 : smooth(from - fade, from + fade, p);
+                o = Math.min(fadeIn, 1 - smooth(to - fade, to + fade, p));
             }
             c.style.opacity = o;
             c.style.transform = 'translateY(' + ((1 - o) * 18) + 'px)';

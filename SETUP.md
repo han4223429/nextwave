@@ -45,3 +45,16 @@
 이 레포에 `/.github/workflows/deploy-pages.yml`이 추가되어 있습니다.
 - main 브랜치 push 시 자동 배포
 - `Settings > Pages`에서 Source를 `GitHub Actions`로 설정하면 배포가 동작합니다.
+
+## 6) 커스텀 도메인 HTTPS 점검
+
+브라우저에서 `wenw.ceo`에 `주의 요함` 또는 `ERR_CERT_COMMON_NAME_INVALID`가 뜨면 GitHub Pages가 아직 `wenw.ceo` 인증서를 내주지 못한 상태입니다.
+
+1. `Settings > Pages > Custom domain`에 `wenw.ceo`가 등록되어 있는지 확인
+2. `Enforce HTTPS`를 켜고, 인증서 발급이 `Certificate issued` 상태가 될 때까지 대기
+3. DNS가 아래처럼 유지되는지 확인
+   - `wenw.ceo` A: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - `www.wenw.ceo` CNAME: `han4223429.github.io`
+4. GitHub가 도메인 소유권 TXT 레코드를 요구하면 안내된 `_github-pages-challenge-...` TXT 값을 DNS에 추가
+
+인증서가 발급되기 전까지는 코드가 정상이어도 HTTPS 주소창 경고가 계속 뜹니다.

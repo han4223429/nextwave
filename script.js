@@ -19,11 +19,22 @@ window.NEXTWAVE_SITE = window.NEXTWAVE_SITE || {
 document.addEventListener('DOMContentLoaded', function () {
     const CFG = window.NEXTWAVE_SITE;
 
+    function safeExternalUrl(url) {
+        if (!url) return '';
+        try {
+            const parsed = new URL(url, window.location.origin);
+            return (parsed.protocol === 'https:' || parsed.protocol === 'http:') ? parsed.href : '';
+        } catch (e) {
+            return '';
+        }
+    }
+
     // --- 지원하기 버튼 연결 ---------------------------------------------------
     document.querySelectorAll('[data-apply]').forEach(function (btn) {
         btn.addEventListener('click', function (e) {
-            if (CFG.applyUrl) {
-                window.open(CFG.applyUrl, '_blank', 'noopener');
+            const applyUrl = safeExternalUrl(CFG.applyUrl);
+            if (applyUrl) {
+                window.open(applyUrl, '_blank', 'noopener,noreferrer');
             } else {
                 e.preventDefault();
                 const target = document.getElementById('recruitment');
@@ -37,8 +48,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const el = document.getElementById(id);
         if (!el) return;
         if (url) {
-            el.href = isMail ? ('mailto:' + url) : url;
-            if (!isMail) el.target = '_blank';
+            const safeUrl = isMail ? ('mailto:' + url) : safeExternalUrl(url);
+            if (!safeUrl) {
+                el.classList.add('hidden');
+                return;
+            }
+            el.href = safeUrl;
+            if (!isMail) {
+                el.target = '_blank';
+                el.rel = 'noopener noreferrer';
+            }
         } else {
             el.classList.add('hidden');
         }
@@ -56,8 +75,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!mobileMenu) return;
         mobileMenu.classList.toggle('translate-x-full', !open);
         mobileMenu.classList.toggle('translate-x-0', open);
+        mobileMenu.setAttribute('aria-hidden', String(!open));
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', String(open));
         document.body.style.overflow = open ? 'hidden' : '';
     }
+    if (mobileMenu) mobileMenu.setAttribute('aria-hidden', 'true');
+    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
     if (menuToggle) menuToggle.addEventListener('click', () => setMenu(true));
     if (menuClose) menuClose.addEventListener('click', () => setMenu(false));
     document.querySelectorAll('.mobile-nav-link').forEach(function (link) {
@@ -149,8 +172,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- 맨 위로 버튼 --------------------------------------------------------
     const toTop = document.getElementById('to-top');
     if (toTop) {
+        function toTopThreshold() {
+            const hero = document.getElementById('hero-stage');
+            if (!hero) return 600;
+            return Math.max(600, hero.offsetTop + hero.offsetHeight - window.innerHeight * 0.5);
+        }
         window.addEventListener('scroll', function () {
-            toTop.classList.toggle('show', window.scrollY > 600);
+            toTop.classList.toggle('show', window.scrollY > toTopThreshold());
         }, { passive: true });
         toTop.addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -180,7 +208,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (modalName) modalName.textContent = name;
         if (modalRole) modalRole.textContent = role;
         if (modalImg) { modalImg.src = img; modalImg.alt = name; }
-        if (modalBio) modalBio.innerHTML = bio;
+        if (modalBio) modalBio.innerHTML = bio.split('<br>').map(function (line) {
+            const div = document.createElement('div');
+            div.textContent = line;
+            return div.innerHTML;
+        }).join('<br>');
         if (modalLink) {
             if (portfolio && portfolio !== '#') {
                 modalLink.href = portfolio;

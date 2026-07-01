@@ -87,6 +87,16 @@
         return div.innerHTML;
     }
 
+    function safeExternalUrl(url) {
+        if (!url) return '';
+        try {
+            var parsed = new URL(url, window.location.origin);
+            return (parsed.protocol === 'https:' || parsed.protocol === 'http:') ? parsed.href : '';
+        } catch (e) {
+            return '';
+        }
+    }
+
     // =========================================================
     // INITIALIZATION
     // =========================================================
@@ -200,36 +210,20 @@
             var doc = await memberRef.get();
 
             if (!doc.exists) {
-                var isSuperAdmin = (user.email === 'hupatv@gmail.com');
-
                 await memberRef.set({
                     uid: user.uid,
                     email: user.email,
                     displayName: user.displayName || '',
                     photoURL: user.photoURL || '',
-                    isMember: isSuperAdmin,
-                    isAdmin: isSuperAdmin,
-                    role: isSuperAdmin ? 'admin' : 'pending',
+                    isMember: false,
+                    isAdmin: false,
+                    role: 'pending',
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                currentProfile = { isMember: isSuperAdmin, isAdmin: isSuperAdmin, role: isSuperAdmin ? 'admin' : 'pending' };
+                currentProfile = { isMember: false, isAdmin: false, role: 'pending' };
             } else {
                 currentProfile = doc.data();
-                var isSuperAdmin = (user.email === 'hupatv@gmail.com' || user.email === 'hanyong.kk1@gmail.com' || user.email === 'handak@10.nate.com');
-
-                // Auto-upgrade super admin if not already upgraded
-                if (isSuperAdmin && (!currentProfile.isAdmin || !currentProfile.isMember)) {
-                    await memberRef.update({
-                        isMember: true,
-                        isAdmin: true,
-                        role: 'admin',
-                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                    currentProfile.isMember = true;
-                    currentProfile.isAdmin = true;
-                    currentProfile.role = 'admin';
-                }
 
                 // Update display name / photo if changed
                 if (currentProfile.displayName !== user.displayName || currentProfile.photoURL !== user.photoURL) {
@@ -570,8 +564,9 @@
                     }
 
                     var linkBtn = '';
-                    if (opp.link) {
-                        linkBtn = '<a href="' + escapeHtml(opp.link) + '" target="_blank" rel="noopener" class="opp-link-btn"><span class="material-symbols-outlined" style="font-size:12px;">open_in_new</span> 바로가기</a>';
+                    var safeLink = safeExternalUrl(opp.link);
+                    if (safeLink) {
+                        linkBtn = '<a href="' + escapeHtml(safeLink) + '" target="_blank" rel="noopener noreferrer" class="opp-link-btn"><span class="material-symbols-outlined" style="font-size:12px;">open_in_new</span> 바로가기</a>';
                     }
 
                     var card = document.createElement('div');
@@ -824,7 +819,7 @@
                         actionsHtml += '<button class="btn-tiny danger" onclick="window.adminInlineAction(\'' + mId + '\', \'revoke\')">회수</button>';
                     } else {
                         // Admin
-                        if (m.email !== 'hupatv@gmail.com') { // superadmin protection
+                        if (m.uid !== currentUser.uid) {
                             actionsHtml += '<button class="btn-tiny danger" onclick="window.adminInlineAction(\'' + mId + '\', \'revoke\')">권한 회수</button>';
                         }
                     }

@@ -21,15 +21,40 @@ service cloud.firestore {
       return isSignedIn() && request.auth.uid == userId;
     }
 
+    function isSelfCreatedPendingMember(userId) {
+      return isOwner(userId)
+        && request.resource.data.keys().hasOnly([
+          'uid', 'email', 'displayName', 'photoURL',
+          'isMember', 'isAdmin', 'role', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.uid == userId
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.isMember == false
+        && request.resource.data.isAdmin == false
+        && request.resource.data.role == 'pending';
+    }
+
+    function isSafeSelfProfileUpdate(userId) {
+      return isOwner(userId)
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.isMember == resource.data.isMember
+        && request.resource.data.isAdmin == resource.data.isAdmin
+        && request.resource.data.role == resource.data.role
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'email', 'displayName', 'photoURL', 'updatedAt'
+        ]);
+    }
+
     // ── 1. Members 컬렉션 ──
-    // 로그인한 사용자는 누구나 읽기 가능 (부원 목록 표시용)
-    // 본인 문서만 생성 가능 (최초 가입 시)
-    // 본인 문서 수정 OR 관리자가 수정 가능
+    // 본인은 자기 문서만 읽고, 승인된 부원/관리자만 부원 목록을 읽을 수 있음
+    // 본인 문서는 pending 상태로만 생성 가능
+    // 본인은 표시 정보만 수정 가능하며 권한 필드는 관리자만 변경 가능
     // 삭제는 관리자만
     match /members/{userId} {
-      allow read: if isSignedIn();
-      allow create: if isSignedIn() && request.auth.uid == userId;
-      allow update: if isOwner(userId) || isAdmin();
+      allow read: if isOwner(userId) || isMember() || isAdmin();
+      allow create: if isSelfCreatedPendingMember(userId);
+      allow update: if isAdmin() || isSafeSelfProfileUpdate(userId);
       allow delete: if isAdmin();
     }
 
@@ -57,7 +82,7 @@ service cloud.firestore {
     // 본인만 생성 가능 (uid 검증)
     // 수정/삭제는 관리자만
     match /attendance/{attId} {
-      allow read: if isSignedIn();
+      allow read: if isAdmin() || (isSignedIn() && resource.data.uid == request.auth.uid);
       allow create: if isMember() && request.resource.data.uid == request.auth.uid;
       allow update, delete: if isAdmin();
     }
