@@ -82,47 +82,46 @@
     <!-- ===================== HEADER ===================== -->
     <header id="site-header"
         class="fixed top-0 inset-x-0 z-50 bg-white/70 backdrop-blur-xl border-b border-brand/10 transition-shadow">
-        <div class="max-w-6xl mx-auto px-5 lg:px-6 h-16 flex items-center justify-between gap-4">
+        <div class="max-w-7xl mx-auto px-5 lg:px-6 h-16 flex items-center justify-between gap-3">
             <a href="#home" class="flex items-center gap-2.5 shrink-0">
                 <img src="assets/logo.png" alt="NextWave 로고" class="h-9 w-9 rounded-xl object-cover" />
                 <span class="font-extrabold text-lg tracking-tight">NextWave</span>
-                <span class="hidden sm:inline font-mono text-[10px] text-brand bg-brand-light px-2 py-0.5 rounded-full">IT
-                    UNION</span>
+                <span class="hidden sm:inline whitespace-nowrap font-mono text-[10px] text-brand bg-brand-light px-2 py-0.5 rounded-full">IT UNION</span>
             </a>
 
-            <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold text-muted">
-                <a class="nav-link hover:text-ink" href="#about" data-i18n="nav.about">소개</a>
-                <a class="nav-link hover:text-ink" href="#activities" data-i18n="nav.activities">활동</a>
-                <a class="nav-link hover:text-ink" href="#awards" data-i18n="nav.awards">성과</a>
-                <a class="nav-link hover:text-ink" href="#team" data-i18n="nav.team">운영진</a>
-                <a class="nav-link hover:text-ink" href="#recruitment" data-i18n="nav.join">모집</a>
-                <a class="nav-link hover:text-ink" href="#faq" data-i18n="nav.faq">FAQ</a>
+            <nav class="hidden xl:flex items-center gap-6 text-sm font-semibold text-muted shrink min-w-0">
+                <a class="nav-link hover:text-ink whitespace-nowrap" href="#about" data-i18n="nav.about">소개</a>
+                <a class="nav-link hover:text-ink whitespace-nowrap" href="#activities" data-i18n="nav.activities">활동</a>
+                <a class="nav-link hover:text-ink whitespace-nowrap" href="#awards" data-i18n="nav.awards">성과</a>
+                <a class="nav-link hover:text-ink whitespace-nowrap" href="#team" data-i18n="nav.team">운영진</a>
+                <a class="nav-link hover:text-ink whitespace-nowrap" href="#recruitment" data-i18n="nav.join">모집</a>
+                <a class="nav-link hover:text-ink whitespace-nowrap" href="#faq" data-i18n="nav.faq">FAQ</a>
                 <li id="portal-nav-item" class="hidden list-none">
-                    <a id="portal-nav-link" class="nav-link hover:text-ink" href="portal.html" data-i18n="nav.portal">부원 포털</a>
+                    <a id="portal-nav-link" class="nav-link hover:text-ink whitespace-nowrap" href="portal.html" data-i18n="nav.portal">부원 포털</a>
                 </li>
             </nav>
 
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 shrink-0">
                 <button data-lang-toggle aria-label="Language / 언어"
-                    class="inline-flex items-center gap-1 text-xs font-bold text-muted hover:text-brand border border-slate-200 hover:border-brand/30 bg-white px-2.5 py-2 rounded-full transition-colors">
+                    class="inline-flex shrink-0 items-center gap-1 text-xs font-bold text-muted hover:text-brand border border-slate-200 hover:border-brand/30 bg-white px-2.5 py-2 rounded-full transition-colors">
                     <span class="material-symbols-rounded text-[18px]">language</span>
                     <span data-lang-label>EN</span>
                 </button>
                 <span id="auth-status"
-                    class="hidden lg:inline-block max-lg:!hidden text-[11px] text-muted bg-slate-100 px-2.5 py-1 rounded-full"></span>
+                    class="hidden 2xl:inline-block max-2xl:!hidden max-w-[160px] truncate align-middle text-[11px] text-muted bg-slate-100 px-2.5 py-1 rounded-full"></span>
                 <button id="portal-login-btn"
-                    class="portal-login-btn hidden sm:inline-flex max-sm:!hidden items-center gap-1.5 text-sm font-semibold text-brand-dark border border-brand/25 bg-white hover:bg-brand-light px-3.5 py-2 rounded-full transition-colors">
+                    class="portal-login-btn inline-flex max-sm:!hidden shrink-0 items-center gap-1.5 text-sm font-semibold whitespace-nowrap text-brand-dark border border-brand/25 bg-white hover:bg-brand-light px-3.5 py-2 rounded-full transition-colors">
                     <span class="material-symbols-rounded text-[18px]">login</span> <span data-i18n="btn.login">로그인</span>
                 </button>
                 <button id="portal-logout-btn"
-                    class="hidden items-center gap-1.5 text-sm font-semibold text-muted border border-slate-200 bg-white hover:bg-slate-50 px-3.5 py-2 rounded-full transition-colors">
+                    class="hidden inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold whitespace-nowrap text-muted border border-slate-200 bg-white hover:bg-slate-50 px-3.5 py-2 rounded-full transition-colors">
                     <span class="material-symbols-rounded text-[18px]">logout</span> <span data-i18n="btn.logout">로그아웃</span>
                 </button>
                 <button data-apply
-                    class="btn-primary hidden sm:inline-flex items-center gap-1.5 text-sm font-bold px-4 py-2 rounded-full">
+                    class="btn-primary hidden sm:inline-flex shrink-0 items-center gap-1.5 text-sm font-bold whitespace-nowrap px-4 py-2 rounded-full">
                     <span data-i18n="btn.apply">지원하기</span> <span class="material-symbols-rounded text-[18px]">arrow_forward</span>
                 </button>
-                <button id="mobile-menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="메뉴 열기">
+                <button id="mobile-menu-toggle" class="xl:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="메뉴 열기">
                     <span class="material-symbols-rounded">menu</span>
                 </button>
             </div>
@@ -131,7 +130,7 @@
 
     <!-- ===================== MOBILE MENU ===================== -->
     <div id="mobile-menu"
-        class="fixed inset-y-0 right-0 z-[60] w-72 max-w-[80vw] bg-white shadow-2xl translate-x-full transition-transform duration-300 lg:hidden flex flex-col p-6">
+        class="fixed inset-y-0 right-0 z-[60] w-72 max-w-[80vw] bg-white shadow-2xl translate-x-full transition-transform duration-300 xl:hidden flex flex-col p-6">
         <div class="flex items-center justify-between mb-8">
             <span class="font-extrabold text-lg" data-i18n="menu.title">메뉴</span>
             <button id="mobile-menu-close" class="p-2 rounded-lg hover:bg-slate-100" aria-label="메뉴 닫기">
