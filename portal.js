@@ -270,7 +270,8 @@
       });
       window.google.accounts.id.initialize({
         client_id: window.NEXTWAVE_GOOGLE_CLIENT_ID,
-        auto_select: false, button_auto_select: false, use_fedcm_for_button: true,
+        // Use Google's standard popup UI; keep account selection explicit.
+        auto_select: false, button_auto_select: false, use_fedcm_for_button: false, ux_mode: 'popup',
         callback: async response => {
           if (busy || auth.currentUser || typeof response?.credential !== 'string' || !response.credential) return;
           busy = true; container.inert = true; container.setAttribute('aria-busy', 'true');
