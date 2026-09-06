@@ -42,13 +42,13 @@
 
 ## 5) GitHub Pages 배포
 
-**2026-09-07 업로드 상태:** 사이트 코드는 `main`에 업로드했습니다. 예약 수집 workflow는 로컬에서 검증했지만 원격 등록은 승인 대기 중입니다. 현재 자동 수집이 활성화된 상태는 아닙니다. 등록 시 `contents:write`로 공개 JSON을 커밋하고 `pages:write`로 기존 Pages를 빌드합니다.
+**2026-09-07 운영 상태:** 사이트와 예약 수집 workflow를 `main`에 등록했습니다. 첫 원격 실행에서 공개 공고 수집·검증·bot commit·Pages 빌드·실제 HTTPS 배포까지 확인했습니다. workflow는 `contents:write`로 공개 JSON만 커밋하고 `pages:write`로 기존 Pages를 빌드하며, 매시간 17분 실행하도록 등록되어 있습니다. [첫 실행과 배포 검증 기록](docs/CRAWLER.md#자동-갱신과-실제-배포)을 참고하세요.
 
 현재 Pages 설정은 `main` 브랜치의 `/` 루트를 배포 소스로 사용합니다.
 
 - main 브랜치 push 시 GitHub Pages가 정적 파일을 빌드/배포합니다.
 - `Settings > Pages`에서 Source가 `Deploy from a branch`, Branch가 `main / root`인지 확인하세요.
-- 등록 후 매시간 공고 수집 workflow는 새 JSON을 commit한 뒤 Pages 설정을 읽고, 기존 브랜치 배포(`legacy`, 기본 브랜치의 `/`)이면 빌드를 요청합니다. 별도 저장소 변수나 개인 토큰은 필요하지 않습니다. GitHub Actions 토큰의 push만으로는 Pages가 자동 빌드되지 않기 때문에 이 후속 요청을 사용합니다.
+- 매시간 공고 수집 workflow는 새 JSON을 commit한 뒤 Pages 설정을 읽고, 기존 브랜치 배포(`legacy`, 기본 브랜치의 `/`)이면 빌드를 요청합니다. 별도 저장소 변수나 개인 토큰은 필요하지 않습니다. GitHub Actions 토큰의 push만으로는 Pages가 자동 빌드되지 않기 때문에 이 후속 요청을 사용합니다.
 - Pages를 다른 브랜치·하위 폴더 또는 별도 배포 workflow로 바꾸면 수집 workflow가 설정을 변경하지 않고 요약에 배포 연결 필요 상태를 남깁니다. 해당 배포 경로도 새 `data/opportunities.json`을 게시하도록 연결하세요.
 
 ## 6) 로컬 실행과 사이트 설정

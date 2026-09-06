@@ -27,9 +27,9 @@ python3 -m venv /tmp/nextwave-crawler-venv
 
 ## 자동 갱신과 실제 배포
 
-**현재 상태 — 2026-09-07:** 사이트와 최신 공고 JSON은 GitHub `main`에 업로드했습니다. 아래 예약 수집 workflow는 로컬 파일로 준비·검증했으나 아직 원격에 등록하지 않았습니다. 기존 Git 인증에 `workflow` scope가 없어 해당 파일을 분리했으며, 연결된 GitHub 앱을 통한 등록도 자동 승인 검토가 저장소·Pages의 예약 쓰기 권한에 대한 명시적 승인 부족을 이유로 차단했습니다. 정확한 `contents:write`·`pages:write` 권한과 매시간 등록 승인을 요청한 상태입니다. 승인 전에는 수동 실행·공개 JSON 업로드 경로만 사용할 수 있고, 자동 수집이 활성화됐다고 간주하지 않습니다.
+**현재 상태 — 2026-09-07:** 사용자가 승인한 예약 수집 workflow를 `main`에 등록했고 활성 상태를 확인했습니다. [등록 커밋 `9342512`](https://github.com/han4223429/nextwave/commit/9342512b116505eeb87eefa841597119e528cb64)의 [첫 수동 실행](https://github.com/han4223429/nextwave/actions/runs/34044183740)에서 실제 수집·검증·bot commit·기존 Pages 빌드·공개 HTTPS 반영까지 성공했습니다.
 
-등록할 `.github/workflows/crawl.yml`은 기본 브랜치에서 **매시간 17분** 실행하며 등록 후 Actions → Refresh portal opportunities → Run workflow로 즉시 실행할 수도 있습니다. 정적 포털에서 새로고침 버튼을 눌렀을 때는 배포된 최신 JSON을 다시 읽는 것이며 외부 사이트를 직접 크롤링하는 것은 아닙니다.
+`.github/workflows/crawl.yml`은 기본 브랜치에서 **매시간 17분** 실행하도록 등록되어 있으며 Actions → Refresh portal opportunities → Run workflow로 즉시 실행할 수도 있습니다. 정적 포털에서 새로고침 버튼을 눌렀을 때는 배포된 최신 JSON을 다시 읽는 것이며 외부 사이트를 직접 크롤링하는 것은 아닙니다.
 
 운영 저장소의 기본 브랜치에 변경을 merge/push한 뒤 다음을 확인합니다.
 
@@ -39,9 +39,9 @@ python3 -m venv /tmp/nextwave-crawler-venv
 
 GitHub Actions의 기본 `GITHUB_TOKEN`으로 push한 commit만으로는 Pages가 자동 빌드되지 않으므로 명시적인 build 요청을 포함했습니다. [GitHub Pages 설정 문서](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site), [Pages build API](https://docs.github.com/en/rest/pages/pages#request-a-github-pages-build).
 
-이 작업은 workflow 코드를 추가하는 것이며, 로컬 실행만으로 GitHub 예약 작업 또는 원격 배포가 활성화되지는 않습니다. GitHub 일정 지연·사용량 제한·장기 비활성화·출처 장애가 있을 수 있으므로 포털은 실제 마지막 성공 시각을 표시합니다. 수집이 부분 실패해도 상태 JSON을 저장하고 workflow는 최종 실패로 표시합니다.
+GitHub 일정 지연·사용량 제한·장기 비활성화·출처 장애가 있을 수 있으므로 포털은 실제 마지막 성공 시각을 표시합니다. 수집이 부분 실패해도 상태 JSON을 저장하고 workflow는 최종 실패로 표시합니다. 등록된 주기와 첫 수동 실행 성공을 모든 향후 예약 실행의 성공 보장으로 해석하지 않습니다.
 
-2026-09-07 배포 준비 중 읽기 전용 확인에서 이 저장소의 Actions는 활성 상태였고 Pages는 `legacy`, `main /`이었습니다. `main`은 보호 브랜치가 아니었습니다. 이 확인은 새 workflow의 원격 실행·배포 성공 기록이 아니며, 첫 실행 결과는 별도로 확인해야 합니다.
+첫 실행은 **2026-09-07 01:03:25 KST**에 K-Startup 45건·위비티 13건을 오류 없이 수집했습니다. 기존 기록을 보존한 전체 snapshot은 60건(진행 57·보관 3)이며, 파싱·소유권 테스트 25개와 snapshot 검증이 통과했습니다. `github-actions[bot]`의 [수집 커밋 `cc1d1a0`](https://github.com/han4223429/nextwave/commit/cc1d1a0abe280a7616479400fba33715956a07f8)은 `data/opportunities.json`만 변경했습니다. 같은 커밋의 Pages 빌드는 01:04:08 KST에 완료됐고, [공개 JSON](https://wenw.ceo/data/opportunities.json)의 HTTP 200 응답이 커밋 원문과 바이트 단위로 일치했습니다. Pages는 기존 `legacy`, `main /` 구성을 사용했으며 Firebase에는 연결하거나 쓰지 않았습니다. 이 수치는 첫 실행 당시 기록이며 이후에는 포털·Actions의 실제 시각과 상태를 확인합니다.
 
 ## 데이터 계약과 보관 기준
 
