@@ -13,7 +13,7 @@ const deferred = () => {
 
 // Execute production auth functions with controlled SDK responses and a small DOM.
 // This is not a browser, token verifier, Google request, or live Firebase connection.
-function harness({ query = '?signin=google', loaded = true, factoryError = null, renderError = false } = {}) {
+function harness({ query = '?signin=google', protocol = 'https:', hostname = 'wenw.ceo', loaded = true, factoryError = null, renderError = false } = {}) {
   const nodes = new Map(), scripts = [], timers = new Map(), logs = [], storageWrites = [];
   const credentials = [], verifications = [], memberReads = [];
   let callback, renderOptions, observer, timerId = 0;
@@ -29,6 +29,7 @@ function harness({ query = '?signin=google', loaded = true, factoryError = null,
   }
   function getNode(id) { if (!nodes.has(id)) nodes.set(id, node(id)); return nodes.get(id); }
   getNode('google-signin').hidden = true;
+  getNode('auth-referrer').setAttribute('content', 'strict-origin-when-cross-origin');
   getNode('portal-app').hidden = true;
   getNode('pending-screen').hidden = true;
   const auth = {
@@ -64,7 +65,7 @@ function harness({ query = '?signin=google', loaded = true, factoryError = null,
     console: { log: (...args) => logs.push(args), warn: (...args) => logs.push(args), error: (...args) => logs.push(args) },
     setTimeout(fn) { timers.set(++timerId, fn); return timerId; }, clearTimeout(id) { timers.delete(id); },
     localStorage: { setItem: (...args) => storageWrites.push(args) }, sessionStorage: { setItem: (...args) => storageWrites.push(args) },
-    window: { location: { search: query }, firebase, NEXTWAVE_GOOGLE_CLIENT_ID: 'public-test-client.apps.googleusercontent.com', NEXTWAVE_FIREBASE_CONFIG: { apiKey: 'public-test-key' } },
+    window: { location: { search: query, protocol, hostname }, firebase, NEXTWAVE_GOOGLE_CLIENT_ID: 'public-test-client.apps.googleusercontent.com', NEXTWAVE_FIREBASE_CONFIG: { apiKey: 'public-test-key' } },
     document: { getElementById: getNode, querySelectorAll: () => [], createElement: () => node(),
       createDocumentFragment: () => node(), createTextNode: text => ({ textContent: text }), head: { append(script) { scripts.push(script); } } }
   };
@@ -88,6 +89,23 @@ function assertNoTokenExposure(h, token) {
   assert.equal(JSON.stringify([visible, h.logs, h.storageWrites]).includes(token), false);
   assert.equal(h.storageWrites.length, 0);
 }
+
+test('HTTP localhost applies the Google referrer requirement before loading GIS', async () => {
+  const h = harness({ protocol: 'http:', hostname: 'localhost', loaded: false });
+  const loading = h.api.initGoogleIdentity();
+  assert.equal(h.getNode('auth-referrer').getAttribute('content'), 'no-referrer-when-downgrade');
+  assert.equal(h.scripts.length, 1);
+  h.installGoogle(); h.scripts[0].onload(); await loading;
+});
+
+test('HTTPS, non-local hosts and standard Firebase login retain strict referrer privacy', async () => {
+  for (const options of [{}, { protocol: 'https:', hostname: 'localhost' },
+    { protocol: 'http:', hostname: 'localhost.example.com' },
+    { protocol: 'http:', hostname: 'localhost', query: '' }]) {
+    const h = harness(options); await h.api.initGoogleIdentity();
+    assert.equal(h.getNode('auth-referrer').getAttribute('content'), 'strict-origin-when-cross-origin');
+  }
+});
 
 test('Google callback goes through Firebase verification and never grants membership from its payload', async () => {
   const h = harness();

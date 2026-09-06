@@ -331,6 +331,22 @@ def crawl_sources(fetcher, pages=3, detail_limit=20):
     return items, statuses
 
 
+def is_expired_public_item(item, today):
+    """Only a crawler-owned record with an exact, confirmed past date may be removed."""
+    deadline = item.get("deadline")
+    return (item.get("managedBy") == MANAGED_BY and item.get("authorUid") == "crawler"
+            and isinstance(deadline, str) and valid_date(deadline) == deadline
+            and date.fromisoformat(deadline) < today)
+
+
+def prune_expired_snapshot(snapshot, now=None):
+    """Remove expired public imports without claiming a new source check or touching other data."""
+    today = datetime.fromisoformat((now or utc_now()).replace("Z", "+00:00")).astimezone(KST).date()
+    updated = deepcopy(snapshot)
+    updated["items"] = [item for item in updated.get("items", []) if not is_expired_public_item(item, today)]
+    return updated
+
+
 def merge_snapshot(previous, incoming, sources, now=None):
     now = now or utc_now()
     today = datetime.fromisoformat(now.replace("Z", "+00:00")).astimezone(KST).date()
@@ -352,16 +368,14 @@ def merge_snapshot(previous, incoming, sources, now=None):
         reason = None
         if not eligible_audience(item.get("audience", "")):
             reason = "audience_not_eligible"
-        elif deadline and date.fromisoformat(deadline) < today:
-            reason = "deadline_passed"
         elif not deadline and item["sourceId"] in successful and (today - last_seen).days > 30:
             reason = "not_seen_30_days"
         if reason:
             item.update(status="archived", archivedReason=reason, archivedAt=item.get("archivedAt", now))
     records = sorted(records.values(), key=lambda x: (x.get("status") != "active", x.get("deadline") or "9999-12-31", x["id"]))
-    return reclassify_snapshot({"schemaVersion": 1, "generatedAt": now,
+    return prune_expired_snapshot(reclassify_snapshot({"schemaVersion": 1, "generatedAt": now,
             "lastSuccessAt": now if incoming else previous.get("lastSuccessAt"),
-            "refreshIntervalMinutes": 60, "sources": updated_sources, "items": records})
+            "refreshIntervalMinutes": 60, "sources": updated_sources, "items": records}), now)
 
 
 def validate_snapshot(snapshot):
@@ -406,13 +420,23 @@ def main(argv=None):
     parser.add_argument("--output", type=Path, default=Path("data/opportunities.json"))
     parser.add_argument("--pages", type=int, choices=range(1, 11), default=3)
     parser.add_argument("--detail-limit", type=int, choices=range(1, 51), default=20)
-    parser.add_argument("--validate", action="store_true", help="Validate an existing snapshot without network access")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--validate", action="store_true", help="Validate the schema and absence of expired public imports without network access")
+    mode.add_argument("--prune-expired", action="store_true", help="Remove confirmed expired public imports without fetching or changing source timestamps")
     args = parser.parse_args(argv)
-    if args.validate:
+    if args.validate or args.prune_expired:
         if not args.output.exists():
             parser.error("Snapshot does not exist")
         snapshot = read_snapshot(args.output)
-        print(f"Snapshot valid: {len(snapshot['items'])} records")
+        cleaned = prune_expired_snapshot(snapshot)
+        removed = len(snapshot["items"]) - len(cleaned["items"])
+        if args.prune_expired:
+            write_snapshot(args.output, cleaned)
+            print(f"Removed {removed} expired public records; {len(cleaned['items'])} remain. Source timestamps unchanged. No network or Firebase access.")
+        else:
+            if removed:
+                parser.error(f"Snapshot contains {removed} expired public records; run --prune-expired or fetch sources again")
+            print(f"Snapshot valid: {len(snapshot['items'])} records; expired public records: 0 (Korean date)")
         return 0
     previous = read_snapshot(args.output)
     incoming, sources = crawl_sources(PublicFetcher(), args.pages, args.detail_limit)

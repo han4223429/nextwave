@@ -1,8 +1,11 @@
 import copy
+from contextlib import redirect_stderr, redirect_stdout
+import io
 import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import crawler
 from upload_crawl import is_crawler_owned, plan_writes
@@ -118,11 +121,58 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(result['sources'][0]['lastSuccessAt'], old['sources'][0]['lastSuccessAt'])
         self.assertEqual(result['generatedAt'], NOW)
 
-    def test_expiry_uses_korean_calendar_and_archives_without_deleting(self):
-        result = snapshot('2026-09-06')
-        self.assertEqual(len(result['items']), 1)
-        self.assertEqual(result['items'][0]['status'], 'archived')
-        self.assertEqual(result['items'][0]['archivedReason'], 'deadline_passed')
+    def test_expiry_removes_records_at_korean_midnight_and_keeps_today(self):
+        before = snapshot('2026-09-06', '2026-09-06T14:59:59Z')
+        self.assertEqual(len(before['items']), 1)
+        after = crawler.merge_snapshot(before, [item('2026-09-06')], source_status(), '2026-09-06T15:00:00Z')
+        self.assertEqual(after['items'], [])
+        self.assertEqual(len(snapshot('2026-09-07')['items']), 1)
+
+    def test_source_failure_still_removes_expired_records_and_preserves_valid_cached_data(self):
+        old = snapshot('2026-09-06', '2026-09-05T08:00:00Z')
+        for source_number, deadline in [('179131', '2026-09-10'), ('179132', None)]:
+            cached = copy.deepcopy(old['items'][0])
+            cached.update(id='auto_kstartup_' + source_number,
+                          link=cached['link'].replace('179130', source_number), deadline=deadline)
+            old['items'].append(cached)
+        old['items'][0].update(status='archived', archivedReason='deadline_passed')
+        result = crawler.merge_snapshot(old, [], source_status('error'), NOW)
+        self.assertEqual(result['items'], old['items'][1:])
+        self.assertEqual(result['lastSuccessAt'], old['lastSuccessAt'])
+        self.assertEqual(result['sources'][0]['lastSuccessAt'], old['sources'][0]['lastSuccessAt'])
+        self.assertEqual(result['sources'][0]['status'], 'error')
+
+    def test_pruning_requires_crawler_ownership_and_confirmed_date(self):
+        record = snapshot('2026-09-06', '2026-09-05T08:00:00Z')['items'][0]
+        protected = []
+        for fields in [{'authorUid': 'real-member'}, {'managedBy': 'manual'},
+                       {'deadline': None}, {'deadline': 'D-3'}, {'deadline': '2026-02-30'},
+                       {'deadline': 'until 2026-09-06'}, {'deadline': '2026-09-07'}]:
+            protected.append({**record, **fields})
+        original = {'items': [record, *protected], 'lastSuccessAt': '2026-09-05T08:00:00Z'}
+        result = crawler.prune_expired_snapshot(original, NOW)
+        self.assertEqual(result['items'], protected)
+        self.assertEqual(result['lastSuccessAt'], original['lastSuccessAt'])
+        self.assertEqual(len(original['items']), len(protected) + 1)
+
+    def test_cleanup_cli_removes_expired_data_without_network_or_freshness_changes(self):
+        old = snapshot('2026-09-06', '2026-09-05T08:00:00Z')
+        with tempfile.TemporaryDirectory() as temporary, patch('crawler.utc_now', return_value=NOW), \
+                patch('crawler.PublicFetcher') as fetcher, redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+            path = Path(temporary) / 'snapshot.json'
+            crawler.write_snapshot(path, old)
+            with self.assertRaises(SystemExit) as invalid:
+                crawler.main(['--output', str(path), '--validate'])
+            self.assertEqual(invalid.exception.code, 2)
+            self.assertEqual(crawler.main(['--output', str(path), '--prune-expired']), 0)
+            cleaned = crawler.read_snapshot(path)
+            self.assertEqual(cleaned['items'], [])
+            for key in ('generatedAt', 'lastSuccessAt', 'sources'):
+                self.assertEqual(cleaned[key], old[key])
+            self.assertEqual(crawler.main(['--output', str(path), '--validate']), 0)
+            self.assertEqual(crawler.main(['--output', str(path), '--prune-expired']), 0)
+            self.assertEqual(crawler.read_snapshot(path), cleaned)
+            fetcher.assert_not_called()
 
     def test_future_deadline_not_archived_when_it_leaves_sampled_pages(self):
         old = snapshot('2026-12-31', '2026-07-01T00:00:00Z')
@@ -188,7 +238,7 @@ class PublisherTests(unittest.TestCase):
         self.assertFalse(any(x['kind'] == 'delete' for x in writes))
 
     def test_publisher_archives_managed_expiry_using_korean_date(self):
-        old = snapshot('2026-09-06')['items'][0]
+        old = snapshot('2026-09-06', '2026-09-05T08:00:00Z')['items'][0]
         old['status'] = 'active'
         writes, _ = plan_writes({'items': []}, {old['id']: old}, NOW)
         self.assertEqual(writes[0]['data']['archivedReason'], 'deadline_passed')

@@ -111,7 +111,12 @@
   }
   function allOpportunities() {
     const items = new Map();
-    if (publicSnapshot) publicSnapshot.items.forEach(item => items.set(item.id, { ...item, public: true }));
+    if (publicSnapshot) publicSnapshot.items.forEach(item => {
+      // A cached snapshot can cross midnight before the next successful crawl.
+      const days = deadlineDays(item.deadline);
+      if (item.managedBy === 'nextwave-crawler' && item.authorUid === 'crawler' && days !== null && days < 0) return;
+      items.set(item.id, { ...item, public: true });
+    });
     if (currentProfile && currentProfile.isMember === true) manualOpportunities.forEach(item => { if (item.managedBy !== 'nextwave-crawler' && item.authorUid !== 'crawler' && !item.id.startsWith('auto_')) items.set(item.id, { ...item, public: false }); });
     return [...items.values()];
   }
@@ -256,6 +261,11 @@
   async function initGoogleIdentity() {
     // A separate official Google route, enabled for local verification before rollout.
     if (new URLSearchParams(window.location.search).get('signin') !== 'google' || !auth || !window.NEXTWAVE_GOOGLE_CLIENT_ID) return;
+    // Google's HTTP localhost setup requires this policy before GIS loads.
+    // Keep the stricter page default on HTTPS and every non-local host.
+    if (window.location.protocol === 'http:' && window.location.hostname === 'localhost') {
+      $('auth-referrer').setAttribute('content', 'no-referrer-when-downgrade');
+    }
     const container = $('google-signin');
     let busy = false;
     try {

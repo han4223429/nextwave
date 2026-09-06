@@ -97,6 +97,23 @@ test('approved-member merging preserves source snapshot authority over stale cra
   assert.equal(actual[0].title, 'Fresh source');
 });
 
+test('expired cached public imports disappear without removing member records or guessing unknown deadlines', () => {
+  const { api } = portalHarness();
+  const imported = { managedBy: 'nextwave-crawler', authorUid: 'crawler' };
+  api.setState({ currentProfile: { isMember: true }, publicSnapshot: { items: [
+    { ...imported, id: 'auto_expired', deadline: '2026-09-05' },
+    { ...imported, id: 'auto_old_archive', status: 'archived', deadline: '2026-09-05' },
+    { ...imported, id: 'auto_today', deadline: '2026-09-06' },
+    { ...imported, id: 'auto_unknown', deadline: null },
+    { ...imported, id: 'auto_invalid', deadline: '2026-02-30' }
+  ] }, manualOpportunities: [
+    { id: 'member_expired', authorUid: 'member', deadline: '2026-09-05' },
+    { ...imported, id: 'auto_expired', deadline: '2026-09-05' }
+  ] });
+  assert.deepEqual(Array.from(api.allOpportunities(), item => item.id),
+    ['auto_today', 'auto_unknown', 'auto_invalid', 'member_expired']);
+});
+
 test('unsubscribe and rights transitions invalidate already queued private-data callbacks', () => {
   const { api, getNode } = portalHarness();
   api.setState({ currentProfile: { isMember: true } });
