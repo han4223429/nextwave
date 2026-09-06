@@ -8,7 +8,7 @@
 - Search, category filtering, archive inclusion, pagination and manual refresh work without signing in. Homepage deep links can use `portal.html?category=dev`, `gamedev`, `hackathon`, or `marketing` (other defined categories also work).
 - Archived records and past deadlines are hidden by default. Unknown or invalid deadlines are labeled `마감일 미확인`, never as always open. Date comparisons use the Korean calendar.
 - While visible, the page checks for a newer snapshot once per minute. Unchanged snapshots do not replace focused cards; when refreshed content is replaced, surviving opportunity and source links retain keyboard focus without scrolling. Manual refresh downloads the latest snapshot; it **does not start a crawler**.
-- The collection interval comes from `refreshIntervalMinutes`; a source's last successful collection, errors, partial collection and stale data are visible. Source scraping and scheduled deployment are described in [CRAWLER.md](CRAWLER.md).
+- The expected freshness window comes from `refreshIntervalMinutes`; a source's last successful collection, errors, partial collection and stale data are visible. The page checks for newly published snapshots every minute without claiming the source crawler is already scheduled. Source scraping and scheduled deployment are described in [CRAWLER.md](CRAWLER.md).
 - Public fetching starts independently of the Firebase SDK download, so a slow or blocked authentication CDN does not block the opportunity list.
 
 ## Member workspace

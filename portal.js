@@ -173,7 +173,7 @@
     else if (last && stale) status += ' · 업데이트 지연';
     else if (sources.some(source => source.status !== 'ok')) status += ' · 일부 출처 확인 지연';
     $('opp-sync-status').textContent = status;
-    $('opp-refresh-note').textContent = '출처 수집 주기: 약 ' + (interval >= 60 ? interval / 60 + '시간' : interval + '분') + '. 화면은 열려 있는 동안 1분마다 최신 수집본을 확인합니다. 새로고침은 수집을 실행하지 않습니다. 마감일 미확인은 상시 모집을 뜻하지 않아요.';
+    $('opp-refresh-note').textContent = '화면은 열려 있는 동안 1분마다 게시된 최신 수집본을 확인합니다. 새로고침은 수집을 실행하지 않습니다. 마감일 미확인은 상시 모집을 뜻하지 않아요.';
     replaceChildrenKeepingFocus($('opp-sources'), ...sources.map(source => {
       const row = el('div', 'source-row'); const url = safeURL(source.url); const name = el(url ? 'a' : 'span', '', source.name || source.id || '공식 출처');
       if (url) { name.dataset.focusKey = 'source:' + (source.id || url); name.href = url; name.target = '_blank'; name.rel = 'noopener noreferrer'; }

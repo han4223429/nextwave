@@ -27,7 +27,9 @@ python3 -m venv /tmp/nextwave-crawler-venv
 
 ## 자동 갱신과 실제 배포
 
-`.github/workflows/crawl.yml`은 기본 브랜치에서 **매시간 17분** 실행하며 Actions → Refresh portal opportunities → Run workflow로 즉시 실행할 수도 있습니다. 정적 포털에서 새로고침 버튼을 눌렀을 때는 배포된 최신 JSON을 다시 읽는 것이며 외부 사이트를 직접 크롤링하는 것은 아닙니다.
+**현재 상태 — 2026-09-07:** 사이트와 최신 공고 JSON은 GitHub `main`에 업로드했습니다. 아래 예약 수집 workflow는 로컬 파일로 준비·검증했으나 아직 원격에 등록하지 않았습니다. 기존 Git 인증에 `workflow` scope가 없어 해당 파일을 분리했으며, 연결된 GitHub 앱을 통한 등록도 자동 승인 검토가 저장소·Pages의 예약 쓰기 권한에 대한 명시적 승인 부족을 이유로 차단했습니다. 정확한 `contents:write`·`pages:write` 권한과 매시간 등록 승인을 요청한 상태입니다. 승인 전에는 수동 실행·공개 JSON 업로드 경로만 사용할 수 있고, 자동 수집이 활성화됐다고 간주하지 않습니다.
+
+등록할 `.github/workflows/crawl.yml`은 기본 브랜치에서 **매시간 17분** 실행하며 등록 후 Actions → Refresh portal opportunities → Run workflow로 즉시 실행할 수도 있습니다. 정적 포털에서 새로고침 버튼을 눌렀을 때는 배포된 최신 JSON을 다시 읽는 것이며 외부 사이트를 직접 크롤링하는 것은 아닙니다.
 
 운영 저장소의 기본 브랜치에 변경을 merge/push한 뒤 다음을 확인합니다.
 
