@@ -1,380 +1,136 @@
 #!/usr/bin/env python3
-"""
-크롤링 데이터를 Firebase REST API로 직접 업로드합니다.
-Firebase CLI 로그인 토큰을 재사용합니다.
-"""
-import requests
-from bs4 import BeautifulSoup
-from datetime import datetime, timedelta
-import json, os, re
+"""Optional Firestore publication. Explicit project and service account only; dry-run by default."""
+from __future__ import annotations
 
-# ── Firebase 설정 ──
-PROJECT_ID = 'nextwave-a24e1'
-FIRESTORE_URL = f'https://firestore.googleapis.com/v1/projects/{PROJECT_ID}/databases/(default)/documents/opportunities'
+import argparse
+from datetime import datetime
+import json
+import os
+from pathlib import Path
+import re
 
-# Firebase CLI 토큰 또는 서비스 계정 키에서 access_token 가져오기
-def get_access_token():
-    # 1. CI 환경: 서비스 계정 키 파일이 있는 경우 (GitHub Actions)
-    sa_path = 'serviceAccountKey.json'
-    if os.path.exists(sa_path):
-        from google.oauth2 import service_account
-        from google.auth.transport import requests as auth_requests
-        
-        scopes = ['https://www.googleapis.com/auth/datastore', 'https://www.googleapis.com/auth/firebase.database']
-        creds = service_account.Credentials.from_service_account_file(sa_path, scopes=scopes)
-        creds.refresh(auth_requests.Request())
-        return creds.token
+from crawler import KST, MANAGED_BY, read_snapshot, utc_now, valid_date
 
-    # 2. 로컬 환경: Firebase CLI 토큰 사용
-    config_path = os.path.expanduser('~/.config/configstore/firebase-tools.json')
-    if not os.path.exists(config_path):
-        # 다른 가능한 경로 확인
-        config_path = os.path.expanduser('~/.config/firebase/config.json')
-        
-    if os.path.exists(config_path):
-        with open(config_path) as f:
-            config = json.load(f)
-        
-        tokens = config.get('tokens', config.get('user', {}).get('tokens', {}))
-        access_token = tokens.get('access_token')
-        expires_at = tokens.get('expires_at', 0)
-        
-        # 토큰 유효 시 바로 반환
-        if access_token and expires_at > datetime.now().timestamp() * 1000:
-            return access_token
-        
-        # 만료 시 refresh 시도
-        refresh_token = tokens.get('refresh_token')
-        if refresh_token:
-            resp = requests.post('https://oauth2.googleapis.com/token', data={
-                'client_id': '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-                'client_secret': 'FhIEOKaBTlqFJjdiWbMHZnvc',
-                'refresh_token': refresh_token,
-                'grant_type': 'refresh_token',
-            })
-            if resp.status_code == 200:
-                return resp.json()['access_token']
-            if access_token: return access_token
-            
-    raise Exception("인증 토큰 또는 서비스 계정 키를 찾을 수 없습니다.")
-
-# ── 키워드 기반 카테고리 분류 ──
-CATEGORY_KEYWORDS = {
-    'hackathon': ['해커톤', 'hackathon', 'hack', '메이커톤', '코딩대회'],
-    'gamedev': ['게임', 'game', '유니티', 'unity', '언리얼', 'unreal', '게임잼'],
-    'dev': ['개발', '프로그래밍', '코딩', 'AI', '인공지능', '앱', '웹', 'SW', '소프트웨어',
-            '프론트엔드', '백엔드', '데이터', '클라우드', 'IT', '디지털'],
-    'marketing': ['마케팅', '광고', '브랜딩', 'SNS', '콘텐츠', '디지털마케팅',
-                  '퍼포먼스', 'PR', '홍보', '미디어', '크리에이터'],
-    'contest': ['공모전', '경진대회', '아이디어', '기획', '창업', '스타트업',
-                '비즈니스', '사업계획', '피칭', '데모데이'],
-    'activity': ['대외활동', '서포터즈', '동아리', '연합', '봉사', '인턴',
-                 '체험단', '기자단', '리포터', '앰배서더', '멘토링'],
-}
-EXCLUDE_KEYWORDS = ['교육', '강의', '수업', '자격증', '시험', '토익', '토플', '학원', '인강']
-
-def classify(title, desc=''):
-    text = (title + ' ' + desc).lower()
-    for kw in EXCLUDE_KEYWORDS:
-        if kw in text:
-            return None
-    for cat, keywords in CATEGORY_KEYWORDS.items():
-        for kw in keywords:
-            if kw.lower() in text:
-                return cat
-    return 'contest'
-
-# ── 링커리어 크롤링 ──
-def crawl_linkareer():
-    results = []
-    urls = [
-        ('https://linkareer.com/list/contest', 'contest'),
-        ('https://linkareer.com/list/activity', 'activity'),
-    ]
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}
-
-    for url, default_cat in urls:
-        try:
-            resp = requests.get(url, headers=headers, timeout=10)
-            resp.raise_for_status()
-            soup = BeautifulSoup(resp.text, 'html.parser')
-            items = soup.select('article, .activity-item, .contest-item, [class*="Card"]')[:15]
-
-            for item in items:
-                title_el = item.select_one('h2, h3, .title, [class*="title"], [class*="Title"]')
-                if not title_el:
-                    continue
-                title = title_el.get_text(strip=True)
-                if not title or len(title) < 3:
-                    continue
-                # 중복된 "추천" 태그 제거
-                title = re.sub(r'^추천', '', title).strip()
-                
-                category = classify(title)
-                if category is None:
-                    continue
-
-                link_el = item.select_one('a[href]')
-                link = ''
-                if link_el:
-                    href = link_el.get('href', '')
-                    if href.startswith('/'):
-                        link = 'https://linkareer.com' + href
-                    elif href.startswith('http'):
-                        link = href
-
-                results.append({
-                    'title': title,
-                    'description': '링커리어에서 수집된 정보입니다.',
-                    'category': category,
-                    'deadline': None,
-                    'link': link,
-                    'source': '링커리어',
-                })
-            print(f"✅ 링커리어 ({default_cat}): {len(items)}건 스캔")
-        except Exception as e:
-            print(f"❌ 링커리어 ({default_cat}) 실패: {e}")
-
-    # 중복 제거 (title 기준)
-    seen = set()
-    unique = []
-    for item in results:
-        if item['title'] not in seen:
-            seen.add(item['title'])
-            unique.append(item)
-    
-    print(f"   → 총 {len(unique)}건 (중복 제거 후)")
-    return unique
+LEGACY_SOURCES = {"링커리어", "위비티", "올콘", "콘테스트코리아", "K-Startup"}
 
 
-
-# ── 위비티 (Wevity) 크롤링 ──
-def crawl_wevity():
-    results = []
-    # 위비티는 공모전 위주
-    url = 'https://www.wevity.com/?c=find&s=1'
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}
-
-    try:
-        resp = requests.get(url, headers=headers, timeout=10)
-        resp.raise_for_status()
-        soup = BeautifulSoup(resp.text, 'html.parser')
-        # 위비티 리스트 아이템 선택자
-        items = soup.select('.list li')[:20]
-
-        for item in items:
-            title_el = item.select_one('.tit a')
-            if not title_el: continue
-            title = title_el.get_text(strip=True)
-            if not title: continue
-
-            category = classify(title) or 'contest'
-            
-            href = title_el.get('href', '')
-            link = 'https://www.wevity.com/' + href if href else ''
-
-            results.append({
-                'title': title,
-                'description': '위비티에서 수집된 정보입니다.',
-                'category': category,
-                'deadline': None,
-                'link': link,
-                'source': '위비티',
-            })
-        print(f"✅ 위비티: {len(items)}건 스캔")
-    except Exception as e:
-        print(f"❌ 위비티 실패: {e}")
-    return results
+def is_crawler_owned(data):
+    # A managedBy field alone is never enough to overwrite a member-owned record.
+    return data.get("authorUid") == "crawler" and (
+        data.get("managedBy") == MANAGED_BY or
+        (not data.get("managedBy") and data.get("source") in LEGACY_SOURCES
+         and data.get("authorName") == "NextWave Bot"))
 
 
-
-
-# ── 올콘 (All-con) 크롤링 ──
-def crawl_allcon():
-    results = []
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}
-
-    try:
-        resp = requests.get('https://www.all-con.co.kr', headers=headers, timeout=10)
-        resp.raise_for_status()
-        soup = BeautifulSoup(resp.text, 'html.parser')
-
-        for a in soup.select('a[href*="/hit/contest/"]'):
-            title = a.get_text(strip=True)
-            if not title or len(title) < 5:
-                continue
-            href = a.get('href', '')
-            link = 'https://www.all-con.co.kr' + href if href.startswith('/') else href
-
-            category = classify(title) or 'contest'
-
-            results.append({
-                'title': title,
-                'description': '올콘에서 수집된 공모전 정보입니다.',
-                'category': category,
-                'deadline': None,
-                'link': link,
-                'source': '올콘',
-            })
-
-        # 중복 제거
-        seen = set()
-        unique = []
-        for item in results:
-            if item['title'] not in seen:
-                seen.add(item['title'])
-                unique.append(item)
-        results = unique
-
-        print(f"✅ 올콘: {len(results)}건 수집")
-    except Exception as e:
-        print(f"❌ 올콘 실패: {e}")
-    return results
-
-
-# ── 콘테스트코리아 (Contest Korea) 크롤링 ──
-def crawl_contestkorea():
-    results = []
-    urls = [
-        ('https://www.contestkorea.com/sub/list.php?int_gbn=1', 'contest'),
-        ('https://www.contestkorea.com/sub/list.php?int_gbn=2', 'activity')
-    ]
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}
-
-    for url, default_cat in urls:
-        try:
-            resp = requests.get(url, headers=headers, timeout=10)
-            resp.raise_for_status()
-            soup = BeautifulSoup(resp.text, 'html.parser')
-            items = soup.select('.list_style_2 li')[:20]
-
-            for item in items:
-                title_el = item.select_one('.txt')
-                if not title_el: continue
-                title = title_el.get_text(strip=True)
-                if not title or len(title) < 2: continue
-
-                category = classify(title) or default_cat
-                
-                a_tag = item.select_one('a')
-                href = a_tag.get('href', '') if a_tag else ''
-                link = 'https://www.contestkorea.com/sub/' + href if href else ''
-
-                results.append({
-                    'title': title,
-                    'description': '콘테스트코리아에서 수집된 정보입니다.',
-                    'category': category,
-                    'deadline': None,
-                    'link': link,
-                    'source': '콘테스트코리아',
-                })
-            print(f"✅ 콘테스트코리아 ({default_cat}): {len(items)}건 스캔")
-        except Exception as e:
-            print(f"❌ 콘테스트코리아 ({default_cat}) 실패: {e}")
-    return results
-
-# ── Firestore REST API로 업로드 ──
-def upload_to_firestore(items, token):
-    headers = {
-        'Authorization': f'Bearer {token}',
-        'Content-Type': 'application/json',
-    }
-    
-    # 서버의 기존 데이터 확인 (중복 방지)
-    existing_titles_norm = set()
-    try:
-        existing_resp = requests.get(FIRESTORE_URL, headers=headers, params={'pageSize': 100})
-        if existing_resp.status_code == 200:
-            docs = existing_resp.json().get('documents', [])
-            for doc in docs:
-                fields = doc.get('fields', {})
-                t = fields.get('title', {}).get('stringValue', '')
-                if t:
-                    # 제목 정규화 (공백 제거)
-                    norm_t = re.sub(r'\s+', '', t)
-                    existing_titles_norm.add(norm_t)
-    except:
-        pass
-    
-    saved, skipped = 0, 0
-    for item in items:
-        # 현재 아이템 제목 정규화
-        norm_title = re.sub(r'\s+', '', item['title'])
-        
-        if norm_title in existing_titles_norm:
-            skipped += 1
+def plan_writes(snapshot, existing, now=None):
+    """Pure planner: only upsert owned IDs; archive legacy imports; never delete anything."""
+    now = now or utc_now()
+    today = datetime.fromisoformat(now.replace("Z", "+00:00")).astimezone(KST).date().isoformat()
+    writes, skipped = [], []
+    incoming_ids = {item["id"] for item in snapshot["items"]}
+    for item in snapshot["items"]:
+        previous = existing.get(item["id"])
+        if previous is not None and not is_crawler_owned(previous):
+            skipped.append(item["id"])
             continue
-        
-        doc = {
-            'fields': {
-                'title': {'stringValue': item['title']},
-                'description': {'stringValue': item['description']},
-                'category': {'stringValue': item['category']},
-                'link': {'stringValue': item['link'] or ''},
-                'source': {'stringValue': item['source']},
-                'authorUid': {'stringValue': 'crawler'},
-                'authorName': {'stringValue': 'NextWave Bot'},
-                'createdAt': {'timestampValue': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')},
-            }
-        }
-        
-        resp = requests.post(FIRESTORE_URL, headers=headers, json=doc)
-        if resp.status_code in (200, 201):
-            saved += 1
-            existing_titles_norm.add(norm_title)
-            print(f"  ✅ [{item['source']}] {item['title']}")
-        else:
-            skipped += 1
-    
-    print(f"\n📊 결과: {saved}건 새로 저장, {skipped}건 중복/실패 스킵")
-    return saved
+        data = {key: value for key, value in item.items() if key != "id"}
+        data["updatedAt"] = now
+        if previous and previous.get("createdAt"):
+            data["createdAt"] = previous["createdAt"]
+        writes.append({"id": item["id"], "data": data, "kind": "upsert"})
+    for doc_id, previous in existing.items():
+        if doc_id in incoming_ids or not is_crawler_owned(previous) or previous.get("status") == "archived":
+            continue
+        reason = None
+        if previous.get("managedBy") != MANAGED_BY:
+            # Earlier scrapers had no verified dates/stable IDs. Keep the audit trail, hide the import.
+            reason = "legacy_unverified"
+        elif valid_date(previous.get("deadline")) and previous["deadline"] < today:
+            reason = "deadline_passed"
+        if reason:
+            writes.append({"id": doc_id, "kind": "archive", "data": {
+                "status": "archived", "archivedReason": reason, "archivedAt": now, "updatedAt": now}})
+    return writes, skipped
 
-# ── 메인 ──
-if __name__ == '__main__':
-    print("=" * 50)
-    print("🚀 NextWave Mega Crawler (Linkareer, Wevity, ContestKorea)")
-    print(f"⏰ {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("=" * 50 + "\n")
-    
-    print("🔑 Firebase 토큰 가져오는 중...")
+
+def publish(snapshot, project, credential_path, apply=False):
+    import firebase_admin
+    from firebase_admin import credentials, firestore
+    from google.cloud.firestore_v1.base_query import FieldFilter
+
+    # Reject accidentally cross-project credentials before connecting to any database.
+    credential_data = json.loads(credential_path.read_text(encoding="utf-8"))
+    if credential_data.get("project_id") != project or credential_data.get("type") != "service_account":
+        raise ValueError("The explicit project must match the service account project_id")
+    app = firebase_admin.initialize_app(credentials.Certificate(credential_data), {"projectId": project}, name="nextwave-crawler-publish")
     try:
-        token = get_access_token()
-        print("✅ 토큰 획득 성공!\n")
-    except Exception as e:
-        print(f"❌ 토큰 획득 실패: {e}")
-        exit(1)
-    
-    all_raw_items = []
-    
-    # 수집 소스 리스트
-    sources = [
-        ("링커리어", crawl_linkareer),
-        ("위비티", crawl_wevity),
-        ("올콘", crawl_allcon),
-        ("콘테스트코리아", crawl_contestkorea)
-    ]
-    
-    for name, fetch_func in sources:
-        print(f"📡 {name} 수집 중...")
-        try:
-            items = fetch_func()
-            all_raw_items.extend(items)
-            print("")
-        except Exception as e:
-            print(f"❌ {name} 오류: {e}\n")
-    
-    # 클라이언트 측 중복 제거 (제목 정규화 기준)
-    seen_norm = set()
-    unique_items = []
-    for it in all_raw_items:
-        norm = re.sub(r'\s+', '', it['title'])
-        if norm not in seen_norm:
-            seen_norm.add(norm)
-            unique_items.append(it)
-    
-    print(f"📦 총 {len(all_raw_items)}건 수집 → 중복 제거 후 {len(unique_items)}건 선별")
-    print(f"🚀 Firestore 업로드 시작...\n")
-    
-    upload_to_firestore(unique_items, token)
-    
-    print("\n✅ 모든 사이트 수집 및 동기화 완료!")
+        db = firestore.client(app)
+        collection = db.collection("opportunities")
+        # Query only the auto-import namespace; get all pages via the SDK iterator.
+        existing = {doc.id: doc.to_dict() for doc in collection.where(filter=FieldFilter("authorUid", "==", "crawler")).stream()}
+        references = [collection.document(x["id"]) for x in snapshot["items"]]
+        for doc in db.get_all(references):
+            if doc.exists:
+                existing[doc.id] = doc.to_dict()
+        writes, skipped = plan_writes(snapshot, existing)
+        summary = {"project": project, "mode": "publish" if apply else "dry-run",
+                   "upserts": sum(x["kind"] == "upsert" for x in writes),
+                   "archives": sum(x["kind"] == "archive" for x in writes), "memberCollisionsSkipped": len(skipped)}
+        print(json.dumps(summary, ensure_ascii=False))
+        if not apply:
+            return
+
+        @firestore.transactional
+        def write_owned(transaction, operation):
+            reference = collection.document(operation["id"])
+            current = reference.get(transaction=transaction)
+            if current.exists and not is_crawler_owned(current.to_dict()):
+                raise ValueError("Ownership changed during publication; refusing to overwrite")
+            if operation["kind"] == "archive" and not current.exists:
+                return
+            data = dict(operation["data"])
+            data["updatedAt"] = firestore.SERVER_TIMESTAMP
+            if operation["kind"] == "upsert":
+                # Normalise only database timestamps; snapshot remains plain portable JSON.
+                data["createdAt"] = current.to_dict().get("createdAt") if current.exists else firestore.SERVER_TIMESTAMP
+                data["archivedReason"] = data.get("archivedReason")
+                data["archivedAt"] = data.get("archivedAt")
+            transaction.set(reference, data, merge=True)
+
+        for operation in writes:
+            write_owned(db.transaction(), operation)
+        db.collection("crawlerStatus").document("opportunities").set({
+            "generatedAt": snapshot["generatedAt"], "lastSuccessAt": snapshot.get("lastSuccessAt"),
+            "sources": snapshot["sources"], "publishedAt": firestore.SERVER_TIMESTAMP,
+            "managedBy": MANAGED_BY,
+        })
+        print("Publication complete; no documents deleted.")
+    finally:
+        firebase_admin.delete_app(app)
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--snapshot", type=Path, default=Path("data/opportunities.json"))
+    parser.add_argument("--project", default=os.getenv("FIREBASE_PROJECT_ID"))
+    parser.add_argument("--credentials", type=Path, default=os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
+    parser.add_argument("--publish", action="store_true", help="Apply managed upserts/archives to the explicitly selected project")
+    args = parser.parse_args(argv)
+    if not args.snapshot.exists():
+        parser.error("Snapshot does not exist; run crawler.py first")
+    snapshot = read_snapshot(args.snapshot)
+    if not args.project and not args.credentials and not args.publish:
+        print(f"Local preview: {len(snapshot['items'])} validated records. No Firebase connection.\nUse --project and --credentials for a database comparison; add --publish to apply.")
+        return 0
+    if not args.project or not args.credentials:
+        parser.error("Provide both --project and --credentials (or FIREBASE_PROJECT_ID / GOOGLE_APPLICATION_CREDENTIALS)")
+    if not re.fullmatch(r"[a-z][a-z0-9-]{4,61}[a-z0-9]", args.project):
+        parser.error("Invalid Firebase project ID")
+    if not args.credentials.is_file():
+        parser.error("Service account file does not exist")
+    publish(snapshot, args.project, args.credentials, args.publish)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

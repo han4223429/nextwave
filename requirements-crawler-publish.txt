@@ -1,0 +1,2 @@
+-r requirements-crawler.txt
+firebase-admin==7.1.0

@@ -1,273 +1,129 @@
-// =============================================================================
-// NextWave IT Union — UI interactions (2026 bright redesign)
-// =============================================================================
-
-// -----------------------------------------------------------------------------
-// 사이트 설정 — 여기 값만 채우면 버튼/링크가 자동 연결됩니다.
-//   applyUrl  : 지원서 링크(구글폼·노션 등). 비워두면 '지원하기'가 모집 안내로 스크롤됩니다.
-//   instagram : 인스타그램 프로필 URL (비우면 버튼 숨김)
-//   email     : 문의 이메일 (비우면 버튼 숨김)
-//   kakaoUrl  : 카카오 오픈채팅 링크 (비우면 버튼 숨김)
-// -----------------------------------------------------------------------------
-window.NEXTWAVE_SITE = window.NEXTWAVE_SITE || {
-    applyUrl: '',
-    instagram: '',
-    email: '',
-    kakaoUrl: ''
-};
-
-document.addEventListener('DOMContentLoaded', function () {
-    const CFG = window.NEXTWAVE_SITE;
-
-    function safeExternalUrl(url) {
-        if (!url) return '';
-        try {
-            const parsed = new URL(url, window.location.origin);
-            return (parsed.protocol === 'https:' || parsed.protocol === 'http:') ? parsed.href : '';
-        } catch (e) {
-            return '';
+// NextWave — Our next wave. Local interactions; member authentication lives in the portal.
+window.NEXTWAVE_SITE = window.NEXTWAVE_SITE || { applyUrl: '', instagram: '', email: '', kakaoUrl: '' };
+document.addEventListener('DOMContentLoaded', () => {
+    'use strict';
+    const $ = id => document.getElementById(id);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const isEnglish = () => window.I18N && window.I18N.lang === 'en';
+    const safeUrl = value => { try { const u = new URL(value); return u.protocol === 'https:' || u.protocol === 'http:' ? u.href : ''; } catch { return ''; } };
+    const config = window.NEXTWAVE_SITE;
+    function setupLinks() {
+        const applyUrl = safeUrl(config.applyUrl);
+        $('apply-link').hidden = !applyUrl;
+        $('apply-status').hidden = !!applyUrl;
+        if (applyUrl) $('apply-link').href = applyUrl;
+        [['contact-instagram', config.instagram], ['contact-kakao', config.kakaoUrl]].forEach(([id, url]) => {
+            const href = safeUrl(url); if (!href) return;
+            $(id).href = href; $(id).target = '_blank'; $(id).rel = 'noopener noreferrer'; $(id).hidden = false;
+        });
+        if (/^[^\s@\r\n]+@[^\s@\r\n]+\.[^\s@\r\n]+$/.test(config.email || '')) {
+            $('contact-email').href = 'mailto:' + encodeURIComponent(config.email); $('contact-email').hidden = false;
         }
     }
+    setupLinks();
 
-    // --- 지원하기 버튼 연결 ---------------------------------------------------
-    document.querySelectorAll('[data-apply]').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-            const applyUrl = safeExternalUrl(CFG.applyUrl);
-            if (applyUrl) {
-                window.open(applyUrl, '_blank', 'noopener,noreferrer');
-            } else {
-                e.preventDefault();
-                const target = document.getElementById('recruitment');
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            }
+    const menu = $('mobile-menu');
+    const menuButton = $('mobile-menu-toggle');
+    function closeMenu(restoreFocus = false) { menu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', isEnglish() ? 'Open menu' : '메뉴 열기'); if (restoreFocus) menuButton.focus(); }
+    menuButton.addEventListener('click', () => {
+        const open = menu.hidden; menu.hidden = !open; menuButton.setAttribute('aria-expanded', String(open));
+        menuButton.setAttribute('aria-label', open ? (isEnglish() ? 'Close menu' : '메뉴 닫기') : (isEnglish() ? 'Open menu' : '메뉴 열기'));
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeMenu()));
+    document.addEventListener('click', event => { if (!menu.hidden && !event.target.closest('#site-header')) closeMenu(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && !menu.hidden) closeMenu(true); });
+    window.matchMedia('(min-width: 981px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
+
+    const ideas = {
+        dev: { ko: [['캠퍼스의 불편함을', '하나의', '서비스로.'], ['작은 아이디어를', '사람들이 쓰는', '앱으로.'], ['매번 하던 반복을', '한 번의', '클릭으로.']], en: [['A campus problem.', 'One useful', 'product.'], ['A small idea.', 'An app people', 'use.'], ['A daily routine.', 'Just one', 'click.']] },
+        game: { ko: [['상상 속 세계를', '직접 플레이하는', '게임으로.'], ['심심했던 시간을', '잊지 못할', '한 판으로.'], ['우리만의 이야기를', '누군가의', '모험으로.']], en: [['An imagined world.', 'A game you can', 'play.'], ['An ordinary moment.', 'One memorable', 'round.'], ['A story of our own.', 'Someone’s next', 'adventure.']] },
+        hack: { ko: [['지나쳤던 문제를', '밤새 만든', '해결책으로.'], ['서로 다른 전공을', '하나의', '팀으로.'], ['어제의 물음표를', '내일의', '프로토타입으로.']], en: [['An overlooked problem.', 'An overnight', 'solution.'], ['Different majors.', 'One curious', 'team.'], ['Yesterday’s question.', 'Tomorrow’s', 'prototype.']] },
+        mkt: { ko: [['아무도 몰랐던 것을', '모두가 궁금한', '브랜드로.'], ['우리가 만든 결과를', '사람들에게 닿는', '이야기로.'], ['작은 반응 하나를', '다음 실험의', '단서로.']], en: [['An unknown idea.', 'A brand worth', 'knowing.'], ['Something we built.', 'A story worth', 'sharing.'], ['One small response.', 'Our next', 'experiment.']] }
+    };
+    let track = 'dev', variation = 0, attempts = 1;
+    function renderIdea(animate = false) {
+        const text = ideas[track][isEnglish() ? 'en' : 'ko'][variation];
+        $('idea-first').textContent = text[0];
+        $('idea-second').replaceChildren(document.createTextNode(text[1] + ' '));
+        const em = document.createElement('em'); em.textContent = text[2]; $('idea-second').append(em);
+        $('experiment-number').textContent = 'TRY / ' + String(attempts).padStart(3, '0');
+        const categories = { dev: 'dev', game: 'gamedev', hack: 'hackathon', mkt: 'marketing' };
+        $('track-opportunities').href = 'portal.html?category=' + categories[track];
+        const descriptionKey = { dev: 'act.dev.d', game: 'act.game.d', hack: 'act.hack.d', mkt: 'act.mkt.d' }[track];
+        $('track-description').textContent = window.I18N ? window.I18N.t(descriptionKey) : '';
+        document.querySelector('.track-lab').dataset.track = track;
+        document.querySelectorAll('[data-track]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.track === track)));
+        if (animate && !reducedMotion.matches && document.documentElement.dataset.motion !== 'paused') { const output = $('idea-output'); output.classList.remove('remixing'); void output.offsetWidth; output.classList.add('remixing'); }
+    }
+    document.querySelectorAll('[data-track]').forEach(button => button.addEventListener('click', () => { track = button.dataset.track; variation = 0; attempts++; renderIdea(true); }));
+    $('idea-remix').addEventListener('click', () => { variation = (variation + 1) % ideas[track].ko.length; attempts++; renderIdea(true); });
+    renderIdea();
+
+    const projectTabs = [...document.querySelectorAll('[data-project-tab]')];
+    function selectProject(button, moveFocus = false) {
+        const selected = button.dataset.projectTab;
+        projectTabs.forEach(tab => {
+            const active = tab === button;
+            tab.setAttribute('aria-selected', String(active));
+            tab.tabIndex = active ? 0 : -1;
+        });
+        document.querySelectorAll('[data-project-panel]').forEach(panel => { panel.hidden = panel.dataset.projectPanel !== selected; });
+        if (moveFocus) button.focus({ preventScroll: true });
+    }
+    projectTabs.forEach((button, index) => {
+        button.addEventListener('click', () => selectProject(button));
+        button.addEventListener('keydown', event => {
+            let next = index;
+            if (event.key === 'ArrowRight') next = (index + 1) % projectTabs.length;
+            else if (event.key === 'ArrowLeft') next = (index - 1 + projectTabs.length) % projectTabs.length;
+            else if (event.key === 'Home') next = 0;
+            else if (event.key === 'End') next = projectTabs.length - 1;
+            else return;
+            event.preventDefault(); selectProject(projectTabs[next], true);
         });
     });
 
-    // --- 연락 채널 버튼 (있을 때만 표시) -------------------------------------
-    function wireContact(id, url, isMail) {
-        const el = document.getElementById(id);
-        if (!el) return;
-        if (url) {
-            const safeUrl = isMail ? ('mailto:' + url) : safeExternalUrl(url);
-            if (!safeUrl) {
-                el.classList.add('hidden');
-                return;
-            }
-            el.href = safeUrl;
-            if (!isMail) {
-                el.target = '_blank';
-                el.rel = 'noopener noreferrer';
-            }
-        } else {
-            el.classList.add('hidden');
-        }
+    const modal = $('member-modal'); let activeCard;
+    function fillProfile(card) {
+        $('mm-name').textContent = card.dataset.name || '';
+        $('mm-role').textContent = (isEnglish() && card.dataset.roleEn) || card.dataset.role || '';
+        $('mm-img').src = card.dataset.img; $('mm-img').alt = card.dataset.name;
+        const bio = (isEnglish() && card.dataset.bioEn) || card.dataset.bio || '';
+        $('mm-bio').textContent = bio.replace(/<br\s*\/?\s*>/gi, '\n').replace(/^>\s*/gm, '');
+        const url = safeUrl(card.dataset.portfolio); $('mm-link').hidden = !url; if (url) $('mm-link').href = url;
     }
-    wireContact('contact-instagram', CFG.instagram, false);
-    wireContact('contact-email', CFG.email, true);
-    wireContact('contact-kakao', CFG.kakaoUrl, false);
-
-    // --- 모바일 메뉴 ---------------------------------------------------------
-    const menuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuClose = document.getElementById('mobile-menu-close');
-
-    function setMenu(open) {
-        if (!mobileMenu) return;
-        mobileMenu.classList.toggle('translate-x-full', !open);
-        mobileMenu.classList.toggle('translate-x-0', open);
-        mobileMenu.setAttribute('aria-hidden', String(!open));
-        if (menuToggle) menuToggle.setAttribute('aria-expanded', String(open));
-        document.body.style.overflow = open ? 'hidden' : '';
-    }
-    if (mobileMenu) mobileMenu.setAttribute('aria-hidden', 'true');
-    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
-    if (menuToggle) menuToggle.addEventListener('click', () => setMenu(true));
-    if (menuClose) menuClose.addEventListener('click', () => setMenu(false));
-    document.querySelectorAll('.mobile-nav-link').forEach(function (link) {
-        link.addEventListener('click', () => setMenu(false));
+    document.querySelectorAll('.member-card').forEach(card => {
+        const open = () => { activeCard = card; fillProfile(card); modal.showModal(); document.body.style.overflow = 'hidden'; $('mm-close').focus(); };
+        card.addEventListener('click', open); card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); } });
     });
+    $('mm-close').addEventListener('click', () => modal.close());
+    modal.addEventListener('click', event => { if (event.target === modal) { const box = modal.getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) modal.close(); } });
+    modal.addEventListener('close', () => { document.body.style.overflow = ''; if (activeCard) activeCard.focus(); });
+    document.addEventListener('nw:langchange', () => { renderIdea(); setupLinks(); if (modal.open && activeCard) fillProfile(activeCard); });
 
-    // --- 스크롤 시 헤더 그림자 -----------------------------------------------
-    const header = document.getElementById('site-header');
-    function onScrollHeader() {
-        if (!header) return;
-        header.classList.toggle('shadow-lg', window.scrollY > 16);
-        header.classList.toggle('shadow-indigo-100', window.scrollY > 16);
-    }
-    onScrollHeader();
-    window.addEventListener('scroll', onScrollHeader, { passive: true });
-
-    // --- 액티브 내비게이션 하이라이트 ---------------------------------------
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section[id]');
-    if (sections.length) {
-        const navObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    navLinks.forEach(function (link) {
-                        link.classList.toggle(
-                            'nav-link-active',
-                            link.getAttribute('href') === '#' + id
-                        );
-                    });
-                }
-            });
-        }, { rootMargin: '-30% 0px -65% 0px', threshold: 0 });
-        sections.forEach((s) => navObserver.observe(s));
-    }
-
-    // --- 스크롤 리빌 ---------------------------------------------------------
-    const revealEls = document.querySelectorAll('.reveal');
-    if (revealEls.length) {
-        const revealObserver = new IntersectionObserver(function (entries, obs) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        revealEls.forEach((el) => revealObserver.observe(el));
-    }
-
-    // --- 숫자 카운트업 -------------------------------------------------------
-    const counters = document.querySelectorAll('[data-count]');
-    if (counters.length) {
-        const countObserver = new IntersectionObserver(function (entries, obs) {
-            entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                const el = entry.target;
-                const target = parseFloat(el.getAttribute('data-count'));
-                const suffix = el.getAttribute('data-suffix') || '';
-                const decimals = (el.getAttribute('data-count').split('.')[1] || '').length;
-                const duration = 1400;
-                const start = performance.now();
-                function tick(now) {
-                    const p = Math.min((now - start) / duration, 1);
-                    const eased = 1 - Math.pow(1 - p, 3);
-                    const val = target * eased;
-                    el.textContent = val.toFixed(decimals) + suffix;
-                    if (p < 1) requestAnimationFrame(tick);
-                    else el.textContent = target.toFixed(decimals) + suffix;
-                }
-                requestAnimationFrame(tick);
-                obs.unobserve(el);
-            });
-        }, { threshold: 0.5 });
-        counters.forEach((c) => countObserver.observe(c));
-    }
-
-    // --- FAQ 아코디언 --------------------------------------------------------
-    document.querySelectorAll('.faq-item').forEach(function (item, i) {
-        const btn = item.querySelector('.faq-trigger');
-        const ans = item.querySelector('.faq-answer');
-        if (!btn) return;
-        if (ans && !ans.id) ans.id = 'faq-answer-' + (i + 1);
-        btn.setAttribute('aria-expanded', 'false');
-        if (ans) btn.setAttribute('aria-controls', ans.id);
-        btn.addEventListener('click', function () {
-            const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item.open').forEach(function (o) {
-                o.classList.remove('open');
-                const t = o.querySelector('.faq-trigger');
-                if (t) t.setAttribute('aria-expanded', 'false');
-            });
-            if (!isOpen) {
-                item.classList.add('open');
-                btn.setAttribute('aria-expanded', 'true');
-            }
-        });
-    });
-
-    // --- 맨 위로 버튼 --------------------------------------------------------
-    const toTop = document.getElementById('to-top');
-    if (toTop) {
-        function toTopThreshold() {
-            const hero = document.getElementById('hero-stage');
-            if (!hero) return 600;
-            return Math.max(600, hero.offsetTop + hero.offsetHeight - window.innerHeight * 0.5);
-        }
-        window.addEventListener('scroll', function () {
-            toTop.classList.toggle('show', window.scrollY > toTopThreshold());
-        }, { passive: true });
-        toTop.addEventListener('click', function () {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
-    // --- 운영진 프로필 모달 --------------------------------------------------
-    const modal = document.getElementById('member-modal');
-    const modalBackdrop = document.getElementById('member-modal-backdrop');
-    const modalCard = document.getElementById('member-modal-card');
-    const modalImg = document.getElementById('mm-img');
-    const modalName = document.getElementById('mm-name');
-    const modalRole = document.getElementById('mm-role');
-    const modalBio = document.getElementById('mm-bio');
-    const modalLink = document.getElementById('mm-link');
-    const modalClose = document.getElementById('mm-close');
-
-    function openModal(card) {
-        if (!modal) return;
-        const en = window.I18N && window.I18N.lang === 'en';
-        const name = card.getAttribute('data-name') || '';
-        const role = (en && card.getAttribute('data-role-en')) || card.getAttribute('data-role') || '';
-        const img = card.getAttribute('data-img') || '';
-        const bio = (en && card.getAttribute('data-bio-en')) || card.getAttribute('data-bio') || '';
-        const portfolio = card.getAttribute('data-portfolio') || '';
-
-        if (modalName) modalName.textContent = name;
-        if (modalRole) modalRole.textContent = role;
-        if (modalImg) { modalImg.src = img; modalImg.alt = name; }
-        if (modalBio) modalBio.innerHTML = bio.split('<br>').map(function (line) {
-            const div = document.createElement('div');
-            div.textContent = line;
-            return div.innerHTML;
-        }).join('<br>');
-        if (modalLink) {
-            if (portfolio && portfolio !== '#') {
-                modalLink.href = portfolio;
-                modalLink.classList.remove('hidden');
-            } else {
-                modalLink.classList.add('hidden');
+    let queued = false;
+    function updateScroll() {
+        queued = false; const distance = document.documentElement.scrollHeight - window.innerHeight;
+        $('reading-progress').style.width = (distance > 0 ? Math.min(100, window.scrollY / distance * 100) : 0) + '%';
+        if (!reducedMotion.matches && document.documentElement.dataset.motion !== 'paused') {
+            const culture = document.querySelector('.culture-words');
+            const box = culture.getBoundingClientRect();
+            if (box.bottom > 0 && box.top < window.innerHeight) {
+                const shift = Math.max(-12, Math.min(12, (box.top / window.innerHeight - .5) * 35));
+                culture.style.setProperty('--culture-shift', shift + 'px');
             }
         }
-        modal.classList.remove('hidden');
-        modal.offsetHeight; // reflow
-        if (modalBackdrop) modalBackdrop.classList.add('opacity-100');
-        if (modalCard) {
-            modalCard.classList.remove('opacity-0', 'scale-95');
-            modalCard.classList.add('opacity-100', 'scale-100');
-        }
-        document.body.style.overflow = 'hidden';
     }
-
-    function closeModal() {
-        if (!modal) return;
-        if (modalBackdrop) modalBackdrop.classList.remove('opacity-100');
-        if (modalCard) {
-            modalCard.classList.add('opacity-0', 'scale-95');
-            modalCard.classList.remove('opacity-100', 'scale-100');
-        }
-        setTimeout(function () {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }, 250);
+    window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(updateScroll); } }, { passive: true });
+    updateScroll();
+    if ('IntersectionObserver' in window) {
+        const links = document.querySelectorAll('.desktop-nav .nav-link');
+        const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (!entry.isIntersecting) return; links.forEach(link => { if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); }); }); }, { rootMargin: '-10% 0px -65% 0px' });
+        document.querySelectorAll('main section[id]').forEach(section => observer.observe(section));
+        const entrance = new IntersectionObserver(entries => entries.forEach(entry => {
+            if (entry.isIntersecting) { entry.target.classList.add('in-view'); entrance.unobserve(entry.target); }
+        }), { threshold: .12 });
+        document.querySelectorAll('main section:not(#home)').forEach(section => entrance.observe(section));
     }
-
-    document.querySelectorAll('.member-card').forEach(function (card) {
-        card.addEventListener('click', () => openModal(card));
-        card.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
-        });
-    });
-    if (modalClose) modalClose.addEventListener('click', closeModal);
-    if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeModal();
-    });
-
-    // --- 현재 연도 푸터 ------------------------------------------------------
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+    $('year').textContent = new Date().getFullYear();
 });

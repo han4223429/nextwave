@@ -1,0 +1,97 @@
+/* Source viewer: https://han4223429.github.io/portfolio/.
+ * Exact reference control layout and neutral gallery palette are isolated from the page.
+ */
+.rescue-feature .project-subtitle { white-space: pre-line; }
+.rescue-figure {
+    --paper:#f4f3ee;--ink:#191a18;--muted:#686b64;--line:#c7c8c0;--soft:#e9e9e1;--accent:#c84021;
+    --mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace;
+    font-family:'Pretendard Variable',Pretendard,Arial,sans-serif;
+    margin:0;width:100%;height:360px;position:relative;overflow:hidden;border:1px solid #d9ddd7;border-radius:0;
+}
+.rescue-figure img {width:100%;height:100%;object-fit:contain;display:block;}
+.rescue-figure button {font:inherit;color:inherit;cursor:pointer;}
+.rescue-figure .mono {font-family:var(--mono);}
+.rescue-figure .rescue-view-head button {background:transparent;border:0;padding:0;}
+.rescue-figure .rescue-controls button {background:transparent;border-radius:0;box-shadow:none;}
+.rescue-figure>figcaption {font-family:var(--mono);}
+/* Keep the product unobstructed; the 3D action sits in its own caption row. */
+.rescue-figure {
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: minmax(0, 1fr) auto;
+    background: #fff;
+}
+.rescue-poster { display: contents; }
+.rescue-figure .rescue-poster img {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-height: 0;
+    object-fit: contain;
+    background: #f5f5f5;
+}
+.rescue-figure:hover .rescue-poster img { transform: none; }
+.rescue-launch {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 44px;
+    margin: 12px 16px 12px 8px;
+    padding: 10px 17px;
+    border: 1px solid #d8dcd7;
+    border-radius: 24px;
+    background: #fff;
+    color: #30382f;
+    text-align: center;
+    transition: border-color .2s, background .2s;
+}
+.rescue-launch strong { font-size: 13px; font-weight: 600; white-space: nowrap; letter-spacing: -.015em; }
+.rescue-launch-arrow {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    background: #b95531;
+    mask: url('assets/rescue/arrow-up-right.svg') center / contain no-repeat;
+    transition: transform .2s;
+}
+.rescue-launch:hover { border-color: #c1a18c; background: #fff7ef; }
+.rescue-launch:hover .rescue-launch-arrow { transform: translate(1px, -1px); }
+.rescue-launch:focus-visible { outline-color: #b95531; outline-offset: 3px; }
+.rescue-launch:disabled { cursor: progress; opacity: .65; }
+.rescue-figure > figcaption {
+    position: static;
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
+    padding: 12px 8px 12px 16px;
+    background: transparent;
+    color: #686f65;
+    font-size: 10px;
+    line-height: 1.6;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+.rescue-load-status {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    padding: 0 16px 14px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #30382f;
+    background: #fff;
+}
+.rescue-figure.is-active { display: block; }
+.rescue-figure.is-active{height:auto;min-height:390px;background:var(--soft)}.rescue-figure.is-active>figcaption{display:none}.rescue-live{color:var(--ink);background:var(--soft)}.rescue-view-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:12px 18px 0}.rescue-view-head .mono{font-size:10px;letter-spacing:.03em}.rescue-view-head button{font-size:11px;text-decoration:underline;text-underline-offset:4px;min-height:44px}.rescue-stage{height:300px;position:relative;overflow:hidden}.rescue-stage canvas{display:block;width:100%!important;height:100%!important;cursor:grab;touch-action:pan-y;outline-offset:-4px}.rescue-stage canvas:active{cursor:grabbing}.rescue-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:0 18px}.rescue-primary-controls,.rescue-camera-controls{display:flex;align-items:center;gap:6px}.rescue-controls button{font-size:11px;padding:0 11px;min-height:44px;border:1px solid var(--line);white-space:nowrap;transition:background .18s,color .18s}.rescue-controls button:hover{border-color:var(--ink)}.rescue-controls button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}.rescue-controls #rescueDrive[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--paper)}.rescue-camera-controls #rescueZoomIn,.rescue-camera-controls #rescueZoomOut{font-size:18px;min-width:36px;padding-inline:8px}.rescue-controls button:disabled{opacity:.35;cursor:default}.rescue-hint{font-size:12px;line-height:1.5;text-align:center;color:var(--muted);margin:13px 16px 7px}.rescue-disclosure{font-size:11px;line-height:1.5;text-align:center;color:var(--muted);padding:0 12px 14px}.rescue-live .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1100px){.rescue-controls{padding-inline:12px;gap:6px}.rescue-controls button{font-size:10px;padding-inline:8px}.rescue-primary-controls,.rescue-camera-controls{gap:4px}.rescue-camera-controls #rescueZoomIn,.rescue-camera-controls #rescueZoomOut{min-width:30px}.rescue-stage{height:280px}}
+@media(max-width:760px){.rescue-launch{margin:10px 12px 10px 6px;padding:10px 13px;gap:10px}.rescue-figure>figcaption{padding:10px 6px 10px 12px;font-size:10px}.rescue-stage{height:280px}.rescue-controls{flex-wrap:wrap;justify-content:center;gap:10px}.rescue-controls button{min-height:44px;font-size:11px}.rescue-primary-controls{gap:6px}.rescue-camera-controls #rescueZoomIn,.rescue-camera-controls #rescueZoomOut{min-width:36px}.rescue-hint{margin-top:12px}.rescue-disclosure{font-size:11px}.rescue-view-head{padding-inline:14px}}
+@media(prefers-reduced-motion:reduce){.rescue-launch{transition:none}.rescue-launch-arrow{transition:none}.rescue-launch:hover .rescue-launch-arrow{transform:none}}
+
+@media(min-width:1600px){.rescue-figure:not(.is-active){height:390px}}
+@media(max-width:1100px){.rescue-figure:not(.is-active){height:350px}}
+@media(max-width:760px){.rescue-figure:not(.is-active){height:270px}}
+html[data-motion=paused] .rescue-launch,html[data-motion=paused] .rescue-launch-arrow{transition:none}
+html[data-motion=paused] .rescue-launch:hover .rescue-launch-arrow{transform:none}

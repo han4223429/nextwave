@@ -9,3 +9,6 @@ window.NEXTWAVE_FIREBASE_CONFIG = {
   messagingSenderId: '1096623136388',
   appId: '1:1096623136388:web:89c64a6e4b34efd6f5acd1'
 };
+
+// Public Google web client ID for the official Sign in with Google button.
+window.NEXTWAVE_GOOGLE_CLIENT_ID = '1096623136388-6r97b73nrmtnpb4vv4i6kdc4j2c4r3v2.apps.googleusercontent.com';

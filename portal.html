@@ -1,276 +1,118 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextWave Portal</title>
-    <meta name="description" content="NextWave IT Union 부원 전용 포털 – 채팅, 공지사항, 출석, 기회 정보">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="NextWave Portal">
-    <meta property="og:description" content="NextWave IT Union 부원 전용 포털 – 채팅, 공지사항, 출석, 기회 정보">
-    <meta property="og:image" content="assets/logo.png">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="NextWave Portal">
-    <meta name="twitter:image" content="assets/logo.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-    <link rel="icon" href="assets/logo.png">
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
-    <script src="firebase.config.js"></script>
-    <link rel="stylesheet" href="portal.css?v=2026bright3">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Desk — NextWave Portal</title>
+  <meta name="description" content="NextWave 창업동아리의 기회 탐색 데스크. 창업·공모전 공고를 모으고, 부원들의 다음 시도를 연결합니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Live Desk — NextWave Portal">
+  <meta property="og:description" content="기회를 찾고, 함께 만들고, 다음 시도로. NextWave 창업동아리 포털.">
+  <meta property="og:image" content="assets/logo.png">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="portal.css?v=water-sound-20260907-2">
+  <script defer src="water-audio.js?v=water-sound-20260907-2"></script>
+  <script defer src="sound-ui.js?v=water-sound-20260907-2"></script>
+  <script defer src="firebase.config.js?v=google-identity-20260906"></script>
+  <script defer src="portal.js?v=water-sound-20260907-2"></script>
 </head>
 <body>
-
-    <!-- ====== LOGIN SCREEN ====== -->
-    <div id="login-screen" class="login-screen">
-        <div class="login-logo">NextWave Portal</div>
-        <div class="login-sub">부원 전용 공간</div>
-        <div class="login-box">
-            <h2>부원 로그인</h2>
-            <p>부원만 들어올 수 있는 공간이에요.<br>구글 계정으로 로그인해 주세요.</p>
-            <button id="login-btn" class="google-btn">
-                <span class="material-symbols-outlined">login</span>
-                Google 로그인
-            </button>
-            <p id="login-error" style="color: var(--p-danger); margin-top: 16px; font-size: 11px;"></p>
+  <a class="skip-link" href="#opportunity-board">기회 정보로 건너뛰기</a>
+  <header class="public-topbar" id="public-topbar">
+    <a href="index.html" class="wordmark" aria-label="NextWave 홈">NEXTWAVE<span class="wordmark-dot" aria-hidden="true">.</span></a>
+    <span class="topbar-label">LIVE DESK <span class="topbar-divider" aria-hidden="true">/</span> NEXT RIPPLE</span>
+    <div class="portal-public-actions"><button class="portal-sound-button" type="button" data-sound-toggle aria-pressed="true" aria-label="물결 효과음 끄기"><span class="material-symbols-outlined" aria-hidden="true">water_drop</span><span data-sound-label>SOUND ON</span></button><a class="text-link" href="index.html">클럽 홈 <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main class="public-shell" id="public-shell">
+    <section class="desk-intro" id="login-screen" aria-labelledby="desk-title">
+      <div class="intro-copy">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> NEXTWAVE / NEXT RIPPLE</p>
+        <h1 id="desk-title">작은 도전에서,<br><span>다음 물결까지.</span></h1>
+        <p class="intro-description">작은 도전이 다음 물결로 이어집니다.<br>기회를 발견하고, 동료와 함께 출발해 보세요.</p>
+        <a class="intro-jump" href="#opportunity-board">다음 기회 찾기 <span aria-hidden="true">↓</span></a>
+        <div class="intro-route" aria-label="발견, 연결, 실행"><span>FIND</span><span aria-hidden="true">↗</span><span>CONNECT</span><span aria-hidden="true">↗</span><span>MAKE IT HAPPEN</span></div>
+      </div>
+      <aside class="login-box" aria-labelledby="login-title">
+        <div class="card-kicker"><span>YOUR CREW, ON BOARD</span><span class="material-symbols-outlined" aria-hidden="true">north_east</span></div>
+        <span class="material-symbols-outlined login-icon" aria-hidden="true">waves</span>
+        <h2 id="login-title">한 사람의 시작,<br>우리의 다음 물결.</h2>
+        <p>동료의 소식과 우리 팀의 다음 일정까지.<br>처음이라면 로그인 후 운영진의 승인을 기다려 주세요.</p>
+        <button id="login-btn" class="google-btn" type="button"><span class="material-symbols-outlined" aria-hidden="true">login</span><span id="login-label">Google로 부원 로그인</span><span aria-hidden="true">↗</span></button>
+        <div id="google-signin" hidden></div>
+        <p id="login-error" class="form-error" role="alert"></p>
+        <div class="login-footnote">아래 기회 정보는 누구나 볼 수 있어요.</div>
+      </aside>
+    </section>
+    <section id="pending-screen" class="pending-screen" hidden aria-labelledby="pending-title">
+      <p class="eyebrow">MEMBERS ACCESS / PENDING</p>
+      <h1 id="pending-title">작업실의 문을<br>열고 있어요.</h1>
+      <p id="pending-description">운영진이 가입 요청을 확인 중이에요. 승인되면 이 화면이 자동으로 전환됩니다.</p>
+      <button id="pending-logout" class="btn-secondary" type="button">로그아웃</button>
+    </section>
+    <div id="public-board-slot">
+      <section id="opportunity-board" class="opportunity-board" aria-labelledby="board-title" tabindex="-1">
+        <div class="board-heading">
+          <div><p class="eyebrow">FIND YOUR NEXT RIPPLE</p><h2 id="board-title">다음 물결을 만드는 기회<span class="small-period">.</span></h2></div>
+          <div class="board-total"><strong id="opp-total">—</strong><span>살펴볼 기회</span></div>
         </div>
-    </div>
-
-    <!-- ====== PENDING SCREEN ====== -->
-    <div id="pending-screen" class="pending-screen" style="display: none;">
-        <div class="pending-icon">⏳</div>
-        <h2>승인 기다리는 중이에요</h2>
-        <p>운영진이 확인하고 있어요. 승인되면 바로 들어올 수 있어요.</p>
-        <button id="pending-logout" class="btn-secondary" style="margin-top: 24px;">로그아웃</button>
-    </div>
-
-    <!-- ====== PORTAL DASHBOARD ====== -->
-    <div id="portal-app" style="display: none;">
-        <!-- Top Bar -->
-        <header class="portal-topbar">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <button class="mobile-menu-btn" id="mobile-sidebar-btn" style="background:none;border:none;color:var(--p-primary);cursor:pointer;">
-                    <span class="material-symbols-outlined">menu</span>
-                </button>
-                <a href="index.html" class="logo" style="text-decoration:none;">NextWave <span>Portal</span></a>
-            </div>
-            <div class="user-info">
-                <span class="user-name" id="topbar-username">User</span>
-                <img id="topbar-avatar" src="" alt="avatar">
-                <button id="topbar-logout" class="btn-secondary" style="padding:5px 12px;font-size:10px;">Logout</button>
-            </div>
-        </header>
-
-        <!-- Mobile Backdrop -->
-        <div class="mobile-backdrop" id="mobile-backdrop" style="position:fixed;inset:0;z-index:35;background:rgba(26,28,46,0.45);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);display:none;"></div>
-
-        <div class="portal-layout">
-            <!-- Sidebar -->
-            <aside class="portal-sidebar" id="portal-sidebar">
-                <div class="nav-section">
-                    <div class="nav-section-title">MENU</div>
-                    <div class="nav-item active" data-tab="chat">
-                        <span class="material-symbols-outlined">chat</span>
-                        채팅
-                    </div>
-                    <div class="nav-item" data-tab="announcements">
-                        <span class="material-symbols-outlined">campaign</span>
-                        공지사항
-                    </div>
-                    <div class="nav-item" data-tab="attendance">
-                        <span class="material-symbols-outlined">check_circle</span>
-                        출석 체크
-                    </div>
-                    <div class="nav-item" data-tab="members">
-                        <span class="material-symbols-outlined">group</span>
-                        부원 명단
-                    </div>
-                    <div class="nav-item" data-tab="opportunities">
-                        <span class="material-symbols-outlined">rocket_launch</span>
-                        기회 정보
-                    </div>
-                    <div class="nav-item" data-tab="admin" id="admin-nav" style="display:none;">
-                        <span class="material-symbols-outlined">admin_panel_settings</span>
-                        관리자
-                    </div>
-                </div>
-                <div class="nav-bottom">
-                    <a href="index.html" class="back-link">
-                        <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span>
-                        메인 페이지로 돌아가기
-                    </a>
-                </div>
-            </aside>
-
-            <!-- Main Content -->
-            <main class="portal-main">
-
-                <!-- ── Chat Tab ── -->
-                <div class="tab-panel active" id="tab-chat">
-                    <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">chat</span> 부원 채팅</h3>
-                        <div class="chat-container">
-                            <div class="chat-messages" id="chat-messages">
-                                <div style="text-align:center;color:var(--p-outline);font-size:11px;padding:20px;">
-                                    <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                    메시지 불러오는 중…
-                                </div>
-                            </div>
-                            <div class="chat-input-bar">
-                                <input type="text" id="chat-input" placeholder="메시지를 입력하세요…" autocomplete="off">
-                                <button id="chat-send" class="btn-primary">전송</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Announcements Tab ── -->
-                <div class="tab-panel" id="tab-announcements">
-                    <div class="portal-card" id="announcement-form-card" style="display:none;">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">edit</span> 공지 작성 (관리자)</h3>
-                        <div class="announcement-form">
-                            <input type="text" id="ann-title-input" placeholder="공지 제목">
-                            <textarea id="ann-body-input" placeholder="공지 내용을 작성하세요..."></textarea>
-                            <button id="ann-submit" class="btn-primary">공지 등록</button>
-                        </div>
-                    </div>
-                    <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">campaign</span> 공지사항</h3>
-                        <div id="announcements-list">
-                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;">
-                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                공지 불러오는 중…
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Attendance Tab ── -->
-                <div class="tab-panel" id="tab-attendance">
-                    <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">calendar_today</span> 오늘의 출석</h3>
-                        <div class="attendance-today" id="attendance-today">
-                            <div class="date-display" id="attendance-date"></div>
-                            <div id="attendance-status"></div>
-                            <button id="attendance-btn" class="btn-primary" style="margin-top:16px;">출석 체크</button>
-                        </div>
-                    </div>
-                    <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">history</span> 출석 기록</h3>
-                        <table class="attendance-log">
-                            <thead><tr><th>날짜</th><th>시간</th><th>상태</th></tr></thead>
-                            <tbody id="attendance-history"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- ── Members Tab ── -->
-                <div class="tab-panel" id="tab-members">
-                    <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">group</span> 승인된 부원 목록</h3>
-                        <div class="member-grid" id="member-grid">
-                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;grid-column:1/-1;">
-                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                부원 목록 불러오는 중…
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Opportunities Tab ── -->
-                <div class="tab-panel" id="tab-opportunities">
-                    <div class="portal-card" id="opp-form-card" style="display:none;">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">add_circle</span> 기회 정보 등록 (관리자)</h3>
-                        <div class="opp-form">
-                            <input type="text" id="opp-title-input" placeholder="제목 (예: 2026 AI 해커톤)">
-                            <textarea id="opp-desc-input" placeholder="간단한 설명을 작성하세요..."></textarea>
-                            <div class="opp-form-row">
-                                <select id="opp-category-input">
-                                    <option value="contest">🏆 공모전</option>
-                                    <option value="hackathon">💻 해커톤</option>
-                                    <option value="dev">⚙️ 개발</option>
-                                    <option value="gamedev">🎮 게임개발</option>
-                                    <option value="marketing">📢 마케팅</option>
-                                    <option value="activity">🤝 대외활동</option>
-                                </select>
-                                <input type="date" id="opp-deadline-input" placeholder="마감일">
-                            </div>
-                            <input type="url" id="opp-link-input" placeholder="관련 링크 (https://...)">
-                            <input type="text" id="opp-source-input" placeholder="출처 (예: 캠퍼스픽, 링커리어...)">
-                            <button id="opp-submit" class="btn-primary">등록</button>
-                        </div>
-                    </div>
-                    <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">rocket_launch</span> 기회 정보 센터</h3>
-                        <p style="font-size:11px;color:var(--p-on-surface-variant);margin-bottom:16px;">공모전, 마케팅 트렌드, 대외활동 등 유용한 정보를 한 곳에서 확인하세요. 마감된 정보는 자동으로 사라집니다.</p>
-                        <div class="opp-filters" id="opp-filters">
-                            <button class="opp-filter-btn active" data-filter="all">전체</button>
-                            <button class="opp-filter-btn" data-filter="contest">🏆 공모전</button>
-                            <button class="opp-filter-btn" data-filter="hackathon">💻 해커톤</button>
-                            <button class="opp-filter-btn" data-filter="dev">⚙️ 개발</button>
-                            <button class="opp-filter-btn" data-filter="gamedev">🎮 게임개발</button>
-                            <button class="opp-filter-btn" data-filter="marketing">📢 마케팅</button>
-                            <button class="opp-filter-btn" data-filter="activity">🤝 대외활동</button>
-                        </div>
-                        <div class="opp-grid" id="opp-grid">
-                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:30px;grid-column:1/-1;">
-                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                정보 불러오는 중…
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Admin Tab ── -->
-                <div class="tab-panel" id="tab-admin">
-                    <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">admin_panel_settings</span> 부원 관리 및 권한 설정</h3>
-                        <p style="font-size:12px;color:var(--p-on-surface-variant);margin-bottom:16px;">아래 목록에서 부원의 이름(닉네임)을 수정하거나 권한을 관리할 수 있습니다.</p>
-                        <div id="admin-member-list" style="max-height:500px;overflow-y:auto;border:1px solid var(--p-outline-variant);background:#f7f8fc;">
-                            <div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;">
-                                <div class="loading-spinner" style="margin:0 auto 8px;"></div>
-                                회원 목록 불러오는 중…
-                            </div>
-                        </div>
-                    </div>
-                    <div class="portal-card">
-                        <h3><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">assignment_turned_in</span> 전체 부원 출석 기록</h3>
-                        <div id="admin-attendance-container" style="max-height:300px;overflow-y:auto;margin-top:10px;">
-                            <table class="attendance-log">
-                                <thead><tr><th>이름</th><th>날짜</th><th>시간</th></tr></thead>
-                                <tbody id="admin-attendance-body">
-                                    <tr><td colspan="3" style="text-align:center;color:var(--p-outline);">불러오는 중…</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </main>
+        <div class="sync-bar">
+          <div class="sync-copy"><span class="status-dot" id="sync-dot" aria-hidden="true"></span><span id="opp-sync-status" role="status">공고 출처 정보를 불러오는 중</span></div>
+          <button id="opp-refresh" class="refresh-btn" type="button"><span class="material-symbols-outlined" aria-hidden="true">refresh</span>새로고침</button>
         </div>
-    </div>
-
-    <!-- Toast -->
-    <div id="toast" class="toast"></div>
-
-    <!-- Custom Confirm Modal (DOM 재렌더링에 영향받지 않음) -->
-    <div id="confirm-modal" class="confirm-modal-overlay" style="display:none;">
-        <div class="confirm-modal-box">
-            <div class="confirm-modal-icon"><span class="material-symbols-outlined">warning</span></div>
-            <p id="confirm-modal-msg" class="confirm-modal-msg">정말 삭제하시겠습니까?</p>
-            <div class="confirm-modal-actions">
-                <button type="button" id="confirm-modal-cancel" class="confirm-modal-btn cancel">취소</button>
-                <button type="button" id="confirm-modal-ok" class="confirm-modal-btn ok">삭제</button>
-            </div>
+        <div class="board-toolbar">
+          <div class="search-field"><span class="material-symbols-outlined" aria-hidden="true">search</span><label class="sr-only" for="opp-search">기회 검색</label><input id="opp-search" type="search" placeholder="관심 있는 주제, 기관, 공고 검색" autocomplete="off"></div>
+          <label class="archive-toggle"><input id="opp-show-closed" type="checkbox"><span>마감·보관 포함</span></label>
         </div>
+        <div class="opp-filters" id="opp-filters" role="group" aria-label="기회 분야 필터"><button type="button" class="opp-filter-btn active" data-filter="all" aria-pressed="true">전체</button></div>
+        <div class="results-caption"><span id="opp-result-count" role="status">목록을 준비하고 있어요.</span><span>마감일은 한국 시간 기준 · 신청 전 원문 확인</span></div>
+        <div class="opp-grid" id="opp-grid" aria-busy="true"><p class="empty-state">기회를 불러오는 중이에요.</p></div>
+        <details class="source-details"><summary>출처와 업데이트 현황 <span aria-hidden="true">+</span></summary><p id="opp-refresh-note">공고 출처의 정보를 주기적으로 수집합니다. 새로고침은 마지막 수집 결과를 확인합니다.</p><div id="opp-sources" class="source-list"></div></details>
+      </section>
     </div>
+    <footer class="desk-footer"><a href="index.html">NEXTWAVE / 작은 도전이 다음 물결로.</a><span>SMALL STARTS. NEXT RIPPLES.</span></footer>
+  </main>
 
-    <script src="portal.js?v=5"></script>
+  <div id="portal-app" hidden>
+    <header class="portal-topbar">
+      <div class="portal-brand"><button class="mobile-menu-btn icon-btn" id="mobile-sidebar-btn" type="button" aria-label="포털 메뉴 열기" aria-controls="portal-sidebar" aria-expanded="false"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button><a href="index.html" class="wordmark">NEXTWAVE<span class="wordmark-dot">.</span></a><span class="topbar-label">LIVE DESK</span></div>
+      <div class="user-info"><button class="portal-sound-button" type="button" data-sound-toggle aria-pressed="true" aria-label="물결 효과음 끄기"><span class="material-symbols-outlined" aria-hidden="true">water_drop</span><span data-sound-label>SOUND ON</span></button><span class="user-name" id="topbar-username"></span><img id="topbar-avatar" alt="내 프로필" hidden><button id="topbar-logout" class="btn-secondary" type="button">로그아웃</button></div>
+    </header>
+    <button class="mobile-backdrop" id="mobile-backdrop" type="button" aria-label="메뉴 닫기" hidden></button>
+    <div class="portal-layout">
+      <aside class="portal-sidebar" id="portal-sidebar" aria-label="부원 메뉴">
+        <p class="eyebrow">YOUR CREW SPACE</p>
+        <nav class="nav-section" aria-label="부원 공간">
+          <button class="nav-item active" type="button" data-tab="opportunities" aria-current="page"><span class="nav-number">01</span>기회 데스크<span class="material-symbols-outlined" aria-hidden="true">north_east</span></button>
+          <button class="nav-item" type="button" data-tab="chat"><span class="nav-number">02</span>부원 채팅<span class="material-symbols-outlined" aria-hidden="true">chat</span></button>
+          <button class="nav-item" type="button" data-tab="announcements"><span class="nav-number">03</span>공지사항<span class="material-symbols-outlined" aria-hidden="true">campaign</span></button>
+          <button class="nav-item" type="button" data-tab="attendance"><span class="nav-number">04</span>출석 기록<span class="material-symbols-outlined" aria-hidden="true">check_circle</span></button>
+          <button class="nav-item" type="button" data-tab="members"><span class="nav-number">05</span>함께하는 사람들<span class="material-symbols-outlined" aria-hidden="true">group</span></button>
+          <button class="nav-item" type="button" data-tab="admin" id="admin-nav" hidden><span class="nav-number">06</span>운영 데스크<span class="material-symbols-outlined" aria-hidden="true">tune</span></button>
+        </nav>
+        <div class="nav-bottom"><p>작은 시도들이 모여<br>다음 물결이 됩니다.</p><a href="index.html" class="text-link">클럽으로 돌아가기 ↗</a></div>
+      </aside>
+      <main class="portal-main">
+        <section class="tab-panel active" id="tab-opportunities" aria-label="기회 데스크">
+          <div id="member-board-slot"></div>
+          <section class="portal-card" id="opp-form-card" hidden>
+            <p class="eyebrow">ADD A NEW OPPORTUNITY</p><h2>직접 발견한 기회 추가</h2>
+            <form id="opp-form" class="entry-form"><label for="opp-title-input">제목</label><input id="opp-title-input" required maxlength="200" placeholder="공고 제목"><label for="opp-desc-input">설명</label><textarea id="opp-desc-input" maxlength="4000" placeholder="대상, 지원 내용, 준비할 것"></textarea><div class="form-columns"><div><label for="opp-category-input">분야</label><select id="opp-category-input"><option value="startup">창업</option><option value="support">사업 지원</option><option value="contest">공모전</option><option value="hackathon">해커톤</option><option value="dev">개발</option><option value="gamedev">게임 개발</option><option value="marketing">마케팅</option><option value="activity">대외활동</option><option value="education">교육</option><option value="internship">인턴십</option></select></div><div><label for="opp-deadline-input">마감일 (선택)</label><input type="date" id="opp-deadline-input"></div></div><label for="opp-link-input">원문 링크</label><input type="url" id="opp-link-input" maxlength="2000" placeholder="https://"><label for="opp-source-input">출처</label><input id="opp-source-input" maxlength="200" placeholder="주최 기관 또는 공식 사이트"><button id="opp-submit" class="btn-primary" type="submit">기회 등록 ↗</button></form>
+          </section>
+        </section>
+        <section class="tab-panel" id="tab-chat" hidden aria-labelledby="chat-title"><div class="panel-heading"><p class="eyebrow">02 / CONVERSATIONS</p><h1 id="chat-title">생각을 주고받는 곳.</h1><p>진행 중인 일, 막힌 문제, 작은 발견까지.</p></div><div class="portal-card chat-card"><div class="chat-messages" id="chat-messages" role="log" aria-label="부원 채팅 메시지" aria-relevant="additions text"><p class="empty-state">메시지를 불러오는 중이에요.</p></div><form id="chat-form" class="chat-input-bar"><label class="sr-only" for="chat-input">메시지</label><input id="chat-input" maxlength="2000" placeholder="동료에게 이야기를 건네세요" autocomplete="off" required><button id="chat-send" type="submit" class="btn-primary">전송 ↗</button></form></div></section>
+        <section class="tab-panel" id="tab-announcements" hidden aria-labelledby="announcements-title"><div class="panel-heading"><p class="eyebrow">03 / CLUB NOTES</p><h1 id="announcements-title">함께 알아둘 이야기.</h1></div><section class="portal-card" id="announcement-form-card" hidden><h2>공지 작성</h2><form id="announcement-form" class="entry-form"><label for="ann-title-input">제목</label><input id="ann-title-input" required maxlength="200" placeholder="공지 제목"><label for="ann-body-input">내용</label><textarea id="ann-body-input" required maxlength="10000" placeholder="부원들에게 알려주세요"></textarea><button id="ann-submit" type="submit" class="btn-primary">공지 등록 ↗</button></form></section><div class="portal-card" id="announcements-list"><p class="empty-state">공지를 불러오는 중이에요.</p></div></section>
+        <section class="tab-panel" id="tab-attendance" hidden aria-labelledby="attendance-title"><div class="panel-heading"><p class="eyebrow">04 / SHOWING UP</p><h1 id="attendance-title">오늘도, 한 걸음.</h1><p>함께한 날을 기록해요. 출석 날짜는 한국 시간 기준입니다.</p></div><div class="portal-card attendance-today"><div class="date-display" id="attendance-date"></div><div id="attendance-status" role="status"></div><button id="attendance-btn" class="btn-primary" type="button">출석 체크</button></div><div class="portal-card"><h2>나의 출석 기록</h2><div class="table-scroll"><table class="attendance-log"><thead><tr><th scope="col">날짜</th><th scope="col">시간</th><th scope="col">기록</th></tr></thead><tbody id="attendance-history"></tbody></table></div></div></section>
+        <section class="tab-panel" id="tab-members" hidden aria-labelledby="members-title"><div class="panel-heading"><p class="eyebrow">05 / PEOPLE OF NEXTWAVE</p><h1 id="members-title">각자의 파도, 함께.</h1><p>같이 만들고, 배우고, 시도하는 동료들.</p></div><div class="member-grid" id="member-grid"><p class="empty-state">부원을 불러오는 중이에요.</p></div></section>
+        <section class="tab-panel" id="tab-admin" hidden aria-labelledby="admin-title"><div class="panel-heading"><p class="eyebrow">06 / OPERATING DESK</p><h1 id="admin-title">작업실을 돌보는 일.</h1></div><section class="portal-card"><h2>부원 및 권한 관리</h2><p class="muted">가입 요청을 승인하고 부원의 이름과 권한을 관리합니다.</p><div id="admin-member-list"></div></section><section class="portal-card"><h2>전체 부원 출석 기록</h2><div class="table-scroll"><table class="attendance-log"><thead><tr><th scope="col">이름</th><th scope="col">날짜</th><th scope="col">시간</th></tr></thead><tbody id="admin-attendance-body"></tbody></table></div></section></section>
+      </main>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="confirm-modal" class="confirm-modal" aria-labelledby="confirm-modal-msg"><form method="dialog"><p class="eyebrow">PLEASE CONFIRM</p><h2 id="confirm-modal-msg">이 항목을 삭제할까요?</h2><div class="confirm-modal-actions"><button type="submit" value="cancel" class="btn-secondary">취소</button><button type="submit" value="confirm" class="btn-danger">확인</button></div></form></dialog>
+  <noscript><p class="noscript-message">기회 목록과 부원 공간을 이용하려면 JavaScript를 켜 주세요. <a href="index.html">홈으로 돌아가기</a></p></noscript>
+  <div id="sound-toast" class="sound-toast" role="status" aria-live="polite"></div>
 </body>
 </html>

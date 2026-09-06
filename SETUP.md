@@ -5,7 +5,7 @@
 ## 1) Firebase 웹 설정 연결
 
 1. Firebase 콘솔에서 프로젝트를 생성하고 **웹 앱** 등록
-2. 아래 값들을 얻어서 `firebase.config.js`(권장) 또는 `index.html`의 `portalConfig`에 넣기
+2. 아래 값들을 얻어서 `firebase.config.js`에 넣기
    - apiKey
    - authDomain
    - projectId
@@ -46,14 +46,30 @@
 
 - main 브랜치 push 시 GitHub Pages가 정적 파일을 빌드/배포합니다.
 - `Settings > Pages`에서 Source가 `Deploy from a branch`, Branch가 `main / root`인지 확인하세요.
+- 매시간 공고 수집 workflow는 새 JSON을 commit한 뒤 Pages 설정을 읽고, 기존 브랜치 배포(`legacy`, 기본 브랜치의 `/`)이면 빌드를 요청합니다. 별도 저장소 변수나 개인 토큰은 필요하지 않습니다. GitHub Actions 토큰의 push만으로는 Pages가 자동 빌드되지 않기 때문에 이 후속 요청을 사용합니다.
+- Pages를 다른 브랜치·하위 폴더 또는 별도 배포 workflow로 바꾸면 수집 workflow가 설정을 변경하지 않고 요약에 배포 연결 필요 상태를 남깁니다. 해당 배포 경로도 새 `data/opportunities.json`을 게시하도록 연결하세요.
 
-## 6) Tailwind CSS 빌드
+## 6) 로컬 실행과 사이트 설정
 
-메인 페이지는 프로덕션에서 Tailwind Play CDN을 쓰지 않도록 `tailwind.css`를 커밋합니다. `index.html`, `i18n.js`, `script.js`, `three-hero.js`의 Tailwind 클래스가 바뀌면 아래 명령으로 CSS를 다시 생성하세요.
+별도 프런트엔드 빌드 없이 실행합니다.
 
 ```bash
-npx -y tailwindcss@3.4.17 -c tailwind.config.cjs -i tailwind.input.css -o tailwind.css --minify
+python3 -m http.server 8000 --bind 127.0.0.1
 ```
+
+`script.js` 상단의 `NEXTWAVE_SITE`에 실제 `applyUrl`, `instagram`, `email`, `kakaoUrl`을 지정합니다. 주소가 없는 연락처는 숨기고 지원서는 준비 중 상태로 표시합니다.
+
+운영 파일은 다음과 같습니다.
+
+- 홈: `index.html`, `styles.css`, `script.js`, `i18n.js`
+- WebGL 수면·프로젝트 체험: `kinetic.js`, `project-demo.js`, `rescue-demo.js`, `rescue-demo.css`
+- 공통 물결 효과음·SOUND 설정: `water-audio.js`, `sound-ui.js`
+- 포털: `portal.html`, `portal.css`, `portal.js`, `firebase.config.js`
+- 공통 이미지·공개 수집본: `assets/`, `data/`
+
+홈 수면은 `kinetic.js`가 사진·텍스처 없이 실시간 3D 메시로 생성합니다. RESCUE JET은 `assets/rescue/`의 원본 모델과 `assets/vendor/three/`의 로컬 Three.js 모듈을 클릭할 때 불러옵니다. WebGL을 사용할 수 없어도 사이트 콘텐츠와 구명장치의 원본 이미지는 볼 수 있습니다. 새 배포 시 HTML에서 참조하는 CSS/JS 버전도 함께 갱신합니다.
+
+크롤러 설치·예약 활성화·선택적 Firestore 발행은 [docs/CRAWLER.md](docs/CRAWLER.md)를 참조하세요. 변경된 Firestore 규칙은 실제 프로젝트에 별도 배포해야 합니다. 개인 키 파일은 웹 루트 밖에 둡니다.
 
 ## 7) 커스텀 도메인 HTTPS 점검
 

@@ -1,937 +1,453 @@
-// =========================================================
-// NextWave Portal – Main Script
-// Firebase Auth + Firestore powered member portal
-// =========================================================
-
+/* NextWave Field Desk — public opportunities + authenticated member workspace. */
 (function () {
-    'use strict';
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const categories = { startup: '창업', support: '사업 지원', contest: '공모전', hackathon: '해커톤', dev: '개발', gamedev: '게임 개발', marketing: '마케팅', activity: '대외활동', education: '교육', internship: '인턴십' };
+  const privateListeners = new Map();
+  let auth = null, db = null, currentUser = null, currentProfile = null;
+  let profileUnsubscribe = null, authEpoch = 0, dataEpoch = 0, activeTab = 'opportunities', activeDay = '';
+  let publicSnapshot = null, manualOpportunities = [], snapshotError = false, fetchingSnapshot = false;
+  const requestedCategory = new URLSearchParams(window.location.search).get('category');
+  let currentFilter = Object.hasOwn(categories, requestedCategory) ? requestedCategory : 'all', searchTerm = '', showClosed = false, visibleLimit = 12, filterSignature = '';
+  let toastTimer = null, snapshotFingerprint = '', renderedDay = '';
+  let firebaseLoadPromise = null;
 
-    // ── Firebase instances ──
-    let auth = null;
-    let db = null;
-    let currentUser = null;
-    let currentProfile = null;
-    let chatUnsubscribe = null;
-    let announcementsUnsubscribe = null;
-    let oppUnsubscribe = null;
-    let currentOppFilter = 'all';
-
-    // ── DOM Refs ──
-    const $ = (id) => document.getElementById(id);
-
-    // Screens
-    const loginScreen = $('login-screen');
-    const pendingScreen = $('pending-screen');
-    const portalApp = $('portal-app');
-
-    // ── Toast ──
-    function showToast(msg, duration) {
-        duration = duration || 3000;
-        var toast = $('toast');
-        if (!toast) return;
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(function () { toast.classList.remove('show'); }, duration);
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = String(text);
+    return node;
+  }
+  function replaceChildrenKeepingFocus(container, ...children) {
+    const active = document.activeElement;
+    const focusKey = active && container.contains(active) ? active.dataset?.focusKey : null;
+    container.replaceChildren(...children);
+    if (focusKey) {
+      const replacement = [...container.querySelectorAll('[data-focus-key]')].find(node => node.dataset.focusKey === focusKey);
+      replacement?.focus({ preventScroll: true });
     }
+  }
+  function icon(name) { const node = el('span', 'material-symbols-outlined', name); node.setAttribute('aria-hidden', 'true'); return node; }
+  function safeURL(value, httpsOnly) {
+    if (typeof value !== 'string' || value.length > 2048) return '';
+    try { const url = new URL(value); return (url.protocol === 'https:' || (!httpsOnly && url.protocol === 'http:')) && !url.username && !url.password ? url.href : ''; } catch (_) { return ''; }
+  }
+  function avatar(value, className) {
+    const url = safeURL(value, true);
+    if (!url) return null;
+    const img = el('img', className); img.src = url; img.alt = ''; img.referrerPolicy = 'no-referrer'; img.addEventListener('error', () => { img.hidden = true; }, { once: true }); return img;
+  }
+  function dateObject(value) {
+    if (!value) return null;
+    try {
+      const date = typeof value.toDate === 'function' ? value.toDate() : new Date(typeof value.seconds === 'number' ? value.seconds * 1000 : value);
+      return Number.isFinite(date.getTime()) ? date : null;
+    } catch (_) { return null; }
+  }
+  function seoulDate(value) {
+    const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(value || new Date());
+    const pick = type => parts.find(part => part.type === type).value;
+    return pick('year') + '-' + pick('month') + '-' + pick('day');
+  }
+  function formatDate(value) { const date = dateObject(value); return date ? seoulDate(date) : '확인 중'; }
+  function formatTime(value) { const date = dateObject(value); return date ? new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hour12: false }).format(date) : '전송 중'; }
+  function formatStamp(value) { const date = dateObject(value); return date ? seoulDate(date).replaceAll('-', '.') + ' ' + formatTime(date) : '확인 기록 없음'; }
+  function deadlineDays(value) {
+    if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+    const parsed = new Date(value + 'T00:00:00Z');
+    if (!Number.isFinite(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value) return null;
+    return Math.round((parsed.getTime() - new Date(seoulDate() + 'T00:00:00Z').getTime()) / 86400000);
+  }
+  function deadlineBadge(item) {
+    const days = deadlineDays(item.deadline);
+    if (item.status === 'archived') return { text: '보관', cls: 'closed' };
+    if (days === null) return { text: '마감일 미확인', cls: '' };
+    if (days < 0) return { text: '마감', cls: 'closed' };
+    if (days === 0) return { text: '오늘 마감', cls: 'urgent' };
+    return { text: 'D−' + days, cls: days <= 3 ? 'urgent' : days <= 14 ? 'soon' : '' };
+  }
+  function isClosed(item) { const days = deadlineDays(item.deadline); return item.status === 'archived' || (days !== null && days < 0); }
+  function showToast(message) { clearTimeout(toastTimer); $('toast').textContent = message; $('toast').classList.add('show'); toastTimer = setTimeout(() => $('toast').classList.remove('show'), 4000); }
+  function confirmAction(message) {
+    const dialog = $('confirm-modal');
+    $('confirm-modal-msg').textContent = message; dialog.returnValue = ''; dialog.showModal();
+    return new Promise(resolve => dialog.addEventListener('close', () => resolve(dialog.returnValue === 'confirm'), { once: true }));
+  }
+  function emptyState(container, message, detail) {
+    const node = el('div', 'empty-state'); node.append(el('strong', '', message)); if (detail) node.append(el('p', '', detail)); container.replaceChildren(node); return node;
+  }
+  function errorMessage(error, fallback) {
+    const code = String(error && error.code || '');
+    if (code.includes('permission-denied')) return '접근 권한을 확인하지 못했어요. 승인 상태를 확인한 뒤 다시 로그인해 주세요.';
+    if (code.includes('unavailable') || code.includes('network-request-failed')) return '연결이 원활하지 않아요. 잠시 후 다시 시도해 주세요.';
+    return fallback;
+  }
 
-    // ── Custom Confirm Modal (DOM 재렌더링에 영향받지 않음) ──
-    function showConfirmModal(message, onConfirm) {
-        var overlay = $('confirm-modal');
-        var msgEl = $('confirm-modal-msg');
-        var okBtn = $('confirm-modal-ok');
-        var cancelBtn = $('confirm-modal-cancel');
-        if (!overlay) return;
-
-        msgEl.textContent = message;
-        overlay.style.display = 'flex';
-
-        // 기존 이벤트 제거를 위해 클론 교체
-        var newOk = okBtn.cloneNode(true);
-        okBtn.parentNode.replaceChild(newOk, okBtn);
-        var newCancel = cancelBtn.cloneNode(true);
-        cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
-
-        newCancel.addEventListener('click', function() {
-            overlay.style.display = 'none';
-        });
-        newOk.addEventListener('click', function() {
-            overlay.style.display = 'none';
-            onConfirm();
-        });
+  // Public data is a static, source-backed snapshot. Refresh does not trigger a crawler.
+  async function refreshSnapshot(manual) {
+    if (fetchingSnapshot) return;
+    fetchingSnapshot = true;
+    $('opp-refresh').disabled = true; $('opp-refresh').setAttribute('aria-busy', 'true');
+    let changed = false;
+    const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 12000);
+    try {
+      const response = await fetch('data/opportunities.json', { cache: 'no-store', signal: controller.signal });
+      if (!response.ok) throw new Error('snapshot unavailable');
+      const data = await response.json();
+      if (data.schemaVersion !== 1 || !Array.isArray(data.items) || !Array.isArray(data.sources)) throw new Error('invalid snapshot');
+      const fingerprint = JSON.stringify(data);
+      changed = fingerprint !== snapshotFingerprint || snapshotError || renderedDay !== seoulDate();
+      snapshotFingerprint = fingerprint;
+      publicSnapshot = { ...data, items: data.items.filter(item => item && typeof item.id === 'string' && typeof item.title === 'string' && item.title.trim() && safeURL(item.link)) };
+      snapshotError = false;
+      if (manual) showToast('가장 최근에 수집된 목록을 확인했어요.');
+    } catch (_) {
+      changed = !snapshotError || renderedDay !== seoulDate();
+      snapshotError = true;
+      if (manual) showToast(publicSnapshot ? '연결을 확인해 주세요. 마지막으로 받은 목록을 표시합니다.' : '기회 목록을 가져오지 못했어요. 잠시 후 다시 시도해 주세요.');
+    } finally {
+      clearTimeout(timeout); fetchingSnapshot = false; $('opp-refresh').disabled = false; $('opp-refresh').setAttribute('aria-busy', 'false'); $('opp-grid').setAttribute('aria-busy', 'false'); if (changed || !publicSnapshot) renderOpportunities(); renderSources();
     }
-
-    // ── Utility: Format timestamp ──
-    function formatTime(ts) {
-        if (!ts) return '';
-        var d = ts.toDate ? ts.toDate() : new Date(ts);
-        var h = d.getHours().toString().padStart(2, '0');
-        var m = d.getMinutes().toString().padStart(2, '0');
-        return h + ':' + m;
+  }
+  function allOpportunities() {
+    const items = new Map();
+    if (publicSnapshot) publicSnapshot.items.forEach(item => items.set(item.id, { ...item, public: true }));
+    if (currentProfile && currentProfile.isMember === true) manualOpportunities.forEach(item => { if (item.managedBy !== 'nextwave-crawler' && item.authorUid !== 'crawler' && !item.id.startsWith('auto_')) items.set(item.id, { ...item, public: false }); });
+    return [...items.values()];
+  }
+  function renderFilters(items) {
+    const available = [...new Set(items.map(item => item.category).filter(key => Object.hasOwn(categories, key)))];
+    const keys = Object.keys(categories).filter(key => available.includes(key) || key === currentFilter);
+    const signature = keys.join(',');
+    if (signature !== filterSignature || $('opp-filters').childElementCount === 1) {
+      filterSignature = signature;
+      const buttons = ['all', ...keys].map(key => { const button = el('button', 'opp-filter-btn', key === 'all' ? '전체' : categories[key]); button.type = 'button'; button.dataset.filter = key; return button; });
+      $('opp-filters').replaceChildren(...buttons);
     }
-
-    function formatDate(ts) {
-        if (!ts) return '';
-        var d = ts.toDate ? ts.toDate() : new Date(ts);
-        return d.getFullYear() + '-' + (d.getMonth() + 1).toString().padStart(2, '0') + '-' + d.getDate().toString().padStart(2, '0');
+    $('opp-filters').querySelectorAll('button').forEach(button => { const selected = button.dataset.filter === currentFilter; button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected)); });
+  }
+  function renderOpportunities() {
+    renderedDay = seoulDate();
+    const items = allOpportunities(); renderFilters(items);
+    $('opp-total').textContent = String(items.filter(item => !isClosed(item)).length).padStart(2, '0');
+    const search = searchTerm.toLocaleLowerCase('ko-KR');
+    const filtered = items.filter(item => (showClosed || !isClosed(item)) && (currentFilter === 'all' || item.category === currentFilter) && (!search || [item.title, item.description, item.source, item.organizer, categories[item.category]].join(' ').toLocaleLowerCase('ko-KR').includes(search)));
+    filtered.sort((a, b) => Number(isClosed(a)) - Number(isClosed(b)) || (deadlineDays(a.deadline) ?? 100000) - (deadlineDays(b.deadline) ?? 100000) || (dateObject(b.lastSeenAt || b.createdAt)?.getTime() || 0) - (dateObject(a.lastSeenAt || a.createdAt)?.getTime() || 0));
+    $('opp-result-count').textContent = filtered.length + '개 결과 · 마감 가까운 순';
+    const grid = $('opp-grid');
+    if (!filtered.length) {
+      if (!publicSnapshot && snapshotError && !items.length) emptyState(grid, '기회 목록을 연결하지 못했어요.', '새로고침으로 다시 확인해 주세요. 부원 로그인은 계속 이용할 수 있어요.');
+      else if (!items.length) emptyState(grid, '확인된 공고를 준비하고 있어요.', '수집이 완료되면 이곳에 표시됩니다. 아래에서 출처 상태를 확인할 수 있어요.');
+      else { const state = emptyState(grid, '조건에 맞는 기회가 아직 없어요.', '검색어를 바꾸거나 다른 분야를 살펴보세요.'); const reset = el('button', 'btn-secondary', '검색 조건 초기화'); reset.type = 'button'; reset.addEventListener('click', () => { searchTerm = ''; currentFilter = 'all'; showClosed = false; $('opp-search').value = ''; $('opp-show-closed').checked = false; renderOpportunities(); }); state.append(reset); }
+      return;
     }
+    const fragment = document.createDocumentFragment();
+    filtered.slice(0, visibleLimit).forEach((item, index) => {
+      const card = el('article', 'opp-card' + (isClosed(item) ? ' archived' : ''));
+      const top = el('div', 'opp-card-top'); const badge = deadlineBadge(item);
+      top.append(el('span', 'opp-card-index', 'CALL / ' + String(index + 1).padStart(3, '0')), el('span', 'opp-dday ' + badge.cls, badge.text));
+      card.append(top, el('h3', 'opp-card-title', item.title), el('p', 'opp-card-desc', typeof item.description === 'string' && item.description ? item.description : '지원 대상과 세부 내용을 원문 공고에서 확인하세요.'));
+      const meta = el('div', 'opp-card-meta'); meta.append(el('span', 'opp-tag', categories[item.category] || '기회 정보'));
+      if (item.source) meta.append(el('span', 'opp-source', item.source));
+      if (deadlineDays(item.deadline) !== null) meta.append(el('span', 'opp-source', item.deadline + ' 마감'));
+      card.append(meta);
+      if (item.lastSeenAt) card.append(el('p', 'opp-checked', '출처 확인 ' + formatStamp(item.lastSeenAt) + ' KST'));
+      const actions = el('div', 'opp-card-actions'); const link = safeURL(item.link);
+      if (link) { const anchor = el('a', 'opp-link-btn', '원문 공고 확인'); anchor.dataset.focusKey = 'opportunity:' + item.id; anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; anchor.setAttribute('aria-label', item.title + ' — 원문 공고 (새 탭)'); anchor.append(el('span', '', '↗')); actions.append(anchor); }
+      else actions.append(el('span', 'opp-source', '원문 링크 미등록'));
+      if (!item.public && currentProfile?.isAdmin === true) actions.append(deleteButton('이 기회 정보를 삭제할까요?', 'opportunities', item.id, '기회 삭제'));
+      card.append(actions); fragment.append(card);
+    });
+    if (filtered.length > visibleLimit) { const moreRow = el('div', 'opp-more'); const more = el('button', 'btn-secondary', '기회 ' + Math.min(12, filtered.length - visibleLimit) + '개 더 보기 ↓'); more.type = 'button'; more.dataset.focusKey = 'opportunities-more'; more.addEventListener('click', () => { visibleLimit += 12; renderOpportunities(); grid.querySelectorAll('.opp-card')[visibleLimit - 12]?.querySelector('a')?.focus({ preventScroll: true }); }); moreRow.append(more); fragment.append(moreRow); }
+    replaceChildrenKeepingFocus(grid, fragment);
+  }
+  function renderSources() {
+    const sources = (publicSnapshot?.sources || []).filter(source => source && typeof source === 'object');
+    const last = dateObject(publicSnapshot?.lastSuccessAt);
+    const interval = Number(publicSnapshot?.refreshIntervalMinutes) || 360;
+    const stale = !last || Date.now() - last.getTime() > Math.max(interval * 2, 120) * 60000;
+    const warning = snapshotError || stale || sources.some(source => source.status !== 'ok');
+    $('sync-dot').classList.toggle('warning', warning);
+    let status = last ? '최근 수집 ' + formatStamp(last) + ' KST' : '아직 성공한 수집 기록이 없어요';
+    if (snapshotError) status = publicSnapshot ? '연결 지연 · 마지막으로 받은 목록 표시' : '목록 연결 실패 · 새로고침해 주세요';
+    else if (last && stale) status += ' · 업데이트 지연';
+    else if (sources.some(source => source.status !== 'ok')) status += ' · 일부 출처 확인 지연';
+    $('opp-sync-status').textContent = status;
+    $('opp-refresh-note').textContent = '출처 수집 주기: 약 ' + (interval >= 60 ? interval / 60 + '시간' : interval + '분') + '. 화면은 열려 있는 동안 1분마다 최신 수집본을 확인합니다. 새로고침은 수집을 실행하지 않습니다. 마감일 미확인은 상시 모집을 뜻하지 않아요.';
+    replaceChildrenKeepingFocus($('opp-sources'), ...sources.map(source => {
+      const row = el('div', 'source-row'); const url = safeURL(source.url); const name = el(url ? 'a' : 'span', '', source.name || source.id || '공식 출처');
+      if (url) { name.dataset.focusKey = 'source:' + (source.id || url); name.href = url; name.target = '_blank'; name.rel = 'noopener noreferrer'; }
+      const state = source.status === 'ok' ? '정상 확인' : source.status === 'partial' ? '일부 확인 지연' : '확인 실패';
+      const details = el('span', 'source-meta' + (source.status !== 'ok' ? ' warning' : ''), state + ' · ' + (Number(source.itemCount) || 0) + '건'); details.append(el('br'), document.createTextNode('최근 성공 ' + formatStamp(source.lastSuccessAt)));
+      row.append(name, details); return row;
+    }));
+    if (!sources.length) $('opp-sources').append(el('p', '', '출처 상태를 아직 가져오지 못했어요.'));
+  }
 
-    function todayStr() {
-        var d = new Date();
-        return d.getFullYear() + '-' + (d.getMonth() + 1).toString().padStart(2, '0') + '-' + d.getDate().toString().padStart(2, '0');
-    }
-
-    // ── Escape HTML ──
-    function escapeHtml(text) {
-        var div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    function safeExternalUrl(url) {
-        if (!url) return '';
-        try {
-            var parsed = new URL(url, window.location.origin);
-            return (parsed.protocol === 'https:' || parsed.protocol === 'http:') ? parsed.href : '';
-        } catch (e) {
-            return '';
-        }
-    }
-
-    // =========================================================
-    // INITIALIZATION
-    // =========================================================
-    function init() {
-        var config = window.NEXTWAVE_FIREBASE_CONFIG;
-        if (!config || typeof config !== 'object') {
-            $('login-error').textContent = 'Firebase 설정이 없습니다. firebase.config.js를 확인해 주세요.';
-            return;
-        }
-
-        var hasConfig = Object.values(config).every(function (v) {
-            return typeof v === 'string' && v.indexOf('PASTE_YOUR') === -1;
-        });
-
-        if (!hasConfig) {
-            $('login-error').textContent = 'Firebase 설정이 완료되지 않았습니다. firebase.config.js를 확인해 주세요.';
-            return;
-        }
-
-        try {
-            if (!firebase.apps.length) {
-                firebase.initializeApp(config);
-            }
-            auth = firebase.auth();
-            db = firebase.firestore();
-            auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-        } catch (e) {
-            console.error('Firebase init failed:', e);
-            $('login-error').textContent = 'Firebase 초기화 실패: ' + e.message;
-            return;
-        }
-
-        // Auth state listener
-        auth.onAuthStateChanged(function (user) {
-            if (user) {
-                currentUser = user;
-                handleSignedIn(user);
-            } else {
-                currentUser = null;
-                currentProfile = null;
-                showScreen('login');
-            }
-        });
-
-        // Bind login button
-        $('login-btn').addEventListener('click', doLogin);
-        $('pending-logout').addEventListener('click', doLogout);
-        $('topbar-logout').addEventListener('click', doLogout);
-
-        // Sidebar navigation
-        setupSidebar();
-
-        // Chat
-        $('chat-send').addEventListener('click', sendChat);
-        $('chat-input').addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') sendChat();
-        });
-
-        // Announcements
-        $('ann-submit').addEventListener('click', submitAnnouncement);
-
-        // Attendance
-        $('attendance-btn').addEventListener('click', doAttendance);
-
-        // Admin
-        // Inline actions will be handled by window level functions: window.adminInlineAction, window.adminRename
-
-        // Mobile sidebar
-        var mobileBtn = $('mobile-sidebar-btn');
-        var sidebar = $('portal-sidebar');
-        var backdrop = $('mobile-backdrop');
-
-        if (mobileBtn) {
-            mobileBtn.addEventListener('click', function () {
-                sidebar.classList.toggle('open');
-                backdrop.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
-            });
-        }
-        if (backdrop) {
-            backdrop.addEventListener('click', function () {
-                sidebar.classList.remove('open');
-                backdrop.style.display = 'none';
-            });
-        }
-    }
-
-    // =========================================================
-    // AUTH
-    // =========================================================
-    function doLogin() {
-        if (!auth) return;
-        var provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider).catch(function (err) {
-            console.error('Login error:', err);
-            $('login-error').textContent = '로그인 실패: ' + err.message;
-        });
-    }
-
-    function doLogout() {
-        if (!auth) return;
-        if (chatUnsubscribe) chatUnsubscribe();
-        if (announcementsUnsubscribe) announcementsUnsubscribe();
-        if (oppUnsubscribe) oppUnsubscribe();
-        auth.signOut();
-    }
-
-    async function handleSignedIn(user) {
-        // Check/create member profile
-        try {
-            var memberRef = db.collection('members').doc(user.uid);
-            var doc = await memberRef.get();
-
-            if (!doc.exists) {
-                await memberRef.set({
-                    uid: user.uid,
-                    email: user.email,
-                    displayName: user.displayName || '',
-                    photoURL: user.photoURL || '',
-                    isMember: false,
-                    isAdmin: false,
-                    role: 'pending',
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                currentProfile = { isMember: false, isAdmin: false, role: 'pending' };
-            } else {
-                currentProfile = doc.data();
-
-                // Update display name / photo if changed
-                if (currentProfile.displayName !== user.displayName || currentProfile.photoURL !== user.photoURL) {
-                    await memberRef.update({
-                        displayName: user.displayName || '',
-                        photoURL: user.photoURL || '',
-                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                }
-            }
-
-            if (currentProfile.isMember) {
-                showScreen('portal');
-                setupPortal(user);
-            } else {
-                showScreen('pending');
-            }
-        } catch (err) {
-            console.error('Profile check error:', err);
-            showToast('프로필 확인 실패: ' + err.message);
-            showScreen('pending');
-        }
-    }
-
-    // =========================================================
-    // SCREEN MANAGEMENT
-    // =========================================================
-    function showScreen(name) {
-        loginScreen.style.display = name === 'login' ? '' : 'none';
-        pendingScreen.style.display = name === 'pending' ? '' : 'none';
-        portalApp.style.display = name === 'portal' ? '' : 'none';
-    }
-
-    // =========================================================
-    // PORTAL SETUP
-    // =========================================================
-    function setupPortal(user) {
-        // Topbar
-        $('topbar-username').textContent = user.displayName || user.email;
-        var avatar = $('topbar-avatar');
-        if (user.photoURL) {
-            avatar.src = user.photoURL;
-            avatar.style.display = '';
+  function stopPrivateData() {
+    dataEpoch += 1;
+    privateListeners.forEach(unsubscribe => unsubscribe()); privateListeners.clear(); manualOpportunities = [];
+    ['chat-messages', 'announcements-list', 'attendance-history', 'attendance-status', 'member-grid', 'admin-member-list', 'admin-attendance-body'].forEach(id => $(id).replaceChildren());
+    ['chat-input', 'ann-title-input', 'ann-body-input', 'opp-title-input', 'opp-desc-input', 'opp-link-input', 'opp-source-input', 'opp-deadline-input'].forEach(id => { $(id).value = ''; });
+    $('topbar-username').textContent = ''; $('topbar-avatar').removeAttribute('src'); $('topbar-avatar').hidden = true;
+    ['admin-nav', 'announcement-form-card', 'opp-form-card'].forEach(id => { $(id).hidden = true; });
+    if ($('confirm-modal').open) $('confirm-modal').close('cancel');
+    activeDay = ''; closeSidebar();
+  }
+  function showScreen(name) {
+    $('login-screen').hidden = name !== 'login'; $('pending-screen').hidden = name !== 'pending'; $('portal-app').hidden = name !== 'portal'; $('public-shell').hidden = name === 'portal'; $('public-topbar').hidden = name === 'portal';
+    $(name === 'portal' ? 'member-board-slot' : 'public-board-slot').append($('opportunity-board'));
+    renderOpportunities();
+  }
+  function listen(key, query, onData, onError) {
+    privateListeners.get(key)?.();
+    const epoch = authEpoch, generation = dataEpoch;
+    const unsubscribe = query.onSnapshot(snapshot => { if (epoch === authEpoch && generation === dataEpoch && currentProfile?.isMember === true) onData(snapshot); }, error => { if (epoch === authEpoch && generation === dataEpoch && currentProfile?.isMember === true) onError?.(error); });
+    privateListeners.set(key, unsubscribe);
+  }
+  function profileName() { return String(currentProfile?.displayName || currentUser?.displayName || '부원').slice(0, 100); }
+  function setupMemberPortal() {
+    $('topbar-username').textContent = profileName();
+    const url = safeURL(currentProfile.photoURL || currentUser.photoURL, true); $('topbar-avatar').hidden = !url; if (url) $('topbar-avatar').src = url;
+    const admin = currentProfile.isAdmin === true;
+    ['admin-nav', 'announcement-form-card', 'opp-form-card'].forEach(id => { $(id).hidden = !admin; });
+    if (!admin && activeTab === 'admin') activateTab('opportunities');
+    showScreen('portal'); loadChat(); loadAnnouncements(); loadAttendance(); loadMembers();
+    listen('opportunities', db.collection('opportunities'), snapshot => { manualOpportunities = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })); renderOpportunities(); }, error => showToast(errorMessage(error, '부원 등록 기회를 불러오지 못했어요. 공개 기회는 계속 볼 수 있어요.')));
+    if (admin) { loadAdminMembers(); loadAllAttendance(); }
+  }
+  async function handleSignedIn(user, epoch) {
+    try {
+      const memberRef = db.collection('members').doc(user.uid); const doc = await memberRef.get();
+      if (epoch !== authEpoch) return;
+      if (!doc.exists) {
+        await memberRef.set({ uid: user.uid, email: user.email || '', displayName: String(user.displayName || '').slice(0, 100), photoURL: safeURL(user.photoURL, true), isMember: false, isAdmin: false, role: 'pending', createdAt: firebase.firestore.FieldValue.serverTimestamp(), updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+      }
+      if (epoch !== authEpoch) return;
+      profileUnsubscribe = memberRef.onSnapshot(profileDoc => {
+        if (epoch !== authEpoch) return;
+        const next = profileDoc.exists ? profileDoc.data() : null;
+        const rightsChanged = !currentProfile || currentProfile.isMember !== next?.isMember || currentProfile.isAdmin !== next?.isAdmin;
+        currentProfile = next;
+        if (next?.isMember === true) {
+          if (rightsChanged) { stopPrivateData(); setupMemberPortal(); }
+          else $('topbar-username').textContent = profileName();
         } else {
-            avatar.style.display = 'none';
+          stopPrivateData(); $('pending-title').textContent = '작업실의 문을 열고 있어요.'; $('pending-description').textContent = '운영진이 가입 요청을 확인 중이에요. 승인되면 이 화면이 자동으로 전환됩니다.'; showScreen('pending');
         }
-
-        // Admin nav & opp form
-        if (currentProfile && currentProfile.isAdmin) {
-            $('admin-nav').style.display = '';
-            $('announcement-form-card').style.display = '';
-            $('opp-form-card').style.display = '';
+      }, error => profileError(error, epoch));
+    } catch (error) { profileError(error, epoch); }
+  }
+  function profileError(error, epoch) {
+    if (epoch !== authEpoch) return;
+    currentProfile = null; stopPrivateData(); $('pending-title').textContent = '계정을 확인하지 못했어요.'; $('pending-description').textContent = errorMessage(error, '잠시 후 로그아웃하고 다시 로그인해 주세요. 공개 기회 정보는 아래에서 볼 수 있어요.'); showScreen('pending');
+  }
+  async function doLogin() {
+    if (!auth) { $('login-error').textContent = '로그인 서비스를 연결하지 못했어요. 잠시 후 페이지를 새로고침해 주세요.'; return; }
+    $('login-error').textContent = ''; $('login-btn').disabled = true; $('login-label').textContent = 'Google 계정 연결 중';
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    try { await auth.signInWithPopup(provider); }
+    catch (error) {
+      const messages = { 'auth/popup-closed-by-user': '로그인 창이 닫혔어요. 준비되면 다시 눌러 주세요.', 'auth/cancelled-popup-request': '로그인 요청이 이미 진행 중이에요.', 'auth/popup-blocked': '브라우저에서 팝업을 허용한 뒤 다시 눌러 주세요.', 'auth/unauthorized-domain': '이 주소에서 로그인이 허용되지 않았어요. 운영진에게 현재 주소를 알려 주세요.', 'auth/network-request-failed': '네트워크를 확인하고 다시 시도해 주세요.' };
+      $('login-error').textContent = messages[error.code] || '로그인하지 못했어요. 잠시 후 다시 시도해 주세요.';
+    } finally { $('login-btn').disabled = false; $('login-label').textContent = 'Google로 부원 로그인'; }
+  }
+  async function initGoogleIdentity() {
+    // A separate official Google route, enabled for local verification before rollout.
+    if (new URLSearchParams(window.location.search).get('signin') !== 'google' || !auth || !window.NEXTWAVE_GOOGLE_CLIENT_ID) return;
+    const container = $('google-signin');
+    let busy = false;
+    try {
+      await new Promise((resolve, reject) => {
+        if (window.google?.accounts?.id) { resolve(); return; }
+        const script = document.createElement('script');
+        const timer = setTimeout(() => reject(new Error('Google connection timed out')), 12000);
+        script.src = 'https://accounts.google.com/gsi/client'; script.async = true;
+        script.onload = () => { clearTimeout(timer); resolve(); };
+        script.onerror = () => { clearTimeout(timer); reject(new Error('Google connection failed')); };
+        document.head.append(script);
+      });
+      window.google.accounts.id.initialize({
+        client_id: window.NEXTWAVE_GOOGLE_CLIENT_ID,
+        auto_select: false, button_auto_select: false, use_fedcm_for_button: true,
+        callback: async response => {
+          if (busy || auth.currentUser || typeof response?.credential !== 'string' || !response.credential) return;
+          busy = true; container.inert = true; container.setAttribute('aria-busy', 'true');
+          $('login-error').textContent = ''; delete $('login-error').dataset.code;
+          try {
+            // Firebase verifies the Google token. Never persist or log the raw token.
+            const credential = firebase.auth.GoogleAuthProvider.credential(response.credential);
+            await auth.signInWithCredential(credential);
+          } catch (error) {
+            $('login-error').dataset.code = /^auth\/[a-z-]+$/.test(error?.code || '') ? error.code : 'unknown';
+            $('login-error').textContent = error?.code === 'auth/network-request-failed'
+              ? '연결을 확인하고 다시 로그인해 주세요.' : '계정 연결을 마치지 못했어요. 다시 로그인해 주세요.';
+          } finally { busy = false; container.inert = false; container.removeAttribute('aria-busy'); }
         }
-
-        // Load data
-        loadChat();
-        loadAnnouncements();
-        loadAttendance();
-        loadMembers();
-        loadOpportunities();
-        setupOppFilters();
-        if (currentProfile && currentProfile.isAdmin) {
-            loadAdminMembers();
-            loadAllAttendance();
-        }
-
-        // Opp submit
-        $('opp-submit').addEventListener('click', submitOpportunity);
+      });
+      container.hidden = false;
+      window.google.accounts.id.renderButton(container, { type: 'standard', theme: 'filled_blue', size: 'large', text: 'signin_with', shape: 'pill', locale: 'ko', width: Math.min(380, Math.max(200, $('login-btn').clientWidth)), click_listener: () => { $('login-error').textContent = ''; window.NextWaveFeedback?.('tap'); } });
+      $('login-btn').hidden = true;
+    } catch (_) {
+      container.hidden = true; $('login-btn').hidden = false;
+      $('login-error').textContent = 'Google 로그인 버튼을 불러오지 못했어요. 아래 로그인 버튼으로 다시 시도해 주세요.';
     }
+  }
+  async function doLogout() { if (!auth) return; try { await auth.signOut(); } catch (_) { showToast('로그아웃하지 못했어요. 연결을 확인하고 다시 시도해 주세요.'); } }
+  function loadFirebaseSDK() {
+    if (window.firebase?.auth && window.firebase?.firestore) return Promise.resolve();
+    if (firebaseLoadPromise) return firebaseLoadPromise;
+    firebaseLoadPromise = ['app', 'auth', 'firestore'].reduce((promise, module) => promise.then(() => new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      const timeout = setTimeout(() => reject(new Error('Firebase connection timed out')), 12000);
+      script.src = 'https://www.gstatic.com/firebasejs/11.0.2/firebase-' + module + '-compat.js';
+      script.onload = () => { clearTimeout(timeout); resolve(); };
+      script.onerror = () => { clearTimeout(timeout); reject(new Error('Firebase connection failed')); };
+      document.head.append(script);
+    })), Promise.resolve());
+    return firebaseLoadPromise;
+  }
+  function initAuth() {
+    const config = window.NEXTWAVE_FIREBASE_CONFIG;
+    if (!window.firebase || !config || !config.apiKey || String(config.apiKey).includes('PASTE_YOUR')) { $('login-error').textContent = '로그인 서비스를 연결하지 못했어요. 기회 데스크는 계속 이용할 수 있어요.'; return; }
+    try {
+      if (!firebase.apps.length) firebase.initializeApp(config);
+      auth = firebase.auth(); db = firebase.firestore();
+      auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => { $('login-error').textContent = '브라우저의 저장 공간 설정에 따라 로그인 상태가 유지되지 않을 수 있어요.'; });
+      auth.onAuthStateChanged(user => {
+        authEpoch += 1; profileUnsubscribe?.(); profileUnsubscribe = null; stopPrivateData(); currentUser = user; currentProfile = null; activateTab('opportunities');
+        if (user) { $('pending-title').textContent = '작업실을 확인하고 있어요.'; $('pending-description').textContent = '계정과 부원 승인 상태를 확인합니다.'; showScreen('pending'); handleSignedIn(user, authEpoch); }
+        else showScreen('login');
+      });
+    } catch (_) { $('login-error').textContent = '로그인 서비스를 연결하지 못했어요. 잠시 후 다시 방문해 주세요.'; }
+  }
+  function closeSidebar() { $('portal-sidebar').classList.remove('open'); $('mobile-backdrop').hidden = true; $('mobile-sidebar-btn').setAttribute('aria-expanded', 'false'); }
+  function activateTab(tab) {
+    if (tab === 'admin' && currentProfile?.isAdmin !== true) return;
+    activeTab = tab;
+    document.querySelectorAll('.nav-item').forEach(button => { const active = button.dataset.tab === tab; button.classList.toggle('active', active); if (active) button.setAttribute('aria-current', 'page'); else button.removeAttribute('aria-current'); });
+    document.querySelectorAll('.tab-panel').forEach(panel => { panel.hidden = panel.id !== 'tab-' + tab; panel.classList.toggle('active', !panel.hidden); }); closeSidebar();
+    if (tab === 'attendance' && currentProfile?.isMember === true && activeDay !== seoulDate()) loadAttendance();
+  }
 
-    // =========================================================
-    // SIDEBAR NAVIGATION
-    // =========================================================
-    function setupSidebar() {
-        var items = document.querySelectorAll('.portal-sidebar .nav-item');
-        items.forEach(function (item) {
-            item.setAttribute('role', 'button');
-            item.setAttribute('tabindex', '0');
-            item.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
-            });
-            item.addEventListener('click', function () {
-                var tab = item.getAttribute('data-tab');
-                if (!tab) return;
+  function deleteButton(message, collection, id, label) {
+    const button = el('button', 'delete-btn'); button.type = 'button'; button.setAttribute('aria-label', label); button.title = label; button.append(icon('delete'));
+    button.addEventListener('click', async () => { if (currentProfile?.isAdmin !== true || !await confirmAction(message) || currentProfile?.isAdmin !== true) return; try { await db.collection(collection).doc(id).delete(); showToast('삭제했어요.'); } catch (error) { showToast(errorMessage(error, '삭제하지 못했어요. 다시 시도해 주세요.')); } });
+    return button;
+  }
+  function loadChat() {
+    listen('chat', db.collection('messages').orderBy('createdAt', 'asc').limitToLast(100), snapshot => {
+      const container = $('chat-messages'); const follow = container.scrollHeight - container.scrollTop - container.clientHeight < 100 || !container.querySelector('.chat-msg');
+      if (snapshot.empty) { emptyState(container, '첫 이야기를 기다리고 있어요.', '동료에게 가볍게 인사를 건네보세요.'); return; }
+      container.replaceChildren(...snapshot.docs.map(doc => {
+        const data = doc.data(); const row = el('div', 'chat-msg'); const photo = avatar(data.photoURL, 'avatar'); if (photo) row.append(photo);
+        const body = el('div', 'msg-body'), header = el('div', 'msg-header'); header.append(el('span', 'msg-name', data.displayName || '부원'), el('span', 'msg-time', formatTime(data.createdAt)));
+        if (currentProfile.isAdmin === true) header.append(deleteButton('이 메시지를 삭제할까요?', 'messages', doc.id, '메시지 삭제'));
+        body.append(header, el('div', 'msg-text', data.text || '')); row.append(body); return row;
+      }));
+      if (follow) container.scrollTop = container.scrollHeight;
+    }, error => emptyState($('chat-messages'), '채팅을 불러오지 못했어요.', errorMessage(error, '연결이 복구되면 다시 확인합니다.')));
+  }
+  async function sendChat(event) {
+    event.preventDefault(); if (!db || currentProfile?.isMember !== true) return;
+    const input = $('chat-input'), message = input.value.trim(); if (!message || message.length > 2000) return;
+    const epoch = authEpoch; $('chat-send').disabled = true;
+    try { await db.collection('messages').add({ text: message, uid: currentUser.uid, displayName: profileName(), photoURL: safeURL(currentProfile.photoURL || currentUser.photoURL, true), createdAt: firebase.firestore.FieldValue.serverTimestamp() }); if (epoch === authEpoch && input.value.trim() === message) input.value = ''; }
+    catch (error) { if (epoch === authEpoch) showToast(errorMessage(error, '메시지를 보내지 못했어요. 입력한 내용은 보관했어요.')); }
+    finally { $('chat-send').disabled = false; }
+  }
+  function loadAnnouncements() {
+    listen('announcements', db.collection('announcements').orderBy('createdAt', 'desc').limit(30), snapshot => {
+      if (snapshot.empty) { emptyState($('announcements-list'), '아직 새로운 공지가 없어요.'); return; }
+      $('announcements-list').replaceChildren(...snapshot.docs.map(doc => { const data = doc.data(); const item = el('article', 'announcement-item'), header = el('div', 'ann-header'); header.append(el('h2', 'ann-title', data.title || '제목 없음')); if (currentProfile.isAdmin === true) header.append(deleteButton('이 공지사항을 삭제할까요?', 'announcements', doc.id, '공지 삭제')); item.append(header, el('p', 'ann-date', formatDate(data.createdAt)), el('div', 'ann-body', data.body || '')); return item; }));
+    }, error => emptyState($('announcements-list'), '공지를 불러오지 못했어요.', errorMessage(error, '잠시 후 다시 확인해 주세요.')));
+  }
+  async function submitAnnouncement(event) {
+    event.preventDefault(); if (!db || currentProfile?.isAdmin !== true) return;
+    const title = $('ann-title-input').value.trim(), body = $('ann-body-input').value.trim(); if (!title || !body) return;
+    const epoch = authEpoch; $('ann-submit').disabled = true;
+    try { await db.collection('announcements').add({ title, body, authorUid: currentUser.uid, authorName: profileName(), createdAt: firebase.firestore.FieldValue.serverTimestamp() }); if (epoch === authEpoch) { $('announcement-form').reset(); showToast('공지를 등록했어요.'); } }
+    catch (error) { showToast(errorMessage(error, '공지를 등록하지 못했어요. 내용은 보관했어요.')); } finally { $('ann-submit').disabled = false; }
+  }
+  async function submitOpportunity(event) {
+    event.preventDefault(); if (!db || currentProfile?.isAdmin !== true) return;
+    const title = $('opp-title-input').value.trim(), description = $('opp-desc-input').value.trim(), category = $('opp-category-input').value, deadline = $('opp-deadline-input').value || null, rawLink = $('opp-link-input').value.trim(), source = $('opp-source-input').value.trim();
+    if (!title || !Object.hasOwn(categories, category)) return;
+    const link = safeURL(rawLink); if (rawLink && !link) { showToast('http 또는 https로 시작하는 올바른 링크를 입력해 주세요.'); $('opp-link-input').focus(); return; }
+    if (deadline && deadlineDays(deadline) === null) { showToast('마감일을 다시 확인해 주세요.'); return; }
+    const epoch = authEpoch; $('opp-submit').disabled = true;
+    try { await db.collection('opportunities').add({ title, description, category, deadline, link: link || null, source: source || null, authorUid: currentUser.uid, authorName: profileName(), createdAt: firebase.firestore.FieldValue.serverTimestamp() }); if (epoch === authEpoch) { $('opp-form').reset(); showToast('기회를 등록했어요.'); } }
+    catch (error) { showToast(errorMessage(error, '기회를 등록하지 못했어요. 입력한 내용은 보관했어요.')); } finally { $('opp-submit').disabled = false; }
+  }
+  function attendanceRows(container, records, admin) {
+    container.replaceChildren();
+    if (!records.length) { const row = el('tr'), cell = el('td', 'muted', '아직 출석 기록이 없어요.'); cell.colSpan = 3; row.append(cell); container.append(row); return; }
+    records.forEach(data => { const row = el('tr'); const values = admin ? [data.displayName || '부원', data.date || '', formatTime(data.createdAt)] : [data.date || '', formatTime(data.createdAt), '출석']; values.forEach(value => row.append(el('td', '', value))); container.append(row); });
+  }
+  function attendanceError(container) { const row = el('tr'), cell = el('td', 'muted', '출석 기록을 불러오지 못했어요.'); cell.colSpan = 3; row.append(cell); container.replaceChildren(row); }
+  function loadAttendance() {
+    if (!db || currentProfile?.isMember !== true) return;
+    activeDay = seoulDate(); $('attendance-date').textContent = activeDay; $('attendance-btn').disabled = true;
+    listen('attendance-today', db.collection('attendance').doc(currentUser.uid + '_' + activeDay), doc => { $('attendance-status').replaceChildren(el('span', 'status-badge ' + (doc.exists ? 'checked' : 'not-checked'), doc.exists ? '출석 완료' : '아직 체크 전')); $('attendance-btn').disabled = doc.exists; $('attendance-btn').textContent = doc.exists ? '오늘의 출석을 기록했어요' : '오늘 출석 체크 ↗'; }, () => { $('attendance-status').textContent = '출석 상태를 확인하지 못했어요.'; $('attendance-btn').disabled = false; });
+    listen('attendance-history', db.collection('attendance').where('uid', '==', currentUser.uid), snapshot => { const records = snapshot.docs.map(doc => doc.data()).sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))).slice(0, 30); attendanceRows($('attendance-history'), records, false); }, () => attendanceError($('attendance-history')));
+  }
+  async function doAttendance() {
+    if (!db || currentProfile?.isMember !== true) return;
+    $('attendance-btn').disabled = true; const today = seoulDate(), epoch = authEpoch;
+    try { await db.collection('attendance').doc(currentUser.uid + '_' + today).set({ uid: currentUser.uid, displayName: profileName(), date: today, createdAt: firebase.firestore.FieldValue.serverTimestamp() }); if (epoch === authEpoch) { showToast('오늘도 함께해 줘서 고마워요. 출석 완료!'); if (activeDay !== today) loadAttendance(); } }
+    catch (error) { if (epoch === authEpoch) { showToast(errorMessage(error, '출석을 기록하지 못했어요. 상태를 다시 확인합니다.')); loadAttendance(); } }
+  }
+  function loadMembers() {
+    listen('members', db.collection('members').where('isMember', '==', true), snapshot => {
+      if (snapshot.empty) { emptyState($('member-grid'), '승인된 부원이 아직 없어요.'); return; }
+      const members = snapshot.docs.map(doc => doc.data()).sort((a, b) => String(a.displayName || '').localeCompare(String(b.displayName || ''), 'ko'));
+      $('member-grid').replaceChildren(...members.map(member => { const card = el('article', 'member-card'), photo = avatar(member.photoURL); if (photo) card.append(photo); const info = el('div', 'member-info'); info.append(el('h2', 'member-name', member.displayName || '부원'), el('p', 'member-role', member.isAdmin === true ? '운영진' : 'NextWave 부원')); card.append(info, el('span', 'member-badge ' + (member.isAdmin === true ? 'admin' : ''), member.isAdmin === true ? 'ADMIN' : 'MEMBER')); return card; }));
+    }, error => emptyState($('member-grid'), '부원 목록을 불러오지 못했어요.', errorMessage(error, '잠시 후 다시 확인해 주세요.')));
+  }
+  function loadAdminMembers() {
+    listen('admin-members', db.collection('members').orderBy('createdAt', 'desc'), snapshot => {
+      if (currentProfile?.isAdmin !== true) return;
+      $('admin-member-list').replaceChildren(...snapshot.docs.map(doc => {
+        const member = doc.data(), uid = doc.id; const row = el('div', 'admin-member-row'), info = el('div', 'admin-member-info'), edit = el('div', 'admin-name-edit');
+        const input = el('input', 'admin-name-input'); input.type = 'text'; input.maxLength = 100; input.value = member.displayName || ''; input.setAttribute('aria-label', (member.displayName || '부원') + ' 이름');
+        const save = el('button', 'btn-tiny', '이름 저장'); save.type = 'button'; save.addEventListener('click', async () => { const name = input.value.trim(); if (!name || currentProfile?.isAdmin !== true) return; save.disabled = true; try { await db.collection('members').doc(uid).update({ displayName: name, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }); showToast('이름을 변경했어요.'); } catch (error) { showToast(errorMessage(error, '이름을 변경하지 못했어요.')); } finally { save.disabled = false; } });
+        edit.append(input, save); const status = member.isAdmin === true ? 'ADMIN' : member.isMember === true ? 'MEMBER' : 'PENDING'; info.append(edit, el('div', 'admin-member-meta', (member.email || '') + ' · ' + status));
+        const actions = el('div', 'admin-row-actions'); const addAction = (action, label, style) => { const button = el('button', 'btn-tiny ' + style, label); button.type = 'button'; button.addEventListener('click', () => adminAction(uid, action, member.displayName || '이 부원')); actions.append(button); };
+        if (member.isMember !== true) addAction('approve', '가입 승인', 'primary');
+        else if (member.isAdmin !== true) { addAction('makeAdmin', '관리자 부여', 'secondary'); addAction('revoke', '권한 회수', 'danger'); }
+        else if (uid !== currentUser.uid) addAction('revoke', '권한 회수', 'danger');
+        row.append(info, actions); return row;
+      }));
+    }, error => emptyState($('admin-member-list'), '관리 목록을 불러오지 못했어요.', errorMessage(error, '잠시 후 다시 확인해 주세요.')));
+  }
+  async function adminAction(uid, action, name) {
+    if (!db || currentProfile?.isAdmin !== true) return;
+    const messages = { approve: name + ' 님의 가입을 승인할까요?', makeAdmin: name + ' 님에게 관리자 권한을 부여할까요?', revoke: name + ' 님의 부원 및 관리자 권한을 회수할까요?' };
+    if (!Object.hasOwn(messages, action) || !await confirmAction(messages[action]) || currentProfile?.isAdmin !== true) return;
+    const changes = { approve: { isMember: true, isAdmin: false, role: 'member' }, makeAdmin: { isMember: true, isAdmin: true, role: 'admin' }, revoke: { isMember: false, isAdmin: false, role: 'pending' } };
+    try { await db.collection('members').doc(uid).update({ ...changes[action], updatedAt: firebase.firestore.FieldValue.serverTimestamp() }); showToast('권한을 변경했어요.'); } catch (error) { showToast(errorMessage(error, '권한을 변경하지 못했어요.')); }
+  }
+  function loadAllAttendance() { listen('admin-attendance', db.collection('attendance').orderBy('createdAt', 'desc').limit(100), snapshot => attendanceRows($('admin-attendance-body'), snapshot.docs.map(doc => doc.data()), true), () => attendanceError($('admin-attendance-body'))); }
 
-                // Update active state
-                items.forEach(function (i) { i.classList.remove('active'); });
-                item.classList.add('active');
-
-                // Show panel
-                document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
-                var panel = $('tab-' + tab);
-                if (panel) panel.classList.add('active');
-
-                // Close mobile sidebar
-                var sidebar = $('portal-sidebar');
-                var backdrop = $('mobile-backdrop');
-                sidebar.classList.remove('open');
-                if (backdrop) backdrop.style.display = 'none';
-            });
-        });
-    }
-
-    // =========================================================
-    // CHAT MODULE
-    // =========================================================
-    function loadChat() {
-        if (!db) return;
-        var messagesDiv = $('chat-messages');
-
-        if (chatUnsubscribe) chatUnsubscribe();
-
-        chatUnsubscribe = db.collection('messages')
-            .orderBy('createdAt', 'asc')
-            .limitToLast(100)
-            .onSnapshot(function (snapshot) {
-                messagesDiv.innerHTML = '';
-                if (snapshot.empty) {
-                    messagesDiv.innerHTML = '<div style="text-align:center;color:var(--p-outline);font-size:12px;padding:40px;">아직 메시지가 없어요. 먼저 인사 남겨볼까요?</div>';
-                    return;
-                }
-                snapshot.forEach(function (doc) {
-                    var msg = doc.data();
-                    var el = document.createElement('div');
-                    el.className = 'chat-msg';
-                    var chatDeleteHtml = '';
-                    if (currentProfile && currentProfile.isAdmin) {
-                        chatDeleteHtml = '<button type="button" class="chat-delete-btn" onclick="event.preventDefault(); event.stopPropagation(); window.deleteChat(\'' + doc.id + '\')" title="삭제" style="background:none;border:none;color:var(--p-danger);cursor:pointer;margin-left:auto;"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>';
-                    }
-                    
-                    el.innerHTML =
-                        '<img class="avatar" src="' + escapeHtml(msg.photoURL || '') + '" alt="" onerror="this.style.display=\'none\'">' +
-                        '<div class="msg-body" style="flex-grow:1;">' +
-                        '  <div class="msg-header" style="display:flex;">' +
-                        '    <span class="msg-name">' + escapeHtml(msg.displayName || 'Unknown') + '</span>' +
-                        '    <span class="msg-time">' + formatTime(msg.createdAt) + '</span>' +
-                        chatDeleteHtml +
-                        '  </div>' +
-                        '  <div class="msg-text">' + escapeHtml(msg.text || '') + '</div>' +
-                        '</div>';
-                    messagesDiv.appendChild(el);
-                });
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }, function (err) {
-                console.error('Chat listener error:', err);
-                messagesDiv.innerHTML = '<div style="text-align:center;color:var(--p-danger);font-size:12px;padding:20px;">채팅을 불러오지 못했어요: ' + escapeHtml(err.message) + '</div>';
-            });
-    }
-
-    function sendChat() {
-        if (!db || !currentUser) return;
-        var input = $('chat-input');
-        var text = input.value.trim();
-        if (!text) return;
-
-        input.value = '';
-        db.collection('messages').add({
-            text: text,
-            uid: currentUser.uid,
-            displayName: currentUser.displayName || currentUser.email,
-            photoURL: currentUser.photoURL || '',
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        }).catch(function (err) {
-            console.error('Send error:', err);
-            showToast('메시지를 못 보냈어요');
-        });
-    }
-
-    // =========================================================
-    // DELETE CHAT
-    // =========================================================
-    window.deleteChat = function(docId) {
-        if (!db) return;
-        if (!currentProfile || !currentProfile.isAdmin) {
-            showToast('삭제는 관리자만 할 수 있어요');
-            return;
-        }
-        showConfirmModal('이 메시지를 삭제하시겠습니까?', function() {
-            db.collection('messages').doc(docId).delete().then(function() {
-                showToast('메시지를 지웠어요');
-            }).catch(function(err) {
-                console.error('Chat delete error:', err);
-                showToast('삭제에 실패했어요: ' + err.message);
-            });
-        });
-    };
-
-    // =========================================================
-    // ANNOUNCEMENTS MODULE
-    // =========================================================
-    function loadAnnouncements() {
-        if (!db) return;
-        var listDiv = $('announcements-list');
-
-        if (announcementsUnsubscribe) announcementsUnsubscribe();
-
-        announcementsUnsubscribe = db.collection('announcements')
-            .orderBy('createdAt', 'desc')
-            .limit(20)
-            .onSnapshot(function (snapshot) {
-                listDiv.innerHTML = '';
-                if (snapshot.empty) {
-                    listDiv.innerHTML = '<div style="text-align:center;color:var(--p-outline);font-size:12px;padding:30px;">아직 공지가 없어요.</div>';
-                    return;
-                }
-                snapshot.forEach(function (doc) {
-                    var ann = doc.data();
-                    var annId = doc.id;
-                    var el = document.createElement('div');
-                    el.className = 'announcement-item';
-                    
-                    var deleteHtml = '';
-                    if (currentProfile && currentProfile.isAdmin) {
-                        deleteHtml = '<button type="button" class="ann-delete-btn" onclick="event.preventDefault(); event.stopPropagation(); window.deleteAnnouncement(\'' + annId + '\')" title="공지 삭제"><span class="material-symbols-outlined" style="font-size:16px;">delete</span></button>';
-                    }
-
-                    el.innerHTML =
-                        '<div class="ann-header">' +
-                        '  <div class="ann-title-wrap">' +
-                        '    <div class="ann-title">' + escapeHtml(ann.title || '제목 없음') + '</div>' +
-                        deleteHtml +
-                        '  </div>' +
-                        '  <div class="ann-date">' + formatDate(ann.createdAt) + '</div>' +
-                        '</div>' +
-                        '<div class="ann-body">' + escapeHtml(ann.body || '').replace(/\n/g, '<br>') + '</div>';
-                    listDiv.appendChild(el);
-                });
-            }, function (err) {
-                console.error('Announcements error:', err);
-                listDiv.innerHTML = '<div style="color:var(--p-danger);font-size:12px;padding:20px;">공지를 불러오지 못했어요</div>';
-            });
-    }
-
-    function submitAnnouncement() {
-        if (!db || !currentProfile || !currentProfile.isAdmin) return;
-        var title = $('ann-title-input').value.trim();
-        var body = $('ann-body-input').value.trim();
-        if (!title || !body) {
-            showToast('제목이랑 내용을 모두 입력해 주세요');
-            return;
-        }
-
-        db.collection('announcements').add({
-            title: title,
-            body: body,
-            authorUid: currentUser.uid,
-            authorName: currentUser.displayName || currentUser.email,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(function () {
-            $('ann-title-input').value = '';
-            $('ann-body-input').value = '';
-            showToast('공지를 올렸어요');
-        }).catch(function (err) {
-            console.error('Announcement submit error:', err);
-            showToast('공지 등록에 실패했어요');
-        });
-    }
-
-    // =========================================================
-    // DELETE ANNOUNCEMENT
-    // =========================================================
-    window.deleteAnnouncement = function(docId) {
-        if (!db) return;
-        if (!currentProfile || !currentProfile.isAdmin) {
-            showToast('삭제는 관리자만 할 수 있어요');
-            return;
-        }
-        showConfirmModal('정말 이 공지사항을 삭제하시겠습니까?', function() {
-            db.collection('announcements').doc(docId).delete().then(function() {
-                showToast('공지를 지웠어요');
-            }).catch(function(err) {
-                console.error('Delete error:', err);
-                showToast('삭제에 실패했어요: ' + err.message);
-            });
-        });
-    };
-
-    // =========================================================
-    // OPPORTUNITIES MODULE
-    // =========================================================
-    var CATEGORY_LABELS = {
-        contest: '🏆 공모전',
-        hackathon: '💻 해커톤',
-        dev: '⚙️ 개발',
-        gamedev: '🎮 게임개발',
-        marketing: '📢 마케팅',
-        activity: '🤝 대외활동'
-    };
-
-    function calcDday(deadlineStr) {
-        if (!deadlineStr) return null;
-        var deadline = new Date(deadlineStr + 'T23:59:59');
-        var now = new Date();
-        var diff = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
-        return diff;
-    }
-
-    function ddayLabel(dday) {
-        if (dday === null) return { text: '상시', cls: 'normal' };
-        if (dday < 0) return { text: '마감', cls: 'urgent' };
-        if (dday === 0) return { text: 'D-DAY', cls: 'urgent' };
-        if (dday <= 7) return { text: 'D-' + dday, cls: 'urgent' };
-        if (dday <= 14) return { text: 'D-' + dday, cls: 'soon' };
-        return { text: 'D-' + dday, cls: 'normal' };
-    }
-
-    function loadOpportunities() {
-        if (!db) return;
-        var grid = $('opp-grid');
-
-        if (oppUnsubscribe) oppUnsubscribe();
-
-        oppUnsubscribe = db.collection('opportunities')
-            .onSnapshot(function (snapshot) {
-                grid.innerHTML = '';
-                var hasItems = false;
-                var items = [];
-                snapshot.forEach(function (doc) { items.push({ id: doc.id, data: doc.data() }); });
-                // 클라이언트 정렬: createdAt 최신순
-                items.sort(function(a, b) {
-                    var ta = a.data.createdAt ? (a.data.createdAt.seconds || 0) : 0;
-                    var tb = b.data.createdAt ? (b.data.createdAt.seconds || 0) : 0;
-                    return tb - ta;
-                });
-
-                items.forEach(function (item) {
-                    var opp = item.data;
-                    var oppId = item.id;
-                    var dday = calcDday(opp.deadline);
-
-                    // 마감된 정보 자동 숨기기 (마감일 지난 지 3일 이상)
-                    if (dday !== null && dday < -3) return;
-
-                    // 카테고리 필터
-                    if (currentOppFilter !== 'all' && opp.category !== currentOppFilter) return;
-
-                    hasItems = true;
-                    var dd = ddayLabel(dday);
-
-                    var deleteBtn = '';
-                    if (currentProfile && currentProfile.isAdmin) {
-                        deleteBtn = '<button type="button" class="opp-delete-btn" data-opp-id="' + oppId + '" title="삭제"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>';
-                    }
-
-                    var linkBtn = '';
-                    var safeLink = safeExternalUrl(opp.link);
-                    if (safeLink) {
-                        linkBtn = '<a href="' + escapeHtml(safeLink) + '" target="_blank" rel="noopener noreferrer" class="opp-link-btn"><span class="material-symbols-outlined" style="font-size:12px;">open_in_new</span> 바로가기</a>';
-                    }
-
-                    var card = document.createElement('div');
-                    card.className = 'opp-card';
-                    card.setAttribute('data-category', opp.category || '');
-                    card.innerHTML =
-                        '<div class="opp-card-header">' +
-                        '  <div class="opp-card-title">' + escapeHtml(opp.title || '') + '</div>' +
-                        '  <div class="opp-dday ' + dd.cls + '">' + dd.text + '</div>' +
-                        '</div>' +
-                        '<div class="opp-card-desc">' + escapeHtml(opp.description || '').replace(/\n/g, '<br>') + '</div>' +
-                        '<div class="opp-card-meta">' +
-                        '  <span class="opp-tag ' + (CATEGORY_LABELS[opp.category] ? opp.category : '') + '">' + (CATEGORY_LABELS[opp.category] || escapeHtml(opp.category || '')) + '</span>' +
-                        (opp.source ? '  <span class="opp-source">출처: ' + escapeHtml(opp.source) + '</span>' : '') +
-                        (opp.deadline ? '  <span class="opp-source">마감: ' + escapeHtml(opp.deadline) + '</span>' : '') +
-                        '</div>' +
-                        '<div class="opp-card-actions">' + linkBtn + deleteBtn + '</div>';
-
-                    grid.appendChild(card);
-                });
-
-                if (!hasItems) {
-                    grid.innerHTML = '<div class="opp-empty">' +
-                        '<span class="material-symbols-outlined" style="font-size:48px;display:block;margin-bottom:8px;">search_off</span>' +
-                        '아직 올라온 정보가 없어요.' +
-                        (currentOppFilter !== 'all' ? '<br><span style="font-size:10px;">다른 카테고리도 눌러보세요.</span>' : '') +
-                        '</div>';
-                }
-            }, function (err) {
-                console.error('Opportunities error:', err);
-                grid.innerHTML = '<div class="opp-empty" style="color:var(--p-danger);">기회 정보를 불러오지 못했어요: ' + escapeHtml(err.message) + '</div>';
-            });
-    }
-
-    function setupOppFilters() {
-        var filtersDiv = $('opp-filters');
-        if (!filtersDiv) return;
-        filtersDiv.addEventListener('click', function(e) {
-            var btn = e.target.closest('.opp-filter-btn');
-            if (!btn) return;
-            var filter = btn.getAttribute('data-filter');
-            currentOppFilter = filter;
-
-            filtersDiv.querySelectorAll('.opp-filter-btn').forEach(function(b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-
-            loadOpportunities();
-        });
-    }
-
-    function submitOpportunity() {
-        if (!db || !currentProfile || !currentProfile.isAdmin) return;
-
-        var title = $('opp-title-input').value.trim();
-        var description = $('opp-desc-input').value.trim();
-        var category = $('opp-category-input').value;
-        var deadline = $('opp-deadline-input').value;
-        var link = $('opp-link-input').value.trim();
-        var source = $('opp-source-input').value.trim();
-
-        if (!title) {
-            showToast('제목을 입력해 주세요.');
-            return;
-        }
-
-        db.collection('opportunities').add({
-            title: title,
-            description: description,
-            category: category,
-            deadline: deadline || null,
-            link: link || null,
-            source: source || null,
-            authorUid: currentUser.uid,
-            authorName: currentUser.displayName || currentUser.email,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(function () {
-            $('opp-title-input').value = '';
-            $('opp-desc-input').value = '';
-            $('opp-deadline-input').value = '';
-            $('opp-link-input').value = '';
-            $('opp-source-input').value = '';
-            showToast('기회 정보를 올렸어요');
-        }).catch(function (err) {
-            console.error('Opp submit error:', err);
-            showToast('등록에 실패했어요: ' + err.message);
-        });
-    }
-
-    // 기회 정보 삭제 (이벤트 위임 방식)
-    var oppGrid = $('opp-grid');
-    if (oppGrid) {
-        oppGrid.addEventListener('click', function(e) {
-            var btn = e.target.closest('.opp-delete-btn');
-            if (!btn) return;
-            e.preventDefault();
-            e.stopPropagation();
-            
-            var docId = btn.getAttribute('data-opp-id');
-            if (!docId) return;
-            if (!db) return;
-            if (!currentProfile || !currentProfile.isAdmin) {
-                showToast('삭제는 관리자만 할 수 있어요');
-                return;
-            }
-
-            showConfirmModal('이 기회 정보를 삭제하시겠습니까?', function() {
-                db.collection('opportunities').doc(docId).delete().then(function() {
-                    showToast('기회 정보를 지웠어요');
-                }).catch(function(err) {
-                    console.error('Opp delete error:', err);
-                    showToast('삭제에 실패했어요: ' + err.message);
-                });
-            });
-        });
-    }
-
-    // =========================================================
-    // ATTENDANCE MODULE
-    // =========================================================
-    function loadAttendance() {
-        if (!db || !currentUser) return;
-
-        var today = todayStr();
-        $('attendance-date').textContent = today;
-
-        // Check today's attendance
-        var todayRef = db.collection('attendance').doc(currentUser.uid + '_' + today);
-        todayRef.get().then(function (doc) {
-            if (doc.exists) {
-                $('attendance-status').innerHTML = '<div class="status-badge checked">✓ 출석 완료</div>';
-                $('attendance-btn').disabled = true;
-                $('attendance-btn').textContent = '오늘은 이미 출석했어요';
-            } else {
-                $('attendance-status').innerHTML = '<div class="status-badge not-checked">미출석</div>';
-                $('attendance-btn').disabled = false;
-                $('attendance-btn').textContent = '출석 체크';
-            }
-        });
-
-        // Load history
-        db.collection('attendance')
-            .where('uid', '==', currentUser.uid)
-            .limit(30)
-            .get()
-            .then(function (snapshot) {
-                var tbody = $('attendance-history');
-                tbody.innerHTML = '';
-                if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--p-outline);">아직 출석 기록이 없어요.</td></tr>';
-                    return;
-                }
-                snapshot.forEach(function (doc) {
-                    var data = doc.data();
-                    var tr = document.createElement('tr');
-                    tr.innerHTML =
-                        '<td>' + escapeHtml(data.date || '') + '</td>' +
-                        '<td>' + formatTime(data.createdAt) + '</td>' +
-                        '<td style="color:var(--p-tertiary);">✓ 출석</td>';
-                    tbody.appendChild(tr);
-                });
-            })
-            .catch(function (err) {
-                console.error('Attendance history error:', err);
-            });
-    }
-
-    function doAttendance() {
-        if (!db || !currentUser) return;
-        var today = todayStr();
-        var docId = currentUser.uid + '_' + today;
-
-        db.collection('attendance').doc(docId).set({
-            uid: currentUser.uid,
-            displayName: currentUser.displayName || '',
-            date: today,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(function () {
-            showToast('출석 완료!');
-            loadAttendance();
-        }).catch(function (err) {
-            console.error('Attendance error:', err);
-            showToast('출석 체크에 실패했어요: ' + err.message);
-        });
-    }
-
-    // =========================================================
-    // MEMBERS MODULE
-    // =========================================================
-    function loadMembers() {
-        if (!db) return;
-        var grid = $('member-grid');
-
-        db.collection('members')
-            .where('isMember', '==', true)
-            .get()
-            .then(function (snapshot) {
-                grid.innerHTML = '';
-                if (snapshot.empty) {
-                    grid.innerHTML = '<div style="text-align:center;color:var(--p-outline);font-size:12px;padding:20px;grid-column:1/-1;">아직 승인된 부원이 없어요.</div>';
-                    return;
-                }
-                snapshot.forEach(function (doc) {
-                    var m = doc.data();
-                    var card = document.createElement('div');
-                    card.className = 'member-card';
-                    var badgeClass = m.isAdmin ? 'admin' : 'member';
-                    var badgeText = m.isAdmin ? 'ADMIN' : 'MEMBER';
-                    card.innerHTML =
-                        '<img src="' + escapeHtml(m.photoURL || '') + '" alt="" onerror="this.style.display=\'none\'">' +
-                        '<div class="member-info">' +
-                        '  <div class="member-name">' + escapeHtml(m.displayName || m.email || 'Unknown') + '</div>' +
-                        '  <div class="member-role">' + escapeHtml(m.role || 'member') + '</div>' +
-                        '</div>' +
-                        '<span class="member-badge ' + badgeClass + '">' + badgeText + '</span>';
-                    grid.appendChild(card);
-                });
-            })
-            .catch(function (err) {
-                console.error('Members error:', err);
-                grid.innerHTML = '<div style="color:var(--p-danger);font-size:12px;padding:20px;grid-column:1/-1;">부원 목록을 불러오지 못했어요</div>';
-            });
-    }
-
-    // =========================================================
-    // ADMIN MODULE
-    // =========================================================
-    function loadAdminMembers() {
-        if (!db) return;
-        var listDiv = $('admin-member-list');
-
-        db.collection('members')
-            .orderBy('createdAt', 'desc')
-            .get()
-            .then(function (snapshot) {
-                listDiv.innerHTML = '';
-                snapshot.forEach(function (doc) {
-                    var m = doc.data();
-                    var mId = m.uid;
-                    var row = document.createElement('div');
-                    row.className = 'admin-member-row';
-                    
-                    var statusColor = m.isAdmin ? 'var(--p-secondary)' : (m.isMember ? 'var(--p-tertiary)' : 'var(--p-outline)');
-                    var statusText = m.isAdmin ? 'ADMIN' : (m.isMember ? 'MEMBER' : 'PENDING');
-                    
-                    var actionsHtml = '';
-                    if (!m.isMember) {
-                        actionsHtml += '<button class="btn-tiny primary" onclick="window.adminInlineAction(\'' + mId + '\', \'approve\')">승인</button>';
-                    } else if (!m.isAdmin) {
-                        actionsHtml += '<button class="btn-tiny secondary" onclick="window.adminInlineAction(\'' + mId + '\', \'makeAdmin\')">관리자 부여</button>';
-                        actionsHtml += '<button class="btn-tiny danger" onclick="window.adminInlineAction(\'' + mId + '\', \'revoke\')">회수</button>';
-                    } else {
-                        // Admin
-                        if (m.uid !== currentUser.uid) {
-                            actionsHtml += '<button class="btn-tiny danger" onclick="window.adminInlineAction(\'' + mId + '\', \'revoke\')">권한 회수</button>';
-                        }
-                    }
-
-                    row.innerHTML =
-                        '<div class="admin-member-info">' +
-                        '  <div class="admin-name-edit">' +
-                        '    <input type="text" class="admin-name-input" id="admin-name-' + mId + '" value="' + escapeHtml(m.displayName || '') + '" placeholder="이름 없음">' +
-                        '    <button class="btn-tiny" onclick="window.adminRename(\'' + mId + '\')">저장</button>' +
-                        '  </div>' +
-                        '  <div style="color:var(--p-outline);font-size:10px;">' + escapeHtml(m.email || '') + ' <span style="color:' + statusColor + ';font-weight:700;margin-left:4px;">[' + statusText + ']</span></div>' +
-                        '</div>' +
-                        '<div class="admin-row-actions">' + actionsHtml + '</div>';
-                    
-                    listDiv.appendChild(row);
-                });
-            })
-            .catch(function (err) {
-                console.error('Admin list error:', err);
-            });
-    }
-
-    function loadAllAttendance() {
-        if (!db) return;
-        var tbody = $('admin-attendance-body');
-
-        db.collection('attendance')
-            .limit(100)
-            .get()
-            .then(function (snapshot) {
-                tbody.innerHTML = '';
-                if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--p-outline);">아직 출석 기록이 없어요.</td></tr>';
-                    return;
-                }
-                snapshot.forEach(function (doc) {
-                    var data = doc.data();
-                    var tr = document.createElement('tr');
-                    tr.innerHTML =
-                        '<td>' + escapeHtml(data.displayName || 'Unknown') + '</td>' +
-                        '<td>' + escapeHtml(data.date || '') + '</td>' +
-                        '<td>' + formatTime(data.createdAt) + '</td>';
-                    tbody.appendChild(tr);
-                });
-            })
-            .catch(function (err) {
-                console.error('All attendance error:', err);
-                tbody.innerHTML = '<tr><td colspan="3" style="color:var(--p-danger);text-align:center;">로드 실패</td></tr>';
-            });
-    }
-
-    window.adminRename = async function(uid) {
-        if (!db || !currentProfile || !currentProfile.isAdmin) return;
-        var newName = $('admin-name-' + uid).value.trim();
-        if (!newName) {
-            showToast('이름을 입력해 주세요.');
-            return;
-        }
-
-        try {
-            await db.collection('members').doc(uid).update({
-                displayName: newName,
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            showToast('이름을 바꿨어요');
-            loadMembers();
-            // Optional: update chat messages where author is this user (too complex for now, just future msgs will have new name)
-        } catch (err) {
-            console.error('Rename error:', err);
-            showToast('이름 변경 실패: ' + err.message);
-        }
-    };
-
-    window.adminInlineAction = async function(uid, action) {
-        if (!db || !currentProfile || !currentProfile.isAdmin) return;
-        
-        if (action === 'revoke' && !confirm('정말 이 유저의 권한을 회수하시겠습니까?')) return;
-
-        try {
-            var memberDoc = db.collection('members').doc(uid);
-            var updateData = {};
-            if (action === 'approve') {
-                updateData = { isMember: true, role: 'member', updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
-            } else if (action === 'makeAdmin') {
-                updateData = { isMember: true, isAdmin: true, role: 'admin', updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
-            } else if (action === 'revoke') {
-                updateData = { isMember: false, isAdmin: false, role: 'pending', updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
-            }
-
-            await memberDoc.update(updateData);
-            showToast('권한을 바꿨어요');
-
-            // Refresh lists
-            loadMembers();
-            loadAdminMembers();
-        } catch (err) {
-            console.error('Action error:', err);
-            showToast('오류: ' + err.message);
-        }
-    };
-
-    // =========================================================
-    // BOOT
-    // =========================================================
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+  function init() {
+    $('login-btn').addEventListener('click', doLogin); $('pending-logout').addEventListener('click', doLogout); $('topbar-logout').addEventListener('click', doLogout);
+    $('opp-refresh').addEventListener('click', () => refreshSnapshot(true));
+    $('opp-search').addEventListener('input', event => { searchTerm = event.target.value.trim(); visibleLimit = 12; renderOpportunities(); });
+    $('opp-show-closed').addEventListener('change', event => { showClosed = event.target.checked; visibleLimit = 12; renderOpportunities(); });
+    $('opp-filters').addEventListener('click', event => { const button = event.target.closest('button[data-filter]'); if (!button) return; currentFilter = button.dataset.filter; visibleLimit = 12; renderOpportunities(); });
+    document.querySelectorAll('.nav-item').forEach(button => button.addEventListener('click', () => activateTab(button.dataset.tab)));
+    $('mobile-sidebar-btn').addEventListener('click', () => { const open = $('portal-sidebar').classList.toggle('open'); $('mobile-backdrop').hidden = !open; $('mobile-sidebar-btn').setAttribute('aria-expanded', String(open)); if (open) $('portal-sidebar').querySelector('.nav-item.active').focus(); });
+    $('mobile-backdrop').addEventListener('click', closeSidebar);
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && $('portal-sidebar').classList.contains('open')) { closeSidebar(); $('mobile-sidebar-btn').focus(); } });
+    $('chat-form').addEventListener('submit', sendChat); $('announcement-form').addEventListener('submit', submitAnnouncement); $('opp-form').addEventListener('submit', submitOpportunity); $('attendance-btn').addEventListener('click', doAttendance);
+    $('topbar-avatar').addEventListener('error', () => { $('topbar-avatar').hidden = true; });
+    function visibleRefresh() { if (document.visibilityState !== 'visible') return; refreshSnapshot(false); if (currentProfile?.isMember === true && activeDay !== seoulDate()) loadAttendance(); }
+    document.addEventListener('visibilitychange', visibleRefresh); window.addEventListener('online', visibleRefresh); setInterval(visibleRefresh, 60000);
+    refreshSnapshot(false);
+    $('login-btn').disabled = true; $('login-label').textContent = '로그인 연결 중';
+    // The public board starts immediately, even if the authentication CDN is slow.
+    loadFirebaseSDK().then(() => { initAuth(); return initGoogleIdentity(); }).catch(() => { $('login-error').textContent = '로그인 서비스를 연결하지 못했어요. 기회 데스크는 계속 이용할 수 있어요.'; }).finally(() => { $('login-btn').disabled = false; $('login-label').textContent = 'Google로 부원 로그인'; });
+  }
+  init();
 })();

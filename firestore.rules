@@ -21,8 +21,29 @@ service cloud.firestore {
       return isSignedIn() && request.auth.uid == userId;
     }
 
+    function isValidProfileText() {
+      return request.resource.data.displayName is string
+        && request.resource.data.displayName.size() <= 100
+        && request.resource.data.get('photoURL', '') is string
+        && request.resource.data.get('photoURL', '').size() <= 2048
+        && (request.resource.data.get('photoURL', '') == ''
+          || request.resource.data.photoURL.matches('https://.*'));
+    }
+
+    function padTwo(value) {
+      return (value < 10 ? '0' : '') + string(value);
+    }
+
+    // 클라이언트의 시계/시간대를 신뢰하지 않고 서울 날짜를 서버에서 계산합니다.
+    function seoulDate() {
+      let localTime = request.time + duration.value(9, 'h');
+      return string(localTime.year()) + '-' + padTwo(localTime.month())
+        + '-' + padTwo(localTime.day());
+    }
+
     function isSelfCreatedPendingMember(userId) {
       return isOwner(userId)
+        && isValidProfileText()
         && request.resource.data.keys().hasOnly([
           'uid', 'email', 'displayName', 'photoURL',
           'isMember', 'isAdmin', 'role', 'createdAt', 'updatedAt'
@@ -31,16 +52,20 @@ service cloud.firestore {
         && request.resource.data.email == request.auth.token.email
         && request.resource.data.isMember == false
         && request.resource.data.isAdmin == false
-        && request.resource.data.role == 'pending';
+        && request.resource.data.role == 'pending'
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
     }
 
     function isSafeSelfProfileUpdate(userId) {
       return isOwner(userId)
+        && isValidProfileText()
         && request.resource.data.uid == resource.data.uid
         && request.resource.data.email == request.auth.token.email
         && request.resource.data.isMember == resource.data.isMember
         && request.resource.data.isAdmin == resource.data.isAdmin
         && request.resource.data.role == resource.data.role
+        && request.resource.data.updatedAt == request.time
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
           'email', 'displayName', 'photoURL', 'updatedAt'
         ]);
@@ -52,7 +77,8 @@ service cloud.firestore {
     // 본인은 표시 정보만 수정 가능하며 권한 필드는 관리자만 변경 가능
     // 삭제는 관리자만
     match /members/{userId} {
-      allow read: if isOwner(userId) || isMember() || isAdmin();
+      allow read: if isOwner(userId) || isAdmin()
+        || (isMember() && resource.data.isMember == true);
       allow create: if isSelfCreatedPendingMember(userId);
       allow update: if isAdmin() || isSafeSelfProfileUpdate(userId);
       allow delete: if isAdmin();
@@ -71,6 +97,11 @@ service cloud.firestore {
         && request.resource.data.text.size() <= 2000
         && request.resource.data.displayName is string
         && request.resource.data.displayName.size() <= 100
+        && request.resource.data.photoURL is string
+        && request.resource.data.photoURL.size() <= 2048
+        && (request.resource.data.photoURL == ''
+          || request.resource.data.photoURL.matches('https://.*'))
+        && request.resource.data.createdAt == request.time
         && request.resource.data.keys().hasOnly(['uid', 'text', 'displayName', 'photoURL', 'createdAt']);
       allow update: if isAdmin();
       allow delete: if isAdmin();
@@ -86,21 +117,28 @@ service cloud.firestore {
 
     // ── 4. Attendance (출석) 컬렉션 ──
     // 본인 기록 읽기 + 관리자는 전체 읽기
-    // 본인만 생성 가능 (uid 검증)
+    // 본인은 서울 기준 오늘 한 번만 생성 가능 (UID/문서 ID/서버 시간 검증)
     // 수정/삭제는 관리자만
     match /attendance/{attId} {
-      allow read: if isAdmin() || (isSignedIn() && resource.data.uid == request.auth.uid);
+      // 오늘 문서가 아직 없어도 본인이 미출석 여부를 확인할 수 있어야 합니다.
+      allow get: if isAdmin() || (isSignedIn()
+        && (attId == request.auth.uid + '_' + seoulDate()
+          || resource.data.uid == request.auth.uid));
+      allow list: if isAdmin() || (isSignedIn() && resource.data.uid == request.auth.uid);
       allow create: if isMember()
         && request.resource.data.uid == request.auth.uid
-        && request.resource.data.date is string
-        && request.resource.data.date.size() <= 40
+        && request.resource.data.date == seoulDate()
+        && attId == request.auth.uid + '_' + request.resource.data.date
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() <= 100
+        && request.resource.data.createdAt == request.time
         && request.resource.data.keys().hasOnly(['uid', 'displayName', 'date', 'createdAt']);
       allow update, delete: if isAdmin();
     }
 
     // ── 5. Opportunities (기회 정보) 컬렉션 ──
     // 승인된 부원은 읽기 가능
-    // 생성/수정/삭제는 관리자만 (크롤러도 관리자 토큰으로 접근)
+    // 브라우저 쓰기는 관리자만. Admin SDK 크롤러는 별도의 IAM 권한으로 접근합니다.
     match /opportunities/{oppId} {
       allow read: if isMember();
       allow create, update, delete: if isAdmin();
