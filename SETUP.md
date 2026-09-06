@@ -17,6 +17,9 @@
 
 - `Authentication > Sign-in method`에서 `Google` 사용 설정
 - 이메일 도메인 제한이 필요하면 승인 정책 설정
+- Google Auth Platform의 Data Access 선언은 앱이 실제 요청하는 기본 로그인 범위 `openid`, `userinfo.email`, `userinfo.profile`와 일치해야 합니다. 추가 Google API 권한은 사용하지 않습니다. [공식 설정 안내](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid)
+
+**현재 검증 상태:** Google 계정 선택 뒤 동의 단계의 일반 401이 남아 있습니다. 기본 범위 3개의 선언 저장은 자동 승인 검토에서 구체적인 사용자 승인을 요구해 대기 중입니다. 성공한 것으로 처리하지 않으며, 자세한 최신 상태는 [인증 진단](docs/QA-AUTH-2026-09-06.md)을 확인하세요.
 
 ## 3) Firestore 규칙 배포
 
@@ -58,6 +61,8 @@
 ```bash
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
+
+Google 로그인 확인은 허용 도메인인 `http://localhost:8000/portal.html`을 사용합니다. `?signin=google`은 검증 중인 공식 GIS 경로입니다. 이 경로의 HTTP localhost에서만 Google 안내에 따라 referrer meta를 `no-referrer-when-downgrade`로 바꾸고, HTTPS·다른 호스트와 일반 로그인은 `strict-origin-when-cross-origin`을 유지합니다. 실제 인증 성공을 확인하기 전에는 실험 경로를 기본값으로 전환하지 않습니다.
 
 `script.js` 상단의 `NEXTWAVE_SITE`에 실제 `applyUrl`, `instagram`, `email`, `kakaoUrl`을 지정합니다. 주소가 없는 연락처는 숨기고 지원서는 준비 중 상태로 표시합니다.
 

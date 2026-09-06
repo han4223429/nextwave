@@ -47,6 +47,8 @@ GitHub 일정 지연·사용량 제한·장기 비활성화·출처 장애가 �
 
 ## 데이터 계약과 삭제·보관 기준
 
+**실제 삭제 배포 확인 (2026-09-07):** [수정 커밋 `020faf8`](https://github.com/han4223429/nextwave/commit/020faf82f65c58e3d93815cc629525364e25cab6) 이후 [원격 실행 `34045854698`](https://github.com/han4223429/nextwave/actions/runs/34045854698)이 수집·28개 검사·만료 0건 검증·공개 JSON commit·Pages 요청까지 성공했습니다. 01:34:44 KST에 K-Startup 45건·위비티 13건을 오류 없이 확인했고, 최종 JSON은 59건(진행 57·미래 마감의 대상 외 보관 2), 만료 0건입니다. 9월 6일 마감 `auto_wevity_110012`는 실제로 제거됐습니다. [bot 커밋 `a5f7fb4`](https://github.com/han4223429/nextwave/commit/a5f7fb415e6974574265f8bb35e599c10ae74341)는 공개 JSON만 변경했고 Pages는 01:35:26 KST에 완료됐습니다. 배포된 JSON·포털 HTML·JS는 모두 HTTPS 200이며 검증 커밋의 파일과 바이트 단위로 일치했습니다.
+
 - 최상위: `schemaVersion: 1`, `generatedAt`(최근 시도), `lastSuccessAt`(새 데이터를 얻은 마지막 시각), `refreshIntervalMinutes`, `classificationVersion`(로컬 분류 규칙 버전), `sources`, `items`.
 - 출처 상태: `id`, `name`, `url`, `status` (`ok`, `partial`, `error`), `checkedAt`, `lastSuccessAt`(해당 출처 전체 성공), `itemCount`, `errorCount`, 선택적 `error`.
 - 공고: `id`, `title`, `description`, `category`, `deadline`, `link`, `source`, `sourceId`, `sourceUrl`, `managedBy: "nextwave-crawler"`, `authorUid: "crawler"`, `firstSeenAt`, `lastSeenAt`, `createdAt`, `status` (`active`, `archived`). 추가 필드: `organizer`, `sourceCategory`, `startDate`, `publishedAt`, `audience`, `applicationPeriod`.
