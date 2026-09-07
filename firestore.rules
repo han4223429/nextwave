@@ -4,7 +4,8 @@ service cloud.firestore {
 
     // ── 헬퍼 함수 ──
     function isSignedIn() {
-      return request.auth != null;
+      // Email ownership must be verified before any member data is read or created.
+      return request.auth != null && request.auth.token.get('email_verified', false) == true;
     }
 
     function isAdmin() {

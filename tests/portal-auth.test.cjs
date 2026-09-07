@@ -13,7 +13,7 @@ const deferred = () => {
 
 // Execute production auth functions with controlled SDK responses and a small DOM.
 // This is not a browser, token verifier, Google request, or live Firebase connection.
-function harness({ query = '?signin=google', protocol = 'https:', hostname = 'wenw.ceo', loaded = true, factoryError = null, renderError = false } = {}) {
+function harness({ query = '?signin=google', protocol = 'https:', hostname = 'wenw.ceo', loaded = true, factoryError = null, renderError = false, emailModule = null } = {}) {
   const nodes = new Map(), scripts = [], timers = new Map(), logs = [], storageWrites = [];
   const credentials = [], verifications = [], memberReads = [];
   let callback, renderOptions, observer, timerId = 0;
@@ -36,6 +36,7 @@ function harness({ query = '?signin=google', protocol = 'https:', hostname = 'we
     currentUser: null,
     setPersistence: () => Promise.resolve(),
     onAuthStateChanged(fn) { observer = fn; },
+    signOut() { this.currentUser = null; observer(null); return Promise.resolve(); },
     signInWithCredential(credential) {
       const result = deferred();
       verifications.push({ credential, ...result });
@@ -65,7 +66,7 @@ function harness({ query = '?signin=google', protocol = 'https:', hostname = 'we
     console: { log: (...args) => logs.push(args), warn: (...args) => logs.push(args), error: (...args) => logs.push(args) },
     setTimeout(fn) { timers.set(++timerId, fn); return timerId; }, clearTimeout(id) { timers.delete(id); },
     localStorage: { setItem: (...args) => storageWrites.push(args) }, sessionStorage: { setItem: (...args) => storageWrites.push(args) },
-    window: { location: { search: query, protocol, hostname }, firebase, NEXTWAVE_GOOGLE_CLIENT_ID: 'public-test-client.apps.googleusercontent.com', NEXTWAVE_FIREBASE_CONFIG: { apiKey: 'public-test-key' } },
+    window: { location: { search: query, protocol, hostname }, firebase, NextWaveEmailAuth: emailModule, NEXTWAVE_GOOGLE_CLIENT_ID: 'public-test-client.apps.googleusercontent.com', NEXTWAVE_FIREBASE_CONFIG: { apiKey: 'public-test-key' } },
     document: { getElementById: getNode, querySelectorAll: () => [], createElement: () => node(),
       createDocumentFragment: () => node(), createTextNode: text => ({ textContent: text }), head: { append(script) { scripts.push(script); } } }
   };
@@ -89,6 +90,32 @@ function assertNoTokenExposure(h, token) {
   assert.equal(JSON.stringify([visible, h.logs, h.storageWrites]).includes(token), false);
   assert.equal(h.storageWrites.length, 0);
 }
+
+test('unverified or malformed email verification cannot read or create a member profile', () => {
+  for (const emailVerified of [false, undefined, 'true']) {
+    const h = harness();
+    h.emitAuth({ uid: 'existing-member', email: 'member@example.test', emailVerified });
+    assert.deepEqual(h.memberReads, []);
+    assert.equal(h.api.getState().currentProfile, null);
+    assert.equal(h.auth.currentUser, null);
+    assert.equal(h.getNode('portal-app').hidden, true);
+  }
+});
+
+test('email callback resumes only SDK identity after link confirmation, never the supplied account or email', () => {
+  let notify, pending = true;
+  const module = { create({ onAuthenticated }) {
+    notify = onAuthenticated;
+    return { hasPendingLink: () => pending, syncUser() {}, isBusy: () => false, setExternalBusy() {}, requireVerification() {} };
+  } };
+  const h = harness({ emailModule: module });
+  h.emitAuth({ uid: 'firebase-verified-uid', emailVerified: true, email: 'member@example.test' });
+  assert.deepEqual(h.memberReads, [], 'A pending email link cannot reuse an unrelated restored session');
+  pending = false;
+  notify({ uid: 'injected-uid', isMember: true, isAdmin: true, emailVerified: true });
+  assert.deepEqual(h.memberReads, ['firebase-verified-uid']);
+  assert.equal(h.getNode('portal-app').hidden, true);
+});
 
 test('HTTP localhost applies the Google referrer requirement before loading GIS', async () => {
   const h = harness({ protocol: 'http:', hostname: 'localhost', loaded: false });
@@ -122,7 +149,7 @@ test('Google callback goes through Firebase verification and never grants member
   await attempt;
   assert.equal(h.api.getState().currentUser, null, 'Only the Firebase auth observer may set application identity');
   assert.equal(h.getNode('portal-app').hidden, true);
-  h.emitAuth({ uid: 'firebase-confirmed-user' });
+  h.emitAuth({ uid: 'firebase-confirmed-user', emailVerified: true });
   assert.equal(h.getNode('pending-screen').hidden, false);
   assert.equal(h.getNode('portal-app').hidden, true, 'Firebase authentication still requires a member profile');
   assert.deepEqual(h.memberReads, ['firebase-confirmed-user']);

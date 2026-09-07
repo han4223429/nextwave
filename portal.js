@@ -4,7 +4,7 @@
   const $ = id => document.getElementById(id);
   const categories = { startup: '창업', support: '사업 지원', contest: '공모전', hackathon: '해커톤', dev: '개발', gamedev: '게임 개발', marketing: '마케팅', activity: '대외활동', education: '교육', internship: '인턴십' };
   const privateListeners = new Map();
-  let auth = null, db = null, currentUser = null, currentProfile = null;
+  let auth = null, db = null, currentUser = null, currentProfile = null, emailAuth = null;
   let profileUnsubscribe = null, authEpoch = 0, dataEpoch = 0, activeTab = 'opportunities', activeDay = '';
   let publicSnapshot = null, manualOpportunities = [], snapshotError = false, fetchingSnapshot = false;
   const requestedCategory = new URLSearchParams(window.location.search).get('category');
@@ -249,6 +249,8 @@
   }
   async function doLogin() {
     if (!auth) { $('login-error').textContent = '로그인 서비스를 연결하지 못했어요. 잠시 후 페이지를 새로고침해 주세요.'; return; }
+    if (emailAuth?.isBusy()) return;
+    emailAuth?.setExternalBusy(true);
     $('login-error').textContent = ''; $('login-btn').disabled = true; $('login-label').textContent = 'Google 계정 연결 중';
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
@@ -256,7 +258,7 @@
     catch (error) {
       const messages = { 'auth/popup-closed-by-user': '로그인 창이 닫혔어요. 준비되면 다시 눌러 주세요.', 'auth/cancelled-popup-request': '로그인 요청이 이미 진행 중이에요.', 'auth/popup-blocked': '브라우저에서 팝업을 허용한 뒤 다시 눌러 주세요.', 'auth/unauthorized-domain': '이 주소에서 로그인이 허용되지 않았어요. 운영진에게 현재 주소를 알려 주세요.', 'auth/network-request-failed': '네트워크를 확인하고 다시 시도해 주세요.' };
       $('login-error').textContent = messages[error.code] || '로그인하지 못했어요. 잠시 후 다시 시도해 주세요.';
-    } finally { $('login-btn').disabled = false; $('login-label').textContent = 'Google로 부원 로그인'; }
+    } finally { $('login-btn').disabled = false; emailAuth?.setExternalBusy(false); $('login-label').textContent = 'Google로 부원 로그인'; }
   }
   async function initGoogleIdentity() {
     // A separate official Google route, enabled for local verification before rollout.
@@ -283,8 +285,9 @@
         // Use Google's standard popup UI; keep account selection explicit.
         auto_select: false, button_auto_select: false, use_fedcm_for_button: false, ux_mode: 'popup',
         callback: async response => {
-          if (busy || auth.currentUser || typeof response?.credential !== 'string' || !response.credential) return;
+          if (busy || emailAuth?.isBusy() || auth.currentUser || typeof response?.credential !== 'string' || !response.credential) return;
           busy = true; container.inert = true; container.setAttribute('aria-busy', 'true');
+          emailAuth?.setExternalBusy(true);
           $('login-error').textContent = ''; delete $('login-error').dataset.code;
           try {
             // Firebase verifies the Google token. Never persist or log the raw token.
@@ -294,7 +297,7 @@
             $('login-error').dataset.code = /^auth\/[a-z-]+$/.test(error?.code || '') ? error.code : 'unknown';
             $('login-error').textContent = error?.code === 'auth/network-request-failed'
               ? '연결을 확인하고 다시 로그인해 주세요.' : '계정 연결을 마치지 못했어요. 다시 로그인해 주세요.';
-          } finally { busy = false; container.inert = false; container.removeAttribute('aria-busy'); }
+          } finally { busy = false; container.inert = false; emailAuth?.setExternalBusy(false); container.removeAttribute('aria-busy'); }
         }
       });
       container.hidden = false;
@@ -325,13 +328,23 @@
     try {
       if (!firebase.apps.length) firebase.initializeApp(config);
       auth = firebase.auth(); db = firebase.firestore();
+      emailAuth = window.NextWaveEmailAuth?.create({ auth, onAuthenticated: () => handleAuthUser(auth.currentUser) }) || null;
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => { $('login-error').textContent = '브라우저의 저장 공간 설정에 따라 로그인 상태가 유지되지 않을 수 있어요.'; });
-      auth.onAuthStateChanged(user => {
-        authEpoch += 1; profileUnsubscribe?.(); profileUnsubscribe = null; stopPrivateData(); currentUser = user; currentProfile = null; activateTab('opportunities');
-        if (user) { $('pending-title').textContent = '작업실을 확인하고 있어요.'; $('pending-description').textContent = '계정과 부원 승인 상태를 확인합니다.'; showScreen('pending'); handleSignedIn(user, authEpoch); }
-        else showScreen('login');
-      });
+      auth.onAuthStateChanged(handleAuthUser);
     } catch (_) { $('login-error').textContent = '로그인 서비스를 연결하지 못했어요. 잠시 후 다시 방문해 주세요.'; }
+  }
+  function handleAuthUser(user) {
+    authEpoch += 1; profileUnsubscribe?.(); profileUnsubscribe = null; stopPrivateData(); currentUser = user; currentProfile = null; activateTab('opportunities');
+    emailAuth?.syncUser(user);
+    if (emailAuth?.hasPendingLink()) { showScreen('login'); return; }
+    if (user && user.emailVerified !== true) {
+      showScreen('login'); emailAuth?.requireVerification(user);
+      // The email submit handler signs out its own unverified result. This covers restored sessions.
+      if (!emailAuth?.isBusy()) auth.signOut().catch(() => { $('login-error').textContent = '이메일 인증이 필요해요. 다시 로그인해 주세요.'; });
+      return;
+    }
+    if (user) { $('pending-title').textContent = '작업실을 확인하고 있어요.'; $('pending-description').textContent = '계정과 부원 승인 상태를 확인합니다.'; showScreen('pending'); handleSignedIn(user, authEpoch); }
+    else showScreen('login');
   }
   function closeSidebar() { $('portal-sidebar').classList.remove('open'); $('mobile-backdrop').hidden = true; $('mobile-sidebar-btn').setAttribute('aria-expanded', 'false'); }
   function activateTab(tab) {

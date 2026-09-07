@@ -19,15 +19,18 @@ const ids = Object.fromEntries(['admin', 'member', 'other', 'pending'].map(role 
 const email = uid => `${uid}@example.test`;
 const encoded = value => Buffer.from(JSON.stringify(value)).toString('base64url');
 
-function token(uid) {
-    if (uid === 'owner') return 'owner'; // Emulator-only fixture seeding.
+function token(identity) {
+    if (identity === 'owner') return 'owner'; // Emulator-only fixture seeding.
+    const { uid, verified = true, provider = 'google.com' } = typeof identity === 'object' && identity
+        ? identity : { uid: identity };
     if (!uid) return null;
     const now = Math.floor(Date.now() / 1000);
     return `${encoded({ alg: 'none', typ: 'JWT' })}.${encoded({
         iss: `https://securetoken.google.com/${project}`, aud: project,
-        sub: uid, user_id: uid, email: email(uid), email_verified: true,
+        sub: uid, user_id: uid, email: email(uid),
+        ...(verified === null ? {} : { email_verified: verified }),
         iat: now, exp: now + 3600, auth_time: now,
-        firebase: { identities: { email: [email(uid)] }, sign_in_provider: 'google.com' }
+        firebase: { identities: { email: [email(uid)] }, sign_in_provider: provider }
     })}.`;
 }
 
@@ -146,4 +149,52 @@ test('admins alone write announcements, opportunities and permission changes', a
     expectStatus(await write(ids.admin, `members/${ids.pending}`, { isMember: true, role: 'member' }, { update: true, timestamps: ['updatedAt'] }), 200);
     expectStatus(await write(ids.admin, `members/${ids.other}`, { isMember: false, isAdmin: false, role: 'pending' }, { update: true, timestamps: ['updatedAt'] }), 200);
     expectStatus(await request(`${base}/messages/valid-${suffix}`, ids.other), 403);
+});
+
+test('an unverified password session cannot use existing member or admin permissions', async () => {
+    for (const uid of [ids.member, ids.admin]) {
+        const unverified = { uid, provider: 'password', verified: false };
+        expectStatus(await request(`${base}/members/${uid}`, unverified), 403);
+        expectStatus(await request(`${base}/members`, unverified), 403);
+        expectStatus(await write(unverified, `members/${uid}`, { displayName: 'Unverified change' }, {
+            update: true, timestamps: ['updatedAt']
+        }), 403);
+        expectStatus(await request(`${base}/messages/valid-${suffix}`, unverified), 403);
+        expectStatus(await write(unverified, `messages/unverified-${uid}`, {
+            uid, displayName: '부원', text: '금지', photoURL: ''
+        }, { timestamps: ['createdAt'] }), 403);
+        expectStatus(await request(`${base}/attendance/${uid}_${seoulDate()}`, unverified), 403);
+        for (const collection of ['announcements', 'opportunities']) {
+            expectStatus(await request(`${base}/${collection}/admin-${suffix}`, unverified), 403);
+            expectStatus(await write(unverified, `${collection}/unverified-${uid}`, { title: '금지' }), 403);
+        }
+    }
+});
+
+test('unverified, missing or non-boolean verification claims cannot create pending members', async () => {
+    for (const [index, verified] of [false, null, 'true'].entries()) {
+        const uid = `unverified-signup-${index}-${suffix}`;
+        expectStatus(await write({ uid, provider: 'password', verified }, `members/${uid}`, profile(uid), {
+            timestamps: ['createdAt', 'updatedAt']
+        }), 403);
+        expectStatus(await request(`${base}/members/${uid}`, 'owner'), 404);
+    }
+});
+
+test('verified password sessions keep the existing UID permissions and new users stay pending', async () => {
+    const member = { uid: ids.member, provider: 'password', verified: true };
+    const admin = { uid: ids.admin, provider: 'password', verified: true };
+    expectStatus(await request(`${base}/members/${ids.member}`, member), 200);
+    expectStatus(await write(member, `messages/verified-password-${suffix}`, {
+        uid: ids.member, displayName: '기존 부원', text: '동일 UID', photoURL: ''
+    }, { timestamps: ['createdAt'] }), 200);
+    expectStatus(await write(admin, `opportunities/verified-password-${suffix}`, { title: '동일 관리자' }), 200);
+    const uid = `verified-password-signup-${suffix}`, fresh = { uid, provider: 'password', verified: true };
+    expectStatus(await write(fresh, `members/${uid}`, profile(uid), {
+        timestamps: ['createdAt', 'updatedAt']
+    }), 200);
+    expectStatus(await request(`${base}/messages/valid-${suffix}`, fresh), 403);
+    expectStatus(await write(fresh, `members/${uid}`, { isMember: true, isAdmin: true, role: 'admin' }, {
+        update: true, timestamps: ['updatedAt']
+    }), 403);
 });

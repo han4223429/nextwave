@@ -14,11 +14,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-  <link rel="stylesheet" href="portal.css?v=water-sound-20260907-2">
+  <link rel="stylesheet" href="portal.css?v=email-login-20260907-2">
   <script defer src="water-audio.js?v=water-sound-20260907-2"></script>
   <script defer src="sound-ui.js?v=water-sound-20260907-2"></script>
   <script defer src="firebase.config.js?v=google-identity-20260906"></script>
-  <script defer src="portal.js?v=google-local-referrer-20260907"></script>
+  <script defer src="email-auth.js?v=email-login-20260907-2"></script>
+  <script defer src="portal.js?v=email-login-20260907-2"></script>
 </head>
 <body>
   <a class="skip-link" href="#opportunity-board">기회 정보로 건너뛰기</a>
@@ -41,17 +42,38 @@
         <span class="material-symbols-outlined login-icon" aria-hidden="true">waves</span>
         <h2 id="login-title">한 사람의 시작,<br>우리의 다음 물결.</h2>
         <p>동료의 소식과 우리 팀의 다음 일정까지.<br>처음이라면 로그인 후 운영진의 승인을 기다려 주세요.</p>
-        <button id="login-btn" class="google-btn" type="button"><span class="material-symbols-outlined" aria-hidden="true">login</span><span id="login-label">Google로 부원 로그인</span><span aria-hidden="true">↗</span></button>
-        <div id="google-signin" hidden></div>
-        <p id="login-error" class="form-error" role="alert"></p>
-        <div class="login-footnote">아래 기회 정보는 누구나 볼 수 있어요.</div>
+        <div class="login-methods">
+          <button id="login-btn" class="google-btn" type="button"><span class="material-symbols-outlined" aria-hidden="true">login</span><span id="login-label">Google로 부원 로그인</span><span aria-hidden="true">↗</span></button>
+          <div id="google-signin" hidden></div>
+          <p id="login-error" class="form-error" role="alert"></p>
+          <details id="email-auth-panel" class="email-auth-panel">
+            <summary><span>이메일로 로그인</span><span class="material-symbols-outlined" aria-hidden="true">expand_more</span></summary>
+            <form id="email-login-form" class="email-auth-form" aria-describedby="email-auth-help">
+              <div class="email-auth-field">
+                <label for="email-login-address">이메일 주소</label>
+                <input id="email-login-address" type="email" required disabled autocomplete="email" inputmode="email" maxlength="254" autocapitalize="none" spellcheck="false" placeholder="name@example.com" aria-describedby="email-auth-help email-auth-error">
+              </div>
+              <div id="email-password-field" class="email-auth-field">
+                <label for="email-login-password">비밀번호</label>
+                <input id="email-login-password" type="password" required disabled autocomplete="current-password" aria-describedby="email-auth-error">
+              </div>
+              <button id="email-login-submit" class="btn-primary" type="submit" disabled>이메일로 로그인</button>
+              <button id="email-login-mode" class="email-mode-button" type="button" disabled>처음 이용 / 비밀번호 없이</button>
+              <p id="email-auth-help" class="email-auth-help">Google로 이용했다면 같은 이메일 주소를 입력해 주세요. 처음이거나 비밀번호가 없다면 이메일 링크로 시작할 수 있어요.</p>
+              <p id="email-auth-status" class="email-auth-status" role="status" aria-live="polite"></p>
+              <p id="email-auth-error" class="form-error" role="alert"></p>
+            </form>
+            <button id="email-login-cancel" class="btn-secondary email-cancel-button" type="button" hidden>메일 인증 취소</button>
+          </details>
+          <div class="login-footnote">아래 기회 정보는 누구나 볼 수 있어요.</div>
+        </div>
       </aside>
     </section>
     <section id="pending-screen" class="pending-screen" hidden aria-labelledby="pending-title">
       <p class="eyebrow">MEMBERS ACCESS / PENDING</p>
       <h1 id="pending-title">작업실의 문을<br>열고 있어요.</h1>
       <p id="pending-description">운영진이 가입 요청을 확인 중이에요. 승인되면 이 화면이 자동으로 전환됩니다.</p>
-      <button id="pending-logout" class="btn-secondary" type="button">로그아웃</button>
+      <div class="pending-actions"><button id="pending-logout" class="btn-secondary" type="button">로그아웃</button><button class="btn-secondary" type="button" data-email-password-open hidden>비밀번호 설정</button></div>
     </section>
     <div id="public-board-slot">
       <section id="opportunity-board" class="opportunity-board" aria-labelledby="board-title" tabindex="-1">
@@ -79,7 +101,7 @@
   <div id="portal-app" hidden>
     <header class="portal-topbar">
       <div class="portal-brand"><button class="mobile-menu-btn icon-btn" id="mobile-sidebar-btn" type="button" aria-label="포털 메뉴 열기" aria-controls="portal-sidebar" aria-expanded="false"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button><a href="index.html" class="wordmark">NEXTWAVE<span class="wordmark-dot">.</span></a><span class="topbar-label">LIVE DESK</span></div>
-      <div class="user-info"><button class="portal-sound-button" type="button" data-sound-toggle aria-pressed="true" aria-label="물결 효과음 끄기"><span class="material-symbols-outlined" aria-hidden="true">water_drop</span><span data-sound-label>SOUND ON</span></button><span class="user-name" id="topbar-username"></span><img id="topbar-avatar" alt="내 프로필" hidden><button id="topbar-logout" class="btn-secondary" type="button">로그아웃</button></div>
+      <div class="user-info"><button class="portal-sound-button" type="button" data-sound-toggle aria-pressed="true" aria-label="물결 효과음 끄기"><span class="material-symbols-outlined" aria-hidden="true">water_drop</span><span data-sound-label>SOUND ON</span></button><span class="user-name" id="topbar-username"></span><img id="topbar-avatar" alt="내 프로필" hidden><button class="btn-secondary email-password-trigger" type="button" data-email-password-open aria-label="비밀번호 설정" title="비밀번호 설정" hidden><span class="material-symbols-outlined" aria-hidden="true">password</span><span class="email-password-label">비밀번호 설정</span></button><button id="topbar-logout" class="btn-secondary" type="button">로그아웃</button></div>
     </header>
     <button class="mobile-backdrop" id="mobile-backdrop" type="button" aria-label="메뉴 닫기" hidden></button>
     <div class="portal-layout">
@@ -112,6 +134,18 @@
     </div>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="email-password-modal" class="email-password-modal" aria-labelledby="email-password-title" aria-describedby="email-password-help">
+    <p class="eyebrow">YOUR NEXT SIGN-IN</p>
+    <h2 id="email-password-title">다음에는 비밀번호로.</h2>
+    <p id="email-password-help" class="email-auth-help">12자 이상의 비밀번호를 설정하면 다음부터 이메일 주소와 비밀번호로 로그인할 수 있어요.</p>
+    <form id="email-password-form" class="email-auth-form">
+      <div class="email-auth-field"><label for="email-new-password">새 비밀번호</label><input id="email-new-password" type="password" autocomplete="new-password" minlength="12" required aria-describedby="email-password-help email-password-error"></div>
+      <div class="email-auth-field"><label for="email-confirm-password">새 비밀번호 확인</label><input id="email-confirm-password" type="password" autocomplete="new-password" minlength="12" required aria-describedby="email-password-error"></div>
+      <p id="email-password-status" class="email-auth-status" role="status" aria-live="polite"></p>
+      <p id="email-password-error" class="form-error" role="alert"></p>
+      <div class="email-password-actions"><button id="email-password-close" class="btn-secondary" type="button">닫기</button><button id="email-password-save" class="btn-primary" type="submit">비밀번호 저장</button></div>
+    </form>
+  </dialog>
   <dialog id="confirm-modal" class="confirm-modal" aria-labelledby="confirm-modal-msg"><form method="dialog"><p class="eyebrow">PLEASE CONFIRM</p><h2 id="confirm-modal-msg">이 항목을 삭제할까요?</h2><div class="confirm-modal-actions"><button type="submit" value="cancel" class="btn-secondary">취소</button><button type="submit" value="confirm" class="btn-danger">확인</button></div></form></dialog>
   <noscript><p class="noscript-message">기회 목록과 부원 공간을 이용하려면 JavaScript를 켜 주세요. <a href="index.html">홈으로 돌아가기</a></p></noscript>
   <div id="sound-toast" class="sound-toast" role="status" aria-live="polite"></div>
