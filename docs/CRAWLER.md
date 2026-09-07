@@ -47,6 +47,8 @@ GitHub 일정 지연·사용량 제한·장기 비활성화·출처 장애가 �
 
 ## 데이터 계약과 삭제·보관 기준
 
+**후속 예약 실행 확인 (2026-09-07 10:42:56 KST):** 최근 예약 실행 4회가 모두 성공했습니다. 마지막은 [실행 `34071544301`](https://github.com/han4223429/nextwave/actions/runs/34071544301)이며 공개 JSON은 10:00:29 KST에 갱신됐고 활성 58·보관 2·확정 만료 0건입니다. 두 출처 모두 정상, 오류 0건입니다. 실제 예약 시작은 03:15·05:25·07:53·09:59 KST로 약 2시간 간격이었으므로, `60분`은 설정된 예약 간격이며 실제 실행 간격을 보장하지 않습니다. 이 지연의 정확한 원인은 이번 관찰만으로 확인하지 못했습니다.
+
 **실제 삭제 배포 확인 (2026-09-07):** [수정 커밋 `020faf8`](https://github.com/han4223429/nextwave/commit/020faf82f65c58e3d93815cc629525364e25cab6) 이후 [원격 실행 `34045854698`](https://github.com/han4223429/nextwave/actions/runs/34045854698)이 수집·28개 검사·만료 0건 검증·공개 JSON commit·Pages 요청까지 성공했습니다. 01:34:44 KST에 K-Startup 45건·위비티 13건을 오류 없이 확인했고, 최종 JSON은 59건(진행 57·미래 마감의 대상 외 보관 2), 만료 0건입니다. 9월 6일 마감 `auto_wevity_110012`는 실제로 제거됐습니다. [bot 커밋 `a5f7fb4`](https://github.com/han4223429/nextwave/commit/a5f7fb415e6974574265f8bb35e599c10ae74341)는 공개 JSON만 변경했고 Pages는 01:35:26 KST에 완료됐습니다. 배포된 JSON·포털 HTML·JS는 모두 HTTPS 200이며 검증 커밋의 파일과 바이트 단위로 일치했습니다.
 
 - 최상위: `schemaVersion: 1`, `generatedAt`(최근 시도), `lastSuccessAt`(새 데이터를 얻은 마지막 시각), `refreshIntervalMinutes`, `classificationVersion`(로컬 분류 규칙 버전), `sources`, `items`.

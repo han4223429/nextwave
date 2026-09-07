@@ -19,7 +19,7 @@
 - 이메일 도메인 제한이 필요하면 승인 정책 설정
 - Google Auth Platform의 Data Access 선언은 앱이 실제 요청하는 기본 로그인 범위 `openid`, `userinfo.email`, `userinfo.profile`와 일치해야 합니다. 추가 Google API 권한은 사용하지 않습니다. [공식 설정 안내](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid)
 
-**현재 검증 상태:** Google 계정 선택 뒤 동의 단계의 일반 401이 남아 있습니다. 기본 범위 3개의 선언 저장은 자동 승인 검토에서 구체적인 사용자 승인을 요구해 대기 중입니다. 성공한 것으로 처리하지 않으며, 자세한 최신 상태는 [인증 진단](docs/QA-AUTH-2026-09-06.md)을 확인하세요.
+**현재 검증 상태:** 포털과 Firebase 코드를 제외한 순수 Google Identity Services 페이지에서도 Google 동의 단계의 일반 401이 재현됩니다. 실제 요청에는 기본 세 범위가 들어 있습니다. 빈 콘솔 범위 선언을 이 오류의 확정 원인이나 모든 추가 진단의 선행 조건으로 취급하지 않습니다. 현재는 동일 계정의 깨끗한 Chrome 세션 비교가 필요합니다. 기본 범위 선언 저장은 별도 승인 대기이며, 실제 로그인 성공은 아직 확인하지 못했습니다. [최신 인증 진단](docs/QA-AUTH-2026-09-06.md)을 확인하세요.
 
 ## 3) Firestore 규칙 배포
 
