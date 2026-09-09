@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-09T00:12:20Z",
-  "lastSuccessAt": "2026-09-09T00:12:20Z",
+  "generatedAt": "2026-09-09T04:38:15Z",
+  "lastSuccessAt": "2026-09-09T04:38:15Z",
   "refreshIntervalMinutes": 60,
   "sources": [
     {
@@ -9,20 +9,20 @@
       "name": "K-Startup",
       "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
       "status": "ok",
-      "checkedAt": "2026-09-09T00:11:49Z",
+      "checkedAt": "2026-09-09T04:37:41Z",
       "itemCount": 45,
       "errorCount": 0,
-      "lastSuccessAt": "2026-09-09T00:12:20Z"
+      "lastSuccessAt": "2026-09-09T04:38:15Z"
     },
     {
       "id": "wevity",
       "name": "위비티",
       "url": "https://www.wevity.com/?c=find&s=1",
       "status": "ok",
-      "checkedAt": "2026-09-09T00:12:20Z",
+      "checkedAt": "2026-09-09T04:38:15Z",
       "itemCount": 12,
       "errorCount": 0,
-      "lastSuccessAt": "2026-09-09T00:12:20Z"
+      "lastSuccessAt": "2026-09-09T04:38:15Z"
     }
   ],
   "items": [
@@ -88,7 +88,7 @@
       "startDate": "2026-08-27",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -110,7 +110,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -198,7 +198,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -220,7 +220,7 @@
       "startDate": "2026-08-28",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -242,7 +242,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -396,7 +396,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -463,7 +463,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -530,7 +530,7 @@
       "audience": "대학생",
       "applicationPeriod": "2026-08-05 ~ 2026-09-13",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -553,7 +553,7 @@
       "audience": "일반인, 기타",
       "applicationPeriod": "2026-08-31 ~ 2026-09-13",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -685,7 +685,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -773,7 +773,7 @@
       "startDate": "2026-09-02",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -795,7 +795,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -817,8 +817,30 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179193",
+      "title": "2026년 한전KPS 창업벤처기업 육성 지원사업 참여기업 모집안내(연장)",
+      "description": "에너지밸리기업개발원 · 사업화",
+      "category": "startup",
+      "deadline": "2026-09-15",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179193",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "에너지밸리기업개발원",
+      "sourceCategory": "사업화",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-08",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
     {
@@ -883,7 +905,7 @@
       "startDate": "2026-08-28",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -927,8 +949,30 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179202",
+      "title": "대학생 창업자가 투자를 유치하며 겪었던 이야기들(#고객이 원하는 시장을 찾는 방법) - 제9차 벤처스타트업 아카데미",
+      "description": "광운대학교산학협력단 · 행사ㆍ네트워크",
+      "category": "education",
+      "deadline": "2026-09-16",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179202",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "광운대학교산학협력단",
+      "sourceCategory": "행사ㆍ네트워크",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-08",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
     {
@@ -1037,8 +1081,30 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179200",
+      "title": "2026년 SVC Seoul 인턴십 프로그램 학생인턴 모집공고",
+      "description": "창업진흥원 · 시설ㆍ공간ㆍ보육",
+      "category": "internship",
+      "deadline": "2026-09-17",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179200",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "창업진흥원",
+      "sourceCategory": "시설ㆍ공간ㆍ보육",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-09",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
     {
@@ -1060,7 +1126,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-08-24 ~ 2026-09-17",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1082,7 +1148,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1104,7 +1170,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1126,7 +1192,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1149,7 +1215,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-07-01 ~ 2026-09-18",
       "firstSeenAt": "2026-09-07T01:00:29Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-07T01:00:29Z",
       "status": "active"
     },
@@ -1173,6 +1239,28 @@
       "firstSeenAt": "2026-09-08T05:57:09Z",
       "lastSeenAt": "2026-09-09T00:12:20Z",
       "createdAt": "2026-09-08T05:57:09Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179191",
+      "title": "[고양시×스타필드 고양] 2026 고양 스타트업 팝업스토어 참가기업 모집",
+      "description": "고양시청 · 행사ㆍ네트워크",
+      "category": "activity",
+      "deadline": "2026-09-20",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179191",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "고양시청",
+      "sourceCategory": "행사ㆍ네트워크",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-07",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
     {
@@ -1261,7 +1349,7 @@
       "startDate": "2026-09-02",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1283,7 +1371,7 @@
       "startDate": "2026-08-29",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1305,7 +1393,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1327,7 +1415,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1416,8 +1504,30 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179199",
+      "title": "2026년 스타트업 96 입주 예비창업자 모집",
+      "description": "대전일자리경제진흥원 · 시설ㆍ공간ㆍ보육",
+      "category": "startup",
+      "deadline": "2026-09-22",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179199",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "대전일자리경제진흥원",
+      "sourceCategory": "시설ㆍ공간ㆍ보육",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-08",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
     {
@@ -1438,7 +1548,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1460,7 +1570,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1504,7 +1614,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1548,7 +1658,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1592,7 +1702,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1615,7 +1725,7 @@
       "audience": "일반인, 대학생, 청소년, 기타",
       "applicationPeriod": "2026-09-01 ~ 2026-09-28",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1638,7 +1748,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-08-25 ~ 2026-09-28",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1815,7 +1925,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1837,7 +1947,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1859,7 +1969,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1881,7 +1991,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1903,7 +2013,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1925,8 +2035,52 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179194",
+      "title": "한국공학대학교 창업보육센터 입주기업 모집공고",
+      "description": "㈜한국공학대학교기술지주회사 · 시설ㆍ공간ㆍ보육",
+      "category": "startup",
+      "deadline": "2026-09-30",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179194",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "㈜한국공학대학교기술지주회사",
+      "sourceCategory": "시설ㆍ공간ㆍ보육",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-08",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179205",
+      "title": "('26년 4분기) 공공조달시장 진출지원 컨설팅 희망기업 모집",
+      "description": "인천지방조달청 · 멘토링ㆍ컨설팅ㆍ교육",
+      "category": "education",
+      "deadline": "2026-09-30",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179205",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "인천지방조달청",
+      "sourceCategory": "멘토링ㆍ컨설팅ㆍ교육",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-09",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
     {
@@ -1950,6 +2104,29 @@
       "firstSeenAt": "2026-09-06T12:29:51Z",
       "lastSeenAt": "2026-09-07T06:04:47Z",
       "createdAt": "2026-09-06T12:29:51Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_wevity_110854",
+      "title": "2026 제45회 대한민국작곡상 공모",
+      "description": "(사)한국음악협회, 대한민국작곡상위원회 · 예체능/미술/음악",
+      "category": "contest",
+      "deadline": "2026-09-30",
+      "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=110854",
+      "source": "위비티",
+      "sourceId": "wevity",
+      "sourceUrl": "https://www.wevity.com/?c=find&s=1",
+      "organizer": "(사)한국음악협회, 대한민국작곡상위원회",
+      "sourceCategory": "예체능/미술/음악",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-01",
+      "audience": "제한없음",
+      "applicationPeriod": "2026-09-01 ~ 2026-09-30",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
     {
@@ -1992,7 +2169,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -2015,7 +2192,7 @@
       "audience": "일반인, 대학생, 청소년, 기타",
       "applicationPeriod": "2026-06-01 ~ 2026-10-02",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -2040,6 +2217,29 @@
       "firstSeenAt": "2026-09-08T11:14:00Z",
       "lastSeenAt": "2026-09-09T00:12:20Z",
       "createdAt": "2026-09-08T11:14:00Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_wevity_110855",
+      "title": "2026 AI 활용 아이디어 공모전",
+      "description": "과학기술정보통신부 / 정보통신산업진흥원, 한국정보방송통신대연합 · 기획/아이디어",
+      "category": "dev",
+      "deadline": "2026-10-02",
+      "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=110855",
+      "source": "위비티",
+      "sourceId": "wevity",
+      "sourceUrl": "https://www.wevity.com/?c=find&s=1",
+      "organizer": "과학기술정보통신부 / 정보통신산업진흥원, 한국정보방송통신대연합",
+      "sourceCategory": "기획/아이디어",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-07",
+      "audience": "제한없음",
+      "applicationPeriod": "2026-09-07 ~ 2026-10-02",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
     {
@@ -2082,8 +2282,30 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179183",
+      "title": "2026년 투자 유치 역량 강화 특강",
+      "description": "서울시립대학교창업보육센터 · 시설ㆍ공간ㆍ보육",
+      "category": "startup",
+      "deadline": "2026-10-07",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179183",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "서울시립대학교창업보육센터",
+      "sourceCategory": "시설ㆍ공간ㆍ보육",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-07",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
     {
@@ -2105,7 +2327,7 @@
       "audience": "일반인, 대학생, 기타",
       "applicationPeriod": "2026-09-01 ~ 2026-10-07",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -2173,7 +2395,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-07-31 ~ 2026-10-17",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -2218,7 +2440,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2263,7 +2485,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2286,7 +2508,7 @@
       "audience": "제한없음, 일반인, 대학생",
       "applicationPeriod": "2026-08-01 ~ 2027-01-31",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T00:12:20Z",
+      "lastSeenAt": "2026-09-09T04:38:15Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
