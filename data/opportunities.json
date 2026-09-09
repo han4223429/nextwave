@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-09T04:38:15Z",
-  "lastSuccessAt": "2026-09-09T04:38:15Z",
+  "generatedAt": "2026-09-09T09:42:23Z",
+  "lastSuccessAt": "2026-09-09T09:42:23Z",
   "refreshIntervalMinutes": 60,
   "sources": [
     {
@@ -9,20 +9,20 @@
       "name": "K-Startup",
       "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
       "status": "ok",
-      "checkedAt": "2026-09-09T04:37:41Z",
+      "checkedAt": "2026-09-09T09:41:57Z",
       "itemCount": 45,
       "errorCount": 0,
-      "lastSuccessAt": "2026-09-09T04:38:15Z"
+      "lastSuccessAt": "2026-09-09T09:42:23Z"
     },
     {
       "id": "wevity",
       "name": "위비티",
       "url": "https://www.wevity.com/?c=find&s=1",
       "status": "ok",
-      "checkedAt": "2026-09-09T04:38:15Z",
-      "itemCount": 12,
+      "checkedAt": "2026-09-09T09:42:23Z",
+      "itemCount": 13,
       "errorCount": 0,
-      "lastSuccessAt": "2026-09-09T04:38:15Z"
+      "lastSuccessAt": "2026-09-09T09:42:23Z"
     }
   ],
   "items": [
@@ -198,7 +198,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -220,7 +220,7 @@
       "startDate": "2026-08-28",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -242,7 +242,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -396,7 +396,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -463,7 +463,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -530,7 +530,7 @@
       "audience": "대학생",
       "applicationPeriod": "2026-08-05 ~ 2026-09-13",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -553,7 +553,7 @@
       "audience": "일반인, 기타",
       "applicationPeriod": "2026-08-31 ~ 2026-09-13",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -685,7 +685,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -773,7 +773,7 @@
       "startDate": "2026-09-02",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -795,7 +795,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -817,7 +817,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -839,7 +839,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -905,7 +905,7 @@
       "startDate": "2026-08-28",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -949,8 +949,30 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179174",
+      "title": "2026 아스트라제네카-서울바이오허브 글로벌 오픈이노베이션 참여기업 모집",
+      "description": "한국과학기술연구원 · 기술개발(R&D)",
+      "category": "startup",
+      "deadline": "2026-09-16",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179174",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "한국과학기술연구원",
+      "sourceCategory": "기술개발(R&D)",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-08-21",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T09:42:23Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
+      "createdAt": "2026-09-09T09:42:23Z",
       "status": "active"
     },
     {
@@ -971,7 +993,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -1081,8 +1103,30 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179169",
+      "title": "[서초창업스테이션] 9월 1:1 전문 분야 컨설팅 - IR 덱 디자인 고도화, 세무회계",
+      "description": "(주)오픈놀 · 시설ㆍ공간ㆍ보육",
+      "category": "startup",
+      "deadline": "2026-09-17",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179169",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "(주)오픈놀",
+      "sourceCategory": "시설ㆍ공간ㆍ보육",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-02",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T09:42:23Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
+      "createdAt": "2026-09-09T09:42:23Z",
       "status": "active"
     },
     {
@@ -1103,7 +1147,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -1126,7 +1170,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-08-24 ~ 2026-09-17",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1148,7 +1192,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1170,8 +1214,30 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179167",
+      "title": "[서초창업스테이션] 9월 창업 교육 - 스타트업을 위한 온라인 판로개척",
+      "description": "(주)오픈놀 · 시설ㆍ공간ㆍ보육",
+      "category": "education",
+      "deadline": "2026-09-18",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179167",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "(주)오픈놀",
+      "sourceCategory": "시설ㆍ공간ㆍ보육",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-07",
+      "publishedAt": "2026-09-09",
+      "firstSeenAt": "2026-09-09T09:42:23Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
+      "createdAt": "2026-09-09T09:42:23Z",
       "status": "active"
     },
     {
@@ -1192,7 +1258,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1215,7 +1281,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-07-01 ~ 2026-09-18",
       "firstSeenAt": "2026-09-07T01:00:29Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-07T01:00:29Z",
       "status": "active"
     },
@@ -1259,7 +1325,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -1307,6 +1373,29 @@
       "firstSeenAt": "2026-09-07T18:15:19Z",
       "lastSeenAt": "2026-09-08T05:57:09Z",
       "createdAt": "2026-09-07T18:15:19Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_wevity_110881",
+      "title": "2026 서울국제노인영화제(Seoul International Senior Film Festival) 시스프렌드 현장지원팀 모집",
+      "description": "서울노인복지센터 · 기타",
+      "category": "contest",
+      "deadline": "2026-09-20",
+      "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=110881",
+      "source": "위비티",
+      "sourceId": "wevity",
+      "sourceUrl": "https://www.wevity.com/?c=find&s=1",
+      "organizer": "서울노인복지센터",
+      "sourceCategory": "기타",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-09",
+      "audience": "일반인, 대학생",
+      "applicationPeriod": "2026-09-09 ~ 2026-09-20",
+      "firstSeenAt": "2026-09-09T09:42:23Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
+      "createdAt": "2026-09-09T09:42:23Z",
       "status": "active"
     },
     {
@@ -1371,7 +1460,7 @@
       "startDate": "2026-08-29",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1393,7 +1482,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1415,7 +1504,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1504,7 +1593,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1526,7 +1615,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -1548,7 +1637,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1570,7 +1659,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1614,7 +1703,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1658,7 +1747,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1702,7 +1791,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1725,7 +1814,7 @@
       "audience": "일반인, 대학생, 청소년, 기타",
       "applicationPeriod": "2026-09-01 ~ 2026-09-28",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1748,7 +1837,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-08-25 ~ 2026-09-28",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1925,7 +2014,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1947,7 +2036,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1969,7 +2058,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1991,7 +2080,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2013,7 +2102,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2035,7 +2124,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2057,7 +2146,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -2079,7 +2168,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -2169,7 +2258,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -2192,7 +2281,7 @@
       "audience": "일반인, 대학생, 청소년, 기타",
       "applicationPeriod": "2026-06-01 ~ 2026-10-02",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -2282,7 +2371,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2304,7 +2393,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -2327,7 +2416,7 @@
       "audience": "일반인, 대학생, 기타",
       "applicationPeriod": "2026-09-01 ~ 2026-10-07",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -2395,7 +2484,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-07-31 ~ 2026-10-17",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -2423,6 +2512,29 @@
       "status": "active"
     },
     {
+      "id": "auto_wevity_110886",
+      "title": "대구점자도서관 개관 30주년 및 제100주년 점자의 날 기념 축제 전국민참여사업 숏폼 영상 공모전",
+      "description": "대구점자도서관 · 영상/UCC/사진",
+      "category": "marketing",
+      "deadline": "2026-10-23",
+      "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=110886",
+      "source": "위비티",
+      "sourceId": "wevity",
+      "sourceUrl": "https://www.wevity.com/?c=find&s=1",
+      "organizer": "대구점자도서관",
+      "sourceCategory": "영상/UCC/사진",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-05",
+      "audience": "제한없음",
+      "applicationPeriod": "2026-10-05 ~ 2026-10-23",
+      "firstSeenAt": "2026-09-09T09:42:23Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
+      "createdAt": "2026-09-09T09:42:23Z",
+      "status": "active"
+    },
+    {
       "id": "auto_kstartup_179171",
       "title": "[무료 AI 역량강화 교육]생성형 AI 기반 글로벌 무역·물류 데이터 분석 및 공급망 최적화 과정 (대전)",
       "description": "(주)글로벌창업연구소 · 멘토링ㆍ컨설팅ㆍ교육",
@@ -2440,7 +2552,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2485,8 +2597,31 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-08T11:14:00Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_wevity_110885",
+      "title": "2026 대한건축사협회 대학(원)생 모듈러건축 공모전",
+      "description": "대한건축사협회 / 대한건축사협회 모듈러건축위원회 · 건축/건설/인테리어",
+      "category": "contest",
+      "deadline": "2026-12-02",
+      "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=110885",
+      "source": "위비티",
+      "sourceId": "wevity",
+      "sourceUrl": "https://www.wevity.com/?c=find&s=1",
+      "organizer": "대한건축사협회 / 대한건축사협회 모듈러건축위원회",
+      "sourceCategory": "건축/건설/인테리어",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-21",
+      "audience": "대학생",
+      "applicationPeriod": "2026-09-21 ~ 2026-12-02",
+      "firstSeenAt": "2026-09-09T09:42:23Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
+      "createdAt": "2026-09-09T09:42:23Z",
       "status": "active"
     },
     {
@@ -2508,7 +2643,7 @@
       "audience": "제한없음, 일반인, 대학생",
       "applicationPeriod": "2026-08-01 ~ 2027-01-31",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-09T04:38:15Z",
+      "lastSeenAt": "2026-09-09T09:42:23Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
