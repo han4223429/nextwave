@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-14T18:36:42Z",
-  "lastSuccessAt": "2026-09-14T18:36:42Z",
+  "generatedAt": "2026-09-14T22:29:05Z",
+  "lastSuccessAt": "2026-09-14T22:29:05Z",
   "refreshIntervalMinutes": 60,
   "sources": [
     {
@@ -9,20 +9,20 @@
       "name": "K-Startup",
       "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
       "status": "ok",
-      "checkedAt": "2026-09-14T18:36:12Z",
+      "checkedAt": "2026-09-14T22:28:34Z",
       "itemCount": 45,
       "errorCount": 0,
-      "lastSuccessAt": "2026-09-14T18:36:42Z"
+      "lastSuccessAt": "2026-09-14T22:29:05Z"
     },
     {
       "id": "wevity",
       "name": "위비티",
       "url": "https://www.wevity.com/?c=find&s=1",
       "status": "ok",
-      "checkedAt": "2026-09-14T18:36:42Z",
+      "checkedAt": "2026-09-14T22:29:05Z",
       "itemCount": 12,
       "errorCount": 0,
-      "lastSuccessAt": "2026-09-14T18:36:42Z"
+      "lastSuccessAt": "2026-09-14T22:29:05Z"
     }
   ],
   "items": [
@@ -110,7 +110,7 @@
       "startDate": "2026-09-02",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -132,7 +132,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -154,7 +154,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -176,7 +176,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -198,7 +198,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-14T12:46:46Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-14T12:46:46Z",
       "status": "active"
     },
@@ -220,7 +220,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -242,7 +242,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -397,7 +397,7 @@
       "startDate": "2026-08-21",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T09:42:23Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T09:42:23Z",
       "status": "active"
     },
@@ -419,7 +419,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -441,7 +441,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -463,7 +463,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -573,7 +573,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -595,7 +595,7 @@
       "startDate": "2026-09-02",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T09:42:23Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T09:42:23Z",
       "status": "active"
     },
@@ -617,7 +617,7 @@
       "startDate": "2026-09-10",
       "publishedAt": "2026-09-10",
       "firstSeenAt": "2026-09-10T04:38:33Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-10T04:38:33Z",
       "status": "active"
     },
@@ -639,7 +639,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -662,7 +662,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-08-24 ~ 2026-09-17",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -707,7 +707,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -729,7 +729,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -751,7 +751,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T09:42:23Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T09:42:23Z",
       "status": "active"
     },
@@ -773,7 +773,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -796,7 +796,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-07-01 ~ 2026-09-18",
       "firstSeenAt": "2026-09-07T01:00:29Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-07T01:00:29Z",
       "status": "active"
     },
@@ -840,7 +840,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -1020,7 +1020,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1042,7 +1042,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1153,7 +1153,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -1220,7 +1220,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1264,7 +1264,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T05:57:09Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T05:57:09Z",
       "status": "active"
     },
@@ -1308,7 +1308,7 @@
       "startDate": "2026-09-01",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1330,7 +1330,7 @@
       "startDate": "2026-09-10",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -1397,7 +1397,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1420,7 +1420,7 @@
       "audience": "일반인, 대학생, 청소년, 기타",
       "applicationPeriod": "2026-09-01 ~ 2026-09-28",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1443,7 +1443,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-08-25 ~ 2026-09-28",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1666,7 +1666,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1732,7 +1732,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1754,7 +1754,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1776,7 +1776,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -1798,7 +1798,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -1820,7 +1820,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -1842,7 +1842,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -1864,7 +1864,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -1887,7 +1887,7 @@
       "audience": "대학생, 기타",
       "applicationPeriod": "2026-04-06 ~ 2026-09-30",
       "firstSeenAt": "2026-09-13T18:11:08Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-13T18:11:08Z",
       "status": "active"
     },
@@ -2046,7 +2046,7 @@
       "audience": "일반인, 대학생, 청소년, 기타",
       "applicationPeriod": "2026-06-01 ~ 2026-10-02",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -2205,7 +2205,7 @@
       "startDate": "2026-09-08",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2250,7 +2250,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T04:38:15Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T04:38:15Z",
       "status": "active"
     },
@@ -2273,7 +2273,7 @@
       "audience": "일반인, 대학생, 기타",
       "applicationPeriod": "2026-09-01 ~ 2026-10-07",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -2317,7 +2317,7 @@
       "startDate": "2026-09-09",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -2339,8 +2339,31 @@
       "startDate": "2026-09-10",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_wevity_110994",
+      "title": "충청북도사회서비스원 기관 홍보 캐릭터 도민 아이디어 공모전",
+      "description": "충청북도사회서비스원 · 광고/마케팅",
+      "category": "marketing",
+      "deadline": "2026-10-14",
+      "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=110994",
+      "source": "위비티",
+      "sourceId": "wevity",
+      "sourceUrl": "https://www.wevity.com/?c=find&s=1",
+      "organizer": "충청북도사회서비스원",
+      "sourceCategory": "광고/마케팅",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-09-14",
+      "audience": "제한없음",
+      "applicationPeriod": "2026-09-14 ~ 2026-10-14",
+      "firstSeenAt": "2026-09-14T22:29:05Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
+      "createdAt": "2026-09-14T22:29:05Z",
       "status": "active"
     },
     {
@@ -2431,7 +2454,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-07-31 ~ 2026-10-17",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -2523,7 +2546,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-09-14 ~ 2026-10-23",
       "firstSeenAt": "2026-09-14T12:46:46Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-14T12:46:46Z",
       "status": "active"
     },
@@ -2545,7 +2568,7 @@
       "startDate": "2026-09-03",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -2567,7 +2590,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2589,7 +2612,7 @@
       "startDate": "2026-09-10",
       "publishedAt": "2026-09-09",
       "firstSeenAt": "2026-09-09T18:34:26Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-09T18:34:26Z",
       "status": "active"
     },
@@ -2612,7 +2635,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-02-02 ~ 2026-10-30",
       "firstSeenAt": "2026-09-13T18:11:08Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-13T18:11:08Z",
       "status": "active"
     },
@@ -2657,7 +2680,7 @@
       "startDate": "2026-09-07",
       "publishedAt": "2026-09-08",
       "firstSeenAt": "2026-09-08T11:14:00Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-08T11:14:00Z",
       "status": "active"
     },
@@ -2702,7 +2725,7 @@
       "startDate": "2026-09-04",
       "publishedAt": "2026-09-11",
       "firstSeenAt": "2026-09-11T09:38:55Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-11T09:38:55Z",
       "status": "active"
     },
@@ -2748,7 +2771,7 @@
       "audience": "제한없음, 일반인, 대학생",
       "applicationPeriod": "2026-08-01 ~ 2027-01-31",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-09-14T18:36:42Z",
+      "lastSeenAt": "2026-09-14T22:29:05Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
