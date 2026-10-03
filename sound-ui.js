@@ -1,4 +1,4 @@
-/* Shared, gesture-started water feedback for the club site and member portal. */
+/* Shared, gesture-started editorial feedback for the club site and member portal. */
 (function () {
     'use strict';
     function init() {
@@ -16,8 +16,8 @@
             buttons.forEach(button => {
                 button.disabled = !state.available;
                 button.setAttribute('aria-pressed', String(state.available && state.enabled));
-                button.setAttribute('aria-label', !state.available ? (english() ? 'Water sounds unavailable in this browser' : '이 브라우저에서는 물결 효과음을 재생할 수 없어요') : english() ? (state.enabled ? 'Mute water sounds' : 'Enable water sounds') : (state.enabled ? '물결 효과음 끄기' : '물결 효과음 켜기'));
-                button.title = !state.available ? button.getAttribute('aria-label') : english() ? 'Water sounds · sound begins with your interaction' : '물결 효과음 · 화면을 조작할 때 짧게 들려요';
+                button.setAttribute('aria-label', !state.available ? (english() ? 'Interface sounds unavailable in this browser' : '이 브라우저에서는 화면 효과음을 재생할 수 없어요') : english() ? (state.enabled ? 'Mute interface sounds' : 'Enable interface sounds') : (state.enabled ? '화면 효과음 끄기' : '화면 효과음 켜기'));
+                button.title = !state.available ? button.getAttribute('aria-label') : english() ? 'Interface sounds · sound begins with your interaction' : '화면 효과음 · 화면을 조작할 때 짧게 들려요';
                 const label = button.querySelector('[data-sound-label], #sound-label');
                 if (label) label.textContent = !state.available ? 'SOUND —' : state.enabled ? 'SOUND ON' : 'SOUND OFF';
                 button.dataset.audioState = state.contextState || 'idle';
@@ -61,10 +61,10 @@
             pendingCue = null;
             audio.setEnabled(!audio.enabled);
             update();
-            if (!audio.enabled) { announce('물결 효과음을 껐어요.', 'Water sounds off.'); return; }
+            if (!audio.enabled) { announce('화면 효과음을 껐어요.', 'Interface sounds off.'); return; }
             const ready = await unlock();
             if (requestEpoch !== toggleEpoch || document.hidden) return;
-            if (ready && audio.enabled) { audio.play('chime'); announce('물방울과 잔잔한 물소리를 켰어요.', 'Water drops and soft wave sounds on.'); }
+            if (ready && audio.enabled) { audio.play('chime'); announce('종이 넘김과 키 클릭 효과음을 켰어요.', 'Paper and key sounds on.'); }
             else if (audio.enabled) announce('소리를 시작하지 못했어요. 화면을 다시 조작해 주세요.', 'Sound could not start. Interact with the page to try again.');
         }));
         document.addEventListener('pointerdown', event => {

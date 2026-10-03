@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $('idea-first').textContent = text[0];
         $('idea-second').replaceChildren(document.createTextNode(text[1] + ' '));
         const em = document.createElement('em'); em.textContent = text[2]; $('idea-second').append(em);
-        $('experiment-number').textContent = 'TRY / ' + String(attempts).padStart(3, '0');
+        $('experiment-number').textContent = (isEnglish() ? 'Example ' : '예시 ') + String(attempts).padStart(2, '0');
         const categories = { dev: 'dev', game: 'gamedev', hack: 'hackathon', mkt: 'marketing' };
         $('track-opportunities').href = 'portal.html?category=' + categories[track];
         const descriptionKey = { dev: 'act.dev.d', game: 'act.game.d', hack: 'act.hack.d', mkt: 'act.mkt.d' }[track];
@@ -105,14 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateScroll() {
         queued = false; const distance = document.documentElement.scrollHeight - window.innerHeight;
         $('reading-progress').style.width = (distance > 0 ? Math.min(100, window.scrollY / distance * 100) : 0) + '%';
-        if (!reducedMotion.matches && document.documentElement.dataset.motion !== 'paused') {
-            const culture = document.querySelector('.culture-words');
-            const box = culture.getBoundingClientRect();
-            if (box.bottom > 0 && box.top < window.innerHeight) {
-                const shift = Math.max(-12, Math.min(12, (box.top / window.innerHeight - .5) * 35));
-                culture.style.setProperty('--culture-shift', shift + 'px');
-            }
-        }
     }
     window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(updateScroll); } }, { passive: true });
     updateScroll();

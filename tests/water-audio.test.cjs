@@ -203,7 +203,7 @@ test('all cues use short, bounded envelopes, a low master gain and one non-loopi
     context.nodes.filter(node => node.kind === 'gain').forEach(node => node.gain.operations.forEach(operation => {
         if ('value' in operation) assert.ok(operation.value >= 0 && operation.value <= 0.9);
     }));
-    assert.equal(h.audio.getState().masterGain, 0.16);
+    assert.ok(h.audio.getState().masterGain > 0 && h.audio.getState().masterGain <= 0.10, 'editorial feedback stays within the quiet output budget');
 });
 
 test('safe state subscriptions and storage events keep the shared sound preference in sync', async () => {

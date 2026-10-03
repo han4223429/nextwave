@@ -1,9 +1,9 @@
-/* NextWave: short, locally synthesized water cues. No media, network, or ambient loop. */
+/* NextWave: short, locally synthesized paper and key cues. No media, network, or ambient loop. */
 (function (root) {
     'use strict';
 
     const STORAGE_KEY = 'nw:sound';
-    const MASTER_GAIN = 0.16;
+    const MASTER_GAIN = 0.10;
     const MAX_VOICES = 4;
     const COOLDOWNS = Object.freeze({ tap: 70, ripple: 140, wave: 800, chime: 260, fire: 75, hit: 110, dash: 200 });
     const mutedValue = value => ['off', 'false', '0', 'muted'].includes(value);
@@ -93,7 +93,7 @@
             master = context.createGain(); master.gain.setValueAtTime(0, context.currentTime); gateLevel = 0;
             const highpass = context.createBiquadFilter(), lowpass = context.createBiquadFilter(), limiter = context.createDynamicsCompressor();
             highpass.type = 'highpass'; highpass.frequency.value = 95; highpass.Q.value = 0.5;
-            lowpass.type = 'lowpass'; lowpass.frequency.value = 4300; lowpass.Q.value = 0.55;
+            lowpass.type = 'lowpass'; lowpass.frequency.value = 2800; lowpass.Q.value = 0.55;
             limiter.threshold.value = -22; limiter.knee.value = 10; limiter.ratio.value = 4;
             limiter.attack.value = 0.003; limiter.release.value = 0.12;
             master.connect(highpass); highpass.connect(lowpass); lowpass.connect(limiter); limiter.connect(context.destination);
@@ -163,10 +163,9 @@
             source.type = 'sine';
             if (crystal) source.frequency.setValueAtTime(frequency, start);
             else {
-                // A rising cavity resonance followed by a soft settling pitch makes a liquid plop.
-                source.frequency.setValueAtTime(frequency * 0.68, start);
-                source.frequency.exponentialRampToValueAtTime(frequency * 1.6, start + 0.019);
-                source.frequency.exponentialRampToValueAtTime(frequency * 0.93, start + duration);
+                // A brief descending body, without the former rising water-drop pitch.
+                source.frequency.setValueAtTime(frequency, start);
+                source.frequency.exponentialRampToValueAtTime(frequency * 0.82, start + duration);
             }
             envelope(gain.gain, start, duration, peak);
             source.connect(gain);
@@ -194,20 +193,21 @@
         function synthesize(voice, kind, time) {
             const variation = [0.96, 1.04, 1, 1.07][cueCount % 4];
             if (kind === 'ripple') {
-                bubble(voice, time, 330 * variation, 0.16, 0.19, -0.18);
-                bubble(voice, time + 0.055, 500 * variation, 0.115, 0.20, 0.06);
-                bubble(voice, time + 0.12, 690 * variation, 0.065, 0.19, 0.20);
-                waterNoise(voice, time + 0.005, 0.24, 0.07);
+                bubble(voice, time, 230 * variation, 0.07, 0.045, -0.08);
+                bubble(voice, time + 0.055, 270 * variation, 0.05, 0.04, 0.02);
+                bubble(voice, time + 0.12, 210 * variation, 0.035, 0.035, 0.08);
+                waterNoise(voice, time + 0.005, 0.18, 0.10, 700, 1400);
             } else if (kind === 'wave') {
-                waterNoise(voice, time, 0.54, 0.19, 300, 1450);
-                bubble(voice, time + 0.22, 310 * variation, 0.065, 0.15, -0.10);
-                bubble(voice, time + 0.36, 470 * variation, 0.04, 0.14, 0.16);
+                // Soft filtered friction, like turning a sheet of paper.
+                waterNoise(voice, time, 0.30, 0.12, 650, 1350);
+                bubble(voice, time + 0.22, 210 * variation, 0.025, 0.035, -0.05);
+                bubble(voice, time + 0.26, 230 * variation, 0.015, 0.03, 0.05);
             } else if (kind === 'chime') {
-                // D and A are a clean pentatonic pair, with quiet glass-like upper partials.
-                oscillator(voice, time, 0.28, 587.33, 0.12, -0.12, true);
-                oscillator(voice, time, 0.16, 1409.59, 0.018, -0.12, true);
-                oscillator(voice, time + 0.075, 0.31, 880, 0.09, 0.12, true);
-                oscillator(voice, time + 0.075, 0.18, 2112, 0.013, 0.12, true);
+                // Two restrained key strikes for selection feedback.
+                oscillator(voice, time, 0.045, 260, 0.075, -0.05, true);
+                oscillator(voice, time, 0.025, 780, 0.012, -0.05, true);
+                oscillator(voice, time + 0.055, 0.05, 330, 0.055, 0.05, true);
+                oscillator(voice, time + 0.055, 0.025, 990, 0.008, 0.05, true);
             } else if (kind === 'dash') {
                 waterNoise(voice, time, 0.23, 0.16, 540, 1850);
                 bubble(voice, time + 0.04, 300 * variation, 0.075, 0.13, 0.10);
@@ -219,8 +219,8 @@
                 bubble(voice, time, 255 * variation, 0.145, 0.105);
                 waterNoise(voice, time, 0.055, 0.04, 780, 1400);
             } else {
-                bubble(voice, time, 375 * variation, 0.185, 0.145);
-                waterNoise(voice, time, 0.038, 0.035, 1050, 1550);
+                bubble(voice, time, 240 * variation, 0.09, 0.04);
+                waterNoise(voice, time, 0.028, 0.10, 850, 1500);
             }
         }
         function play(requestedKind = 'tap') {
