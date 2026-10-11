@@ -1,0 +1,5 @@
+[
+  {"_id":"6acb3e05ee012963f81ccba1","title":"2026 AI 해커톤","eventType":"hackathon","organization":"운영기관","applicationStartDate":"2026-10-10T15:00:00.000Z","applicationEndDate":"2026-10-19T15:00:00.000Z","isClosed":false,"isDeleted":false,"status":"approved"},
+  {"_id":"6acb3e05ee012963f81ccba2","title":"2026 아이디어 공모전","eventType":"contest","applicationEndDate":"2026-10-30T00:00:00.000Z","isClosed":true,"isDeleted":false,"status":"approved"},
+  {"_id":"6acb3e05ee012963f81ccba3","title":"2026 개발자 컨퍼런스","eventType":"conference","applicationEndDate":"2026-10-30T00:00:00.000Z","isClosed":false,"isDeleted":false,"status":"approved"}
+]

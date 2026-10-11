@@ -102,6 +102,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .board-total > span { font-size: 11px; font-weight: 550; }
 .sync-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 11px 15px 11px 18px; border: 1px solid #c8e6ed; border-radius: 15px; background: #e2f4f8; }
 .sync-copy { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+.source-strip { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.source-pill { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; padding: 5px 12px; border: 1px solid #c4e4eb; border-radius: 999px; background: #fff; color: #345c70; font-size: 11px; }
+.source-pill strong { font-weight: 700; color: var(--p-primary); }
+.source-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: #0d9e91; }
+.source-pill.warning { border-color: #e6bcb8; background: #fff7f5; }
+.source-pill.warning .source-pill-dot { background: #ba554b; }
 .refresh-btn { display: flex; align-items: center; gap: 6px; min-height: 33px; border: 0; border-radius: 20px; padding: 5px 12px; background: var(--p-surface); font-size: 11px; white-space: nowrap; transition: background .2s; }
 .refresh-btn:hover { background: #d4f4f7; }
 .refresh-btn .material-symbols-outlined { font-size: 17px; }
@@ -131,11 +137,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .opp-dday.urgent { color: #9d3b2e; background: #fff1ed; }
 .opp-dday.soon { color: #086b98; background: #e0f6fa; }
 .opp-dday.closed { color: #486a73; background: #e2eff1; }
-.opp-card-title { grid-area: title; font-size: 21px; font-weight: 660; line-height: 1.5; letter-spacing: -.65px; overflow-wrap: anywhere; margin-bottom: 8px; }
+.opp-card-title { grid-area: title; font-size: 21px; font-weight: 700; line-height: 1.42; letter-spacing: -.65px; overflow-wrap: anywhere; margin-bottom: 8px; }
 .opp-card-desc { grid-area: description; color: var(--p-on-surface-variant); font-size: 12px; line-height: 1.8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-line; overflow-wrap: anywhere; margin-bottom: 16px; }
 .opp-card-meta { grid-area: meta; display: flex; align-items: center; flex-wrap: wrap; gap: 9px; align-self: end; }
 .opp-tag { font-size: 10px; font-weight: 550; background: #e3f5f9; color: #376a7f; padding: 3px 9px; border-radius: 99px; }
-.opp-source { color: #466d80; font-size: 10px; }
+.opp-source { color: #345d70; font-size: 11px; }
 .opp-card-actions { grid-area: actions; display: flex; align-items: center; justify-content: end; gap: 8px; border-left: 1px solid #e3f0f4; padding-left: 25px; }
 .opp-link-btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 12px; font-weight: 650; flex: 1; }
 .opp-link-btn > span { display: grid; place-items: center; width: 37px; height: 37px; flex-shrink: 0; border-radius: 50%; background: var(--p-aqua); color: var(--p-primary); font-size: 23px; font-weight: 400; transition: background .2s, transform .2s; }

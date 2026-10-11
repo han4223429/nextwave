@@ -61,7 +61,7 @@
   function deadlineBadge(item) {
     const days = deadlineDays(item.deadline);
     if (item.status === 'archived') return { text: '보관', cls: 'closed' };
-    if (days === null) return { text: '마감일 미확인', cls: '' };
+    if (days === null) return { text: item.recruitmentStatus === 'open' ? '접수 중 · 일정 확인' : '마감일 미확인', cls: item.recruitmentStatus === 'open' ? 'soon' : '' };
     if (days < 0) return { text: '마감', cls: 'closed' };
     if (days === 0) return { text: '오늘 마감', cls: 'urgent' };
     return { text: 'D−' + days, cls: days <= 3 ? 'urgent' : days <= 14 ? 'soon' : '' };
@@ -155,6 +155,7 @@
       const meta = el('div', 'opp-card-meta'); meta.append(el('span', 'opp-tag', categories[item.category] || '기회 정보'));
       if (item.source) meta.append(el('span', 'opp-source', item.source));
       if (deadlineDays(item.deadline) !== null) meta.append(el('span', 'opp-source', item.deadline + ' 마감'));
+      else if (item.recruitmentStatus === 'open') meta.append(el('span', 'opp-source', '마감일 원문 확인'));
       card.append(meta);
       if (item.lastSeenAt) card.append(el('p', 'opp-checked', '출처 확인 ' + formatStamp(item.lastSeenAt) + ' KST'));
       const actions = el('div', 'opp-card-actions'); const link = safeURL(item.link);
@@ -168,6 +169,12 @@
   }
   function renderSources() {
     const sources = (publicSnapshot?.sources || []).filter(source => source && typeof source === 'object');
+    const strip = $('opp-source-strip');
+    if (strip) strip.replaceChildren(...sources.map(source => {
+      const pill = el('span', 'source-pill' + (source.status !== 'ok' ? ' warning' : ''));
+      pill.append(el('span', 'source-pill-dot'), el('strong', '', source.name || source.id || '출처'), el('span', '', String(Number(source.itemCount) || 0) + '건'));
+      return pill;
+    }));
     const last = dateObject(publicSnapshot?.lastSuccessAt);
     const interval = Number(publicSnapshot?.refreshIntervalMinutes) || 360;
     const stale = !last || Date.now() - last.getTime() > Math.max(interval * 2, 120) * 60000;

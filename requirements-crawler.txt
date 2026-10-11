@@ -1,3 +1,4 @@
 beautifulsoup4==4.14.2
+certifi==2026.7.22
 soupsieve==2.9.2
 typing_extensions==4.16.0

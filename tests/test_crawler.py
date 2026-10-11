@@ -72,6 +72,36 @@ class ParsingTests(unittest.TestCase):
         html = '<div class="ms-list"><ul class="list"><li><div class="tit"><a href="?ix=1&gp=1">Event</a></div></li><li><div class="tit"><a href="?ix=1&gp=2">Event</a></div></li></ul></div>'
         self.assertEqual(crawler.parse_wevity_links(html), ['https://www.wevity.com/?c=find&s=1&gbn=view&ix=1'])
 
+    def test_hola_public_events_keep_only_metadata_and_korean_deadline(self):
+        results = crawler.parse_hola_events((FIXTURES / 'hola-events.json').read_text())
+        self.assertEqual(len(results), 2)
+        self.assertEqual(results[0]['id'], 'auto_hola_6acb3e05ee012963f81ccba1')
+        self.assertEqual(results[0]['deadline'], '2026-10-20')
+        self.assertEqual(results[0]['startDate'], '2026-10-11')
+        self.assertEqual(results[0]['category'], 'hackathon')
+        self.assertEqual(results[1]['category'], 'contest')
+        self.assertEqual(results[1]['status'], 'archived')
+        self.assertNotIn('content', results[0])
+        with self.assertRaises(ValueError):
+            crawler.parse_hola_events('[]')
+
+    def test_dacon_public_list_uses_explicit_registration_state(self):
+        results = crawler.parse_dacon_list((FIXTURES / 'dacon-list.html').read_text())
+        self.assertEqual([item['id'] for item in results], ['auto_dacon_236771', 'auto_dacon_236749'])
+        self.assertEqual(results[0]['deadline'], None)
+        self.assertEqual(results[0]['recruitmentStatus'], 'open')
+        self.assertEqual(results[0]['category'], 'contest')
+        self.assertEqual(results[1]['status'], 'archived')
+        with self.assertRaises(ValueError):
+            crawler.parse_dacon_list('<h1>점검 중</h1>')
+
+    def test_new_source_links_reject_foreign_hosts_and_path_variants(self):
+        for source, url in [('hola', 'https://holaworld.io.evil.test/hola-it/6acb3e05ee012963f81ccba1'),
+                            ('hola', 'https://holaworld.io/hola-it/6acb3e05ee012963f81ccba1/../x'),
+                            ('dacon', 'https://dacon.io/competitions/official/236771/overview/extra')]:
+            with self.assertRaises(ValueError):
+                crawler.source_item_id(source, url)
+
     def test_short_english_keywords_do_not_match_inside_words(self):
         self.assertEqual(crawler.classify_category('Sailing photo contest'), 'contest')
         self.assertEqual(crawler.classify_category('2026 AI 해커톤'), 'hackathon')
@@ -101,6 +131,17 @@ class ParsingTests(unittest.TestCase):
         robots += '\nUser-agent: NextWavePortal\nDisallow: /\n'
         self.assertFalse(crawler.robots_allows(robots, 'https://www.wevity.com/'))
 
+    def test_redirect_cannot_cross_host_or_robots_disallow(self):
+        from urllib.request import Request
+        handler = crawler.SafeRedirectHandler({'dacon.io': 'User-agent: *\nDisallow: /private'})
+        original = Request('https://dacon.io/competitions')
+        with self.assertRaises(ValueError):
+            handler.redirect_request(original, None, 302, '', {}, 'https://api.holaworld.io/api/events')
+        with self.assertRaises(ValueError):
+            handler.redirect_request(original, None, 302, '', {}, 'https://dacon.io/private')
+        redirected = handler.redirect_request(original, None, 302, '', {}, 'https://dacon.io/competitions/')
+        self.assertEqual(redirected.full_url, 'https://dacon.io/competitions/')
+
 
 class RefreshTests(unittest.TestCase):
     def test_existing_item_is_updated_without_duplicate_or_resetting_first_seen(self):
@@ -112,6 +153,13 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(result['items'][0]['deadline'], '2026-10-01')
         self.assertEqual(result['items'][0]['firstSeenAt'], '2026-09-05T08:00:00Z')
         self.assertEqual(result['items'][0]['lastSeenAt'], NOW)
+
+    def test_source_closed_record_is_archived_without_guessing_deadline(self):
+        record = crawler.parse_dacon_list((FIXTURES / 'dacon-list.html').read_text())[1]
+        result = crawler.merge_snapshot({}, [record], [{**crawler.SOURCES['dacon'], 'status': 'ok', 'checkedAt': NOW, 'itemCount': 1}], NOW)
+        self.assertEqual(result['items'][0]['status'], 'archived')
+        self.assertEqual(result['items'][0]['archivedReason'], 'source_closed')
+        self.assertEqual(result['items'][0]['deadline'], None)
 
     def test_failed_source_preserves_original_freshness_and_items(self):
         old = snapshot(now='2026-09-05T08:00:00Z')

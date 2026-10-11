@@ -8,23 +8,30 @@ from datetime import date, datetime, timedelta, timezone
 import json
 from pathlib import Path
 import re
+import ssl
 import time
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlencode, urlparse
-from urllib.request import HTTPRedirectHandler, Request, build_opener
+from urllib.request import HTTPRedirectHandler, HTTPSHandler, Request, build_opener
 
+import certifi
 from bs4 import BeautifulSoup
 
 MANAGED_BY = "nextwave-crawler"
-CLASSIFICATION_VERSION = 2
+CLASSIFICATION_VERSION = 3
 USER_AGENT = "NextWavePortal/2.0 (+https://wenw.ceo)"
 KST_URL = "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do"
 WEV_URL = "https://www.wevity.com/"
+HOLA_URL = "https://holaworld.io/hola-it"
+HOLA_API = "https://api.holaworld.io/api/events"
+DACON_URL = "https://dacon.io/competitions"
 SOURCES = {
     "kstartup": {"id": "kstartup", "name": "K-Startup", "url": KST_URL},
     "wevity": {"id": "wevity", "name": "위비티", "url": WEV_URL + "?c=find&s=1"},
+    "hola": {"id": "hola", "name": "Hola IT", "url": HOLA_URL},
+    "dacon": {"id": "dacon", "name": "DACON", "url": DACON_URL},
 }
-ALLOWED_HOSTS = {"www.k-startup.go.kr", "www.wevity.com"}
+ALLOWED_HOSTS = {"www.k-startup.go.kr", "www.wevity.com", "holaworld.io", "api.holaworld.io", "dacon.io"}
 CATEGORIES = {"startup", "hackathon", "gamedev", "dev", "marketing", "contest", "activity", "education", "internship"}
 KST = timezone(timedelta(hours=9))
 MAX_BYTES = 3_000_000
@@ -60,12 +67,21 @@ def safe_source_url(url):
 def source_item_id(source_id, url):
     safe_source_url(url)
     parsed = urlparse(url)
-    expected = "www.k-startup.go.kr" if source_id == "kstartup" else "www.wevity.com"
+    expected = {"kstartup": "www.k-startup.go.kr", "wevity": "www.wevity.com",
+                "hola": "holaworld.io", "dacon": "dacon.io"}.get(source_id)
     if source_id not in SOURCES or parsed.hostname != expected:
         raise ValueError("Source and URL do not match")
-    key = "pbancSn" if source_id == "kstartup" else "ix"
-    value = parse_qs(parsed.query).get(key, [""])[0]
-    if not re.fullmatch(r"\d{1,12}", value):
+    if source_id in ("kstartup", "wevity"):
+        key = "pbancSn" if source_id == "kstartup" else "ix"
+        value = parse_qs(parsed.query).get(key, [""])[0]
+        valid = re.fullmatch(r"\d{1,12}", value)
+    elif source_id == "hola":
+        match = re.fullmatch(r"/hola-it/([a-f0-9]{24})", parsed.path)
+        value, valid = (match.group(1), True) if match else ("", False)
+    else:
+        match = re.fullmatch(r"/competitions/official/(\d{1,12})/overview/?", parsed.path)
+        value, valid = (match.group(1), True) if match else ("", False)
+    if not valid:
         raise ValueError("Source record has no stable ID")
     return "auto_" + source_id + "_" + value
 
@@ -100,12 +116,20 @@ def classify_category(title, source_category="", default="contest"):
     return source_defaults.get(clean(source_category), default)
 
 
+def category_for_source(source_id, title, source_category=""):
+    # An explicit competition type is stronger evidence than the word "AI" in its title.
+    if source_id == "hola" and source_category in ("hackathon", "contest"):
+        return source_category
+    if source_id == "dacon":
+        return "hackathon" if re.search(r"해커톤|hackathon", title, re.I) else "contest"
+    return classify_category(title, source_category, "startup" if source_id == "kstartup" else "contest")
+
+
 def reclassify_snapshot(snapshot):
     """Apply local categorization rules without pretending that sources were fetched again."""
     updated = deepcopy(snapshot)
     for item in updated.get("items", []):
-        item["category"] = classify_category(item["title"], item.get("sourceCategory", ""),
-                                              "startup" if item["sourceId"] == "kstartup" else "contest")
+        item["category"] = category_for_source(item["sourceId"], item["title"], item.get("sourceCategory", ""))
     updated["classificationVersion"] = CLASSIFICATION_VERSION
     return updated
 
@@ -118,7 +142,7 @@ def make_item(source_id, title, link, deadline, organizer="", source_category=""
     return {
         "id": source_item_id(source_id, link), "title": title,
         "description": " · ".join(filter(None, [clean(organizer), clean(source_category)])),
-        "category": classify_category(title, source_category, "startup" if source_id == "kstartup" else "contest"),
+        "category": category_for_source(source_id, title, source_category),
         "deadline": valid_date(deadline), "link": link,
         "source": source["name"], "sourceId": source_id, "sourceUrl": source["url"],
         "organizer": clean(organizer), "sourceCategory": clean(source_category),
@@ -213,9 +237,85 @@ def parse_wevity_detail(html, link):
                      startDate=start, audience=audience, applicationPeriod=fields["접수기간"])
 
 
+def hola_date(value):
+    """Convert an explicit ISO timestamp to a calendar day in Korea."""
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(KST).date().isoformat()
+    except (AttributeError, TypeError, ValueError):
+        return None
+
+
+def parse_hola_events(payload):
+    """Keep only the public event listing's small metadata, never its HTML content."""
+    events = json.loads(payload)
+    if not isinstance(events, list) or not events:
+        raise ValueError("Hola event list structure changed or returned no records")
+    items = []
+    for event in events:
+        if not isinstance(event, dict) or event.get("eventType") not in ("hackathon", "contest"):
+            continue
+        if event.get("isDeleted") or event.get("status") != "approved":
+            continue
+        event_id = event.get("_id", "")
+        if not isinstance(event_id, str) or not re.fullmatch(r"[a-f0-9]{24}", event_id):
+            raise ValueError("Hola event has no stable ID")
+        deadline = hola_date(event.get("applicationEndDate"))
+        if not deadline:
+            raise ValueError("Hola event has no valid application end date")
+        link = HOLA_URL + "/" + event_id
+        closed = event.get("isClosed") is True or event.get("_closed") is True
+        item = make_item("hola", event.get("title", ""), link, deadline,
+                         event.get("organization", ""), event["eventType"],
+                         startDate=hola_date(event.get("applicationStartDate")),
+                         recruitmentStatus="closed" if closed else "open")
+        if closed:
+            item.update(status="archived", archivedReason="source_closed")
+        items.append(item)
+    return items
+
+
+def parse_dacon_list(html):
+    soup = BeautifulSoup(html, "html.parser")
+    cards = soup.select(".official-comp .comp")
+    if not cards:
+        raise ValueError("DACON competition list structure changed or returned no records")
+    items = []
+    for card in cards:
+        anchor = card.select_one('a[href]')
+        title = card.select_one('.name')
+        state = card.select_one('.dday')
+        if not anchor or not title or not state:
+            raise ValueError("DACON card missing title/link/state")
+        href = anchor.get("href", "")
+        if not re.fullmatch(r"/competitions/official/\d{1,12}/overview/?", href):
+            continue  # Non-official competition routes have a different contract.
+        label = clean(state.get_text(" ", strip=True))
+        if label not in ("참가신청중", "마감"):
+            continue  # Practice/open play does not mean accepting applications.
+        item = make_item("dacon", title.get_text(" ", strip=True), "https://dacon.io" + href,
+                         None, "", "AI 데이터 경진대회", recruitmentStatus="open" if label == "참가신청중" else "closed")
+        if label == "마감":
+            item.update(status="archived", archivedReason="source_closed")
+        items.append(item)
+    return items
+
+
 class SafeRedirectHandler(HTTPRedirectHandler):
+    def __init__(self, robots):
+        super().__init__()
+        self.robots = robots
+
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         safe_source_url(newurl)
+        original = urlparse(req.full_url)
+        target = urlparse(newurl)
+        if original.hostname != target.hostname:
+            raise ValueError("Cross-host source redirect is not allowed")
+        # The robots file itself may redirect within the same host. Other targets
+        # must satisfy that host's already checked robots rules too.
+        if original.path != "/robots.txt":
+            if target.hostname not in self.robots or not robots_allows(self.robots[target.hostname], newurl):
+                raise ValueError("Redirect target is not allowed by robots.txt")
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
@@ -252,10 +352,11 @@ def robots_allows(text, url):
 
 class PublicFetcher:
     def __init__(self, delay=1.5):
-        self.opener = build_opener(SafeRedirectHandler())
+        self.robots = {}
+        # Use an explicit maintained CA bundle; macOS Python often lacks system roots.
+        self.opener = build_opener(SafeRedirectHandler(self.robots), HTTPSHandler(context=ssl.create_default_context(cafile=certifi.where())))
         self.delay = delay
         self.last_request = {}
-        self.robots = {}
 
     def _request(self, url):
         safe_source_url(url)
@@ -264,7 +365,7 @@ class PublicFetcher:
             time.sleep(max(0, self.delay - (time.monotonic() - self.last_request.get(host, 0))))
             self.last_request[host] = time.monotonic()
             try:
-                request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,text/plain;q=0.9"})
+                request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/json;q=0.9,text/plain;q=0.8"})
                 with self.opener.open(request, timeout=20) as response:
                     raw = response.read(MAX_BYTES + 1)
                     if len(raw) > MAX_BYTES:
@@ -308,7 +409,7 @@ def crawl_sources(fetcher, pages=3, detail_limit=20):
                     fetched.extend(parse_kstartup(fetcher.get(KST_URL + "?" + urlencode({"page": page}))))
                 except Exception as exc:
                     errors.append(f"목록 {page}: {type(exc).__name__}")
-        else:
+        elif source_id == "wevity":
             try:
                 links = parse_wevity_links(fetcher.get(source["url"]))[:detail_limit]
                 for link in links:
@@ -318,6 +419,19 @@ def crawl_sources(fetcher, pages=3, detail_limit=20):
                             fetched.append(item)
                     except Exception as exc:
                         errors.append(f"상세 {source_item_id(source_id, link)}: {type(exc).__name__}")
+            except Exception as exc:
+                errors.append(f"목록: {type(exc).__name__}")
+        elif source_id == "hola":
+            for event_type in ("hackathon", "contest"):
+                for page in range(1, 3):
+                    try:
+                        url = HOLA_API + "?" + urlencode({"eventType": event_type, "page": page})
+                        fetched.extend(parse_hola_events(fetcher.get(url)))
+                    except Exception as exc:
+                        errors.append(f"{event_type} 목록 {page}: {type(exc).__name__}")
+        elif source_id == "dacon":
+            try:
+                fetched.extend(parse_dacon_list(fetcher.get(DACON_URL)))
             except Exception as exc:
                 errors.append(f"목록: {type(exc).__name__}")
         fetched = list({item["id"]: item for item in fetched}.values())
@@ -360,7 +474,9 @@ def merge_snapshot(previous, incoming, sources, now=None):
     for item in incoming:
         old = records.get(item["id"], {})
         records[item["id"]] = {**item, "firstSeenAt": old.get("firstSeenAt", now), "lastSeenAt": now,
-                               "createdAt": old.get("createdAt", now), "status": "active"}
+                               "createdAt": old.get("createdAt", now), "status": item.get("status", "active")}
+        if item.get("status") == "archived":
+            records[item["id"]]["archivedAt"] = old.get("archivedAt", now)
     successful = {s["id"] for s in sources if s["status"] == "ok"}
     for item in records.values():
         deadline = valid_date(item.get("deadline"))
@@ -374,7 +490,7 @@ def merge_snapshot(previous, incoming, sources, now=None):
             item.update(status="archived", archivedReason=reason, archivedAt=item.get("archivedAt", now))
     records = sorted(records.values(), key=lambda x: (x.get("status") != "active", x.get("deadline") or "9999-12-31", x["id"]))
     return prune_expired_snapshot(reclassify_snapshot({"schemaVersion": 1, "generatedAt": now,
-            "lastSuccessAt": now if incoming else previous.get("lastSuccessAt"),
+            "lastSuccessAt": now if any(s["status"] == "ok" for s in sources) else previous.get("lastSuccessAt"),
             "refreshIntervalMinutes": 60, "sources": updated_sources, "items": records}), now)
 
 
