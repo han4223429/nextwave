@@ -425,6 +425,62 @@ window.I18N = (function () {
         "motion.footer": "Small beginnings. Our next wave."
 });
 
+    // Project archive copy: verifiable work and practical navigation come first.
+    Object.assign(dict.ko, {
+        "archive.hero.overline": "순천향대학교 IT·창업 연합 동아리",
+        "archive.hero.title": "만든 것을<br>먼저 보여줍니다.",
+        "archive.hero.body": "동아리 활동과 멤버의 작업을 기록합니다. 게임 점수 실험, 구명 장치 설계, 대회 기록을 직접 살펴보세요.",
+        "archive.hero.work": "프로젝트 살펴보기 ↗",
+        "archive.hero.portal": "열린 공고 찾기 ↗",
+        "archive.hero.cover": "김한용 · 자동 구명 추진 장치 설계",
+        "archive.water.title": "이름에서 시작한<br>수면 실험.",
+        "archive.water.body": "NextWave의 이름을 물의 움직임으로 표현한 웹 실험입니다. 클릭하거나 드래그해 반응을 살펴보세요.",
+        "motion.projects.eyebrow": "실제 작업과 공개된 원작을 바탕으로 구성했습니다.",
+        "motion.projects.title": "프로젝트를<br><span>직접 열어보세요.</span>",
+        "motion.projects.intro": "게임 점수 웹 실험과 구명 장치 설계 이미지를 살펴보세요. 제작자와 원본 출처도 함께 표시했습니다.",
+        "motion.mayhem.subtitle": "MAYHEM의 점수 규칙을<br>브라우저에서 체험합니다.",
+        "motion.about.title": "기획, 개발, 게임.<br><span>함께 시도하는 동아리.</span>",
+        "field.about.body": "NextWave는 순천향대학교의 IT·창업 연합 동아리입니다. 멤버의 프로젝트와 대회 활동을 이곳에 기록하고, 관심 분야별로 함께할 기회를 찾습니다.",
+        "field.about.sub": "이 사이트의 게임 실험과 3D 뷰어는 원작 및 제작자를 표기했습니다. 기록과 기회 정보는 원문 링크에서 다시 확인할 수 있습니다.",
+        "field.join.body": "순천향대학교 재학생과 휴학생에게 열려 있습니다.<br>확정된 모집 일정과 지원 링크는 이곳에 공지합니다.",
+        "motion.track.title": "관심 분야별로<br><span>살펴보세요.</span>",
+        "motion.track.intro": "분야를 고르면 관련 활동 아이디어와 열려 있는 공고로 이동할 수 있습니다.",
+        "motion.track.eyebrow": "개발 · 게임 · 해커톤 · 마케팅",
+        "motion.awards.title": "2025년<br><span>활동 기록.</span>",
+        "motion.team.title": "운영진을<br><span>소개합니다.</span>",
+        "motion.join.title": "합류 안내.",
+        "motion.footer": "순천향대학교 IT·창업 연합 동아리",
+        "opportunity.preview.title": "열려 있는 공고를<br><span>모았습니다.</span>",
+        "opportunity.preview.body": "해커톤·공모전 정보를 출처별로 확인하고 원문 공고로 이동하세요. 지원 전에는 모집 상태와 일정을 다시 확인해 주세요."
+    });
+    Object.assign(dict.en, {
+        "archive.hero.overline": "IT & startup club · Soonchunhyang University",
+        "archive.hero.title": "See the work<br>before the pitch.",
+        "archive.hero.body": "An archive of our club activities and members’ work. Explore a game score experiment, rescue device design, and competition records.",
+        "archive.hero.work": "Explore projects ↗",
+        "archive.hero.portal": "Browse open calls ↗",
+        "archive.hero.cover": "Hanyong Kim · rescue propulsion device design",
+        "archive.water.title": "A water study<br>for our name.",
+        "archive.water.body": "An interactive web study of the movement behind the name NextWave. Click or drag to explore it.",
+        "motion.projects.eyebrow": "Based on actual work and credited originals.",
+        "motion.projects.title": "Open the<br><span>projects.</span>",
+        "motion.projects.intro": "Try the game score experiment and inspect the rescue device design. Original creators and sources are credited.",
+        "motion.mayhem.subtitle": "Try MAYHEM’s scoring idea<br>in the browser.",
+        "motion.about.title": "Planning, development, games.<br><span>Making together.</span>",
+        "field.about.body": "NextWave is an IT and startup club at Soonchunhyang University. We document members’ projects and competition activities and seek opportunities across our interests.",
+        "field.about.sub": "The game experiment and 3D viewer credit their original creators. Follow the source links to verify projects and opportunity details.",
+        "field.join.body": "Open to current and on-leave Soonchunhyang University students.<br>Confirmed recruitment dates and the application link will appear here.",
+        "motion.track.title": "Browse by<br><span>interest.</span>",
+        "motion.track.intro": "Choose a field to see an activity idea and related open calls.",
+        "motion.track.eyebrow": "DEVELOPMENT · GAMES · HACKATHONS · MARKETING",
+        "motion.awards.title": "Activity record<br><span>from 2025.</span>",
+        "motion.team.title": "Meet the<br><span>organizers.</span>",
+        "motion.join.title": "Join NextWave.",
+        "motion.footer": "IT and startup club · Soonchunhyang University",
+        "opportunity.preview.title": "Browse the<br><span>open calls.</span>",
+        "opportunity.preview.body": "Find hackathons and competitions by source, then open the original notice. Confirm status and dates before applying."
+    });
+
     let lang;
     try { lang = localStorage.getItem('nw_lang'); } catch { lang = null; }
     if (lang !== 'ko' && lang !== 'en') {

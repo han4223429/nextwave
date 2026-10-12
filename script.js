@@ -82,6 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault(); selectProject(projectTabs[next], true);
         });
     });
+    document.querySelector('.archive-cover')?.addEventListener('click', () => {
+        const rescueTab = projectTabs.find(button => button.dataset.projectTab === 'rescue');
+        if (rescueTab) selectProject(rescueTab);
+    });
 
     const modal = $('member-modal'); let activeCard;
     function fillProfile(card) {
