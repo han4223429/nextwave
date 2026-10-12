@@ -482,7 +482,7 @@ window.I18N = (function () {
     });
 
     Object.assign(dict.ko, {
-        "stitch.nav.about": "소개", "stitch.nav.calls": "공모전·지원사업", "stitch.nav.join": "참여 안내",
+        "stitch.nav.about": "소개", "stitch.nav.calls": "공모전·지원사업", "stitch.nav.join": "참여 안내", "stitch.nav.member": "부원 로그인", "stitch.brand.line": "대학생 창업가를 위한, NextWave<br>순천향대학교 IT·창업 연합 동아리",
         "stitch.hero.title": "아이디어를 넘어,<br>직접 만든 프로덕트로 증명합니다.",
         "stitch.hero.body": "멤버가 만든 게임과 구명 장치 설계, 그리고 2025년의 대회 기록을 공개합니다. 관심 있는 분야를 살펴보고 다음 도전을 찾아보세요.",
         "stitch.hero.projects": "프로젝트 살펴보기 ↗", "stitch.hero.calls": "공모전·지원사업 찾기 ↗",
@@ -502,7 +502,7 @@ window.I18N = (function () {
         "stitch.join.title": "다음 작업을,<br>함께 시작할까요?"
     });
     Object.assign(dict.en, {
-        "stitch.nav.about": "About", "stitch.nav.calls": "Open calls", "stitch.nav.join": "Join",
+        "stitch.nav.about": "About", "stitch.nav.calls": "Open calls", "stitch.nav.join": "Join", "stitch.nav.member": "Member sign-in", "stitch.brand.line": "NextWave, for student founders<br>IT and startup club · Soonchunhyang University",
         "stitch.hero.title": "Beyond ideas,<br>we prove it by building products.",
         "stitch.hero.body": "Explore a member-made game, a rescue device design, and our 2025 competition record. Find the work that interests you and your next challenge.",
         "stitch.hero.projects": "Explore projects ↗", "stitch.hero.calls": "Find open calls ↗",

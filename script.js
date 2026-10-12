@@ -22,18 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     setupLinks();
 
-    const menu = $('mobile-menu');
-    const menuButton = $('mobile-menu-toggle');
-    function closeMenu(restoreFocus = false) { menu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', isEnglish() ? 'Open menu' : '메뉴 열기'); if (restoreFocus) menuButton.focus(); }
-    menuButton.addEventListener('click', () => {
-        const open = menu.hidden; menu.hidden = !open; menuButton.setAttribute('aria-expanded', String(open));
-        menuButton.setAttribute('aria-label', open ? (isEnglish() ? 'Close menu' : '메뉴 닫기') : (isEnglish() ? 'Open menu' : '메뉴 열기'));
-    });
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeMenu()));
-    document.addEventListener('click', event => { if (!menu.hidden && !event.target.closest('#site-header')) closeMenu(); });
-    document.addEventListener('keydown', event => { if (event.key === 'Escape' && !menu.hidden) closeMenu(true); });
-    window.matchMedia('(min-width: 981px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
-
     const ideas = {
         dev: { ko: [['캠퍼스의 불편함을', '하나의', '서비스로.'], ['작은 아이디어를', '사람들이 쓰는', '앱으로.'], ['매번 하던 반복을', '한 번의', '클릭으로.']], en: [['A campus problem.', 'One useful', 'product.'], ['A small idea.', 'An app people', 'use.'], ['A daily routine.', 'Just one', 'click.']] },
         game: { ko: [['상상 속 세계를', '직접 플레이하는', '게임으로.'], ['심심했던 시간을', '잊지 못할', '한 판으로.'], ['우리만의 이야기를', '누군가의', '모험으로.']], en: [['An imagined world.', 'A game you can', 'play.'], ['An ordinary moment.', 'One memorable', 'round.'], ['A story of our own.', 'Someone’s next', 'adventure.']] },
