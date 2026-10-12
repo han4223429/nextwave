@@ -2,10 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NextWave — 프로젝트와 활동 기록</title>
+  <title>NextWave — 프로젝트와 공모전</title>
   <meta name="description" content="순천향대학교 IT·창업 연합 동아리 NextWave. 직접 만들고, 플레이하고, 다음 도전을 시작하는 사람들. 우리 프로젝트와 인터랙티브 실험을 만나보세요." />
   <meta name="theme-color" content="#f8f7f2" />
-  <meta property="og:type" content="website" /><meta property="og:title" content="NextWave — 프로젝트와 활동 기록" />
+  <meta property="og:type" content="website" /><meta property="og:title" content="NextWave — 프로젝트와 공모전" />
   <meta property="og:description" content="순천향대학교 IT·창업 연합 동아리 NextWave의 프로젝트, 멤버, 대회 기록과 기회 정보." />
   <meta property="og:image" content="assets/logo.png" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:image" content="assets/logo.png" />
   <link rel="icon" href="assets/logo.png" />
@@ -14,11 +14,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="styles.css?v=opportunities-20261012" />
   <link rel="stylesheet" href="rescue-demo.css?v=water-sound-4" />
-  <link rel="stylesheet" href="archive-v2.css?v=archive-20261012" />
+  <link rel="stylesheet" href="stitch-screen.css?v=stitch-20261012" />
   <script defer src="water-audio.js?v=water-sound-20260907-2"></script>
   <script defer src="sound-ui.js?v=water-sound-20260907-2"></script>
-  <script defer src="i18n.js?v=archive-20261012"></script>
-  <script defer src="script.js?v=archive-20261012"></script>
+  <script defer src="i18n.js?v=stitch-20261012"></script>
+  <script defer src="script.js?v=stitch-20261012"></script>
   <script defer src="kinetic.js?v=water-sound-4"></script>
   <script defer src="project-demo.js?v=water-sound-4"></script>
   <script defer src="rescue-demo.js?v=water-sound-4"></script>
@@ -27,13 +27,12 @@
   <a class="skip-link" href="#main-content">본문 바로가기</a>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
   <header id="site-header" class="site-header">
-    <a class="brand" href="#home" aria-label="NextWave 홈">nextwave<span class="brand-dot" aria-hidden="true"></span></a>
+    <a class="brand" href="#home" aria-label="NextWave 홈">NEXTWAVE<span class="brand-dot" aria-hidden="true"></span></a>
     <nav class="desktop-nav" aria-label="주요 메뉴">
+      <a class="nav-link" href="#about" data-i18n="stitch.nav.about">소개</a>
       <a class="nav-link" href="#projects" data-i18n="motion.nav.projects">프로젝트</a>
-      <a class="nav-link" href="#about" data-i18n="field.nav.club">동아리 소개</a>
-      <a class="nav-link" href="#activities" data-i18n="field.nav.work">하는 일</a>
-      <a class="nav-link" href="#team" data-i18n="nav.team">운영진</a>
-      <a class="nav-link" href="#recruitment" data-i18n="field.join">합류 안내</a>
+      <a class="nav-link" href="portal.html" data-i18n="stitch.nav.calls">공모전·지원사업</a>
+      <a class="nav-link" href="#recruitment" data-i18n="stitch.nav.join">참여 안내</a>
     </nav>
     <div class="header-actions">
       <button id="sound-toggle" class="utility-button" aria-pressed="true" aria-label="물결 효과음 끄기"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="sound-label">SOUND ON</span></button>
@@ -42,37 +41,35 @@
       <button id="mobile-menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="메뉴 열기"><span></span><span></span></button>
     </div>
     <nav id="mobile-menu" class="mobile-menu" aria-label="모바일 메뉴" hidden>
-      <a href="#projects" data-i18n="motion.nav.projects">프로젝트</a><a href="#about" data-i18n="field.nav.club">동아리 소개</a><a href="#activities" data-i18n="field.nav.work">하는 일</a><a href="#team" data-i18n="nav.team">운영진</a><a href="#recruitment" data-i18n="field.join">합류 안내</a><a href="portal.html" data-i18n="field.portal">포털</a>
+      <a href="#about" data-i18n="stitch.nav.about">소개</a><a href="#projects" data-i18n="motion.nav.projects">프로젝트</a><a href="portal.html" data-i18n="stitch.nav.calls">공모전·지원사업</a><a href="#recruitment" data-i18n="stitch.nav.join">참여 안내</a>
     </nav>
   </header>
-  <main id="main-content">
-    <section id="home" class="archive-hero" aria-labelledby="archive-hero-title">
-      <div class="page-width">
-        <div class="archive-overline"><span data-i18n="archive.hero.overline">순천향대학교 IT·창업 연합 동아리</span><span>NEXTWAVE / WORK INDEX</span></div>
-        <div class="archive-intro-grid">
-          <div class="archive-lead">
-            <p class="archive-serial">ARCHIVE &nbsp; / &nbsp; PROJECTS & PEOPLE</p>
-            <h1 id="archive-hero-title" data-i18n="archive.hero.title">만든 것을<br>먼저 보여줍니다.</h1>
-            <p class="archive-intro-text" data-i18n="archive.hero.body">동아리 활동과 멤버의 작업을 기록합니다. 게임 점수 실험, 구명 장치 설계, 대회 기록을 직접 살펴보세요.</p>
-            <div class="archive-lead-links"><a href="#projects" data-i18n="archive.hero.work">프로젝트 살펴보기 ↗</a><a href="portal.html" data-i18n="archive.hero.portal">열린 공고 찾기 ↗</a></div>
-          </div>
-          <a class="archive-cover" href="#projects" aria-label="RESCUE JET 프로젝트 살펴보기">
-            <figure><img src="assets/rescue-jet.jpg" width="819" height="631" alt="멤버 김한용의 RESCUE JET 자동 구명 추진 장치 설계 이미지" fetchpriority="high"></figure>
-            <div class="archive-cover-caption"><span>FEATURED WORK / 02</span><strong>RESCUE JET</strong><span data-i18n="archive.hero.cover">김한용 · 자동 구명 추진 장치 설계</span><span aria-hidden="true">↗</span></div>
-          </a>
-        </div>
-        <div class="archive-index-line"><span>WORK / 02</span><span>RECORD / 06</span><span>OPPORTUNITY SOURCES / 06</span><a href="#projects">SCROLL TO WORK ↓</a></div>
+<main id="main-content">
+    <section id="home" class="stitch-hero" aria-labelledby="hero-title">
+      <div class="stitch-container">
+        <p class="stitch-eyebrow"><span class="stitch-signal"></span> 순천향대학교 IT·창업 연합 동아리 <span class="stitch-muted">/ NEXTWAVE</span></p>
+        <h1 id="hero-title" data-i18n="stitch.hero.title">아이디어를 넘어,<br>직접 만든 프로덕트로 증명합니다.</h1>
+        <p class="stitch-hero-copy" data-i18n="stitch.hero.body">멤버가 만든 게임과 구명 장치 설계, 그리고 2025년의 대회 기록을 공개합니다. 관심 있는 분야를 살펴보고 다음 도전을 찾아보세요.</p>
+        <div class="stitch-hero-actions"><a class="stitch-primary" href="#projects" data-i18n="stitch.hero.projects">프로젝트 살펴보기 ↗</a><a class="stitch-secondary" href="portal.html" data-i18n="stitch.hero.calls">공모전·지원사업 찾기 ↗</a></div>
+        <div class="stitch-metrics" aria-label="NextWave 공개 기록"><div><strong>02</strong><span data-i18n="stitch.metric.projects">공개 프로젝트</span></div><div><strong>06</strong><span data-i18n="stitch.metric.awards">2025 활동 기록</span></div><div><strong>06</strong><span data-i18n="stitch.metric.sources">공고 출처</span></div><div><strong>OPEN</strong><span data-i18n="stitch.metric.archive">프로젝트·기회 목록</span></div></div>
       </div>
     </section>
-    <section id="projects" class="projects-section section-space">
-      <div class="page-width">
-        <div class="section-label"><span class="section-kicker">01 / SELECTED WORK</span><span data-i18n="motion.projects.eyebrow">설명보다 먼저, 플레이.</span></div>
-        <div class="section-heading"><h2 data-i18n="motion.projects.title">우리가 만든 건,<br /><span>움직인다.</span></h2><p data-i18n="motion.projects.intro">기록 속 프로젝트를 화면 밖으로.<br />직접 눌러보고, 움직여보고, 이해해보세요.</p></div>
-        <div class="project-tabs" role="tablist" aria-label="체험할 프로젝트 선택">
+    <section id="about" class="stitch-studio stitch-section" aria-labelledby="studio-title">
+      <div class="stitch-container">
+        <div class="stitch-section-head"><div><p class="stitch-kicker">INSIDE THE BUILD STUDIO</p><h2 id="studio-title" data-i18n="stitch.studio.title">작업을 남기고,<br>다음 시도로 이어갑니다.</h2></div><p data-i18n="stitch.studio.body">NextWave는 멤버의 작업을 출처와 함께 기록합니다. 아래 설계 이미지는 김한용의 RESCUE JET 프로젝트 자료입니다.</p></div>
+        <a class="stitch-feature-image archive-cover" href="#project-lab" aria-label="RESCUE JET 프로젝트와 3D 체험 살펴보기"><img src="assets/rescue-jet.jpg" width="819" height="631" alt="김한용의 RESCUE JET 구명 추진 장치 설계 이미지" fetchpriority="high"><span class="stitch-image-caption"><strong>RESCUE JET / 02</strong><span data-i18n="stitch.studio.caption">멤버 김한용의 구명 추진 장치 설계</span><span aria-hidden="true">↗</span></span></a>
+      </div>
+    </section>
+    <section id="projects" class="stitch-projects stitch-section" aria-labelledby="projects-title"><div class="stitch-container">
+      <div class="stitch-section-head"><div><p class="stitch-kicker">SELECTED PROJECTS / 02</p><h2 id="projects-title" data-i18n="stitch.projects.title">서로 다른 두 프로젝트.</h2></div><p data-i18n="stitch.projects.body">게임의 점수 규칙을 브라우저에서 체험하고, 구명 장치의 설계 이미지와 3D 외형을 살펴보세요.</p></div>
+      <div class="stitch-project-ledger">
+        <article class="stitch-project-card"><div class="stitch-project-main"><p class="stitch-card-index">01 / GAME DEVELOPMENT</p><h3>MAYHEM</h3><p data-i18n="stitch.mayhem.body">이학주·HMBG 게임개발 동아리의 게임. 공개된 점수 규칙을 바탕으로 만든 별도 브라우저 실험을 체험할 수 있습니다.</p><a href="https://hakjulee.com/" target="_blank" rel="noopener noreferrer" data-i18n="motion.project.source">제작자 프로젝트 소개</a></div><div class="stitch-project-facts"><span>2025 SCHU AI·SW FESTIVAL</span><strong data-i18n="motion.mayhem.award">게임개발경진대회 최우수상</strong><p data-i18n="motion.mayhem.credit">이학주 · HMBG 게임개발 동아리 프로젝트</p><a href="#project-lab" data-open-project="mayhem" data-i18n="stitch.project.explore">웹 실험 열기 ↗</a></div></article>
+        <article class="stitch-project-card"><div class="stitch-project-main"><p class="stitch-card-index">02 / HARDWARE DESIGN</p><h3>RESCUE JET</h3><p data-i18n="stitch.rescue.body">멤버 김한용이 공개한 자동 구명 추진 장치 설계. 기존 3D 뷰어에서 외형을 돌려보고 분해해 볼 수 있습니다.</p><a href="https://han4223429.github.io/portfolio/#projects" target="_blank" rel="noopener noreferrer" data-i18n="stitch.project.original">원본 프로젝트 보기 ↗</a></div><div class="stitch-project-facts"><span>MEMBER PROJECT / 2025</span><strong data-i18n="stitch.rescue.credit">김한용 · 자동 구명 추진 장치</strong><p data-i18n="stitch.rescue.note">3D 외형은 설계 이미지 기반 재구성이며, 추진 동작은 시각화입니다.</p><a href="#project-lab" data-open-project="rescue" data-i18n="stitch.project.model">3D 체험 열기 ↗</a></div></article>
+      </div>
+      <details id="project-lab" class="stitch-project-lab"><summary><span>INTERACTIVE PROJECT LAB</span><strong data-i18n="stitch.lab.open">게임 실험과 3D 모델 직접 열어보기</strong><span aria-hidden="true">↗</span></summary><div class="stitch-project-lab-inner"><div class="project-tabs" role="tablist" aria-label="체험할 프로젝트 선택">
           <button id="project-tab-mayhem" role="tab" aria-selected="true" aria-controls="mayhem-project-panel" data-project-tab="mayhem" tabindex="0"><span>01</span>MAYHEM<span class="tab-category">GAME</span></button>
           <button id="project-tab-rescue" role="tab" aria-selected="false" aria-controls="rescue-project-panel" data-project-tab="rescue" tabindex="-1"><span>02</span>RESCUE JET<span class="tab-category">HARDWARE</span></button>
-        </div>
-        <div id="mayhem-project-panel" role="tabpanel" aria-labelledby="project-tab-mayhem" data-project-panel="mayhem">
+        </div><div id="mayhem-project-panel" role="tabpanel" aria-labelledby="project-tab-mayhem" data-project-panel="mayhem">
         <article class="project-feature">
           <div class="project-info">
             <div class="project-index">PROJECT / 01 <span class="project-tag">GAME</span></div>
@@ -93,8 +90,7 @@
           </div>
         </article>
         <p class="demo-disclaimer" data-i18n="motion.demo.disclaimer">이 체험은 공개된 점수 규칙을 바탕으로 새로 만든 웹 실험입니다. 조작·표적·30초 제한은 체험을 위한 별도 구성으로, 원작 게임과 다릅니다.</p>
-        </div>
-<article class="project-feature rescue-feature" id="rescue-project-panel" role="tabpanel" aria-labelledby="project-tab-rescue" data-project-panel="rescue" hidden>
+        </div><article class="project-feature rescue-feature" id="rescue-project-panel" role="tabpanel" aria-labelledby="project-tab-rescue" data-project-panel="rescue" hidden>
   <div class="project-info">
     <div class="project-index">PROJECT / 02 <span class="project-tag">HARDWARE</span></div>
     <h3 id="rescue-project-title">RESCUE JET</h3>
@@ -119,23 +115,9 @@
 </div>
 <figcaption data-en="Arduino · 3D printing · 2025 Top Excellence Award" data-ko="Arduino · 3D 프린팅 · 2025 최우수상">Arduino · 3D 프린팅 · 2025 최우수상</figcaption>
 </figure>
-</article>
-
-        <a class="live-project" href="portal.html"><span class="live-project-index">FIND YOUR NEXT CURRENT</span><div><span class="project-tag">WEB · COMMUNITY</span><h3>NEXTWAVE LIVE DESK<span aria-hidden="true">↗</span></h3><p data-i18n="motion.desk.project">우리의 다음 도전을 찾는 도구. 창업 지원·공모전 정보와 부원 공간을 한곳에.</p></div><span class="live-project-action" data-i18n="motion.desk.try">직접 써보기 ↗</span></a>
-      </div>
-    </section>
-
-    <section id="about" class="about-section section-space">
-      <div class="page-width">
-        <div class="section-label"><span class="section-kicker">02 / THE CLUB</span><span>SOONCHUNHYANG UNIVERSITY / NEXTWAVE</span></div>
-        <div class="about-grid"><h2 data-i18n="motion.about.title">잘 맞는 사람보다,<br /><span>다르게 생각하는 사람.</span></h2><div><p data-i18n="field.about.body">NextWave는 아이디어를 쌓아 두는 곳이 아닙니다. 개발자, 디자이너, 기획자가 한 팀이 되어 직접 서비스를 만들고, 게임을 출시하고, 창업대회에 도전합니다.</p><p class="muted" data-i18n="field.about.sub">잘하는 사람만 모이지 않아도 괜찮아요. 질문하고, 부딪히고, 다시 만들어 보는 사람이면 충분합니다.</p></div></div>
-        <div class="culture-words"><div class="culture-word"><span>FEATURED WORK</span><strong>02 <small>PROJECTS</small></strong></div><div class="culture-word"><span>2025 RECORD</span><strong>06 <small>AWARDS</small></strong></div><div class="culture-word"><span>OPEN CALLS</span><strong>06 <small>SOURCES</small></strong></div></div>
-      </div>
-    </section>
-    <section id="activities" class="activity-section section-space"><div class="page-width">
-      <div class="section-label"><span class="section-kicker">03 / INTERESTS</span><span data-i18n="motion.track.eyebrow">당신의 관심사가 시작점.</span></div>
-      <div class="section-heading"><h2 data-i18n="motion.track.title">어떤 쪽에<br /><span>마음이 움직여?</span></h2><p data-i18n="motion.track.intro">관심 분야를 골라보세요.<br />다음에 해볼 실험과 도전할 기회를 연결해드릴게요.</p></div>
-      <div class="track-lab">
+</article></div></details>
+    </div></section>
+    <section id="activities" class="stitch-routes stitch-section" aria-labelledby="routes-title"><div class="stitch-container"><div class="stitch-section-head"><div><p class="stitch-kicker">WAYS TO BUILD</p><h2 id="routes-title" data-i18n="stitch.routes.title">어떤 분야에서 시작할까요?</h2></div><p data-i18n="stitch.routes.body">관심 분야를 고르면 작은 실험 아이디어와 관련 공고로 이어집니다.</p></div><div class="track-lab">
         <div class="track-selector" role="group" aria-label="관심 분야 선택">
           <button data-track="dev" aria-pressed="true"><span class="track-number">01</span><strong>BUILD</strong><span data-i18n="act.dev.t">개발</span><span class="track-arrow" aria-hidden="true">↗</span></button>
           <button data-track="game" aria-pressed="false"><span class="track-number">02</span><strong>PLAY</strong><span data-i18n="act.game.t">게임 개발</span><span class="track-arrow" aria-hidden="true">↗</span></button>
@@ -143,38 +125,14 @@
           <button data-track="mkt" aria-pressed="false"><span class="track-number">04</span><strong>CONNECT</strong><span data-i18n="field.marketing">마케팅</span><span class="track-arrow" aria-hidden="true">↗</span></button>
         </div>
         <div class="track-output"><div class="track-output-top"><span data-i18n="motion.track.suggestion">다음 실험 제안</span><span id="experiment-number">TRY / 001</span></div><p class="track-output-label">WHAT IF…</p><div id="idea-output" aria-live="polite"><p id="idea-first">캠퍼스의 불편함을</p><p id="idea-second">하나의 <em>서비스로.</em></p></div><p id="track-description" class="track-description"></p><div class="track-output-actions"><a id="track-opportunities" class="button button-dark" href="portal.html?category=dev"><span data-i18n="field.opportunities">관련 기회 찾기</span>↗</a><button id="idea-remix" class="text-link"><span data-i18n="motion.track.remix">다른 실험</span>↻</button></div></div>
-      </div>
-    </div></section>
-    <section class="opportunity-preview" aria-labelledby="opportunity-preview-title">
-      <div class="page-width opportunity-preview-inner">
-        <div class="opportunity-preview-copy">
-          <p class="section-kicker">04 / OPEN CALLS</p>
-          <h2 id="opportunity-preview-title" data-i18n="opportunity.preview.title">다음 도전은<br><span>이미 열려 있어요.</span></h2>
-          <p data-i18n="opportunity.preview.body">우리가 만든 것을 시험할 무대. 공모전과 해커톤을 한곳에서 찾고, 원문 공고에서 바로 확인하세요.</p>
-          <a class="opportunity-preview-all" href="portal.html" data-i18n="opportunity.preview.all">모든 기회 보기 ↗</a>
-        </div>
-        <div class="opportunity-preview-lanes" aria-label="기회 분야 바로가기">
-          <a class="opportunity-lane" href="portal.html?category=hackathon"><span class="lane-index">01 / BUILD TOGETHER</span><span class="lane-icon" aria-hidden="true">↗</span><strong data-i18n="opportunity.preview.hackathon">해커톤</strong><span data-i18n="opportunity.preview.hackathon.body">팀을 꾸리고, 아이디어를 움직이는 현장</span></a>
-          <a class="opportunity-lane" href="portal.html?category=contest"><span class="lane-index">02 / TAKE THE STAGE</span><span class="lane-icon" aria-hidden="true">↗</span><strong data-i18n="opportunity.preview.contest">공모전</strong><span data-i18n="opportunity.preview.contest.body">만든 것을 보여주고, 다음 가능성을 여는 무대</span></a>
-          <a class="opportunity-lane" href="portal.html?category=health"><span class="lane-index">03 / HEALTH & CARE</span><span class="lane-icon" aria-hidden="true">↗</span><strong data-i18n="opportunity.preview.health">보건·의료</strong><span data-i18n="opportunity.preview.health.body">돌봄과 의료의 문제를 다루는 도전</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section id="awards" class="awards-section section-space"><div class="page-width">
-      <div class="section-label"><span class="section-kicker">05 / FIELD RECORDS</span><span>2025 ARCHIVE</span></div>
-      <div class="section-heading"><h2 data-i18n="motion.awards.title">해봤고,<br /><span>해냈으니까.</span></h2><p data-i18n="field.record.sub">직접 도전해서 쌓은 여섯 번의 수상 기록.</p></div>
-<ol class="award-list"><li class="award-row"><span class="index">01</span><time>2025.12</time><h3 data-i18n="aw1.t">제품제작역량 창업대회</h3><span class="award-result" data-i18n="aw1.s">최우수상 &amp; 캠프 수료</span></li>
+      </div></div></section>
+    <section id="awards" class="stitch-records stitch-section" aria-labelledby="records-title"><div class="stitch-container"><div class="stitch-section-head"><div><p class="stitch-kicker">ACTIVITY RECORD / 2025</p><h2 id="records-title" data-i18n="stitch.records.title">2025년의 활동 기록.</h2></div><p data-i18n="stitch.records.body">사이트에 공개된 여섯 건의 대회 기록을 날짜와 결과로 정리했습니다.</p></div><ol class="award-list"><li class="award-row"><span class="index">01</span><time>2025.12</time><h3 data-i18n="aw1.t">제품제작역량 창업대회</h3><span class="award-result" data-i18n="aw1.s">최우수상 &amp; 캠프 수료</span></li>
 <li class="award-row"><span class="index">02</span><time>2025.11</time><h3 data-i18n="aw2.t">SCHU AI·SW Festival 게임개발경진대회</h3><span class="award-result" data-i18n="aw2.s">최우수상 · 게임 「MAYHEM」</span></li>
 <li class="award-row"><span class="index">03</span><time>2025.08</time><h3 data-i18n="aw3.t">제1회 올담 데이터 활용 해커톤</h3><span class="award-result" data-i18n="aw3.s">최우수상</span></li>
 <li class="award-row"><span class="index">04</span><time>2025</time><h3 data-i18n="aw4.t">로컬 창업동아리 아이디어 리그</h3><span class="award-result" data-i18n="aw4.s">START-UP Track-1 은상</span></li>
 <li class="award-row"><span class="index">05</span><time>2025</time><h3 data-i18n="aw5.t">로컬 창업동아리 아이디어 리그</h3><span class="award-result" data-i18n="aw5.s">START-UP Track-1 동상</span></li>
-<li class="award-row"><span class="index">06</span><time>2025</time><h3 data-i18n="aw6.t">순천향대학교 나눔토론대회</h3><span class="award-result" data-i18n="aw6.s">장려상</span></li></ol>
-    </div></section>
-    <section id="team" class="team-section section-space"><div class="page-width">
-      <div class="section-label"><span class="section-kicker">06 / THE PEOPLE</span><span data-i18n="field.people.label">프로필을 눌러 만나보세요</span></div>
-      <div class="section-heading"><h2 data-i18n="motion.team.title">같이 사고 칠<br /><span>사람들.</span></h2><p data-i18n="field.team.sub">만드는 사람 곁에는,<br />늘 같이 만드는 사람이 있습니다.</p></div>
-<div class="team-grid"><div class="member-card" role="button" tabindex="0"
+<li class="award-row"><span class="index">06</span><time>2025</time><h3 data-i18n="aw6.t">순천향대학교 나눔토론대회</h3><span class="award-result" data-i18n="aw6.s">장려상</span></li></ol></div></section>
+    <section id="team" class="stitch-people stitch-section" aria-labelledby="people-title"><div class="stitch-container"><div class="stitch-section-head"><div><p class="stitch-kicker">NEXTWAVE / PEOPLE</p><h2 id="people-title" data-i18n="stitch.people.title">함께 운영하는 사람들.</h2></div><p data-i18n="stitch.people.body">프로필을 눌러 각 멤버의 공개된 소개와 원본 포트폴리오를 살펴보세요.</p></div><div class="team-grid"><div class="member-card" role="button" tabindex="0"
                         data-name="손성" data-role="회장 · President" data-role-en="President"
                         data-img="assets/son.jpg" data-portfolio="#"
                         data-bio="&gt; 순천향대학교 사물인터넷학과<br>&gt; KAKAO 엠버서더 KANANA<br>&gt; 삼성전자 1차벤더 근무"
@@ -203,27 +161,16 @@
                         <h3 >이학주</h3>
                         <p  data-i18n="team.r3">인사총괄 · HR Director</p>
                         <p  data-i18n="team.d3">메타버스&amp;게임학과 · RAMIC STUDIO 대표</p>
-                    </div></div>
-
-    </div></section>
-    <section id="recruitment" class="recruitment section-space"><div class="page-width">
-      <div class="section-label"><span class="section-kicker">07 / JOIN</span><span>NEXTWAVE / MEMBERSHIP</span></div>
-      <div class="recruitment-grid"><div><h2 data-i18n="motion.join.title">이제,<br /><span>같이 하자.</span></h2><p data-i18n="field.join.body">순천향대학교 재학생과 휴학생에게 열려 있습니다.<br />확정된 모집 일정과 지원 링크는 이곳에 공지합니다.</p></div>
-<div class="join-details"><dl><div><dt data-i18n="rec.t1">모집 대상</dt><dd data-i18n="rec.d1">순천향대학교 재학생·휴학생 (전공 무관)</dd></div><div><dt data-i18n="rec.t3">활동 트랙</dt><dd data-i18n="field.join.tracks">개발 · 게임 · 해커톤 · 마케팅</dd></div><div><dt data-i18n="field.join.status">모집 일정</dt><dd data-i18n="field.join.schedule">확정 일정은 모집 공지로 안내합니다.</dd></div></dl><ol class="join-steps"><li><span>01</span><span data-i18n="rec.step1">지원서 작성</span></li><li><span>02</span><span data-i18n="rec.step2">가벼운 만남·인터뷰</span></li><li><span>03</span><span data-i18n="field.join.step3">NextWave 합류</span></li></ol><a id="apply-link" class="button button-dark" hidden target="_blank" rel="noopener noreferrer"><span data-i18n="btn.applyNow">지금 지원하기</span><span aria-hidden="true">↗</span></a><p id="apply-status" class="apply-status" role="status" data-i18n="field.join.pending">지원서 링크는 준비 중입니다. 공개되면 이곳에서 바로 연결됩니다.</p></div>
-      </div>
-    </div></section>
-    <section id="faq" class="page-width faq-section section-space"><div><p class="section-kicker">A FEW THINGS TO KNOW</p><h2 data-i18n="field.faq.title">조금 더 궁금하다면.</h2></div>
-<div class="faq-list"><details class="faq-item"><summary><span data-i18n="faq.q1">개발을 전혀 몰라도 괜찮나요?</span><span aria-hidden="true">+</span></summary><p data-i18n="faq.a1">네, 정말 괜찮아요! 잘하는 사람만 모인 곳이 아니라 함께 배우는 곳이에요. 기초부터 같이 시작하는 분들이 많고, 서로 알려주는 문화가 있어요.</p></details>
+                    </div></div></div></section>
+    <section id="recruitment" class="stitch-join stitch-section" aria-labelledby="join-title"><div class="stitch-container"><div class="stitch-join-panel"><p class="stitch-kicker">JOIN NEXTWAVE</p><h2 id="join-title" data-i18n="stitch.join.title">다음 작업에 함께할<br>사람을 기다립니다.</h2><p data-i18n="field.join.body">순천향대학교 재학생과 휴학생에게 열려 있습니다.<br>확정된 모집 일정과 지원 링크는 이곳에 공지합니다.</p><div class="join-details"><dl><div><dt data-i18n="rec.t1">모집 대상</dt><dd data-i18n="rec.d1">순천향대학교 재학생·휴학생 (전공 무관)</dd></div><div><dt data-i18n="rec.t3">활동 트랙</dt><dd data-i18n="field.join.tracks">개발 · 게임 · 해커톤 · 마케팅</dd></div><div><dt data-i18n="field.join.status">모집 일정</dt><dd data-i18n="field.join.schedule">확정 일정은 모집 공지로 안내합니다.</dd></div></dl><ol class="join-steps"><li><span>01</span><span data-i18n="rec.step1">지원서 작성</span></li><li><span>02</span><span data-i18n="rec.step2">가벼운 만남·인터뷰</span></li><li><span>03</span><span data-i18n="field.join.step3">NextWave 합류</span></li></ol><a id="apply-link" class="button button-dark" hidden target="_blank" rel="noopener noreferrer"><span data-i18n="btn.applyNow">지금 지원하기</span><span aria-hidden="true">↗</span></a><p id="apply-status" class="apply-status" role="status" data-i18n="field.join.pending">지원서 링크는 준비 중입니다. 공개되면 이곳에서 바로 연결됩니다.</p></div></div></div></section>
+    <section id="faq" class="stitch-faq stitch-section"><div class="stitch-container"><div class="stitch-section-head"><div><p class="stitch-kicker">QUESTIONS</p><h2 data-i18n="field.faq.title">조금 더 궁금하다면.</h2></div></div><div class="faq-list"><details class="faq-item"><summary><span data-i18n="faq.q1">개발을 전혀 몰라도 괜찮나요?</span><span aria-hidden="true">+</span></summary><p data-i18n="faq.a1">네, 정말 괜찮아요! 잘하는 사람만 모인 곳이 아니라 함께 배우는 곳이에요. 기초부터 같이 시작하는 분들이 많고, 서로 알려주는 문화가 있어요.</p></details>
 <details class="faq-item"><summary><span data-i18n="faq.q2">IT 전공이 아니어도 지원할 수 있나요?</span><span aria-hidden="true">+</span></summary><p data-i18n="faq.a2">물론이죠. 전공 무관하게 누구나 환영합니다. 개발 외에도 디자인·기획·마케팅 등 다양한 역할이 있어서, 자신의 강점을 살릴 수 있어요.</p></details>
 <details class="faq-item"><summary><span data-i18n="faq.q3">활동은 얼마나 자주 하나요?</span><span aria-hidden="true">+</span></summary><p data-i18n="faq.a3">정기 모임을 기본으로, 프로젝트나 대회 시즌에는 팀 단위로 유연하게 모여요. 학업과 병행할 수 있도록 일정은 함께 조율합니다.</p></details>
 <details class="faq-item"><summary><span data-i18n="faq.q4">어디에서 활동하나요?</span><span aria-hidden="true">+</span></summary><p data-i18n="faq.a4">순천향대학교 캠퍼스를 중심으로 온·오프라인을 병행해요. 부원이 되면 전용 포털에서 공지·일정·소통을 한 곳에서 확인할 수 있어요.</p></details>
-<details class="faq-item"><summary><span data-i18n="faq.q5">지원하면 무엇을 얻어갈 수 있나요?</span><span aria-hidden="true">+</span></summary><p data-i18n="faq.a5">실제로 만들어 본 포트폴리오, 대회 수상 경험, 그리고 무엇보다 함께 도전하는 동료들이요. 졸업 후에도 이어지는 네트워크가 가장 큰 자산이에요.</p></details></div></section>
-    <section id="water-study" class="water-study section-space" aria-labelledby="water-study-title"><div class="page-width water-study-grid">
-      <div class="water-study-copy"><p class="section-kicker">08 / INTERACTIVE STUDY</p><h2 id="water-study-title" data-i18n="archive.water.title">이름에서 시작한<br>수면 실험.</h2><p data-i18n="archive.water.body">NextWave의 이름을 물의 움직임으로 표현한 웹 실험입니다. 클릭하거나 드래그해 반응을 살펴보세요.</p><button id="motion-toggle" class="utility-button motion-toggle" aria-pressed="true"><span class="motion-indicator" aria-hidden="true"></span><span id="motion-label">MOTION ON</span></button></div>
-      <div class="water-study-work"><div id="kinetic-stage" class="kinetic-stage"><canvas id="kinetic-canvas" aria-label="클릭과 드래그로 잔물결을 만드는 수면 실험">브라우저가 Canvas를 지원해야 수면 실험을 사용할 수 있습니다.</canvas></div><div class="lab-controller"><span class="lab-controller-label" data-i18n="water.surface">물의 움직임</span><div class="lab-modes" role="group" aria-label="수면 움직임 선택"><button data-lab-mode="wave" aria-pressed="true">RIPPLE</button><button data-lab-mode="orbit" aria-pressed="false">WAVE</button><button data-lab-mode="burst" aria-pressed="false">DROPS</button></div><button id="lab-shuffle" class="shuffle-button" aria-label="수면에 잔물결 만들기">↻<span data-i18n="water.ripple">물결 만들기</span></button></div></div>
-    </div></section>
+<details class="faq-item"><summary><span data-i18n="faq.q5">지원하면 무엇을 얻어갈 수 있나요?</span><span aria-hidden="true">+</span></summary><p data-i18n="faq.a5">실제로 만들어 본 포트폴리오, 대회 수상 경험, 그리고 무엇보다 함께 도전하는 동료들이요. 졸업 후에도 이어지는 네트워크가 가장 큰 자산이에요.</p></details></div></div></section>
+    <section id="water-study" class="stitch-water stitch-section" aria-labelledby="water-study-title"><div class="stitch-container stitch-water-grid"><div><p class="stitch-kicker">INTERACTIVE NOTE / NEXTWAVE</p><h2 id="water-study-title" data-i18n="archive.water.title">이름에서 시작한<br>수면 실험.</h2><p data-i18n="archive.water.body">NextWave의 이름을 물의 움직임으로 표현한 웹 실험입니다. 클릭하거나 드래그해 반응을 살펴보세요.</p><button id="motion-toggle" class="utility-button motion-toggle" aria-pressed="true"><span class="motion-indicator" aria-hidden="true"></span><span id="motion-label">MOTION ON</span></button></div><div class="water-study-work"><div id="kinetic-stage" class="kinetic-stage"><canvas id="kinetic-canvas" aria-label="클릭과 드래그로 잔물결을 만드는 수면 실험">브라우저가 Canvas를 지원해야 수면 실험을 사용할 수 있습니다.</canvas></div><div class="lab-controller"><span class="lab-controller-label" data-i18n="water.surface">물의 움직임</span><div class="lab-modes" role="group" aria-label="수면 움직임 선택"><button data-lab-mode="wave" aria-pressed="true">RIPPLE</button><button data-lab-mode="orbit" aria-pressed="false">WAVE</button><button data-lab-mode="burst" aria-pressed="false">DROPS</button></div><button id="lab-shuffle" class="shuffle-button" aria-label="수면에 잔물결 만들기">↻<span data-i18n="water.ripple">물결 만들기</span></button></div></div></div></section>
   </main>
-  <footer class="site-footer"><div class="page-width"><div class="footer-top"><a class="brand" href="#home">nextwave<span class="brand-dot" aria-hidden="true"></span></a><p data-i18n="motion.footer">멈춰 있는 생각에, 다음 물결을.</p><a href="#home" class="footer-up" aria-label="맨 위로">↑</a></div><div class="footer-contacts"><a id="contact-instagram" hidden>Instagram ↗</a><a id="contact-kakao" hidden>Kakao ↗</a><a id="contact-email" hidden>Email ↗</a></div><div class="footer-bottom"><span>© <span id="year">2026</span> NEXTWAVE IT UNION</span><span>SOONCHUNHYANG UNIVERSITY</span><a href="portal.html">OPEN LIVE DESK ↗</a></div></div></footer>
+  <footer class="site-footer"><div class="page-width"><div class="footer-top"><a class="brand" href="#home">NEXTWAVE<span class="brand-dot" aria-hidden="true"></span></a><p data-i18n="motion.footer">멈춰 있는 생각에, 다음 물결을.</p><a href="#home" class="footer-up" aria-label="맨 위로">↑</a></div><div class="footer-contacts"><a id="contact-instagram" hidden>Instagram ↗</a><a id="contact-kakao" hidden>Kakao ↗</a><a id="contact-email" hidden>Email ↗</a></div><div class="footer-bottom"><span>© <span id="year">2026</span> NEXTWAVE IT UNION</span><span>SOONCHUNHYANG UNIVERSITY</span><a href="portal.html">OPEN LIVE DESK ↗</a></div></div></footer>
   <dialog id="member-modal" aria-labelledby="mm-name"><button id="mm-close" class="modal-close" aria-label="프로필 닫기">×</button><img id="mm-img" alt="" width="200" height="200" /><div class="modal-copy"><p class="section-kicker">NEXTWAVE / PEOPLE</p><h2 id="mm-name"></h2><p id="mm-role"></p><p id="mm-bio"></p><a id="mm-link" class="button button-dark" target="_blank" rel="noopener noreferrer" hidden><span data-i18n="btn.viewPortfolio">포트폴리오 보기</span>↗</a></div></dialog>
   <div id="interaction-toast" class="interaction-toast" role="status" aria-live="polite"></div>
 </body>

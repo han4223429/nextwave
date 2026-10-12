@@ -82,9 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault(); selectProject(projectTabs[next], true);
         });
     });
-    document.querySelector('.archive-cover')?.addEventListener('click', () => {
-        const rescueTab = projectTabs.find(button => button.dataset.projectTab === 'rescue');
-        if (rescueTab) selectProject(rescueTab);
+    function openProjectLab(project) {
+        const lab = $('project-lab');
+        if (lab) lab.open = true;
+        const tab = projectTabs.find(button => button.dataset.projectTab === project);
+        if (tab) selectProject(tab);
+    }
+    document.querySelector('.archive-cover')?.addEventListener('click', () => openProjectLab('rescue'));
+    document.querySelectorAll('[data-open-project]').forEach(link => {
+        link.addEventListener('click', () => openProjectLab(link.dataset.openProject));
     });
 
     const modal = $('member-modal'); let activeCard;

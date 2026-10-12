@@ -481,6 +481,47 @@ window.I18N = (function () {
         "opportunity.preview.body": "Find hackathons and competitions by source, then open the original notice. Confirm status and dates before applying."
     });
 
+    Object.assign(dict.ko, {
+        "stitch.nav.about": "소개", "stitch.nav.calls": "공모전·지원사업", "stitch.nav.join": "참여 안내",
+        "stitch.hero.title": "아이디어를 넘어,<br>직접 만든 프로덕트로 증명합니다.",
+        "stitch.hero.body": "멤버가 만든 게임과 구명 장치 설계, 그리고 2025년의 대회 기록을 공개합니다. 관심 있는 분야를 살펴보고 다음 도전을 찾아보세요.",
+        "stitch.hero.projects": "프로젝트 살펴보기 ↗", "stitch.hero.calls": "공모전·지원사업 찾기 ↗",
+        "stitch.metric.projects": "공개 프로젝트", "stitch.metric.awards": "2025 활동 기록", "stitch.metric.sources": "공고 출처", "stitch.metric.archive": "프로젝트·기회 목록",
+        "stitch.studio.title": "작업을 남기고,<br>다음 시도로 이어갑니다.",
+        "stitch.studio.body": "NextWave는 멤버의 작업을 출처와 함께 기록합니다. 아래 설계 이미지는 김한용의 RESCUE JET 프로젝트 자료입니다.",
+        "stitch.studio.caption": "멤버 김한용의 구명 추진 장치 설계",
+        "stitch.projects.title": "서로 다른 두 프로젝트.", "stitch.projects.body": "게임의 점수 규칙을 브라우저에서 체험하고, 구명 장치의 설계 이미지와 3D 외형을 살펴보세요.",
+        "stitch.mayhem.body": "이학주·HMBG 게임개발 동아리의 게임. 공개된 점수 규칙을 바탕으로 만든 별도 브라우저 실험을 체험할 수 있습니다.",
+        "stitch.project.explore": "웹 실험 열기 ↗", "stitch.project.original": "원본 프로젝트 보기 ↗", "stitch.project.model": "3D 체험 열기 ↗",
+        "stitch.rescue.body": "멤버 김한용이 공개한 자동 구명 추진 장치 설계. 기존 3D 뷰어에서 외형을 돌려보고 분해해 볼 수 있습니다.",
+        "stitch.rescue.credit": "김한용 · 자동 구명 추진 장치", "stitch.rescue.note": "3D 외형은 설계 이미지 기반 재구성이며, 추진 동작은 시각화입니다.",
+        "stitch.lab.open": "게임 실험과 3D 모델 직접 열어보기",
+        "stitch.routes.title": "관심에서 시작하는<br>네 가지 방향.", "stitch.routes.body": "분야를 선택하면 작은 실험 아이디어와 관련 공고를 연결합니다.",
+        "stitch.records.title": "2025년, 우리가 남긴 기록.", "stitch.records.body": "사이트에 공개된 수상과 활동 기록입니다. 구체적인 원문은 각 항목에서 확인해 주세요.",
+        "stitch.people.title": "함께 만드는 사람들.", "stitch.people.body": "운영진 카드를 열면 각자의 소개와 공개 링크를 볼 수 있습니다.",
+        "stitch.join.title": "다음 작업을,<br>함께 시작할까요?"
+    });
+    Object.assign(dict.en, {
+        "stitch.nav.about": "About", "stitch.nav.calls": "Open calls", "stitch.nav.join": "Join",
+        "stitch.hero.title": "Beyond ideas,<br>we prove it by building products.",
+        "stitch.hero.body": "Explore a member-made game, a rescue device design, and our 2025 competition record. Find the work that interests you and your next challenge.",
+        "stitch.hero.projects": "Explore projects ↗", "stitch.hero.calls": "Find open calls ↗",
+        "stitch.metric.projects": "Public projects", "stitch.metric.awards": "2025 records", "stitch.metric.sources": "Opportunity sources", "stitch.metric.archive": "Projects and calls",
+        "stitch.studio.title": "Document the work.<br>Build what comes next.",
+        "stitch.studio.body": "NextWave documents member work with its sources. This design image comes from Hanyong Kim's RESCUE JET project.",
+        "stitch.studio.caption": "Hanyong Kim's rescue propulsion device design",
+        "stitch.projects.title": "Two different projects.", "stitch.projects.body": "Try a browser experiment based on a game's scoring rules, then inspect the rescue device design and 3D reconstruction.",
+        "stitch.mayhem.body": "A game by Hakju Lee and HMBG game development club. Try a separate browser experiment based on its published scoring rules.",
+        "stitch.project.explore": "Open browser experiment ↗", "stitch.project.original": "View original project ↗", "stitch.project.model": "Open 3D model ↗",
+        "stitch.rescue.body": "Member Hanyong Kim's public rescue propulsion device design. Rotate and take apart the exterior in the existing 3D viewer.",
+        "stitch.rescue.credit": "Hanyong Kim · rescue propulsion device", "stitch.rescue.note": "The 3D exterior is reconstructed from a design image; the propulsion is a visualization.",
+        "stitch.lab.open": "Open the game experiment and 3D model",
+        "stitch.routes.title": "Four directions<br>from your interests.", "stitch.routes.body": "Pick a field to find a small experiment idea and related open calls.",
+        "stitch.records.title": "What we did in 2025.", "stitch.records.body": "Public awards and activity records. Follow each item for the original details.",
+        "stitch.people.title": "People building together.", "stitch.people.body": "Open an organizer card to read their introduction and public links.",
+        "stitch.join.title": "Start the next project<br>with us?"
+    });
+
     let lang;
     try { lang = localStorage.getItem('nw_lang'); } catch { lang = null; }
     if (lang !== 'ko' && lang !== 'en') {
