@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T22:52:04Z",
-  "lastSuccessAt": "2026-10-11T22:52:04Z",
+  "generatedAt": "2026-10-11T23:59:53Z",
+  "lastSuccessAt": "2026-10-11T23:59:53Z",
   "refreshIntervalMinutes": 60,
   "sources": [
     {
@@ -9,40 +9,50 @@
       "name": "K-Startup",
       "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
       "status": "ok",
-      "checkedAt": "2026-10-11T22:51:23Z",
+      "checkedAt": "2026-10-11T23:59:13Z",
       "itemCount": 45,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-11T22:52:04Z"
+      "lastSuccessAt": "2026-10-11T23:59:53Z"
     },
     {
       "id": "wevity",
       "name": "위비티",
       "url": "https://www.wevity.com/?c=find&s=1",
       "status": "ok",
-      "checkedAt": "2026-10-11T22:51:54Z",
+      "checkedAt": "2026-10-11T23:59:43Z",
       "itemCount": 15,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-11T22:52:04Z"
+      "lastSuccessAt": "2026-10-11T23:59:53Z"
     },
     {
       "id": "hola",
       "name": "Hola IT",
       "url": "https://holaworld.io/hola-it",
       "status": "ok",
-      "checkedAt": "2026-10-11T22:52:01Z",
+      "checkedAt": "2026-10-11T23:59:49Z",
       "itemCount": 80,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-11T22:52:04Z"
+      "lastSuccessAt": "2026-10-11T23:59:53Z"
     },
     {
       "id": "dacon",
       "name": "DACON",
       "url": "https://dacon.io/competitions",
       "status": "ok",
-      "checkedAt": "2026-10-11T22:52:04Z",
+      "checkedAt": "2026-10-11T23:59:51Z",
       "itemCount": 10,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-11T22:52:04Z"
+      "lastSuccessAt": "2026-10-11T23:59:53Z"
+    },
+    {
+      "id": "nmc_health",
+      "name": "국립중앙의료원",
+      "url": "https://www.nmcpublicedu.or.kr/info.asp",
+      "status": "ok",
+      "checkedAt": "2026-10-11T23:59:53Z",
+      "itemCount": 1,
+      "errorCount": 0,
+      "lastSuccessAt": "2026-10-11T23:59:53Z"
     }
   ],
   "items": [
@@ -51,6 +61,7 @@
       "title": "2026 한국 전자전(KES) 서울 XR 테마관: XR TERMINAL",
       "description": "서울경제진흥원(sba) | 서울XR센터 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-12",
       "link": "https://holaworld.io/hola-it/6ab4c28cfdf75b86efbf5542",
       "source": "Hola IT",
@@ -64,7 +75,7 @@
       "startDate": "2026-09-22",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -88,7 +99,8 @@
       "firstSeenAt": "2026-09-15T07:42:07Z",
       "lastSeenAt": "2026-09-28T21:58:22Z",
       "createdAt": "2026-09-15T07:42:07Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179283",
@@ -110,7 +122,8 @@
       "firstSeenAt": "2026-09-21T04:54:55Z",
       "lastSeenAt": "2026-09-30T23:01:55Z",
       "createdAt": "2026-09-21T04:54:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179287",
@@ -132,7 +145,8 @@
       "firstSeenAt": "2026-09-17T06:07:52Z",
       "lastSeenAt": "2026-09-28T21:58:22Z",
       "createdAt": "2026-09-17T06:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179311",
@@ -154,7 +168,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-01T02:07:52Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179315",
@@ -176,7 +191,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-01T02:07:52Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179329",
@@ -198,7 +214,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-02T01:40:36Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179341",
@@ -220,7 +237,8 @@
       "firstSeenAt": "2026-09-28T15:24:30Z",
       "lastSeenAt": "2026-10-01T02:07:52Z",
       "createdAt": "2026-09-28T15:24:30Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179342",
@@ -242,13 +260,15 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-02T01:40:36Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179369",
       "title": "[투자연계형] 2026 넥스트밸류 그라운드(NextValue Ground)-참여기업 모집",
       "description": "경기창조경제혁신센터 · 사업화",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-12",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179369",
       "source": "K-Startup",
@@ -262,7 +282,7 @@
       "startDate": "2026-09-14",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T08:28:37Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T08:28:37Z",
       "status": "active"
     },
@@ -271,6 +291,7 @@
       "title": "「 동명청년창작소 D-MADE 오디션」참여기업 모집",
       "description": "동명청년창작소 · 멘토링ㆍ컨설팅ㆍ교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-12",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179394",
       "source": "K-Startup",
@@ -284,7 +305,7 @@
       "startDate": "2026-09-30",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -293,6 +314,7 @@
       "title": "제8차 기술융합포럼 연계 제107회 대전창업포럼(양자) 참가 모집",
       "description": "대전창조경제혁신센터 · 융자ㆍ보증",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-12",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179400",
       "source": "K-Startup",
@@ -306,7 +328,7 @@
       "startDate": "2026-10-01",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T08:28:37Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T08:28:37Z",
       "status": "active"
     },
@@ -315,6 +337,7 @@
       "title": "2026년 B the B 뷰티 기반 융복합 콘텐츠 전시(다운타운) 팝업 참여기업 모집(3차)",
       "description": "서울경제진흥원 · 사업화",
       "category": "marketing",
+      "topics": [],
       "deadline": "2026-10-12",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179410",
       "source": "K-Startup",
@@ -328,7 +351,7 @@
       "startDate": "2026-09-30",
       "publishedAt": "2026-10-01",
       "firstSeenAt": "2026-10-01T08:52:55Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-01T08:52:55Z",
       "status": "active"
     },
@@ -353,7 +376,8 @@
       "firstSeenAt": "2026-09-16T04:52:12Z",
       "lastSeenAt": "2026-09-16T04:52:12Z",
       "createdAt": "2026-09-16T04:52:12Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111143",
@@ -376,7 +400,8 @@
       "firstSeenAt": "2026-09-18T18:26:36Z",
       "lastSeenAt": "2026-09-19T05:51:03Z",
       "createdAt": "2026-09-18T18:26:36Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111315",
@@ -399,7 +424,8 @@
       "firstSeenAt": "2026-09-28T15:24:30Z",
       "lastSeenAt": "2026-09-28T15:24:30Z",
       "createdAt": "2026-09-28T15:24:30Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111555",
@@ -422,13 +448,15 @@
       "firstSeenAt": "2026-10-08T13:23:48Z",
       "lastSeenAt": "2026-10-11T07:09:57Z",
       "createdAt": "2026-10-08T13:23:48Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6aae2712fdf75b86efb99e56",
       "title": "2026 AI 농산물 가격예측 해커톤",
       "description": "조재승 · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-13",
       "link": "https://holaworld.io/hola-it/6aae2712fdf75b86efb99e56",
       "source": "Hola IT",
@@ -442,7 +470,7 @@
       "startDate": "2026-09-16",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -451,6 +479,7 @@
       "title": "2026 고용24 국민참여 AI 고용서비스 발굴 온라인 해커톤",
       "description": "고용노동부 · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-13",
       "link": "https://holaworld.io/hola-it/6ab4c29bfdf75b86efbf5573",
       "source": "Hola IT",
@@ -464,7 +493,7 @@
       "startDate": "2026-09-21",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -473,6 +502,7 @@
       "title": "2026 우연한식탁 MVP 개발 해커톤",
       "description": "Party Blay · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-13",
       "link": "https://holaworld.io/hola-it/6abe8b1eee012963f80ebe1a",
       "source": "Hola IT",
@@ -486,7 +516,7 @@
       "startDate": "2026-09-30",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -495,6 +525,7 @@
       "title": "2026 우연한식탁 MVP 개발 해커톤",
       "description": "어치브모먼트 · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-13",
       "link": "https://holaworld.io/hola-it/6abe8b1fee012963f80ebe34",
       "source": "Hola IT",
@@ -508,7 +539,7 @@
       "startDate": "2026-09-30",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -517,6 +548,7 @@
       "title": "[🎬콘텐츠 마케팅 실전과제] 스킨케어 브랜드 'COVER&COVER'의 숏폼, 당신의 기획력으로 직접 만들어보세요💡 (~10/13)",
       "description": "(주)오픈놀 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-13",
       "link": "https://holaworld.io/hola-it/6acb3dfdee012963f81ccb47",
       "source": "Hola IT",
@@ -530,7 +562,7 @@
       "startDate": "2026-10-06",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -554,7 +586,8 @@
       "firstSeenAt": "2026-09-06T12:29:51Z",
       "lastSeenAt": "2026-09-08T05:57:09Z",
       "createdAt": "2026-09-06T12:29:51Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179218",
@@ -576,7 +609,8 @@
       "firstSeenAt": "2026-09-11T09:38:55Z",
       "lastSeenAt": "2026-09-17T06:07:52Z",
       "createdAt": "2026-09-11T09:38:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179284",
@@ -598,7 +632,8 @@
       "firstSeenAt": "2026-09-21T04:54:55Z",
       "lastSeenAt": "2026-09-30T23:01:55Z",
       "createdAt": "2026-09-21T04:54:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179285",
@@ -620,7 +655,8 @@
       "firstSeenAt": "2026-09-17T11:37:30Z",
       "lastSeenAt": "2026-09-30T23:01:55Z",
       "createdAt": "2026-09-17T11:37:30Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179331",
@@ -642,7 +678,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-02T01:40:36Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179350",
@@ -664,7 +701,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-06T07:32:18Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179385",
@@ -686,13 +724,15 @@
       "firstSeenAt": "2026-10-01T08:52:55Z",
       "lastSeenAt": "2026-10-08T00:11:26Z",
       "createdAt": "2026-10-01T08:52:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179403",
       "title": "2026년 10월 동네창업학교 교육생 모집 공고",
       "description": "충남신용보증재단 · 창업교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-13",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179403",
       "source": "K-Startup",
@@ -706,7 +746,7 @@
       "startDate": "2026-09-02",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T08:28:37Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T08:28:37Z",
       "status": "active"
     },
@@ -715,6 +755,7 @@
       "title": "2026 광명시 기업박람회(GM TECH EXPO 2026) 참여기업 추가모집 공고",
       "description": "도도한콜라보(주) · 행사ㆍ네트워크",
       "category": "activity",
+      "topics": [],
       "deadline": "2026-10-13",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179433",
       "source": "K-Startup",
@@ -728,7 +769,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -737,6 +778,7 @@
       "title": "2026년 스타트업 법률지원사업 대전광역시 법률상담회 참여 기업 모집 안내",
       "description": "창업진흥원 · 멘토링ㆍ컨설팅ㆍ교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-13",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179439",
       "source": "K-Startup",
@@ -750,7 +792,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -759,6 +801,7 @@
       "title": "2026년 대전 웰컴 스테이 지원사업 참여기업 모집 연장 공고",
       "description": "대전창조경제혁신센터 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-13",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179449",
       "source": "K-Startup",
@@ -772,7 +815,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -797,7 +840,8 @@
       "firstSeenAt": "2026-09-24T22:22:12Z",
       "lastSeenAt": "2026-09-25T01:28:30Z",
       "createdAt": "2026-09-24T22:22:12Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111455",
@@ -820,13 +864,15 @@
       "firstSeenAt": "2026-10-02T15:46:35Z",
       "lastSeenAt": "2026-10-05T01:58:13Z",
       "createdAt": "2026-10-02T15:46:35Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6ab4c295fdf75b86efbf555f",
       "title": "📢 실제 기업 과제로 마케팅 실무경험 쌓기! 「미니인턴 × 로테아」 참여자 모집",
       "description": "오픈놀 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-14",
       "link": "https://holaworld.io/hola-it/6ab4c295fdf75b86efbf555f",
       "source": "Hola IT",
@@ -840,7 +886,7 @@
       "startDate": "2026-09-23",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -849,6 +895,7 @@
       "title": "Replit x OpenAI x AWS x Gold House Ventures Hackathon",
       "description": "Replit / OpenAI / AWS / Gold House Ventures · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-14",
       "link": "https://holaworld.io/hola-it/6acb3e05ee012963f81ccba1",
       "source": "Hola IT",
@@ -862,7 +909,7 @@
       "startDate": "2026-10-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -886,7 +933,8 @@
       "firstSeenAt": "2026-09-11T09:38:55Z",
       "lastSeenAt": "2026-09-17T06:07:52Z",
       "createdAt": "2026-09-11T09:38:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179355",
@@ -908,13 +956,15 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-06T07:32:18Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179384",
       "title": "2026년 경기 스타트업 아카데미 딥테크 세미나 참여자 모집 / Future AI Technology - AI 메모리 반도체의 발전과 미래",
       "description": "(재)경기도경제과학진흥원 · 멘토링ㆍ컨설팅ㆍ교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-14",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179384",
       "source": "K-Startup",
@@ -928,7 +978,7 @@
       "startDate": "2026-09-29",
       "publishedAt": "2026-10-01",
       "firstSeenAt": "2026-10-01T08:52:55Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-01T08:52:55Z",
       "status": "active"
     },
@@ -937,6 +987,7 @@
       "title": "2026년 제2차 테크플러스 스테이지 입주기업 모집 연장 공고",
       "description": "(재)광주테크노파크 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-14",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179391",
       "source": "K-Startup",
@@ -950,7 +1001,7 @@
       "startDate": "2026-09-30",
       "publishedAt": "2026-10-01",
       "firstSeenAt": "2026-10-01T08:52:55Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-01T08:52:55Z",
       "status": "active"
     },
@@ -959,6 +1010,7 @@
       "title": "2026년 경기 스타트업 아카데미 딥테크 교육 참여자 모집",
       "description": "(재)경기도경제과학진흥원 · 멘토링ㆍ컨설팅ㆍ교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-14",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179404",
       "source": "K-Startup",
@@ -972,7 +1024,7 @@
       "startDate": "2026-10-01",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T08:28:37Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T08:28:37Z",
       "status": "active"
     },
@@ -981,6 +1033,7 @@
       "title": "해운대 청년채움공간(청년창업지원시설) 위탁운영기관 모집 공고",
       "description": "해운대구청 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-14",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179412",
       "source": "K-Startup",
@@ -994,7 +1047,7 @@
       "startDate": "2026-10-01",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T08:28:37Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T08:28:37Z",
       "status": "active"
     },
@@ -1003,6 +1056,7 @@
       "title": "2026년도 해양수산 투자박람회",
       "description": "(사)한국벤처캐피탈협회 · 행사ㆍ네트워크",
       "category": "activity",
+      "topics": [],
       "deadline": "2026-10-14",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179415",
       "source": "K-Startup",
@@ -1016,7 +1070,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -1025,6 +1079,7 @@
       "title": "제38회 대한민국 실내건축대전",
       "description": "(사)한국실내건축가협회(KOSID), KCC글라스·홈씨씨 · 건축/건설/인테리어, 예체능/미술/음악, 기타",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-14",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=108562",
       "source": "위비티",
@@ -1039,7 +1094,7 @@
       "audience": "대학생, 기타",
       "applicationPeriod": "2026-06-22 ~ 2026-10-14",
       "firstSeenAt": "2026-09-28T21:58:22Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-09-28T21:58:22Z",
       "status": "active"
     },
@@ -1064,7 +1119,8 @@
       "firstSeenAt": "2026-09-14T22:29:05Z",
       "lastSeenAt": "2026-09-15T07:42:07Z",
       "createdAt": "2026-09-14T22:29:05Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111379",
@@ -1087,13 +1143,15 @@
       "firstSeenAt": "2026-10-01T02:07:52Z",
       "lastSeenAt": "2026-10-01T02:07:52Z",
       "createdAt": "2026-10-01T02:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6aa92b65fdf75b86efb38266",
       "title": "KoMaP AI 경진대회",
       "description": "산업통상자원부,한국산업기술진흥원 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-15",
       "link": "https://holaworld.io/hola-it/6aa92b65fdf75b86efb38266",
       "source": "Hola IT",
@@ -1107,7 +1165,7 @@
       "startDate": "2026-09-03",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1131,7 +1189,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-01T02:07:52Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179337",
@@ -1153,7 +1212,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-02T01:40:36Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179372",
@@ -1175,13 +1235,15 @@
       "firstSeenAt": "2026-10-01T02:07:52Z",
       "lastSeenAt": "2026-10-08T00:11:26Z",
       "createdAt": "2026-10-01T02:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179402",
       "title": "[강동구 청년해냄센터] 고덕비즈밸리 강동U1센터 청년창업공간 입주기업 모집",
       "description": "강동구 청년해냄센터 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-15",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179402",
       "source": "K-Startup",
@@ -1195,7 +1257,7 @@
       "startDate": "2026-10-01",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T08:28:37Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T08:28:37Z",
       "status": "active"
     },
@@ -1204,6 +1266,7 @@
       "title": "모두의 창업 등 정부지원사업 완벽 대비! 「1:1 맞춤형 창업 멘토링」 참가자 모집",
       "description": "강남구여성능력개발센터 · 멘토링ㆍ컨설팅ㆍ교육",
       "category": "activity",
+      "topics": [],
       "deadline": "2026-10-15",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179422",
       "source": "K-Startup",
@@ -1217,7 +1280,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -1242,7 +1305,8 @@
       "firstSeenAt": "2026-09-11T04:36:08Z",
       "lastSeenAt": "2026-09-11T04:36:08Z",
       "createdAt": "2026-09-11T04:36:08Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179280",
@@ -1264,7 +1328,8 @@
       "firstSeenAt": "2026-09-17T06:07:52Z",
       "lastSeenAt": "2026-09-28T21:58:22Z",
       "createdAt": "2026-09-17T06:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179325",
@@ -1286,13 +1351,15 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-02T01:40:36Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179377",
       "title": "2026년 한신대학교 창업보육센터 신규 창업기업 모집 공고",
       "description": "한신대학교 창업보육센터 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-16",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179377",
       "source": "K-Startup",
@@ -1306,7 +1373,7 @@
       "startDate": "2026-09-29",
       "publishedAt": "2026-10-01",
       "firstSeenAt": "2026-10-01T08:52:55Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-01T08:52:55Z",
       "status": "active"
     },
@@ -1315,6 +1382,7 @@
       "title": "트레일 신산업 로컬창업지원 참여기업 모집",
       "description": "크립톤 · 멘토링ㆍ컨설팅ㆍ교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-16",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179396",
       "source": "K-Startup",
@@ -1328,7 +1396,7 @@
       "startDate": "2026-09-30",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T15:46:35Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T15:46:35Z",
       "status": "active"
     },
@@ -1337,6 +1405,7 @@
       "title": "[창업] 창업가를 위한 IR 피칭 기초 부스팅",
       "description": "마포청년창업취업지원센터 나루 · 창업교육",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-16",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179414",
       "source": "K-Startup",
@@ -1350,7 +1419,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T08:28:37Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T08:28:37Z",
       "status": "active"
     },
@@ -1359,6 +1428,7 @@
       "title": "2026년 템플스테이·사찰음식·불교문화 콘텐츠 논문공모전",
       "description": "한국불교문화사업단 / (사)한국관광학회 · 논문/리포트, 문학/글/시나리오, 기타",
       "category": "marketing",
+      "topics": [],
       "deadline": "2026-10-16",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=107265",
       "source": "위비티",
@@ -1373,7 +1443,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-05-11 ~ 2026-10-16",
       "firstSeenAt": "2026-09-16T18:53:46Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-09-16T18:53:46Z",
       "status": "active"
     },
@@ -1398,7 +1468,8 @@
       "firstSeenAt": "2026-09-07T12:26:06Z",
       "lastSeenAt": "2026-09-07T12:26:06Z",
       "createdAt": "2026-09-07T12:26:06Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_110905",
@@ -1421,7 +1492,8 @@
       "firstSeenAt": "2026-09-10T09:41:19Z",
       "lastSeenAt": "2026-09-10T09:41:19Z",
       "createdAt": "2026-09-10T09:41:19Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111363",
@@ -1444,7 +1516,8 @@
       "firstSeenAt": "2026-09-30T06:41:04Z",
       "lastSeenAt": "2026-09-30T06:41:04Z",
       "createdAt": "2026-09-30T06:41:04Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111390",
@@ -1467,7 +1540,8 @@
       "firstSeenAt": "2026-10-01T08:52:55Z",
       "lastSeenAt": "2026-10-01T08:52:55Z",
       "createdAt": "2026-10-01T08:52:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111533",
@@ -1490,13 +1564,15 @@
       "firstSeenAt": "2026-10-07T13:17:00Z",
       "lastSeenAt": "2026-10-08T05:58:32Z",
       "createdAt": "2026-10-07T13:17:00Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6acb3de3ee012963f81ccaaf",
       "title": "Daytona HackSprint Seoul 해커톤",
       "description": "황인수 · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-17",
       "link": "https://holaworld.io/hola-it/6acb3de3ee012963f81ccaaf",
       "source": "Hola IT",
@@ -1510,7 +1586,7 @@
       "startDate": "2026-10-11",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1519,6 +1595,7 @@
       "title": "2026 0924영상제 영상 공모전",
       "description": "하남시청소년수련관 · 광고/마케팅, 영상/UCC/사진, 웹/모바일/IT, 예체능/미술/음악, 기타",
       "category": "marketing",
+      "topics": [],
       "deadline": "2026-10-17",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=110585",
       "source": "위비티",
@@ -1533,7 +1610,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-07-31 ~ 2026-10-17",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1542,6 +1619,7 @@
       "title": "2026 별별화성 Awards AI CF 공모전",
       "description": "화성특례시 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-18",
       "link": "https://holaworld.io/hola-it/6aae2720fdf75b86efb99eb8",
       "source": "Hola IT",
@@ -1555,7 +1633,7 @@
       "startDate": "2026-09-21",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1564,6 +1642,7 @@
       "title": "2026 AI 농수산 가격예측 해커톤",
       "description": "조재승 · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-18",
       "link": "https://holaworld.io/hola-it/6ab4c298fdf75b86efbf5564",
       "source": "Hola IT",
@@ -1577,7 +1656,7 @@
       "startDate": "2026-09-22",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1601,7 +1680,8 @@
       "firstSeenAt": "2026-10-01T02:07:52Z",
       "lastSeenAt": "2026-10-08T00:11:26Z",
       "createdAt": "2026-10-01T02:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179388",
@@ -1623,7 +1703,8 @@
       "firstSeenAt": "2026-10-01T08:52:55Z",
       "lastSeenAt": "2026-10-08T05:58:32Z",
       "createdAt": "2026-10-01T08:52:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_110834",
@@ -1646,7 +1727,8 @@
       "firstSeenAt": "2026-09-08T11:14:00Z",
       "lastSeenAt": "2026-09-08T11:14:00Z",
       "createdAt": "2026-09-08T11:14:00Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111061",
@@ -1669,7 +1751,8 @@
       "firstSeenAt": "2026-09-16T09:55:17Z",
       "lastSeenAt": "2026-09-16T14:57:36Z",
       "createdAt": "2026-09-16T09:55:17Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111101",
@@ -1692,13 +1775,15 @@
       "firstSeenAt": "2026-09-17T16:58:03Z",
       "lastSeenAt": "2026-09-17T23:33:30Z",
       "createdAt": "2026-09-17T16:58:03Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111311",
       "title": "LG 대국민 미소 사진 공모전 - 스마일 모먼트",
       "description": "LG · 광고/마케팅, 영상/UCC/사진, 웹/모바일/IT, 예체능/미술/음악, 대외활동/서포터즈",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-18",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=111311",
       "source": "위비티",
@@ -1713,7 +1798,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-09-23 ~ 2026-10-18",
       "firstSeenAt": "2026-09-28T15:24:30Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-09-28T15:24:30Z",
       "status": "active"
     },
@@ -1722,6 +1807,7 @@
       "title": "[데이콘]합성 미세구조 기반 재료 물성 예측 AI 경진대회(~10/19)",
       "description": "데이콘 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-19",
       "link": "https://holaworld.io/hola-it/6abe8b1fee012963f80ebe2f",
       "source": "Hola IT",
@@ -1735,7 +1821,7 @@
       "startDate": "2026-09-29",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1744,6 +1830,7 @@
       "title": "영도 창업오피스 크립톤 1:1 멘토링 입주기업 모집",
       "description": "주식회사 크립톤 부산센터 · 시설ㆍ공간ㆍ보육",
       "category": "activity",
+      "topics": [],
       "deadline": "2026-10-19",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179424",
       "source": "K-Startup",
@@ -1757,7 +1844,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -1766,6 +1853,7 @@
       "title": "2026년「강남 취‧창업허브센터」8차 입주 기업 신규 모집",
       "description": "(주)오픈놀 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-19",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179435",
       "source": "K-Startup",
@@ -1779,7 +1867,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -1804,13 +1892,15 @@
       "firstSeenAt": "2026-09-28T21:58:22Z",
       "lastSeenAt": "2026-09-29T01:54:58Z",
       "createdAt": "2026-09-28T21:58:22Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6acb3df9ee012963f81ccb37",
       "title": "2026 청년취업사관학교 해커톤",
       "description": "AllAZITLAB · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-20",
       "link": "https://holaworld.io/hola-it/6acb3df9ee012963f81ccb37",
       "source": "Hola IT",
@@ -1824,7 +1914,7 @@
       "startDate": "2026-10-07",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1848,13 +1938,15 @@
       "firstSeenAt": "2026-09-15T07:42:07Z",
       "lastSeenAt": "2026-09-28T21:58:22Z",
       "createdAt": "2026-09-15T07:42:07Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179425",
       "title": "제46회 창업가정신포럼",
       "description": "경기창조경제혁신센터 · 행사ㆍ네트워크",
       "category": "activity",
+      "topics": [],
       "deadline": "2026-10-20",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179425",
       "source": "K-Startup",
@@ -1868,7 +1960,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -1877,6 +1969,7 @@
       "title": "이타카앤파트너스 조용민 대표 초청 특강 - 내가 투자한 스타트업과 성공하는 창업가의 3가지 비밀",
       "description": "(재)경기도경제과학진흥원 · 멘토링ㆍ컨설팅ㆍ교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-20",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179426",
       "source": "K-Startup",
@@ -1890,7 +1983,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -1899,6 +1992,7 @@
       "title": "2026년 창업기업(예비창업자) 사업고도화 창업교육 참여자 모집 공고",
       "description": "통영시청 · 창업교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-20",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179437",
       "source": "K-Startup",
@@ -1912,7 +2006,7 @@
       "startDate": "2026-10-01",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -1921,6 +2015,7 @@
       "title": "2026 생물자원 활용 창업벤처 지원을 위한 기업 간담회 (3회차) 참여기업 모집",
       "description": "탭엔젤파트너스 · 사업화",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-20",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179445",
       "source": "K-Startup",
@@ -1934,7 +2029,7 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -1943,6 +2038,7 @@
       "title": "2026년 웰컴 투 팁스 5차 참가기업 모집 (호남권)",
       "description": "(주)로우파트너스 · 사업화",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-20",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179464",
       "source": "K-Startup",
@@ -1956,7 +2052,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T13:23:48Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T13:23:48Z",
       "status": "active"
     },
@@ -1965,6 +2061,7 @@
       "title": "2026년 웰컴 투 팁스 6차 참가기업 모집 (전북권)",
       "description": "(주)로우파트너스 · 사업화",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-20",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179466",
       "source": "K-Startup",
@@ -1978,7 +2075,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T13:23:48Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T13:23:48Z",
       "status": "active"
     },
@@ -2002,7 +2099,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-02T01:40:36Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179370",
@@ -2024,13 +2122,15 @@
       "firstSeenAt": "2026-10-01T02:07:52Z",
       "lastSeenAt": "2026-10-08T00:11:26Z",
       "createdAt": "2026-10-01T02:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179393",
       "title": "2026년 위치정보 보호조치 교육 (6차)",
       "description": "(주)아이전스 · 멘토링ㆍ컨설팅ㆍ교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-21",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179393",
       "source": "K-Startup",
@@ -2044,7 +2144,7 @@
       "startDate": "2026-09-30",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T08:28:37Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T08:28:37Z",
       "status": "active"
     },
@@ -2053,6 +2153,7 @@
       "title": "2026년 제3차 I-PLEX광주 입주기업 모집공고",
       "description": "(재)광주테크노파크 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-21",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179442",
       "source": "K-Startup",
@@ -2066,7 +2167,7 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -2091,13 +2192,15 @@
       "firstSeenAt": "2026-09-10T14:25:32Z",
       "lastSeenAt": "2026-09-10T14:25:32Z",
       "createdAt": "2026-09-10T14:25:32Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6a9d96abd7320aa75232b1fd",
       "title": "2026 데이터+AI 혁신챌린지 데이터안심구역 경진대회",
       "description": "과학기술정보통신부 / 한국데이터산업진흥원 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-22",
       "link": "https://holaworld.io/hola-it/6a9d96abd7320aa75232b1fd",
       "source": "Hola IT",
@@ -2111,7 +2214,7 @@
       "startDate": "2026-09-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2120,6 +2223,7 @@
       "title": "데이터안심구역 경진대회",
       "description": "유재은 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-22",
       "link": "https://holaworld.io/hola-it/6a9d96b0d7320aa75232b252",
       "source": "Hola IT",
@@ -2133,7 +2237,7 @@
       "startDate": "2026-09-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2142,6 +2246,7 @@
       "title": "2026데이터·AI혁신챌린지 통합경진대회 데이터문제해결부문 모집",
       "description": "AI데이터문제해결은행홍보사무국 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-22",
       "link": "https://holaworld.io/hola-it/6aa751d4847411b719e2e536",
       "source": "Hola IT",
@@ -2155,7 +2260,7 @@
       "startDate": "2026-09-08",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2164,6 +2269,7 @@
       "title": "2026 서울 빅데이터 포럼",
       "description": "서울시립대학교 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-22",
       "link": "https://holaworld.io/hola-it/6aa751d5847411b719e2e53b",
       "source": "Hola IT",
@@ -2177,7 +2283,7 @@
       "startDate": "2026-09-08",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2186,6 +2292,7 @@
       "title": "쇼미더임팩트 시즌6 참가자 모집 [IMPACT IR 경연대회]",
       "description": "충남사회적경제지원센터 · 멘토링ㆍ컨설팅ㆍ교육",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-22",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179375",
       "source": "K-Startup",
@@ -2199,7 +2306,7 @@
       "startDate": "2026-09-29",
       "publishedAt": "2026-10-01",
       "firstSeenAt": "2026-10-01T08:52:55Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-01T08:52:55Z",
       "status": "active"
     },
@@ -2208,6 +2315,7 @@
       "title": "2026년 강북창업지원센터 10월 창업 교육 및 그룹상담 프로그램 참가자 모집",
       "description": "광운대학교산학협력단 · 창업교육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-22",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179418",
       "source": "K-Startup",
@@ -2221,7 +2329,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T15:46:35Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T15:46:35Z",
       "status": "active"
     },
@@ -2246,13 +2354,15 @@
       "firstSeenAt": "2026-09-17T11:37:30Z",
       "lastSeenAt": "2026-09-17T11:37:30Z",
       "createdAt": "2026-09-17T11:37:30Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6aa92b4dfdf75b86efb381ff",
       "title": "[행정안전부] 공공 웹사이트 불법광고 탐지 도구 개발 공모전",
       "description": "행정안전부/한국지능정보사회진흥원 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-23",
       "link": "https://holaworld.io/hola-it/6aa92b4dfdf75b86efb381ff",
       "source": "Hola IT",
@@ -2266,7 +2376,7 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2275,6 +2385,7 @@
       "title": "2026 CWNU SW-DNA² 챌린지 대학생 AI·SW 경진대회",
       "description": "국립창원대학교 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-23",
       "link": "https://holaworld.io/hola-it/6abe8b1eee012963f80ebe2a",
       "source": "Hola IT",
@@ -2288,7 +2399,7 @@
       "startDate": "2026-09-29",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2312,7 +2423,8 @@
       "firstSeenAt": "2026-09-22T09:55:43Z",
       "lastSeenAt": "2026-09-30T23:01:55Z",
       "createdAt": "2026-09-22T09:55:43Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179381",
@@ -2334,13 +2446,15 @@
       "firstSeenAt": "2026-10-01T02:07:52Z",
       "lastSeenAt": "2026-10-08T00:11:26Z",
       "createdAt": "2026-10-01T02:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179411",
       "title": "2026년 하반기 남동구 청년창업지원센터 입주기업 모집 공고",
       "description": "남동구 청년창업지원센터 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-23",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179411",
       "source": "K-Startup",
@@ -2354,7 +2468,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-02",
       "firstSeenAt": "2026-10-02T08:28:37Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T08:28:37Z",
       "status": "active"
     },
@@ -2363,6 +2477,7 @@
       "title": "경기창업혁신공간 서부권 「스담스담」(오픈 네트워킹) 3회차",
       "description": "(재)경기도경제과학진흥원 · 행사ㆍ네트워크",
       "category": "activity",
+      "topics": [],
       "deadline": "2026-10-23",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179416",
       "source": "K-Startup",
@@ -2376,7 +2491,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -2385,6 +2500,7 @@
       "title": "[서초창업스테이션] 10월 1:1 전문 분야 컨설팅 - 지식재산권/특허 전략, 브랜딩 전략",
       "description": "(주)오픈놀 · 시설ㆍ공간ㆍ보육",
       "category": "marketing",
+      "topics": [],
       "deadline": "2026-10-23",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179434",
       "source": "K-Startup",
@@ -2398,7 +2514,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-07",
       "firstSeenAt": "2026-10-07T13:17:00Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-07T13:17:00Z",
       "status": "active"
     },
@@ -2423,7 +2539,8 @@
       "firstSeenAt": "2026-09-09T09:42:23Z",
       "lastSeenAt": "2026-09-10T04:38:33Z",
       "createdAt": "2026-09-09T09:42:23Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_110998",
@@ -2446,7 +2563,8 @@
       "firstSeenAt": "2026-09-14T12:46:46Z",
       "lastSeenAt": "2026-09-15T07:42:07Z",
       "createdAt": "2026-09-14T12:46:46Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111286",
@@ -2469,7 +2587,8 @@
       "firstSeenAt": "2026-09-26T13:03:12Z",
       "lastSeenAt": "2026-09-28T00:43:05Z",
       "createdAt": "2026-09-26T13:03:12Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111563",
@@ -2492,13 +2611,15 @@
       "firstSeenAt": "2026-10-10T17:50:51Z",
       "lastSeenAt": "2026-10-11T07:09:57Z",
       "createdAt": "2026-10-10T17:50:51Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6aba73e2ee012963f80a4bce",
       "title": "Cursor Hackathon Seoul 4th",
       "description": "Cursor Korea · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-24",
       "link": "https://holaworld.io/hola-it/6aba73e2ee012963f80a4bce",
       "source": "Hola IT",
@@ -2512,7 +2633,7 @@
       "startDate": "2026-10-24",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2521,6 +2642,7 @@
       "title": "『2026 SVC Seoul AI 해커톤』 | 관광 AI 아이디어 도전",
       "description": "창업진흥원, 한국관광공사, 하나투어, SVC Seoul · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-25",
       "link": "https://holaworld.io/hola-it/6acb3dfeee012963f81ccb57",
       "source": "Hola IT",
@@ -2534,7 +2656,7 @@
       "startDate": "2026-10-06",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2558,7 +2680,8 @@
       "firstSeenAt": "2026-09-11T09:38:55Z",
       "lastSeenAt": "2026-09-17T00:28:59Z",
       "createdAt": "2026-09-11T09:38:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111126",
@@ -2581,13 +2704,15 @@
       "firstSeenAt": "2026-09-18T09:43:51Z",
       "lastSeenAt": "2026-09-18T09:43:51Z",
       "createdAt": "2026-09-18T09:43:51Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6acb3de8ee012963f81ccaba",
       "title": "2026 동남권 멀티도메인 모빌리티 비즈니스 해커톤(~10/26)",
       "description": "마이스플랜즈 · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-26",
       "link": "https://holaworld.io/hola-it/6acb3de8ee012963f81ccaba",
       "source": "Hola IT",
@@ -2601,7 +2726,7 @@
       "startDate": "2026-10-09",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2610,6 +2735,7 @@
       "title": "2026 동남권 멀티도메인 모빌리티 비즈니스 해커톤",
       "description": "산업통상부, 부산광역시, 울산광역시, 경상남도 · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-26",
       "link": "https://holaworld.io/hola-it/6acb3deaee012963f81ccac6",
       "source": "Hola IT",
@@ -2623,7 +2749,7 @@
       "startDate": "2026-10-09",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2647,13 +2773,15 @@
       "firstSeenAt": "2026-10-01T02:07:52Z",
       "lastSeenAt": "2026-10-08T00:11:26Z",
       "createdAt": "2026-10-01T02:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179432",
       "title": "[서초창업스테이션] 10월 창업 교육 프로그램 - 창업아이템 찾기 : 문제에서 시작 된 창업아이템 찾기",
       "description": "(주)오픈놀 · 시설ㆍ공간ㆍ보육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-26",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179432",
       "source": "K-Startup",
@@ -2667,7 +2795,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-07",
       "firstSeenAt": "2026-10-07T13:17:00Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-07T13:17:00Z",
       "status": "active"
     },
@@ -2676,6 +2804,7 @@
       "title": "2026년 대전 스타트업스쿨 스타트업 리딩클래스 (6회차 ㅣ 나에게 맞는 투자자 찾는 실전 노하우)",
       "description": "대전창조경제혁신센터 · 행사ㆍ네트워크",
       "category": "activity",
+      "topics": [],
       "deadline": "2026-10-26",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179440",
       "source": "K-Startup",
@@ -2689,7 +2818,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-07",
       "firstSeenAt": "2026-10-07T13:17:00Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-07T13:17:00Z",
       "status": "active"
     },
@@ -2698,6 +2827,7 @@
       "title": "제7회 하이라이트TV AI 공모전",
       "description": "하이라이트TV · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-27",
       "link": "https://holaworld.io/hola-it/6acb3dfeee012963f81ccb4c",
       "source": "Hola IT",
@@ -2711,7 +2841,7 @@
       "startDate": "2026-10-07",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2735,13 +2865,15 @@
       "firstSeenAt": "2026-09-08T11:14:00Z",
       "lastSeenAt": "2026-09-17T00:28:59Z",
       "createdAt": "2026-09-08T11:14:00Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179420",
       "title": "[동대문구 창업지원센터] 10월 메이커스페이스(레이저커터, 3D프린팅) 교육 일정",
       "description": "서울시립대학교창업보육센터 · 시설ㆍ공간ㆍ보육",
       "category": "education",
+      "topics": [],
       "deadline": "2026-10-27",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179420",
       "source": "K-Startup",
@@ -2755,7 +2887,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -2780,7 +2912,8 @@
       "firstSeenAt": "2026-10-07T13:17:00Z",
       "lastSeenAt": "2026-10-08T05:58:32Z",
       "createdAt": "2026-10-07T13:17:00Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111553",
@@ -2803,7 +2936,8 @@
       "firstSeenAt": "2026-10-08T13:23:48Z",
       "lastSeenAt": "2026-10-10T12:26:53Z",
       "createdAt": "2026-10-08T13:23:48Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179360",
@@ -2825,7 +2959,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-06T07:32:18Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179373",
@@ -2847,13 +2982,15 @@
       "firstSeenAt": "2026-10-01T02:07:52Z",
       "lastSeenAt": "2026-10-08T00:11:26Z",
       "createdAt": "2026-10-01T02:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179421",
       "title": "2026년 서울창업센터 동작 입주기업 모집",
       "description": "서울경제진흥원 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-28",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179421",
       "source": "K-Startup",
@@ -2867,7 +3004,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -2876,6 +3013,7 @@
       "title": "[한국도로공사] 2026년 상생형 창업, 벤처기업 지원사업",
       "description": "재단법인밴드 · 사업화",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-28",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179431",
       "source": "K-Startup",
@@ -2889,7 +3027,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -2898,6 +3036,7 @@
       "title": "2027년 초격차 스타트업 프로젝트 정부 첫 실증·구매 주관기관 모집공고",
       "description": "창업진흥원 · 사업화",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-10-29",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179428",
       "source": "K-Startup",
@@ -2911,7 +3050,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -2936,13 +3075,15 @@
       "firstSeenAt": "2026-10-02T08:28:37Z",
       "lastSeenAt": "2026-10-02T15:46:35Z",
       "createdAt": "2026-10-02T08:28:37Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6aa92b4bfdf75b86efb381dc",
       "title": "디자인 잇 어워드 챌린지 2026",
       "description": "(사)한국디자인산업연합회 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-30",
       "link": "https://holaworld.io/hola-it/6aa92b4bfdf75b86efb381dc",
       "source": "Hola IT",
@@ -2956,7 +3097,7 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2965,6 +3106,7 @@
       "title": "2026 경기스포츠산업 공모전",
       "description": "경기도체육회 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-30",
       "link": "https://holaworld.io/hola-it/6aae2716fdf75b86efb99e6f",
       "source": "Hola IT",
@@ -2978,7 +3120,7 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2987,6 +3129,7 @@
       "title": "[BytePlus × AI-Kive] Seedance 2.5 AI 시리즈 제작지원 공모전",
       "description": "BytePlus / (주)스튜디오프리윌루전, AI-Kive · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-30",
       "link": "https://holaworld.io/hola-it/6ab4c28bfdf75b86efbf5536",
       "source": "Hola IT",
@@ -3000,7 +3143,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3009,6 +3152,7 @@
       "title": "사장님을 위한 금융 아이디어 공모전",
       "description": "케이뱅크, 카카오뱅크 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-30",
       "link": "https://holaworld.io/hola-it/6abe8b20ee012963f80ebe52",
       "source": "Hola IT",
@@ -3022,7 +3166,7 @@
       "startDate": "2026-09-28",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3031,6 +3175,7 @@
       "title": "2026년 양자내성암호 전환 경진대회·해커톤",
       "description": "과학기술정보통신부 / 한국인터넷진흥원 · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-30",
       "link": "https://holaworld.io/hola-it/6ac125e3ee012963f812bf19",
       "source": "Hola IT",
@@ -3044,7 +3189,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3068,7 +3213,8 @@
       "firstSeenAt": "2026-09-09T18:34:26Z",
       "lastSeenAt": "2026-09-17T00:28:59Z",
       "createdAt": "2026-09-09T18:34:26Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179268",
@@ -3090,13 +3236,15 @@
       "firstSeenAt": "2026-09-17T06:07:52Z",
       "lastSeenAt": "2026-09-28T21:58:22Z",
       "createdAt": "2026-09-17T06:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179281",
       "title": "2026 경기스포츠산업 공모전",
       "description": "(주)스펙토리 · 행사ㆍ네트워크",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-30",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179281",
       "source": "K-Startup",
@@ -3110,7 +3258,7 @@
       "startDate": "2026-09-14",
       "publishedAt": "2026-10-01",
       "firstSeenAt": "2026-10-01T08:52:55Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-01T08:52:55Z",
       "status": "active"
     },
@@ -3134,13 +3282,15 @@
       "firstSeenAt": "2026-10-01T02:07:52Z",
       "lastSeenAt": "2026-10-08T00:11:26Z",
       "createdAt": "2026-10-01T02:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_104715",
       "title": "2026 제4회 충청남도 드론 영상 및 사진 공모전",
       "description": "충청남도 · 영상/UCC/사진, 예체능/미술/음악, 기타",
       "category": "marketing",
+      "topics": [],
       "deadline": "2026-10-30",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=104715",
       "source": "위비티",
@@ -3155,7 +3305,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-02-02 ~ 2026-10-30",
       "firstSeenAt": "2026-09-13T18:11:08Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-09-13T18:11:08Z",
       "status": "active"
     },
@@ -3180,7 +3330,8 @@
       "firstSeenAt": "2026-09-07T18:15:19Z",
       "lastSeenAt": "2026-09-08T05:57:09Z",
       "createdAt": "2026-09-07T18:15:19Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111243",
@@ -3203,7 +3354,8 @@
       "firstSeenAt": "2026-09-23T05:56:57Z",
       "lastSeenAt": "2026-09-23T05:56:57Z",
       "createdAt": "2026-09-23T05:56:57Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111274",
@@ -3226,7 +3378,8 @@
       "firstSeenAt": "2026-09-24T22:22:12Z",
       "lastSeenAt": "2026-09-24T22:22:12Z",
       "createdAt": "2026-09-24T22:22:12Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111285",
@@ -3249,7 +3402,8 @@
       "firstSeenAt": "2026-09-25T07:45:53Z",
       "lastSeenAt": "2026-09-28T00:43:05Z",
       "createdAt": "2026-09-25T07:45:53Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111314",
@@ -3272,13 +3426,15 @@
       "firstSeenAt": "2026-09-28T15:24:30Z",
       "lastSeenAt": "2026-09-28T15:24:30Z",
       "createdAt": "2026-09-28T15:24:30Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6a8537beb5748aed45f734fc",
       "title": "제5회 기아 PBV 아이디어 공모전",
       "description": "KIA · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-31",
       "link": "https://holaworld.io/hola-it/6a8537beb5748aed45f734fc",
       "source": "Hola IT",
@@ -3292,7 +3448,7 @@
       "startDate": "2026-08-18",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3301,6 +3457,7 @@
       "title": "[제주관광공사] 2026 제주 관광 데이터 활용사례 공모전(~10/31)",
       "description": "제주특별자치도/제주관광공사 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-31",
       "link": "https://holaworld.io/hola-it/6a9d96aed7320aa75232b234",
       "source": "Hola IT",
@@ -3314,7 +3471,7 @@
       "startDate": "2026-09-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3323,6 +3480,7 @@
       "title": "🏆2026년 최고의 웹사이트를 찾아라! 웹어워드코리아 2026 수상후보 공모",
       "description": "한국인터넷전문가협회 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-31",
       "link": "https://holaworld.io/hola-it/6aa751bc847411b719e2e4f5",
       "source": "Hola IT",
@@ -3336,7 +3494,7 @@
       "startDate": "2026-09-08",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3345,6 +3503,7 @@
       "title": "🏆2026년 최고의 스마트앱을 찾아라! 스마트앱어워드 2026 수상후보 공모",
       "description": "한국인터넷전문가협회 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-31",
       "link": "https://holaworld.io/hola-it/6aa751bd847411b719e2e4fa",
       "source": "Hola IT",
@@ -3358,7 +3517,7 @@
       "startDate": "2026-09-08",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3367,6 +3526,7 @@
       "title": "롯데렌터카 T car 숏폼 영상 공모전",
       "description": "롯데렌터카 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-31",
       "link": "https://holaworld.io/hola-it/6acb3df7ee012963f81ccb27",
       "source": "Hola IT",
@@ -3380,7 +3540,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3389,6 +3549,7 @@
       "title": "[활동비·상금 2,000만원 상당 지원] 기업의 실제 문제를 AI로 해결할 프로젝트팀 모집",
       "description": "에이블런 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-31",
       "link": "https://holaworld.io/hola-it/6acb3dfaee012963f81ccb3c",
       "source": "Hola IT",
@@ -3402,7 +3563,7 @@
       "startDate": "2026-10-07",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3411,6 +3572,7 @@
       "title": "AI 뮤직비디오 제작 이벤트 <모두의 프로듀서>",
       "description": "주최: 한국정보통신기술협회 / 주관: 과학기술정보통신부 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-31",
       "link": "https://holaworld.io/hola-it/6acb3dffee012963f81ccb5e",
       "source": "Hola IT",
@@ -3424,7 +3586,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3433,6 +3595,7 @@
       "title": "HACK:ON 선릉 바이브코딩 해커톤 (하루 안에, 배포까지 · 참가비 무료)",
       "description": "mandeun · HACK:ON(해커온) · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-10-31",
       "link": "https://holaworld.io/hola-it/6acb3dffee012963f81ccb65",
       "source": "Hola IT",
@@ -3446,7 +3609,7 @@
       "startDate": "2026-10-07",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3470,7 +3633,8 @@
       "firstSeenAt": "2026-09-15T07:42:07Z",
       "lastSeenAt": "2026-09-28T21:58:22Z",
       "createdAt": "2026-09-15T07:42:07Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179173",
@@ -3492,7 +3656,8 @@
       "firstSeenAt": "2026-09-08T11:14:00Z",
       "lastSeenAt": "2026-09-17T00:28:59Z",
       "createdAt": "2026-09-08T11:14:00Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179387",
@@ -3514,13 +3679,15 @@
       "firstSeenAt": "2026-10-01T08:52:55Z",
       "lastSeenAt": "2026-10-08T05:58:32Z",
       "createdAt": "2026-10-01T08:52:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_109936",
       "title": "[사회복지공동모금회 나눔문화연구소] 제8회 사랑의열매 학술연구지원 공모",
       "description": "사회복지공동모금회 사랑의열매 · 논문/리포트, 문학/글/시나리오, 예체능/미술/음악",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-10-31",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=109936",
       "source": "위비티",
@@ -3535,7 +3702,7 @@
       "audience": "일반인, 대학생, 기타",
       "applicationPeriod": "2026-08-03 ~ 2026-10-31",
       "firstSeenAt": "2026-10-02T20:42:19Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T20:42:19Z",
       "status": "active"
     },
@@ -3560,7 +3727,8 @@
       "firstSeenAt": "2026-09-10T09:41:19Z",
       "lastSeenAt": "2026-09-10T09:41:19Z",
       "createdAt": "2026-09-10T09:41:19Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111272",
@@ -3583,13 +3751,15 @@
       "firstSeenAt": "2026-09-23T11:30:52Z",
       "lastSeenAt": "2026-09-24T19:07:49Z",
       "createdAt": "2026-09-23T11:30:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6abe8b20ee012963f80ebe4d",
       "title": "2026년 제천시 AI 활용 데이터 분석 아이디어 공모전",
       "description": "충청북도 제천시 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-01",
       "link": "https://holaworld.io/hola-it/6abe8b20ee012963f80ebe4d",
       "source": "Hola IT",
@@ -3603,7 +3773,7 @@
       "startDate": "2026-09-28",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3612,6 +3782,7 @@
       "title": "2026 전국 대학생 SW 창업아이디어톤",
       "description": "한양대 ERICA SW중심대학사업단 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-01",
       "link": "https://holaworld.io/hola-it/6abe8b21ee012963f80ebe57",
       "source": "Hola IT",
@@ -3625,7 +3796,7 @@
       "startDate": "2026-09-28",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3634,6 +3805,7 @@
       "title": "2026 디자인 크리에이션 챌린지(DCC) 3D프린팅 제품디자인 공모전",
       "description": "단국대-스트라타시스 첨단제조융합연구센터 / 단국 G-RISE사업단 · 디자인/캐릭터/웹툰, 예체능/미술/음악, 기타",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-01",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=109516",
       "source": "위비티",
@@ -3648,7 +3820,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-10-01 ~ 2026-11-01",
       "firstSeenAt": "2026-09-28T21:58:22Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-09-28T21:58:22Z",
       "status": "active"
     },
@@ -3673,7 +3845,8 @@
       "firstSeenAt": "2026-09-18T04:39:46Z",
       "lastSeenAt": "2026-09-18T04:39:46Z",
       "createdAt": "2026-09-18T04:39:46Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111271",
@@ -3696,7 +3869,8 @@
       "firstSeenAt": "2026-09-23T11:30:52Z",
       "lastSeenAt": "2026-09-24T19:07:49Z",
       "createdAt": "2026-09-23T11:30:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111299",
@@ -3719,13 +3893,15 @@
       "firstSeenAt": "2026-09-28T06:50:27Z",
       "lastSeenAt": "2026-09-28T06:50:27Z",
       "createdAt": "2026-09-28T06:50:27Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6acb3df7ee012963f81ccb22",
       "title": "2026 지식재산 보호 광고 공모전",
       "description": "지식재산처 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-02",
       "link": "https://holaworld.io/hola-it/6acb3df7ee012963f81ccb22",
       "source": "Hola IT",
@@ -3739,7 +3915,7 @@
       "startDate": "2026-10-06",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3763,13 +3939,15 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-01T02:07:52Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179408",
       "title": "「민관협력 오픈이노베이션 지원」2026년 제2차 상호 자율탐색형(바이오 분야) 참여기업 모집공고",
       "description": "창업진흥원 · 행사ㆍ네트워크",
       "category": "activity",
+      "topics": [],
       "deadline": "2026-11-02",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179408",
       "source": "K-Startup",
@@ -3783,7 +3961,7 @@
       "startDate": "2026-10-01",
       "publishedAt": "2026-10-01",
       "firstSeenAt": "2026-10-01T08:52:55Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-01T08:52:55Z",
       "status": "active"
     },
@@ -3792,6 +3970,7 @@
       "title": "2026 한국외식산업연구원 외식경영스타 아이디어 공모전",
       "description": "한국외식산업연구원 · 기획/아이디어, 광고/마케팅, 논문/리포트, 예체능/미술/음악, 취업/창업",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-02",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=111378",
       "source": "위비티",
@@ -3806,7 +3985,7 @@
       "audience": "대학생",
       "applicationPeriod": "2026-10-01 ~ 2026-11-02",
       "firstSeenAt": "2026-09-30T13:39:54Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-09-30T13:39:54Z",
       "status": "active"
     },
@@ -3815,6 +3994,7 @@
       "title": "2026 스페이스 해커톤",
       "description": "우주항공청 / 한국항공우주연구원, 경상국립대학교, 경상남도 진주시 · hackathon",
       "category": "hackathon",
+      "topics": [],
       "deadline": "2026-11-05",
       "link": "https://holaworld.io/hola-it/6aae271ffdf75b86efb99eae",
       "source": "Hola IT",
@@ -3828,8 +4008,35 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_nmc_health_public_health_contest",
+      "title": "2026년 대국민 공공의료 공모전",
+      "description": "보건복지부 / 국립중앙의료원 · 공공의료 공모전",
+      "category": "contest",
+      "topics": [
+        "health"
+      ],
+      "deadline": "2026-11-05",
+      "link": "https://www.nmcpublicedu.or.kr/info.asp",
+      "source": "국립중앙의료원",
+      "sourceId": "nmc_health",
+      "sourceUrl": "https://www.nmcpublicedu.or.kr/info.asp",
+      "organizer": "보건복지부 / 국립중앙의료원",
+      "sourceCategory": "공공의료 공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-06",
+      "audience": "대한민국 국민 누구나 · 개인 또는 4인 이내 팀/기관 (전공 제한 명시 없음)",
+      "applicationPeriod": "2026-10-06 ~ 2026-11-05 18:00 KST",
+      "recruitmentStatus": "open",
+      "firstSeenAt": "2026-10-11T23:58:25Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
+      "createdAt": "2026-10-11T23:58:25Z",
       "status": "active"
     },
     {
@@ -3837,6 +4044,7 @@
       "title": "구름톤 아레나 2026 — 전국 프로그래밍 챔피언십",
       "description": "주식회사 구름 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-06",
       "link": "https://holaworld.io/hola-it/6acb3df4ee012963f81ccafe",
       "source": "Hola IT",
@@ -3850,7 +4058,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3875,7 +4083,8 @@
       "firstSeenAt": "2026-09-21T00:14:48Z",
       "lastSeenAt": "2026-09-21T04:54:55Z",
       "createdAt": "2026-09-21T00:14:48Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111298",
@@ -3898,13 +4107,15 @@
       "firstSeenAt": "2026-09-28T06:50:27Z",
       "lastSeenAt": "2026-09-28T06:50:27Z",
       "createdAt": "2026-09-28T06:50:27Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6a60d0194e4a0d457b180963",
       "title": "컴퓨터·AI공학과『바이브코딩 활용 후기』공모전(~ 11.08) - 나의 솔직한 바이브코딩 이야기!",
       "description": "세종사이버대학교 컴퓨터·AI공학과 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-08",
       "link": "https://holaworld.io/hola-it/6a60d0194e4a0d457b180963",
       "source": "Hola IT",
@@ -3918,7 +4129,7 @@
       "startDate": "2026-05-13",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3927,6 +4138,7 @@
       "title": "의정부 FIT데이(Demo Day) 2회차 기업 모집 공고",
       "description": "경기창조경제혁신센터 · 행사ㆍ네트워크",
       "category": "activity",
+      "topics": [],
       "deadline": "2026-11-08",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179447",
       "source": "K-Startup",
@@ -3940,7 +4152,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -3949,6 +4161,7 @@
       "title": "2026년 청년 어촌창업 아이디어 공모전",
       "description": "한국어촌어항공단 · 사업화",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-08",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179448",
       "source": "K-Startup",
@@ -3962,7 +4175,7 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -3971,6 +4184,7 @@
       "title": "2026 KOSAC 영상콘텐츠챌린지",
       "description": "(사)한국광고총연합회 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-09",
       "link": "https://holaworld.io/hola-it/6aba73e1ee012963f80a4bb5",
       "source": "Hola IT",
@@ -3984,7 +4198,7 @@
       "startDate": "2026-11-02",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3993,6 +4207,7 @@
       "title": "2026 DATA·AI 분석 경진대회 신규",
       "description": "한국과학기술정보연구원 / 과기정통부, 과기연구회, 국회도서관, 대전광역시, 해양경찰청, 한국수자원공사, 대전중구청 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-10",
       "link": "https://holaworld.io/hola-it/6a7d1cb1bcb0b5b2e7537200",
       "source": "Hola IT",
@@ -4006,7 +4221,7 @@
       "startDate": "2026-08-11",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -4030,13 +4245,15 @@
       "firstSeenAt": "2026-09-17T06:07:52Z",
       "lastSeenAt": "2026-09-28T21:58:22Z",
       "createdAt": "2026-09-17T06:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_110023",
       "title": "2026 DATA·AI 분석 경진대회",
       "description": "한국과학기술정보연구원 / 과기정통부, 과기연구회, 국회도서관, 대전광역시, 해양경찰청, 한국수자원공사, 대전중구청 · 웹/모바일/IT, 과학/공학, 기타",
       "category": "dev",
+      "topics": [],
       "deadline": "2026-11-10",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=110023",
       "source": "위비티",
@@ -4051,7 +4268,7 @@
       "audience": "일반인, 대학생, 청소년",
       "applicationPeriod": "2026-08-11 ~ 2026-11-10",
       "firstSeenAt": "2026-10-02T20:42:19Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T20:42:19Z",
       "status": "active"
     },
@@ -4076,13 +4293,15 @@
       "firstSeenAt": "2026-09-17T16:58:03Z",
       "lastSeenAt": "2026-09-18T04:39:46Z",
       "createdAt": "2026-09-17T16:58:03Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_hola_6aa92b64fdf75b86efb38247",
       "title": "AI 활용 옥외광고 간판 디자인 공모전",
       "description": "한국지방재정공제회 한국옥외광고센터 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-13",
       "link": "https://holaworld.io/hola-it/6aa92b64fdf75b86efb38247",
       "source": "Hola IT",
@@ -4096,7 +4315,7 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -4105,6 +4324,7 @@
       "title": "2026 동남 버그바운티 대회",
       "description": "과기정통부,부산시,한국인터넷진흥원,부산정보산업진흥원,울산정보산업진흥원,경남테크노파크 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-13",
       "link": "https://holaworld.io/hola-it/6ab4c28dfdf75b86efbf5547",
       "source": "Hola IT",
@@ -4118,7 +4338,7 @@
       "startDate": "2026-09-21",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -4127,6 +4347,7 @@
       "title": "한양대학교 ERICA 캠퍼스혁신파크 산학연혁신허브 입점자 모집 공고",
       "description": "한국토지주택공사 · 시설ㆍ공간ㆍ보육",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-11-13",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179441",
       "source": "K-Startup",
@@ -4140,7 +4361,7 @@
       "startDate": "2026-09-30",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -4165,13 +4386,15 @@
       "firstSeenAt": "2026-09-22T09:55:43Z",
       "lastSeenAt": "2026-09-22T09:55:43Z",
       "createdAt": "2026-09-22T09:55:43Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111575",
       "title": "2026년 제 5회 한티가는길 사진공모전",
       "description": "사단법인 한티 · 영상/UCC/사진",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-15",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=111575",
       "source": "위비티",
@@ -4186,7 +4409,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-10-26 ~ 2026-11-15",
       "firstSeenAt": "2026-10-11T14:00:56Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T14:00:56Z",
       "status": "active"
     },
@@ -4210,7 +4433,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-06T07:32:18Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111506",
@@ -4233,7 +4457,8 @@
       "firstSeenAt": "2026-10-06T15:07:57Z",
       "lastSeenAt": "2026-10-07T05:54:23Z",
       "createdAt": "2026-10-06T15:07:57Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111531",
@@ -4256,7 +4481,8 @@
       "firstSeenAt": "2026-10-07T19:22:00Z",
       "lastSeenAt": "2026-10-08T05:58:32Z",
       "createdAt": "2026-10-07T19:22:00Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111032",
@@ -4279,7 +4505,8 @@
       "firstSeenAt": "2026-09-15T13:31:14Z",
       "lastSeenAt": "2026-09-16T04:52:12Z",
       "createdAt": "2026-09-15T13:31:14Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179348",
@@ -4301,7 +4528,8 @@
       "firstSeenAt": "2026-09-29T01:54:58Z",
       "lastSeenAt": "2026-10-06T07:32:18Z",
       "createdAt": "2026-09-29T01:54:58Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179184",
@@ -4323,7 +4551,8 @@
       "firstSeenAt": "2026-09-11T09:38:55Z",
       "lastSeenAt": "2026-09-17T06:07:52Z",
       "createdAt": "2026-09-11T09:38:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179386",
@@ -4345,13 +4574,15 @@
       "firstSeenAt": "2026-10-01T08:52:55Z",
       "lastSeenAt": "2026-10-08T00:11:26Z",
       "createdAt": "2026-10-01T08:52:55Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179417",
       "title": "2026년 중소기업 수출 부대비용 지원사업",
       "description": "한국고용정보원 · 판로ㆍ해외진출",
       "category": "startup",
+      "topics": [],
       "deadline": "2026-11-30",
       "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179417",
       "source": "K-Startup",
@@ -4365,7 +4596,7 @@
       "startDate": "2026-10-01",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -4374,6 +4605,7 @@
       "title": "미래에셋금융서비스 TAMS 글로벌금융인양성과정 17기 모집",
       "description": "미래에셋금융서비스 · 기획/아이디어, 광고/마케팅, 대외활동/서포터즈, 취업/창업, 기타",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-11-30",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=111546",
       "source": "위비티",
@@ -4388,7 +4620,7 @@
       "audience": "일반인, 대학생, 기타",
       "applicationPeriod": "2026-10-08 ~ 2026-11-30",
       "firstSeenAt": "2026-10-08T13:23:48Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-08T13:23:48Z",
       "status": "active"
     },
@@ -4413,7 +4645,8 @@
       "firstSeenAt": "2026-09-09T09:42:23Z",
       "lastSeenAt": "2026-09-10T04:38:33Z",
       "createdAt": "2026-09-09T09:42:23Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179365",
@@ -4435,7 +4668,8 @@
       "firstSeenAt": "2026-10-01T02:07:52Z",
       "lastSeenAt": "2026-10-06T07:32:18Z",
       "createdAt": "2026-10-01T02:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_111351",
@@ -4458,7 +4692,8 @@
       "firstSeenAt": "2026-09-29T15:47:35Z",
       "lastSeenAt": "2026-09-30T00:25:11Z",
       "createdAt": "2026-09-29T15:47:35Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_kstartup_179267",
@@ -4480,13 +4715,15 @@
       "firstSeenAt": "2026-09-17T06:07:52Z",
       "lastSeenAt": "2026-09-28T21:58:22Z",
       "createdAt": "2026-09-17T06:07:52Z",
-      "status": "active"
+      "status": "active",
+      "topics": []
     },
     {
       "id": "auto_wevity_109966",
       "title": "제14회 한옥디자인 국제 공모전",
       "description": "사단법인 한옥건축학회 / 사단법인 한옥건축학회 · 디자인/캐릭터/웹툰, 건축/건설/인테리어, 예체능/미술/음악",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-12-28",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=109966",
       "source": "위비티",
@@ -4501,7 +4738,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-10-01 ~ 2026-12-28",
       "firstSeenAt": "2026-10-02T20:42:19Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T20:42:19Z",
       "status": "active"
     },
@@ -4510,6 +4747,7 @@
       "title": "블로그페이로 팔아볼래? 👀쇼핑몰·온라인 판매를 주제로 재미있게 쇼츠·릴스 만들어 올리고, 리워드까지 받아가자!",
       "description": "유디아이디 · contest",
       "category": "contest",
+      "topics": [],
       "deadline": "2026-12-31",
       "link": "https://holaworld.io/hola-it/6a94e502d7320aa7522a2c21",
       "source": "Hola IT",
@@ -4523,7 +4761,7 @@
       "startDate": "2026-09-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -4532,6 +4770,7 @@
       "title": "7th Da-Ho Award Asian International Short Film Competition(단편영화 공모전)",
       "description": "Da-Ho Construction Co., Ltd. · 광고/마케팅, 영상/UCC/사진, 웹/모바일/IT, 예체능/미술/음악, 대외활동/서포터즈, 기타",
       "category": "contest",
+      "topics": [],
       "deadline": "2027-01-15",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=110179",
       "source": "위비티",
@@ -4546,7 +4785,7 @@
       "audience": "제한없음, 일반인, 대학생",
       "applicationPeriod": "2026-08-01 ~ 2027-01-15",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -4555,6 +4794,7 @@
       "title": "제4회 현대문학x미래엔 청소년문학상 공모전",
       "description": "현대문학, 미래엔 · 문학/글/시나리오, 예체능/미술/음악, 기타",
       "category": "contest",
+      "topics": [],
       "deadline": "2027-01-31",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=109996",
       "source": "위비티",
@@ -4569,7 +4809,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-06-01 ~ 2027-01-31",
       "firstSeenAt": "2026-10-02T20:42:19Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-02T20:42:19Z",
       "status": "active"
     },
@@ -4578,6 +4818,7 @@
       "title": "2026 더불어민주당 강북을 대학생위원회 신규위원 모집",
       "description": "더불어 민주당 강북을 대학생 위원회 · 봉사활동",
       "category": "activity",
+      "topics": [],
       "deadline": "2027-06-30",
       "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=111568",
       "source": "위비티",
@@ -4592,7 +4833,7 @@
       "audience": "대학생",
       "applicationPeriod": "2026-10-01 ~ 2027-06-30",
       "firstSeenAt": "2026-10-11T14:00:56Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T14:00:56Z",
       "status": "active"
     },
@@ -4601,6 +4842,7 @@
       "title": "항만 문제해결을 위한 AI 기술 공모전",
       "description": "AI 데이터 경진대회",
       "category": "contest",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236771/overview/",
       "source": "DACON",
@@ -4613,7 +4855,7 @@
       "authorName": "NextWave Bot",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -4622,6 +4864,7 @@
       "title": "제 5회 ETRI 휴먼이해 인공지능 논문경진대회",
       "description": "AI 데이터 경진대회",
       "category": "contest",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236690/overview/",
       "source": "DACON",
@@ -4636,7 +4879,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -4645,6 +4888,7 @@
       "title": "2026 AI·SW중심대학 디지털 경진대회 : SW부문",
       "description": "AI 데이터 경진대회",
       "category": "contest",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236693/overview/",
       "source": "DACON",
@@ -4659,7 +4903,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -4668,6 +4912,7 @@
       "title": "2026 AI·SW중심대학 디지털 경진대회 : AI부문",
       "description": "AI 데이터 경진대회",
       "category": "contest",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236694/overview/",
       "source": "DACON",
@@ -4682,7 +4927,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -4691,6 +4936,7 @@
       "title": "[1차예선] 2026 Samsung Collegiate Programming Challenge : AI 챌린지",
       "description": "AI 데이터 경진대회",
       "category": "contest",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236730/overview/",
       "source": "DACON",
@@ -4705,7 +4951,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -4714,6 +4960,7 @@
       "title": "Aimers 9기 : 투구 제구 성공 확률 예측 AI 온라인 해커톤",
       "description": "AI 데이터 경진대회",
       "category": "hackathon",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236743/overview/",
       "source": "DACON",
@@ -4728,7 +4975,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -4737,6 +4984,7 @@
       "title": "딥보이스 범죄 대응을 위한 AI 탐지 모델 경진대회",
       "description": "AI 데이터 경진대회",
       "category": "contest",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236749/overview/",
       "source": "DACON",
@@ -4751,7 +4999,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -4760,6 +5008,7 @@
       "title": "블랙박스 영상 기반 지능형 고의사고 분석 모델 AI 경진대회",
       "description": "AI 데이터 경진대회",
       "category": "contest",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236753/overview/",
       "source": "DACON",
@@ -4774,7 +5023,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -4783,6 +5032,7 @@
       "title": "나라장터 자체입찰 공고 법령 위반사항 모니터링 AI 경진대회",
       "description": "AI 데이터 경진대회",
       "category": "contest",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236754/overview/",
       "source": "DACON",
@@ -4797,7 +5047,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -4806,6 +5056,7 @@
       "title": "Aimers 9기 : 투구 제구 성공 확률 예측 AI 오프라인 해커톤",
       "description": "AI 데이터 경진대회",
       "category": "hackathon",
+      "topics": [],
       "deadline": null,
       "link": "https://dacon.io/competitions/official/236767/overview/",
       "source": "DACON",
@@ -4820,10 +5071,10 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-11T22:52:04Z",
+      "lastSeenAt": "2026-10-11T23:59:53Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     }
   ],
-  "classificationVersion": 3
+  "classificationVersion": 4
 }

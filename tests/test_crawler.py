@@ -95,6 +95,38 @@ class ParsingTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             crawler.parse_dacon_list('<h1>점검 중</h1>')
 
+    def test_nmc_official_health_contest_dates_eligibility_and_state(self):
+        html = (FIXTURES / 'nmc-health.html').read_text()
+        active = crawler.parse_nmc_health_contest(html, '2026-10-12')[0]
+        self.assertEqual(active['id'], 'auto_nmc_health_public_health_contest')
+        self.assertEqual(active['topics'], ['health'])
+        self.assertEqual(active['category'], 'contest')
+        self.assertEqual(active['recruitmentStatus'], 'open')
+        self.assertEqual(active['applicationPeriod'], '2026-10-06 ~ 2026-11-05 18:00 KST')
+        self.assertIn('전공 제한 명시 없음', active['audience'])
+        self.assertEqual(crawler.parse_nmc_health_contest(html, '2026-10-05')[0]['recruitmentStatus'], 'upcoming')
+        self.assertEqual(crawler.parse_nmc_health_contest(html, '2026-11-05T17:59:00+09:00')[0]['recruitmentStatus'], 'open')
+        self.assertEqual(crawler.parse_nmc_health_contest(html, '2026-11-05T18:00:00+09:00')[0]['recruitmentStatus'], 'closed')
+        closed = crawler.parse_nmc_health_contest(html, '2026-11-06')[0]
+        self.assertEqual(closed['status'], 'archived')
+
+    def test_nmc_changed_rules_fail_and_health_tag_needs_competition_title(self):
+        html = (FIXTURES / 'nmc-health.html').read_text()
+        for changed in [html.replace('대한민국 국민 누구나', '의료인만'),
+                        html.replace('2026. 10. 06.', '2026. 02. 30.'),
+                        html.replace('공모전</title>', '학술대회</title>')]:
+            with self.assertRaises(ValueError):
+                crawler.parse_nmc_health_contest(changed, '2026-10-12')
+        self.assertEqual(crawler.health_topics('2026 디지털 헬스케어 AI 해커톤'), ['health'])
+        self.assertEqual(crawler.health_topics('의료 AI 학술대회'), [])
+        self.assertEqual(crawler.health_topics('보건복지분야 사회복무요원 SNS 영상 공모전'), [])
+        self.assertEqual(crawler.health_topics('일반 창업 아이디어 경진대회'), [])
+        for url in ('https://www.nmcpublicedu.or.kr/info.asp?admin=1',
+                    'https://www.nmcpublicedu.or.kr/private',
+                    'https://www.nmcpublicedu.or.kr.evil.test/info.asp'):
+            with self.assertRaises(ValueError):
+                crawler.source_item_id('nmc_health', url)
+
     def test_new_source_links_reject_foreign_hosts_and_path_variants(self):
         for source, url in [('hola', 'https://holaworld.io.evil.test/hola-it/6acb3e05ee012963f81ccba1'),
                             ('hola', 'https://holaworld.io/hola-it/6acb3e05ee012963f81ccba1/../x'),

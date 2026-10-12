@@ -5,9 +5,10 @@
 ## Public board
 
 - Source records are authoritative from the checked-in crawler snapshot. Legacy Firestore crawler records are not merged over them. Admin-created member opportunities are merged only after membership approval.
-- Search, category filtering, archive inclusion, pagination and manual refresh work without signing in. Homepage deep links can use `portal.html?category=dev`, `gamedev`, `hackathon`, or `marketing` (other defined categories also work).
+- Search, category filtering, archive inclusion, pagination and manual refresh work without signing in. Deep links can use `portal.html?category=dev`, `gamedev`, `hackathon`, `marketing`, or `health` (other defined categories also work). `health` is a topic filter across categories, so a medical hackathon stays a hackathon too.
 - Archived records and past deadlines are hidden by default. Unknown or invalid deadlines are labeled `마감일 미확인`, never as always open. Date comparisons use the Korean calendar.
 - Hola 공고는 공개 목록의 접수 마감일과 종료 상태를 사용합니다. DACON의 `참가신청중` 항목은 `접수 중 · 일정 확인`으로 표시하고 마감일은 원문 확인을 요청합니다. 출처별 수집 건수와 오류 상태는 목록 위에도 보입니다.
+- 보건·의료 대회에는 별도 주제 배지를 붙입니다. 공식 국립중앙의료원 공모전 카드는 접수 기간과 공고의 참가 자격을 보여 줍니다. `접수 예정`은 아직 시작하지 않은 신청을 뜻하며, 정확한 시간과 전공별 조건은 원문을 확인해야 합니다.
 - While visible, the page checks for a newer snapshot once per minute. Unchanged snapshots do not replace focused cards; when refreshed content is replaced, surviving opportunity and source links retain keyboard focus without scrolling. Manual refresh downloads the latest snapshot; it **does not start a crawler**.
 - The expected freshness window comes from `refreshIntervalMinutes`; a source's last successful collection, errors, partial collection and stale data are visible. The page checks for newly published snapshots every minute without claiming the source crawler is already scheduled. Source scraping and scheduled deployment are described in [CRAWLER.md](CRAWLER.md).
 - Public fetching starts independently of the Firebase SDK download, so a slow or blocked authentication CDN does not block the opportunity list.
@@ -27,6 +28,6 @@ node --check portal.js
 node --test tests/portal.test.cjs
 ```
 
-The ten regression tests run the production helpers in a Node VM with a fixed clock; they make no network requests, do not use Firebase credentials, and do not write to Firebase. They cover date-boundary behavior, malformed dates, archive visibility, unsafe links, member/public data separation, stale crawler records, listener teardown, category deep links, keyboard focus during periodic refreshes, and the absence of the previous HTML/inline-handler rendering sinks.
+The portal regression tests run the production helpers in a Node VM with a fixed clock; they make no network requests, do not use Firebase credentials, and do not write to Firebase. They cover date-boundary behavior, malformed dates, archive visibility, unsafe links, member/public data separation, stale crawler records, listener teardown, category and health-topic deep links, keyboard focus during periodic refreshes, and the absence of the previous HTML/inline-handler rendering sinks.
 
 For browser verification, start the existing local static server, open `portal.html`, and check search/no-results/reset, category filters, archive inclusion, load more, refresh, source status, mobile layout and the login cancel/error path. A real approved test account is needed to exercise private interactions end to end; source checks and emulator rules tests are not a substitute for that check. Do not create chat messages, notices, attendance or role changes in production simply to run a UI test.

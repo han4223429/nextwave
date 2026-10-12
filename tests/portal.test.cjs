@@ -27,7 +27,7 @@ function portalHarness(query = '') {
     window: { location: { search: query } }, document: { getElementById: getNode } };
   vm.createContext(context);
   const instrumented = source.replace(/  init\(\);\n\}\)\(\);\s*$/, `
-    globalThis.testPortal = { safeURL, seoulDate, deadlineDays, deadlineBadge, isClosed,
+    globalThis.testPortal = { safeURL, seoulDate, deadlineDays, deadlineBadge, isClosed, matchesFilter,
       dateObject, allOpportunities, listen, stopPrivateData, replaceChildrenKeepingFocus,
       setState: state => { publicSnapshot=state.publicSnapshot || null;
         currentProfile=state.currentProfile || null; manualOpportunities=state.manualOpportunities || []; },
@@ -130,9 +130,19 @@ test('unsubscribe and rights transitions invalidate already queued private-data 
 });
 
 test('homepage category deep links preserve a valid category even when no records match', () => {
-  for (const category of ['dev', 'gamedev', 'hackathon', 'marketing']) assert.equal(portalHarness('?category=' + category).api.getFilter(), category);
+  for (const category of ['dev', 'gamedev', 'hackathon', 'marketing', 'health']) assert.equal(portalHarness('?category=' + category).api.getFilter(), category);
   assert.equal(portalHarness('?category=__proto__').api.getFilter(), 'all');
   assert.equal(portalHarness('?category=nonexistent').api.getFilter(), 'all');
+});
+
+test('health filter selects tagged competitions across categories without catching generic notices', () => {
+  const { api } = portalHarness('?category=health');
+  assert.equal(api.matchesFilter({ category: 'contest', topics: ['health'] }, 'health'), true);
+  assert.equal(api.matchesFilter({ category: 'hackathon', topics: ['health'] }, 'health'), true);
+  assert.equal(api.matchesFilter({ category: 'activity', topics: [] }, 'health'), false);
+  assert.equal(api.matchesFilter({ category: 'contest' }, 'health'), false);
+  assert.equal(api.matchesFilter({ category: 'contest', topics: ['health'] }, 'contest'), true);
+  assert.equal(api.deadlineBadge({ deadline: '2026-11-05', recruitmentStatus: 'upcoming' }).text, '접수 예정');
 });
 
 test('portal keeps untrusted content out of HTML and inline JavaScript rendering sinks', () => {

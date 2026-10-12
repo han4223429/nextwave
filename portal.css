@@ -124,9 +124,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .opp-filter-btn { min-height: 40px; padding: 8px 18px; border: 1px solid #c0e2eb; border-radius: 99px; background: transparent; font-size: 12px; font-weight: 550; transition: transform .2s, background .2s, border-color .2s; }
 .opp-filter-btn:hover { background: #d9f5fb; border-color: #75bdd5; transform: translateY(-2px); }
 .opp-filter-btn.active { color: #fff; background: var(--p-action); border-color: var(--p-action); font-weight: 700; }
+.opp-filter-btn.topic-filter { border-color: #8acac5; background: #eaf8f3; color: #175a55; }
+.opp-filter-btn.topic-filter:hover { background: #d4f1e9; }
+.opp-filter-btn.topic-filter.active { border-color: #176b65; background: #176b65; color: #fff; }
 .results-caption { display: flex; justify-content: space-between; gap: 20px; font-size: 11px; color: var(--p-on-surface-variant); padding: 4px 3px 17px; }
 .opp-grid { display: grid; grid-template-columns: 1fr; gap: 13px; }
-.opp-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 195px; grid-template-areas: 'top actions' 'title actions' 'description actions' 'meta checked'; column-gap: 36px; padding: 26px 30px; background: var(--p-surface); border: 1px solid #d7ecf2; border-radius: 24px; min-width: 0; transition: transform .25s, border-color .25s, box-shadow .25s; animation: card-arrive .45s cubic-bezier(.2,.7,.2,1) both; }
+.opp-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 195px; grid-template-areas: 'top actions' 'title actions' 'description actions' 'eligibility actions' 'meta checked'; column-gap: 36px; padding: 26px 30px; background: var(--p-surface); border: 1px solid #d7ecf2; border-radius: 24px; min-width: 0; transition: transform .25s, border-color .25s, box-shadow .25s; animation: card-arrive .45s cubic-bezier(.2,.7,.2,1) both; }
 .opp-card:nth-child(2) { animation-delay: .045s; }
 .opp-card:nth-child(3) { animation-delay: .09s; }
 .opp-card:hover { transform: translateY(-3px); border-color: #95d5e4; box-shadow: 0 9px 27px #087fc40c; }
@@ -139,8 +142,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .opp-dday.closed { color: #486a73; background: #e2eff1; }
 .opp-card-title { grid-area: title; font-size: 21px; font-weight: 700; line-height: 1.42; letter-spacing: -.65px; overflow-wrap: anywhere; margin-bottom: 8px; }
 .opp-card-desc { grid-area: description; color: var(--p-on-surface-variant); font-size: 12px; line-height: 1.8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-line; overflow-wrap: anywhere; margin-bottom: 16px; }
+.opp-eligibility { grid-area: eligibility; color: #356865; font-size: 11px; line-height: 1.6; margin: -4px 0 12px; overflow-wrap: anywhere; }
 .opp-card-meta { grid-area: meta; display: flex; align-items: center; flex-wrap: wrap; gap: 9px; align-self: end; }
 .opp-tag { font-size: 10px; font-weight: 550; background: #e3f5f9; color: #376a7f; padding: 3px 9px; border-radius: 99px; }
+.opp-health-tag { background: #e1f3eb; color: #175a55; }
 .opp-source { color: #345d70; font-size: 11px; }
 .opp-card-actions { grid-area: actions; display: flex; align-items: center; justify-content: end; gap: 8px; border-left: 1px solid #e3f0f4; padding-left: 25px; }
 .opp-link-btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 12px; font-weight: 650; flex: 1; }
@@ -337,7 +342,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .board-total { flex-direction: column; gap: 3px; padding: 12px 17px; border-radius: 20px; }
   .board-total strong { font-size: 35px; }
   .board-total > span { font-size: 9px; }
-  .opp-card { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'top' 'title' 'description' 'meta' 'checked' 'actions'; padding: 22px 24px; border-radius: 21px; }
+  .opp-card { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'top' 'title' 'description' 'eligibility' 'meta' 'checked' 'actions'; padding: 22px 24px; border-radius: 21px; }
   .opp-card-top { justify-content: space-between; margin-bottom: 13px; }
   .opp-card-title { font-size: 19px; }
   .opp-card-desc { margin-bottom: 14px; }

@@ -3,12 +3,13 @@
   'use strict';
   const $ = id => document.getElementById(id);
   const categories = { startup: '창업', support: '사업 지원', contest: '공모전', hackathon: '해커톤', dev: '개발', gamedev: '게임 개발', marketing: '마케팅', activity: '대외활동', education: '교육', internship: '인턴십' };
+  const topics = { health: '보건·의료' };
   const privateListeners = new Map();
   let auth = null, db = null, currentUser = null, currentProfile = null;
   let profileUnsubscribe = null, authEpoch = 0, dataEpoch = 0, activeTab = 'opportunities', activeDay = '';
   let publicSnapshot = null, manualOpportunities = [], snapshotError = false, fetchingSnapshot = false;
   const requestedCategory = new URLSearchParams(window.location.search).get('category');
-  let currentFilter = Object.hasOwn(categories, requestedCategory) ? requestedCategory : 'all', searchTerm = '', showClosed = false, visibleLimit = 12, filterSignature = '';
+  let currentFilter = Object.hasOwn(categories, requestedCategory) || Object.hasOwn(topics, requestedCategory) ? requestedCategory : 'all', searchTerm = '', showClosed = false, visibleLimit = 12, filterSignature = '';
   let toastTimer = null, snapshotFingerprint = '', renderedDay = '';
   let firebaseLoadPromise = null;
 
@@ -61,12 +62,14 @@
   function deadlineBadge(item) {
     const days = deadlineDays(item.deadline);
     if (item.status === 'archived') return { text: '보관', cls: 'closed' };
+    if (item.recruitmentStatus === 'upcoming') return { text: '접수 예정', cls: '' };
     if (days === null) return { text: item.recruitmentStatus === 'open' ? '접수 중 · 일정 확인' : '마감일 미확인', cls: item.recruitmentStatus === 'open' ? 'soon' : '' };
     if (days < 0) return { text: '마감', cls: 'closed' };
     if (days === 0) return { text: '오늘 마감', cls: 'urgent' };
     return { text: 'D−' + days, cls: days <= 3 ? 'urgent' : days <= 14 ? 'soon' : '' };
   }
   function isClosed(item) { const days = deadlineDays(item.deadline); return item.status === 'archived' || (days !== null && days < 0); }
+  function matchesFilter(item, filter) { return filter === 'all' || item.category === filter || (Object.hasOwn(topics, filter) && Array.isArray(item.topics) && item.topics.includes(filter)); }
   function showToast(message) { clearTimeout(toastTimer); $('toast').textContent = message; $('toast').classList.add('show'); toastTimer = setTimeout(() => $('toast').classList.remove('show'), 4000); }
   function confirmAction(message) {
     const dialog = $('confirm-modal');
@@ -122,11 +125,11 @@
   }
   function renderFilters(items) {
     const available = [...new Set(items.map(item => item.category).filter(key => Object.hasOwn(categories, key)))];
-    const keys = Object.keys(categories).filter(key => available.includes(key) || key === currentFilter);
+    const keys = [...Object.keys(topics), ...Object.keys(categories).filter(key => available.includes(key) || key === currentFilter)];
     const signature = keys.join(',');
     if (signature !== filterSignature || $('opp-filters').childElementCount === 1) {
       filterSignature = signature;
-      const buttons = ['all', ...keys].map(key => { const button = el('button', 'opp-filter-btn', key === 'all' ? '전체' : categories[key]); button.type = 'button'; button.dataset.filter = key; return button; });
+      const buttons = ['all', ...keys].map(key => { const button = el('button', 'opp-filter-btn' + (key === 'health' ? ' topic-filter' : ''), key === 'all' ? '전체' : topics[key] || categories[key]); button.type = 'button'; button.dataset.filter = key; return button; });
       $('opp-filters').replaceChildren(...buttons);
     }
     $('opp-filters').querySelectorAll('button').forEach(button => { const selected = button.dataset.filter === currentFilter; button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected)); });
@@ -136,7 +139,7 @@
     const items = allOpportunities(); renderFilters(items);
     $('opp-total').textContent = String(items.filter(item => !isClosed(item)).length).padStart(2, '0');
     const search = searchTerm.toLocaleLowerCase('ko-KR');
-    const filtered = items.filter(item => (showClosed || !isClosed(item)) && (currentFilter === 'all' || item.category === currentFilter) && (!search || [item.title, item.description, item.source, item.organizer, categories[item.category]].join(' ').toLocaleLowerCase('ko-KR').includes(search)));
+    const filtered = items.filter(item => (showClosed || !isClosed(item)) && matchesFilter(item, currentFilter) && (!search || [item.title, item.description, item.source, item.organizer, item.audience, categories[item.category], ...(Array.isArray(item.topics) ? item.topics.map(topic => topics[topic] || '') : [])].join(' ').toLocaleLowerCase('ko-KR').includes(search)));
     filtered.sort((a, b) => Number(isClosed(a)) - Number(isClosed(b)) || (deadlineDays(a.deadline) ?? 100000) - (deadlineDays(b.deadline) ?? 100000) || (dateObject(b.lastSeenAt || b.createdAt)?.getTime() || 0) - (dateObject(a.lastSeenAt || a.createdAt)?.getTime() || 0));
     $('opp-result-count').textContent = filtered.length + '개 결과 · 마감 가까운 순';
     const grid = $('opp-grid');
@@ -153,10 +156,13 @@
       top.append(el('span', 'opp-card-index', 'CALL / ' + String(index + 1).padStart(3, '0')), el('span', 'opp-dday ' + badge.cls, badge.text));
       card.append(top, el('h3', 'opp-card-title', item.title), el('p', 'opp-card-desc', typeof item.description === 'string' && item.description ? item.description : '지원 대상과 세부 내용을 원문 공고에서 확인하세요.'));
       const meta = el('div', 'opp-card-meta'); meta.append(el('span', 'opp-tag', categories[item.category] || '기회 정보'));
+      if (Array.isArray(item.topics) && item.topics.includes('health')) meta.append(el('span', 'opp-tag opp-health-tag', topics.health));
       if (item.source) meta.append(el('span', 'opp-source', item.source));
-      if (deadlineDays(item.deadline) !== null) meta.append(el('span', 'opp-source', item.deadline + ' 마감'));
+      if (item.applicationPeriod) meta.append(el('span', 'opp-source', '접수 ' + item.applicationPeriod));
+      else if (deadlineDays(item.deadline) !== null) meta.append(el('span', 'opp-source', item.deadline + ' 마감'));
       else if (item.recruitmentStatus === 'open') meta.append(el('span', 'opp-source', '마감일 원문 확인'));
       card.append(meta);
+      if (item.audience) card.append(el('p', 'opp-eligibility', '참가 대상 · ' + item.audience));
       if (item.lastSeenAt) card.append(el('p', 'opp-checked', '출처 확인 ' + formatStamp(item.lastSeenAt) + ' KST'));
       const actions = el('div', 'opp-card-actions'); const link = safeURL(item.link);
       if (link) { const anchor = el('a', 'opp-link-btn', '원문 공고 확인'); anchor.dataset.focusKey = 'opportunity:' + item.id; anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; anchor.setAttribute('aria-label', item.title + ' — 원문 공고 (새 탭)'); anchor.append(el('span', '', '↗')); actions.append(anchor); }

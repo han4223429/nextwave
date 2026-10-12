@@ -18,21 +18,25 @@ import certifi
 from bs4 import BeautifulSoup
 
 MANAGED_BY = "nextwave-crawler"
-CLASSIFICATION_VERSION = 3
+CLASSIFICATION_VERSION = 4
 USER_AGENT = "NextWavePortal/2.0 (+https://wenw.ceo)"
 KST_URL = "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do"
 WEV_URL = "https://www.wevity.com/"
 HOLA_URL = "https://holaworld.io/hola-it"
 HOLA_API = "https://api.holaworld.io/api/events"
 DACON_URL = "https://dacon.io/competitions"
+NMC_HEALTH_URL = "https://www.nmcpublicedu.or.kr/info.asp"
 SOURCES = {
     "kstartup": {"id": "kstartup", "name": "K-Startup", "url": KST_URL},
     "wevity": {"id": "wevity", "name": "위비티", "url": WEV_URL + "?c=find&s=1"},
     "hola": {"id": "hola", "name": "Hola IT", "url": HOLA_URL},
     "dacon": {"id": "dacon", "name": "DACON", "url": DACON_URL},
+    "nmc_health": {"id": "nmc_health", "name": "국립중앙의료원", "url": NMC_HEALTH_URL},
 }
-ALLOWED_HOSTS = {"www.k-startup.go.kr", "www.wevity.com", "holaworld.io", "api.holaworld.io", "dacon.io"}
+ALLOWED_HOSTS = {"www.k-startup.go.kr", "www.wevity.com", "holaworld.io", "api.holaworld.io", "dacon.io", "www.nmcpublicedu.or.kr"}
 CATEGORIES = {"startup", "hackathon", "gamedev", "dev", "marketing", "contest", "activity", "education", "internship"}
+HEALTH_SUBJECT = re.compile(r"보건의료|공공의료|의료|임상|디지털\s*헬스|헬스케어|바이오헬스|재활|치매|건강|의약|제약|간호|medical|healthcare|biomedical|rehabilitation", re.I)
+COMPETITION_TYPE = re.compile(r"공모전|경진대회|해커톤|데이터톤|챌린지|아이디어\s*대회|contest|competition|challenge|hackathon|datathon", re.I)
 KST = timezone(timedelta(hours=9))
 MAX_BYTES = 3_000_000
 
@@ -68,7 +72,7 @@ def source_item_id(source_id, url):
     safe_source_url(url)
     parsed = urlparse(url)
     expected = {"kstartup": "www.k-startup.go.kr", "wevity": "www.wevity.com",
-                "hola": "holaworld.io", "dacon": "dacon.io"}.get(source_id)
+                "hola": "holaworld.io", "dacon": "dacon.io", "nmc_health": "www.nmcpublicedu.or.kr"}.get(source_id)
     if source_id not in SOURCES or parsed.hostname != expected:
         raise ValueError("Source and URL do not match")
     if source_id in ("kstartup", "wevity"):
@@ -78,9 +82,11 @@ def source_item_id(source_id, url):
     elif source_id == "hola":
         match = re.fullmatch(r"/hola-it/([a-f0-9]{24})", parsed.path)
         value, valid = (match.group(1), True) if match else ("", False)
-    else:
+    elif source_id == "dacon":
         match = re.fullmatch(r"/competitions/official/(\d{1,12})/overview/?", parsed.path)
         value, valid = (match.group(1), True) if match else ("", False)
+    else:
+        value, valid = "public_health_contest", parsed.path == "/info.asp" and not parsed.query
     if not valid:
         raise ValueError("Source record has no stable ID")
     return "auto_" + source_id + "_" + value
@@ -122,7 +128,14 @@ def category_for_source(source_id, title, source_category=""):
         return source_category
     if source_id == "dacon":
         return "hackathon" if re.search(r"해커톤|hackathon", title, re.I) else "contest"
+    if source_id == "nmc_health":
+        return "contest"
     return classify_category(title, source_category, "startup" if source_id == "kstartup" else "contest")
+
+
+def health_topics(title):
+    """Label only health competitions, not conferences, courses, or generic agency news."""
+    return ["health"] if HEALTH_SUBJECT.search(title) and COMPETITION_TYPE.search(title) else []
 
 
 def reclassify_snapshot(snapshot):
@@ -130,6 +143,7 @@ def reclassify_snapshot(snapshot):
     updated = deepcopy(snapshot)
     for item in updated.get("items", []):
         item["category"] = category_for_source(item["sourceId"], item["title"], item.get("sourceCategory", ""))
+        item["topics"] = health_topics(item["title"])
     updated["classificationVersion"] = CLASSIFICATION_VERSION
     return updated
 
@@ -143,6 +157,7 @@ def make_item(source_id, title, link, deadline, organizer="", source_category=""
         "id": source_item_id(source_id, link), "title": title,
         "description": " · ".join(filter(None, [clean(organizer), clean(source_category)])),
         "category": category_for_source(source_id, title, source_category),
+        "topics": health_topics(title),
         "deadline": valid_date(deadline), "link": link,
         "source": source["name"], "sourceId": source_id, "sourceUrl": source["url"],
         "organizer": clean(organizer), "sourceCategory": clean(source_category),
@@ -300,6 +315,47 @@ def parse_dacon_list(html):
     return items
 
 
+def parse_nmc_health_contest(html, today=None):
+    """Read the official annual public-health contest rules, not submission forms."""
+    soup = BeautifulSoup(html, "html.parser")
+    title = clean(soup.title.get_text(" ", strip=True)) if soup.title else ""
+    match = re.fullmatch(r"(20\d{2})년 대국민 공공의료 공모전", title)
+    if not match:
+        raise ValueError("National Medical Center contest title changed")
+    text = clean(soup.get_text(" ", strip=True))
+    if "대한민국 국민 누구나" not in text or "개인 또는 4인 이내 팀/기관" not in text:
+        raise ValueError("National Medical Center eligibility changed")
+    period = re.search(r"접수기간\s*(20\d{2})\.\s*(\d{1,2})\.\s*(\d{1,2})\.[^~]{0,20}~\s*(\d{1,2})\.\s*(\d{1,2})\.", text)
+    if not period or period.group(1) != match.group(1):
+        raise ValueError("National Medical Center application period changed")
+    year, start_month, start_day, end_month, end_day = period.groups()
+    start = valid_date(f"{year}-{start_month}-{start_day}")
+    deadline = valid_date(f"{year}-{end_month}-{end_day}")
+    if not start or not deadline or start > deadline:
+        raise ValueError("National Medical Center application dates invalid")
+    end_time = re.search(r"(\d{1,2}):(\d{2})", text[period.end():period.end() + 30])
+    closing_hour = int(end_time.group(1)) if end_time else None
+    closing_minute = int(end_time.group(2)) if end_time else None
+    if closing_hour is not None and (closing_hour >= 24 or closing_minute >= 60):
+        raise ValueError("National Medical Center application time invalid")
+    close_at = f" {closing_hour:02d}:{closing_minute:02d} KST" if end_time else ""
+    if today:
+        now = datetime.fromisoformat(today)
+        now = now.astimezone(KST) if now.tzinfo else now.replace(tzinfo=KST)
+    else:
+        now = datetime.now(KST)
+    current_day = now.date().isoformat()
+    past_closing_time = current_day == deadline and end_time and (now.hour, now.minute) >= (closing_hour, closing_minute)
+    state = "upcoming" if current_day < start else "closed" if current_day > deadline or past_closing_time else "open"
+    item = make_item("nmc_health", title, NMC_HEALTH_URL, deadline, "보건복지부 / 국립중앙의료원",
+                     "공공의료 공모전", startDate=start,
+                     audience="대한민국 국민 누구나 · 개인 또는 4인 이내 팀/기관 (전공 제한 명시 없음)",
+                     applicationPeriod=f"{start} ~ {deadline}{close_at}", recruitmentStatus=state)
+    if state == "closed":
+        item.update(status="archived", archivedReason="deadline_passed")
+    return [item]
+
+
 class SafeRedirectHandler(HTTPRedirectHandler):
     def __init__(self, robots):
         super().__init__()
@@ -434,6 +490,11 @@ def crawl_sources(fetcher, pages=3, detail_limit=20):
                 fetched.extend(parse_dacon_list(fetcher.get(DACON_URL)))
             except Exception as exc:
                 errors.append(f"목록: {type(exc).__name__}")
+        elif source_id == "nmc_health":
+            try:
+                fetched.extend(parse_nmc_health_contest(fetcher.get(NMC_HEALTH_URL)))
+            except Exception as exc:
+                errors.append(f"공모요강: {type(exc).__name__}")
         fetched = list({item["id"]: item for item in fetched}.values())
         status = {**source, "status": "partial" if fetched and errors else "error" if errors else "ok",
                   "checkedAt": utc_now(), "itemCount": len(fetched), "errorCount": len(errors)}
@@ -506,6 +567,8 @@ def validate_snapshot(snapshot):
         seen.add(item["id"])
         if item.get("category") not in CATEGORIES or item.get("status") not in ("active", "archived"):
             raise ValueError("Invalid item category/status")
+        if item.get("topics", []) not in ([], ["health"]):
+            raise ValueError("Invalid item topic")
         if item.get("deadline") is not None and valid_date(item["deadline"]) != item["deadline"]:
             raise ValueError("Invalid deadline")
         if not 3 <= len(item.get("title", "")) <= 400:
