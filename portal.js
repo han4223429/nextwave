@@ -121,7 +121,19 @@
       items.set(item.id, { ...item, public: true });
     });
     if (currentProfile && currentProfile.isMember === true) manualOpportunities.forEach(item => { if (item.managedBy !== 'nextwave-crawler' && item.authorUid !== 'crawler' && !item.id.startsWith('auto_')) items.set(item.id, { ...item, public: false }); });
-    return [...items.values()];
+    // Keep every source record in the snapshot, but show one card when two
+    // public listings have the same full title, confirmed deadline and state.
+    const listed = new Map();
+    for (const item of items.values()) {
+      const title = String(item.title || '').replace(/\s+/g, '').toLocaleLowerCase('ko-KR');
+      const key = item.public && title.length >= 12 && deadlineDays(item.deadline) !== null
+        ? title + '|' + item.deadline + '|' + item.status : item.id;
+      if (listed.has(key)) {
+        const primary = listed.get(key);
+        if (item.link !== primary.link) (primary.alsoListedAt ||= []).push({ source: item.source, link: item.link });
+      } else listed.set(key, item);
+    }
+    return [...listed.values()];
   }
   function renderFilters(items) {
     const available = [...new Set(items.map(item => item.category).filter(key => Object.hasOwn(categories, key)))];
@@ -167,6 +179,7 @@
       const actions = el('div', 'opp-card-actions'); const link = safeURL(item.link);
       if (link) { const anchor = el('a', 'opp-link-btn', '원문 공고 확인'); anchor.dataset.focusKey = 'opportunity:' + item.id; anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; anchor.setAttribute('aria-label', item.title + ' — 원문 공고 (새 탭)'); anchor.append(el('span', '', '↗')); actions.append(anchor); }
       else actions.append(el('span', 'opp-source', '원문 링크 미등록'));
+      if (Array.isArray(item.alsoListedAt)) item.alsoListedAt.forEach(other => { const url = safeURL(other.link); if (url) { const anchor = el('a', 'opp-alternate-link', (other.source || '다른 출처') + '에서도 보기 ↗'); anchor.href = url; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; actions.append(anchor); } });
       if (!item.public && currentProfile?.isAdmin === true) actions.append(deleteButton('이 기회 정보를 삭제할까요?', 'opportunities', item.id, '기회 삭제'));
       card.append(actions); fragment.append(card);
     });

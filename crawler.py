@@ -22,6 +22,7 @@ CLASSIFICATION_VERSION = 4
 USER_AGENT = "NextWavePortal/2.0 (+https://wenw.ceo)"
 KST_URL = "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do"
 WEV_URL = "https://www.wevity.com/"
+THINKYOU_URL = "https://thinkyou.co.kr/contest/"
 HOLA_URL = "https://holaworld.io/hola-it"
 HOLA_API = "https://api.holaworld.io/api/events"
 DACON_URL = "https://dacon.io/competitions"
@@ -29,11 +30,12 @@ NMC_HEALTH_URL = "https://www.nmcpublicedu.or.kr/info.asp"
 SOURCES = {
     "kstartup": {"id": "kstartup", "name": "K-Startup", "url": KST_URL},
     "wevity": {"id": "wevity", "name": "위비티", "url": WEV_URL + "?c=find&s=1"},
+    "thinkyou": {"id": "thinkyou", "name": "씽유", "url": THINKYOU_URL},
     "hola": {"id": "hola", "name": "Hola IT", "url": HOLA_URL},
     "dacon": {"id": "dacon", "name": "DACON", "url": DACON_URL},
     "nmc_health": {"id": "nmc_health", "name": "국립중앙의료원", "url": NMC_HEALTH_URL},
 }
-ALLOWED_HOSTS = {"www.k-startup.go.kr", "www.wevity.com", "holaworld.io", "api.holaworld.io", "dacon.io", "www.nmcpublicedu.or.kr"}
+ALLOWED_HOSTS = {"www.k-startup.go.kr", "www.wevity.com", "thinkyou.co.kr", "holaworld.io", "api.holaworld.io", "dacon.io", "www.nmcpublicedu.or.kr"}
 CATEGORIES = {"startup", "hackathon", "gamedev", "dev", "marketing", "contest", "activity", "education", "internship"}
 HEALTH_SUBJECT = re.compile(r"보건의료|공공의료|의료|임상|디지털\s*헬스|헬스케어|바이오헬스|재활|치매|건강|의약|제약|간호|medical|healthcare|biomedical|rehabilitation", re.I)
 COMPETITION_TYPE = re.compile(r"공모전|경진대회|해커톤|데이터톤|챌린지|아이디어\s*대회|contest|competition|challenge|hackathon|datathon", re.I)
@@ -72,7 +74,7 @@ def source_item_id(source_id, url):
     safe_source_url(url)
     parsed = urlparse(url)
     expected = {"kstartup": "www.k-startup.go.kr", "wevity": "www.wevity.com",
-                "hola": "holaworld.io", "dacon": "dacon.io", "nmc_health": "www.nmcpublicedu.or.kr"}.get(source_id)
+                "thinkyou": "thinkyou.co.kr", "hola": "holaworld.io", "dacon": "dacon.io", "nmc_health": "www.nmcpublicedu.or.kr"}.get(source_id)
     if source_id not in SOURCES or parsed.hostname != expected:
         raise ValueError("Source and URL do not match")
     if source_id in ("kstartup", "wevity"):
@@ -85,6 +87,9 @@ def source_item_id(source_id, url):
     elif source_id == "dacon":
         match = re.fullmatch(r"/competitions/official/(\d{1,12})/overview/?", parsed.path)
         value, valid = (match.group(1), True) if match else ("", False)
+    elif source_id == "thinkyou":
+        match = re.fullmatch(r"/contest/(\d{1,12})/?", parsed.path)
+        value, valid = (match.group(1), not parsed.query) if match else ("", False)
     else:
         value, valid = "public_health_contest", parsed.path == "/info.asp" and not parsed.query
     if not valid:
@@ -250,6 +255,54 @@ def parse_wevity_detail(html, link):
     return make_item("wevity", title.get_text(" ", strip=True), link, deadline,
                      fields.get("주최/주관", ""), fields.get("분야", ""),
                      startDate=start, audience=audience, applicationPeriod=fields["접수기간"])
+
+
+def parse_thinkyou_list(html):
+    """Read only the public listing's title, organizer, period and status."""
+    soup = BeautifulSoup(html, "html.parser")
+    rows = soup.select(".tr .title a[href]")
+    if not rows:
+        raise ValueError("Thinkyou list structure changed or returned no records")
+    items = []
+    for anchor in rows:
+        match = re.match(r"^/contest/(\d{1,12})/(?:\?|$)", anchor.get("href", ""))
+        if not match:
+            continue
+        row = anchor.find_parent(class_="tr")
+        title = row.select_one(".title h3")
+        period = row.select_one(".etc")
+        state = row.select_one(".statNew")
+        if not title or not period or not state:
+            raise ValueError("Thinkyou card missing title, period or status")
+        dates = re.fullmatch(r"(\d{2})-(\d{2})-(\d{2})\s*~\s*(\d{2})-(\d{2})-(\d{2})", clean(period.get_text(" ", strip=True)))
+        if not dates:
+            raise ValueError("Thinkyou application period changed")
+        y1, m1, d1, y2, m2, d2 = dates.groups()
+        start = valid_date(f"20{y1}-{m1}-{d1}")
+        deadline = valid_date(f"20{y2}-{m2}-{d2}")
+        if not start or not deadline or start > deadline:
+            raise ValueError("Thinkyou application dates invalid")
+        label = clean(state.get_text(" ", strip=True))
+        if label.startswith(("접수중", "마감임박")):
+            recruitment = "open"
+        elif label.startswith("접수예정"):
+            recruitment = "upcoming"
+        elif label.startswith("마감"):
+            recruitment = "closed"
+        else:
+            raise ValueError("Thinkyou recruitment state changed")
+        organizer_node = row.select_one(".title dd")
+        organizer = re.sub(r"^주최\s*:\s*", "", clean(organizer_node.get_text(" ", strip=True))) if organizer_node else ""
+        item = make_item("thinkyou", title.get_text(" ", strip=True),
+                         f"https://thinkyou.co.kr/contest/{match.group(1)}/", deadline,
+                         organizer, "공모전", startDate=start, recruitmentStatus=recruitment,
+                         applicationPeriod=f"{start} ~ {deadline}")
+        if recruitment == "closed":
+            item.update(status="archived", archivedReason="source_closed")
+        items.append(item)
+    if not items:
+        raise ValueError("Thinkyou returned no contest records")
+    return items
 
 
 def hola_date(value):
@@ -455,7 +508,7 @@ class PublicFetcher:
         return self._request(url)
 
 
-def crawl_sources(fetcher, pages=3, detail_limit=20):
+def crawl_sources(fetcher, pages=3, detail_limit=45):
     items, statuses = [], []
     for source_id, source in SOURCES.items():
         fetched, errors = [], []
@@ -466,17 +519,27 @@ def crawl_sources(fetcher, pages=3, detail_limit=20):
                 except Exception as exc:
                     errors.append(f"목록 {page}: {type(exc).__name__}")
         elif source_id == "wevity":
-            try:
-                links = parse_wevity_links(fetcher.get(source["url"]))[:detail_limit]
-                for link in links:
-                    try:
-                        item = parse_wevity_detail(fetcher.get(link), link)
-                        if item:
-                            fetched.append(item)
-                    except Exception as exc:
-                        errors.append(f"상세 {source_item_id(source_id, link)}: {type(exc).__name__}")
-            except Exception as exc:
-                errors.append(f"목록: {type(exc).__name__}")
+            links = []
+            for page in range(1, pages + 1):
+                try:
+                    url = WEV_URL + "?" + urlencode({"c": "find", "s": "1", "gp": page})
+                    links.extend(parse_wevity_links(fetcher.get(url)))
+                except Exception as exc:
+                    errors.append(f"목록 {page}: {type(exc).__name__}")
+            for link in list(dict.fromkeys(links))[:detail_limit]:
+                try:
+                    item = parse_wevity_detail(fetcher.get(link), link)
+                    if item:
+                        fetched.append(item)
+                except Exception as exc:
+                    errors.append(f"상세 {source_item_id(source_id, link)}: {type(exc).__name__}")
+        elif source_id == "thinkyou":
+            for page in range(1, pages + 1):
+                try:
+                    url = THINKYOU_URL + "?" + urlencode({"page": page, "pagesize": 45})
+                    fetched.extend(parse_thinkyou_list(fetcher.get(url)))
+                except Exception as exc:
+                    errors.append(f"목록 {page}: {type(exc).__name__}")
         elif source_id == "hola":
             for event_type in ("hackathon", "contest"):
                 for page in range(1, 3):
@@ -598,7 +661,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("data/opportunities.json"))
     parser.add_argument("--pages", type=int, choices=range(1, 11), default=3)
-    parser.add_argument("--detail-limit", type=int, choices=range(1, 51), default=20)
+    parser.add_argument("--detail-limit", type=int, choices=range(1, 101), default=45)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--validate", action="store_true", help="Validate the schema and absence of expired public imports without network access")
     mode.add_argument("--prune-expired", action="store_true", help="Remove confirmed expired public imports without fetching or changing source timestamps")

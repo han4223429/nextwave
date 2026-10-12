@@ -183,6 +183,7 @@ window.I18N = (function () {
 
     // Field Notes redesign keys. Earlier user-written translations stay intact.
     Object.assign(dict.ko, {
+        "field.nav.club": "동아리 소개",
         "field.nav.about": "우리의 방식",
         "field.nav.work": "하는 일",
         "field.nav.record": "실험의 기록",
@@ -307,6 +308,8 @@ window.I18N = (function () {
         "opportunity.preview.hackathon.body": "팀을 꾸리고, 아이디어를 움직이는 현장",
         "opportunity.preview.contest": "공모전",
         "opportunity.preview.contest.body": "만든 것을 보여주고, 다음 가능성을 여는 무대",
+        "opportunity.preview.health": "보건·의료",
+        "opportunity.preview.health.body": "돌봄과 의료의 문제를 다루는 도전",
         "motion.desk.try": "직접 써보기 ↗",
         "motion.about.title": "잘 맞는 사람보다,<br /><span>다르게 생각하는 사람.</span>",
         "motion.track.eyebrow": "당신의 관심사가 시작점.",
@@ -320,6 +323,7 @@ window.I18N = (function () {
         "motion.footer": "멈춰 있는 생각에, 다음 물결을."
 });
     Object.assign(dict.en, {
+        "field.nav.club": "About the club",
         "motion.nav.projects": "Projects",
         "motion.nav.about": "Our energy",
         "motion.hero.description": "That thing you keep thinking about.<br />Let’s actually make it. Together.",
@@ -348,6 +352,8 @@ window.I18N = (function () {
         "opportunity.preview.hackathon.body": "Build a team and turn an idea into something real",
         "opportunity.preview.contest": "Competitions",
         "opportunity.preview.contest.body": "Show your work and open the next possibility",
+        "opportunity.preview.health": "Health & care",
+        "opportunity.preview.health.body": "Challenges around care and medical needs",
         "motion.desk.try": "Try it live ↗",
         "motion.about.title": "Different minds.<br /><span>One shared urge to make.</span>",
         "motion.track.eyebrow": "START WITH WHAT MOVES YOU.",

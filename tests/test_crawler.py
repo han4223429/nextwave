@@ -72,6 +72,52 @@ class ParsingTests(unittest.TestCase):
         html = '<div class="ms-list"><ul class="list"><li><div class="tit"><a href="?ix=1&gp=1">Event</a></div></li><li><div class="tit"><a href="?ix=1&gp=2">Event</a></div></li></ul></div>'
         self.assertEqual(crawler.parse_wevity_links(html), ['https://www.wevity.com/?c=find&s=1&gbn=view&ix=1'])
 
+    def test_thinkyou_public_list_keeps_exact_dates_status_and_canonical_links(self):
+        results = crawler.parse_thinkyou_list((FIXTURES / 'thinkyou-list.html').read_text())
+        self.assertEqual([item['id'] for item in results], ['auto_thinkyou_67342', 'auto_thinkyou_67224', 'auto_thinkyou_67000'])
+        self.assertEqual(results[0]['link'], 'https://thinkyou.co.kr/contest/67342/')
+        self.assertEqual(results[0]['deadline'], '2026-11-15')
+        self.assertEqual(results[0]['startDate'], '2026-10-12')
+        self.assertEqual(results[0]['organizer'], 'LH 한국토지주택공사')
+        self.assertEqual(results[1]['topics'], ['health'])
+        self.assertEqual(results[1]['recruitmentStatus'], 'open')
+        self.assertEqual(results[2]['status'], 'archived')
+        with self.assertRaises(ValueError):
+            crawler.parse_thinkyou_list('<p>점검 중</p>')
+        with self.assertRaises(ValueError):
+            crawler.parse_thinkyou_list((FIXTURES / 'thinkyou-list.html').read_text().replace('26-11-15', '26-02-30'))
+        for link in ('https://thinkyou.co.kr/contest/67342/?private=1', 'https://thinkyou.co.kr/contest/67342/subpage', 'https://thinkyou.co.kr.evil.test/contest/67342/'):
+            with self.assertRaises(ValueError):
+                crawler.source_item_id('thinkyou', link)
+
+    def test_wevity_pages_are_combined_before_the_detail_cap(self):
+        listing = lambda number: '<div class="ms-list"><ul class="list"><li><div class="tit"><a href="?ix=' + str(number) + '">Event</a></div></li></ul></div>'
+        detail = (FIXTURES / 'wevity-detail.html').read_text()
+        class Fetcher:
+            def __init__(self): self.urls = []
+            def get(self, url):
+                self.urls.append(url)
+                if 'gp=' in url: return listing(url[-1])
+                if 'gbn=view' in url: return detail
+                return '<p>offline fixture</p>'
+        fetcher = Fetcher()
+        with patch.object(crawler, 'SOURCES', {'wevity': crawler.SOURCES['wevity']}):
+            items, statuses = crawler.crawl_sources(fetcher, pages=3, detail_limit=2)
+        self.assertEqual([item['id'] for item in items], ['auto_wevity_1', 'auto_wevity_2'])
+        self.assertEqual(statuses[0]['status'], 'ok')
+        self.assertEqual(len([url for url in fetcher.urls if 'gp=' in url]), 3)
+
+    def test_thinkyou_page_error_is_visible_while_good_page_is_kept(self):
+        class Fetcher:
+            def get(self, url):
+                if 'page=2' in url: raise TimeoutError('temporary source failure')
+                return (FIXTURES / 'thinkyou-list.html').read_text()
+        with patch.object(crawler, 'SOURCES', {'thinkyou': crawler.SOURCES['thinkyou']}):
+            items, statuses = crawler.crawl_sources(Fetcher(), pages=2)
+        self.assertEqual(len(items), 3)
+        self.assertEqual(statuses[0]['status'], 'partial')
+        self.assertEqual(statuses[0]['errorCount'], 1)
+
     def test_hola_public_events_keep_only_metadata_and_korean_deadline(self):
         results = crawler.parse_hola_events((FIXTURES / 'hola-events.json').read_text())
         self.assertEqual(len(results), 2)

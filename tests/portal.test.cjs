@@ -97,6 +97,21 @@ test('approved-member merging preserves source snapshot authority over stale cra
   assert.equal(actual[0].title, 'Fresh source');
 });
 
+test('matching public contest cards retain alternate source links without merging member posts', () => {
+  const { api } = portalHarness();
+  const title = '2026년 대국민 공공의료 공모전';
+  api.setState({ currentProfile: { isMember: true }, publicSnapshot: { items: [
+    { id: 'auto_nmc_health_public_health_contest', title, deadline: '2026-11-05', status: 'active', source: '국립중앙의료원', link: 'https://www.nmcpublicedu.or.kr/info.asp' },
+    { id: 'auto_thinkyou_67224', title, deadline: '2026-11-05', status: 'active', source: '씽유', link: 'https://thinkyou.co.kr/contest/67224/' },
+    { id: 'auto_other', title, deadline: '2026-11-06', status: 'active', source: '위비티', link: 'https://www.wevity.com/?ix=1' }
+  ] }, manualOpportunities: [{ id: 'member_post', title, deadline: '2026-11-05', authorUid: 'member' }] });
+  const results = api.allOpportunities();
+  assert.equal(results.length, 3);
+  assert.equal(results[0].source, '국립중앙의료원');
+  assert.deepEqual(Array.from(results[0].alsoListedAt, entry => entry.source), ['씽유']);
+  assert.equal(results[2].id, 'member_post');
+});
+
 test('expired cached public imports disappear without removing member records or guessing unknown deadlines', () => {
   const { api } = portalHarness();
   const imported = { managedBy: 'nextwave-crawler', authorUid: 'crawler' };

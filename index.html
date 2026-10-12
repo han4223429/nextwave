@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="styles.css?v=opportunities-20261012" />
   <link rel="stylesheet" href="rescue-demo.css?v=water-sound-4" />
+  <link rel="stylesheet" href="field-guide.css?v=field-guide-20261012" />
   <script defer src="water-audio.js?v=water-sound-20260907-2"></script>
   <script defer src="sound-ui.js?v=water-sound-20260907-2"></script>
   <script defer src="i18n.js?v=water-sound-4"></script>
@@ -28,9 +29,11 @@
   <header id="site-header" class="site-header">
     <a class="brand" href="#home" aria-label="NextWave 홈">nextwave<span class="brand-dot" aria-hidden="true"></span></a>
     <nav class="desktop-nav" aria-label="주요 메뉴">
+      <a class="nav-link" href="#about" data-i18n="field.nav.club">동아리 소개</a>
       <a class="nav-link" href="#projects" data-i18n="motion.nav.projects">프로젝트</a>
-      <a class="nav-link" href="#about" data-i18n="motion.nav.about">우리의 에너지</a>
+      <a class="nav-link" href="#activities" data-i18n="field.nav.work">하는 일</a>
       <a class="nav-link" href="#team" data-i18n="nav.team">운영진</a>
+      <a class="nav-link" href="#recruitment" data-i18n="field.join">합류 안내</a>
     </nav>
     <div class="header-actions">
       <button id="sound-toggle" class="utility-button" aria-pressed="true" aria-label="물결 효과음 끄기"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="sound-label">SOUND ON</span></button>
@@ -39,13 +42,14 @@
       <button id="mobile-menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="메뉴 열기"><span></span><span></span></button>
     </div>
     <nav id="mobile-menu" class="mobile-menu" aria-label="모바일 메뉴" hidden>
-      <a href="#projects" data-i18n="motion.nav.projects">프로젝트</a><a href="#about" data-i18n="motion.nav.about">우리의 에너지</a><a href="#activities" data-i18n="field.nav.work">하는 일</a><a href="#team" data-i18n="nav.team">운영진</a><a href="#recruitment" data-i18n="field.join">합류 안내</a><a href="portal.html" data-i18n="field.portal">포털</a>
+      <a href="#about" data-i18n="field.nav.club">동아리 소개</a><a href="#projects" data-i18n="motion.nav.projects">프로젝트</a><a href="#activities" data-i18n="field.nav.work">하는 일</a><a href="#team" data-i18n="nav.team">운영진</a><a href="#recruitment" data-i18n="field.join">합류 안내</a><a href="portal.html" data-i18n="field.portal">포털</a>
     </nav>
   </header>
   <main id="main-content">
     <section id="home" class="hero">
       <div id="kinetic-stage" class="kinetic-stage">
         <canvas id="kinetic-canvas" aria-label="클릭과 드래그로 잔물결을 만드는 NextWave의 수면">작은 시작들이 만나 다음 물결을 만듭니다. 아래 버튼에서 물의 움직임을 선택할 수 있습니다.</canvas>
+        <div class="stage-editorial" aria-hidden="true"><span>FIELD NOTE / 001</span><strong>NEXT<br>WAVE</strong><small>IDEA → BUILD → BEYOND</small></div>
       </div>
       <div class="hero-inner page-width">
         <p class="hero-eyebrow"><span class="status-dot" aria-hidden="true"></span><span data-i18n="field.hero.eyebrow">순천향대학교 IT·창업 연합 동아리</span></p>
@@ -68,11 +72,31 @@
         <p class="water-touch-hint" data-i18n="water.hero.drag">DRAG TO EXPLORE · 드래그로 돌려보고, 클릭으로 물결을</p>
       </div>
     </section>
-    <div class="motion-ticker" aria-hidden="true"><div class="ticker-track"><span>SMALL STARTS.</span><span class="ticker-outline">SHARED CURRENTS.</span><span>OUR NEXT WAVE.</span><span>SMALL STARTS.</span><span class="ticker-outline">SHARED CURRENTS.</span><span>OUR NEXT WAVE.</span></div></div>
+    <nav class="chapter-nav" aria-label="NextWave 둘러보기"><a href="#about"><span>01 / ABOUT</span><strong data-i18n="field.nav.club">동아리 소개</strong><b aria-hidden="true">↗</b></a><a href="#projects"><span>02 / WORK</span><strong data-i18n="motion.nav.projects">프로젝트</strong><b aria-hidden="true">↗</b></a><a href="portal.html"><span>03 / DISCOVER</span><strong data-i18n="field.portal">포털</strong><b aria-hidden="true">↗</b></a><a href="#recruitment"><span>04 / JOIN</span><strong data-i18n="field.join">합류 안내</strong><b aria-hidden="true">↗</b></a></nav>
 
+    <section id="about" class="about-section section-space">
+      <div class="page-width">
+        <div class="section-label"><span class="section-kicker">01 / THE CLUB</span><span>DIFFERENT MINDS. ONE WAVE.</span></div>
+        <div class="about-grid"><h2 data-i18n="motion.about.title">잘 맞는 사람보다,<br /><span>다르게 생각하는 사람.</span></h2><div><p data-i18n="field.about.body">NextWave는 아이디어를 쌓아 두는 곳이 아닙니다. 개발자, 디자이너, 기획자가 한 팀이 되어 직접 서비스를 만들고, 게임을 출시하고, 창업대회에 도전합니다.</p><p class="muted" data-i18n="field.about.sub">잘하는 사람만 모이지 않아도 괜찮아요. 질문하고, 부딪히고, 다시 만들어 보는 사람이면 충분합니다.</p></div></div>
+        <div class="culture-words"><div class="culture-word"><span>01 / A RIPPLE</span><strong data-i18n="water.meaning.one">작은 호기심에서</strong></div><div class="culture-word"><span>02 / A CURRENT</span><strong data-i18n="water.meaning.two">함께 만드는 시도로</strong></div><div class="culture-word"><span>03 / THE NEXT WAVE</span><strong data-i18n="water.meaning.three">새로운 변화의 물결로</strong></div></div>
+      </div>
+    </section>
+    <section id="activities" class="activity-section section-space"><div class="page-width">
+      <div class="section-label"><span class="section-kicker">02 / OUR PRACTICE</span><span data-i18n="motion.track.eyebrow">당신의 관심사가 시작점.</span></div>
+      <div class="section-heading"><h2 data-i18n="motion.track.title">어떤 쪽에<br /><span>마음이 움직여?</span></h2><p data-i18n="motion.track.intro">관심 분야를 골라보세요.<br />다음에 해볼 실험과 도전할 기회를 연결해드릴게요.</p></div>
+      <div class="track-lab">
+        <div class="track-selector" role="group" aria-label="관심 분야 선택">
+          <button data-track="dev" aria-pressed="true"><span class="track-number">01</span><strong>BUILD</strong><span data-i18n="act.dev.t">개발</span><span class="track-arrow" aria-hidden="true">↗</span></button>
+          <button data-track="game" aria-pressed="false"><span class="track-number">02</span><strong>PLAY</strong><span data-i18n="act.game.t">게임 개발</span><span class="track-arrow" aria-hidden="true">↗</span></button>
+          <button data-track="hack" aria-pressed="false"><span class="track-number">03</span><strong>SOLVE</strong><span data-i18n="field.hack">해커톤</span><span class="track-arrow" aria-hidden="true">↗</span></button>
+          <button data-track="mkt" aria-pressed="false"><span class="track-number">04</span><strong>CONNECT</strong><span data-i18n="field.marketing">마케팅</span><span class="track-arrow" aria-hidden="true">↗</span></button>
+        </div>
+        <div class="track-output"><div class="track-output-top"><span data-i18n="motion.track.suggestion">다음 실험 제안</span><span id="experiment-number">TRY / 001</span></div><p class="track-output-label">WHAT IF…</p><div id="idea-output" aria-live="polite"><p id="idea-first">캠퍼스의 불편함을</p><p id="idea-second">하나의 <em>서비스로.</em></p></div><p id="track-description" class="track-description"></p><div class="track-output-actions"><a id="track-opportunities" class="button button-dark" href="portal.html?category=dev"><span data-i18n="field.opportunities">관련 기회 찾기</span>↗</a><button id="idea-remix" class="text-link"><span data-i18n="motion.track.remix">다른 실험</span>↻</button></div></div>
+      </div>
+    </div></section>
     <section id="projects" class="projects-section section-space">
       <div class="page-width">
-        <div class="section-label"><span class="section-kicker">01 / WAVES IN THE MAKING</span><span data-i18n="motion.projects.eyebrow">설명보다 먼저, 플레이.</span></div>
+        <div class="section-label"><span class="section-kicker">03 / SELECTED WORK</span><span data-i18n="motion.projects.eyebrow">설명보다 먼저, 플레이.</span></div>
         <div class="section-heading"><h2 data-i18n="motion.projects.title">우리가 만든 건,<br /><span>움직인다.</span></h2><p data-i18n="motion.projects.intro">기록 속 프로젝트를 화면 밖으로.<br />직접 눌러보고, 움직여보고, 이해해보세요.</p></div>
         <div class="project-tabs" role="tablist" aria-label="체험할 프로젝트 선택">
           <button id="project-tab-mayhem" role="tab" aria-selected="true" aria-controls="mayhem-project-panel" data-project-tab="mayhem" tabindex="0"><span>01</span>MAYHEM<span class="tab-category">GAME</span></button>
@@ -134,7 +158,7 @@
     <section class="opportunity-preview" aria-labelledby="opportunity-preview-title">
       <div class="page-width opportunity-preview-inner">
         <div class="opportunity-preview-copy">
-          <p class="section-kicker">THE NEXT CHALLENGE / LIVE DESK</p>
+          <p class="section-kicker">04 / OPEN CALLS</p>
           <h2 id="opportunity-preview-title" data-i18n="opportunity.preview.title">다음 도전은<br><span>이미 열려 있어요.</span></h2>
           <p data-i18n="opportunity.preview.body">우리가 만든 것을 시험할 무대. 공모전과 해커톤을 한곳에서 찾고, 원문 공고에서 바로 확인하세요.</p>
           <a class="opportunity-preview-all" href="portal.html" data-i18n="opportunity.preview.all">모든 기회 보기 ↗</a>
@@ -142,32 +166,13 @@
         <div class="opportunity-preview-lanes" aria-label="기회 분야 바로가기">
           <a class="opportunity-lane" href="portal.html?category=hackathon"><span class="lane-index">01 / BUILD TOGETHER</span><span class="lane-icon" aria-hidden="true">↗</span><strong data-i18n="opportunity.preview.hackathon">해커톤</strong><span data-i18n="opportunity.preview.hackathon.body">팀을 꾸리고, 아이디어를 움직이는 현장</span></a>
           <a class="opportunity-lane" href="portal.html?category=contest"><span class="lane-index">02 / TAKE THE STAGE</span><span class="lane-icon" aria-hidden="true">↗</span><strong data-i18n="opportunity.preview.contest">공모전</strong><span data-i18n="opportunity.preview.contest.body">만든 것을 보여주고, 다음 가능성을 여는 무대</span></a>
+          <a class="opportunity-lane" href="portal.html?category=health"><span class="lane-index">03 / HEALTH & CARE</span><span class="lane-icon" aria-hidden="true">↗</span><strong data-i18n="opportunity.preview.health">보건·의료</strong><span data-i18n="opportunity.preview.health.body">돌봄과 의료의 문제를 다루는 도전</span></a>
         </div>
       </div>
     </section>
 
-    <section id="about" class="about-section section-space">
-      <div class="page-width">
-        <div class="section-label"><span class="section-kicker">02 / DIFFERENT CURRENTS, ONE OCEAN</span><span>DIFFERENT MINDS. ONE WAVE.</span></div>
-        <div class="about-grid"><h2 data-i18n="motion.about.title">잘 맞는 사람보다,<br /><span>다르게 생각하는 사람.</span></h2><div><p data-i18n="field.about.body">NextWave는 아이디어를 쌓아 두는 곳이 아닙니다. 개발자, 디자이너, 기획자가 한 팀이 되어 직접 서비스를 만들고, 게임을 출시하고, 창업대회에 도전합니다.</p><p class="muted" data-i18n="field.about.sub">잘하는 사람만 모이지 않아도 괜찮아요. 질문하고, 부딪히고, 다시 만들어 보는 사람이면 충분합니다.</p></div></div>
-        <div class="culture-words"><div class="culture-word"><span>01 / A RIPPLE</span><strong data-i18n="water.meaning.one">작은 호기심에서</strong></div><div class="culture-word"><span>02 / A CURRENT</span><strong data-i18n="water.meaning.two">함께 만드는 시도로</strong></div><div class="culture-word"><span>03 / THE NEXT WAVE</span><strong data-i18n="water.meaning.three">새로운 변화의 물결로</strong></div></div>
-      </div>
-    </section>
-    <section id="activities" class="activity-section section-space"><div class="page-width">
-      <div class="section-label"><span class="section-kicker">03 / FIND YOUR CURRENT</span><span data-i18n="motion.track.eyebrow">당신의 관심사가 시작점.</span></div>
-      <div class="section-heading"><h2 data-i18n="motion.track.title">어떤 쪽에<br /><span>마음이 움직여?</span></h2><p data-i18n="motion.track.intro">관심 분야를 골라보세요.<br />다음에 해볼 실험과 도전할 기회를 연결해드릴게요.</p></div>
-      <div class="track-lab">
-        <div class="track-selector" role="group" aria-label="관심 분야 선택">
-          <button data-track="dev" aria-pressed="true"><span class="track-number">01</span><strong>BUILD</strong><span data-i18n="act.dev.t">개발</span><span class="track-arrow" aria-hidden="true">↗</span></button>
-          <button data-track="game" aria-pressed="false"><span class="track-number">02</span><strong>PLAY</strong><span data-i18n="act.game.t">게임 개발</span><span class="track-arrow" aria-hidden="true">↗</span></button>
-          <button data-track="hack" aria-pressed="false"><span class="track-number">03</span><strong>SOLVE</strong><span data-i18n="field.hack">해커톤</span><span class="track-arrow" aria-hidden="true">↗</span></button>
-          <button data-track="mkt" aria-pressed="false"><span class="track-number">04</span><strong>CONNECT</strong><span data-i18n="field.marketing">마케팅</span><span class="track-arrow" aria-hidden="true">↗</span></button>
-        </div>
-        <div class="track-output"><div class="track-output-top"><span data-i18n="motion.track.suggestion">다음 실험 제안</span><span id="experiment-number">TRY / 001</span></div><p class="track-output-label">WHAT IF…</p><div id="idea-output" aria-live="polite"><p id="idea-first">캠퍼스의 불편함을</p><p id="idea-second">하나의 <em>서비스로.</em></p></div><p id="track-description" class="track-description"></p><div class="track-output-actions"><a id="track-opportunities" class="button button-dark" href="portal.html?category=dev"><span data-i18n="field.opportunities">관련 기회 찾기</span>↗</a><button id="idea-remix" class="text-link"><span data-i18n="motion.track.remix">다른 실험</span>↻</button></div></div>
-      </div>
-    </div></section>
     <section id="awards" class="awards-section section-space"><div class="page-width">
-      <div class="section-label"><span class="section-kicker">04 / THE WAVES WE MADE</span><span>2025 ARCHIVE</span></div>
+      <div class="section-label"><span class="section-kicker">05 / FIELD RECORDS</span><span>2025 ARCHIVE</span></div>
       <div class="section-heading"><h2 data-i18n="motion.awards.title">해봤고,<br /><span>해냈으니까.</span></h2><p data-i18n="field.record.sub">직접 도전해서 쌓은 여섯 번의 수상 기록.</p></div>
 <ol class="award-list"><li class="award-row"><span class="index">01</span><time>2025.12</time><h3 data-i18n="aw1.t">제품제작역량 창업대회</h3><span class="award-result" data-i18n="aw1.s">최우수상 &amp; 캠프 수료</span></li>
 <li class="award-row"><span class="index">02</span><time>2025.11</time><h3 data-i18n="aw2.t">SCHU AI·SW Festival 게임개발경진대회</h3><span class="award-result" data-i18n="aw2.s">최우수상 · 게임 「MAYHEM」</span></li>
@@ -177,7 +182,7 @@
 <li class="award-row"><span class="index">06</span><time>2025</time><h3 data-i18n="aw6.t">순천향대학교 나눔토론대회</h3><span class="award-result" data-i18n="aw6.s">장려상</span></li></ol>
     </div></section>
     <section id="team" class="team-section section-space"><div class="page-width">
-      <div class="section-label"><span class="section-kicker">05 / PEOPLE BEHIND THE WAVE</span><span data-i18n="field.people.label">프로필을 눌러 만나보세요</span></div>
+      <div class="section-label"><span class="section-kicker">06 / THE PEOPLE</span><span data-i18n="field.people.label">프로필을 눌러 만나보세요</span></div>
       <div class="section-heading"><h2 data-i18n="motion.team.title">같이 사고 칠<br /><span>사람들.</span></h2><p data-i18n="field.team.sub">만드는 사람 곁에는,<br />늘 같이 만드는 사람이 있습니다.</p></div>
 <div class="team-grid"><div class="member-card" role="button" tabindex="0"
                         data-name="손성" data-role="회장 · President" data-role-en="President"
@@ -212,7 +217,7 @@
 
     </div></section>
     <section id="recruitment" class="recruitment section-space"><div class="page-width">
-      <div class="section-label"><span class="section-kicker">06 / JOIN THE NEXT WAVE</span><span>EVERY RIPPLE STARTS SOMEWHERE.</span></div>
+      <div class="section-label"><span class="section-kicker">07 / JOIN THE CURRENT</span><span>EVERY RIPPLE STARTS SOMEWHERE.</span></div>
       <div class="recruitment-grid"><div><h2 data-i18n="motion.join.title">이제,<br /><span>같이 하자.</span></h2><p data-i18n="field.join.body">엄청난 아이디어가 없어도, 아직 서툴러도.<br />“같이 해볼래?”에 마음이 움직였다면.</p></div>
 <div class="join-details"><dl><div><dt data-i18n="rec.t1">모집 대상</dt><dd data-i18n="rec.d1">순천향대학교 재학생·휴학생 (전공 무관)</dd></div><div><dt data-i18n="rec.t3">활동 트랙</dt><dd data-i18n="field.join.tracks">개발 · 게임 · 해커톤 · 마케팅</dd></div><div><dt data-i18n="field.join.status">모집 일정</dt><dd data-i18n="field.join.schedule">확정 일정은 모집 공지로 안내합니다.</dd></div></dl><ol class="join-steps"><li><span>01</span><span data-i18n="rec.step1">지원서 작성</span></li><li><span>02</span><span data-i18n="rec.step2">가벼운 만남·인터뷰</span></li><li><span>03</span><span data-i18n="field.join.step3">NextWave 합류</span></li></ol><a id="apply-link" class="button button-dark" hidden target="_blank" rel="noopener noreferrer"><span data-i18n="btn.applyNow">지금 지원하기</span><span aria-hidden="true">↗</span></a><p id="apply-status" class="apply-status" role="status" data-i18n="field.join.pending">지원서 링크는 준비 중입니다. 공개되면 이곳에서 바로 연결됩니다.</p></div>
       </div>
