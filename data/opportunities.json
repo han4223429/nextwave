@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T02:03:59Z",
-  "lastSuccessAt": "2026-10-13T02:03:59Z",
+  "generatedAt": "2026-10-13T09:24:12Z",
+  "lastSuccessAt": "2026-10-13T09:24:12Z",
   "refreshIntervalMinutes": 60,
   "sources": [
     {
@@ -9,60 +9,60 @@
       "name": "K-Startup",
       "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
       "status": "ok",
-      "checkedAt": "2026-10-13T02:01:31Z",
+      "checkedAt": "2026-10-13T09:22:07Z",
       "itemCount": 45,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-13T02:03:59Z"
+      "lastSuccessAt": "2026-10-13T09:24:12Z"
     },
     {
       "id": "wevity",
       "name": "위비티",
       "url": "https://www.wevity.com/?c=find&s=1",
       "status": "ok",
-      "checkedAt": "2026-10-13T02:03:28Z",
+      "checkedAt": "2026-10-13T09:23:52Z",
       "itemCount": 38,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-13T02:03:59Z"
+      "lastSuccessAt": "2026-10-13T09:24:12Z"
     },
     {
       "id": "thinkyou",
       "name": "씽유",
       "url": "https://thinkyou.co.kr/contest/",
       "status": "ok",
-      "checkedAt": "2026-10-13T02:03:44Z",
+      "checkedAt": "2026-10-13T09:23:59Z",
       "itemCount": 135,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-13T02:03:59Z"
+      "lastSuccessAt": "2026-10-13T09:24:12Z"
     },
     {
       "id": "hola",
       "name": "Hola IT",
       "url": "https://holaworld.io/hola-it",
       "status": "ok",
-      "checkedAt": "2026-10-13T02:03:52Z",
+      "checkedAt": "2026-10-13T09:24:06Z",
       "itemCount": 80,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-13T02:03:59Z"
+      "lastSuccessAt": "2026-10-13T09:24:12Z"
     },
     {
       "id": "dacon",
       "name": "DACON",
       "url": "https://dacon.io/competitions",
       "status": "ok",
-      "checkedAt": "2026-10-13T02:03:56Z",
+      "checkedAt": "2026-10-13T09:24:09Z",
       "itemCount": 10,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-13T02:03:59Z"
+      "lastSuccessAt": "2026-10-13T09:24:12Z"
     },
     {
       "id": "nmc_health",
       "name": "국립중앙의료원",
       "url": "https://www.nmcpublicedu.or.kr/info.asp",
       "status": "ok",
-      "checkedAt": "2026-10-13T02:03:59Z",
+      "checkedAt": "2026-10-13T09:24:12Z",
       "itemCount": 1,
       "errorCount": 0,
-      "lastSuccessAt": "2026-10-13T02:03:59Z"
+      "lastSuccessAt": "2026-10-13T09:24:12Z"
     }
   ],
   "items": [
@@ -85,7 +85,7 @@
       "startDate": "2026-09-21",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -108,7 +108,7 @@
       "startDate": "2026-09-30",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -315,7 +315,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -361,7 +361,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -409,7 +409,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-30 ~ 2026-10-13",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -433,7 +433,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-14 ~ 2026-10-13",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -457,7 +457,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-13",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -552,7 +552,7 @@
       "startDate": "2026-09-23",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -575,7 +575,7 @@
       "startDate": "2026-10-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -759,7 +759,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -782,7 +782,7 @@
       "startDate": "2026-10-12",
       "publishedAt": "2026-10-13",
       "firstSeenAt": "2026-10-13T02:03:59Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-13T02:03:59Z",
       "status": "active"
     },
@@ -806,7 +806,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-10-14",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -830,7 +830,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-23 ~ 2026-10-14",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -854,7 +854,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-12 ~ 2026-10-14",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -878,7 +878,7 @@
       "audience": "대학생, 기타",
       "applicationPeriod": "2026-06-22 ~ 2026-10-14",
       "firstSeenAt": "2026-09-28T21:58:22Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-09-28T21:58:22Z",
       "status": "active"
     },
@@ -949,7 +949,7 @@
       "startDate": "2026-09-03",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1064,7 +1064,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -1087,7 +1087,7 @@
       "startDate": "2026-09-28",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -1111,7 +1111,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-07-29 ~ 2026-10-15",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1273,7 +1273,7 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -1296,8 +1296,31 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179487",
+      "title": "[제주창조경제혁신센터]「상시매칭 오픈이노베이션 플랫폼」'에코프로 계열사''수요과제 매칭 스타트업 모집 (~10/16)",
+      "description": "제주창조경제혁신센터 · 사업화",
+      "category": "startup",
+      "topics": [],
+      "deadline": "2026-10-16",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179487",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "제주창조경제혁신센터",
+      "sourceCategory": "사업화",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-06",
+      "publishedAt": "2026-10-13",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -1344,7 +1367,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-29 ~ 2026-10-16",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1368,7 +1391,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-01 ~ 2026-10-16",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1392,7 +1415,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-07 ~ 2026-10-16",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1416,7 +1439,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-12 ~ 2026-10-16",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -1440,7 +1463,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-12 ~ 2026-10-16",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -1464,7 +1487,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-05-11 ~ 2026-10-16",
       "firstSeenAt": "2026-09-16T18:53:46Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-09-16T18:53:46Z",
       "status": "active"
     },
@@ -1608,7 +1631,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-10-07 ~ 2026-10-16",
       "firstSeenAt": "2026-10-07T13:17:00Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-07T13:17:00Z",
       "status": "active"
     },
@@ -1631,7 +1654,7 @@
       "startDate": "2026-10-11",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1655,7 +1678,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-07-31 ~ 2026-10-17",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -1678,7 +1701,7 @@
       "startDate": "2026-09-21",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1701,7 +1724,7 @@
       "startDate": "2026-09-22",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -1771,7 +1794,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-07-13 ~ 2026-10-18",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1795,7 +1818,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-08-28 ~ 2026-10-18",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1867,7 +1890,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-08-28 ~ 2026-10-18",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1891,7 +1914,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-10-18",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1915,7 +1938,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-30 ~ 2026-10-18",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1939,7 +1962,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-29 ~ 2026-10-18",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -1963,7 +1986,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-19 ~ 2026-10-18",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -2059,7 +2082,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-09-23 ~ 2026-10-18",
       "firstSeenAt": "2026-09-28T15:24:30Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-09-28T15:24:30Z",
       "status": "active"
     },
@@ -2083,7 +2106,7 @@
       "audience": "제한없음, 기타",
       "applicationPeriod": "2026-10-08 ~ 2026-10-18",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -2106,7 +2129,7 @@
       "startDate": "2026-09-29",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2129,7 +2152,7 @@
       "startDate": "2026-10-02",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -2152,7 +2175,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -2176,7 +2199,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-14 ~ 2026-10-19",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -2200,7 +2223,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-10-19",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -2224,7 +2247,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-29 ~ 2026-10-19",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -2248,7 +2271,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-29 ~ 2026-10-19",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -2272,7 +2295,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-02 ~ 2026-10-19",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -2296,7 +2319,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-06 ~ 2026-10-19",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -2343,7 +2366,7 @@
       "startDate": "2026-10-07",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2389,7 +2412,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -2412,7 +2435,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -2435,7 +2458,7 @@
       "startDate": "2026-10-01",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -2458,7 +2481,7 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -2481,7 +2504,7 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-13",
       "firstSeenAt": "2026-10-13T02:03:59Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-13T02:03:59Z",
       "status": "active"
     },
@@ -2504,7 +2527,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T13:23:48Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T13:23:48Z",
       "status": "active"
     },
@@ -2527,7 +2550,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T13:23:48Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T13:23:48Z",
       "status": "active"
     },
@@ -2550,7 +2573,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -2574,8 +2597,56 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-20",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67387",
+      "title": "SK쉴더스 재직자 대상 생성형 AI 보안 실무 역량 강화 교육 (교육비 무료)",
+      "description": "SK쉴더스 · 공모전",
+      "category": "education",
+      "topics": [],
+      "deadline": "2026-10-20",
+      "link": "https://thinkyou.co.kr/contest/67387/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "SK쉴더스",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-12",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-12 ~ 2026-10-20",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67418",
+      "title": "2026 청년취업사관학교 해커톤",
+      "description": "서울경제진흥원 · 공모전",
+      "category": "hackathon",
+      "topics": [],
+      "deadline": "2026-10-20",
+      "link": "https://thinkyou.co.kr/contest/67418/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "서울경제진흥원",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-07",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-07 ~ 2026-10-20",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -2714,7 +2785,7 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -2737,7 +2808,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -2785,7 +2856,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-16 ~ 2026-10-21",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -2809,7 +2880,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-22 ~ 2026-10-21",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -2856,7 +2927,7 @@
       "startDate": "2026-09-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2879,7 +2950,7 @@
       "startDate": "2026-09-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2902,7 +2973,7 @@
       "startDate": "2026-09-08",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2925,7 +2996,7 @@
       "startDate": "2026-09-08",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -2994,7 +3065,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -3018,7 +3089,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-08-18 ~ 2026-10-22",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3066,7 +3137,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-10-12 ~ 2026-10-22",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -3090,7 +3161,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-10-12 ~ 2026-10-22",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -3113,7 +3184,7 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3136,7 +3207,7 @@
       "startDate": "2026-09-29",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3251,7 +3322,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-07",
       "firstSeenAt": "2026-10-07T13:17:00Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-07T13:17:00Z",
       "status": "active"
     },
@@ -3274,7 +3345,7 @@
       "startDate": "2026-10-12",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -3297,7 +3368,7 @@
       "startDate": "2026-10-12",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -3321,7 +3392,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-14 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3369,7 +3440,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-23 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3393,7 +3464,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-14 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3417,7 +3488,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3441,7 +3512,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-14 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3465,7 +3536,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-18 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3489,7 +3560,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-12 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3513,7 +3584,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3537,7 +3608,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3561,8 +3632,32 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-06 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67403",
+      "title": "2026 Tech Discovery 실험실창업 경진대회 참가팀 모집",
+      "description": "과학기술정보통신부, 과학기술사업화진흥원 · 공모전",
+      "category": "contest",
+      "topics": [],
+      "deadline": "2026-10-23",
+      "link": "https://thinkyou.co.kr/contest/67403/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "과학기술정보통신부, 과학기술사업화진흥원",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-01",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-01 ~ 2026-10-23",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -3657,7 +3752,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-10-08 ~ 2026-10-23",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3681,7 +3776,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-10-06 ~ 2026-10-23",
       "firstSeenAt": "2026-10-10T17:50:51Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-10T17:50:51Z",
       "status": "active"
     },
@@ -3704,7 +3799,7 @@
       "startDate": "2026-10-24",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3728,7 +3823,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-10-01 ~ 2026-10-24",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3751,7 +3846,7 @@
       "startDate": "2026-10-06",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -3774,7 +3869,7 @@
       "startDate": "2026-10-12",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -3797,7 +3892,7 @@
       "startDate": "2026-09-30",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -3868,7 +3963,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-23 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3892,7 +3987,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3916,7 +4011,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-18 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3940,7 +4035,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-29 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3964,7 +4059,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -3988,7 +4083,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-15 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -4012,7 +4107,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-05 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4036,7 +4131,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-30 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4060,7 +4155,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-05 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4084,8 +4179,56 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-12 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67384",
+      "title": "2026 제주 환경 해커톤 참가팀 모집",
+      "description": "서울대 빅데이터혁신융합대학사업단 · 공모전",
+      "category": "hackathon",
+      "topics": [],
+      "deadline": "2026-10-25",
+      "link": "https://thinkyou.co.kr/contest/67384/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "서울대 빅데이터혁신융합대학사업단",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-07",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-07 ~ 2026-10-25",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67386",
+      "title": "픽콘 세븐일레븐 공식 출력 서비스 '픽콘' 편의점 출력 대학생 서포터즈 「픽콘 캠퍼스 크루」 2기 모집",
+      "description": "픽콘 · 공모전",
+      "category": "activity",
+      "topics": [],
+      "deadline": "2026-10-25",
+      "link": "https://thinkyou.co.kr/contest/67386/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "픽콘",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-12",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-12 ~ 2026-10-25",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -4132,7 +4275,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-10-12 ~ 2026-10-25",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -4155,7 +4298,7 @@
       "startDate": "2026-10-09",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -4178,7 +4321,7 @@
       "startDate": "2026-10-09",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -4224,7 +4367,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-07",
       "firstSeenAt": "2026-10-07T13:17:00Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-07T13:17:00Z",
       "status": "active"
     },
@@ -4247,7 +4390,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-07",
       "firstSeenAt": "2026-10-07T13:17:00Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-07T13:17:00Z",
       "status": "active"
     },
@@ -4270,7 +4413,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-13",
       "firstSeenAt": "2026-10-13T02:03:59Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-13T02:03:59Z",
       "status": "active"
     },
@@ -4294,7 +4437,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-06 ~ 2026-10-26",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -4318,7 +4461,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-02 ~ 2026-10-26",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4342,7 +4485,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-09 ~ 2026-10-26",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4366,7 +4509,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-06 ~ 2026-10-26",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4414,7 +4557,7 @@
       "audience": "일반인, 대학생, 기타",
       "applicationPeriod": "2026-10-13 ~ 2026-10-26",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -4437,7 +4580,7 @@
       "startDate": "2026-10-07",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -4506,7 +4649,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-13",
       "firstSeenAt": "2026-10-13T02:03:59Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-13T02:03:59Z",
       "status": "active"
     },
@@ -4529,7 +4672,7 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4577,7 +4720,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-30 ~ 2026-10-27",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -4601,7 +4744,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-07 ~ 2026-10-27",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -4625,7 +4768,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-10-27",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -4649,7 +4792,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-09-30 ~ 2026-10-27",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -4673,7 +4816,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-09-28 ~ 2026-10-27",
       "firstSeenAt": "2026-10-07T13:17:00Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-07T13:17:00Z",
       "status": "active"
     },
@@ -4697,7 +4840,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-10-07 ~ 2026-10-27",
       "firstSeenAt": "2026-10-08T13:23:48Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T13:23:48Z",
       "status": "active"
     },
@@ -4789,7 +4932,7 @@
       "startDate": "2026-10-06",
       "publishedAt": "2026-10-06",
       "firstSeenAt": "2026-10-06T15:07:57Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-06T15:07:57Z",
       "status": "active"
     },
@@ -4837,7 +4980,7 @@
       "recruitmentStatus": "upcoming",
       "applicationPeriod": "2026-10-26 ~ 2026-10-28",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -4861,7 +5004,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-09 ~ 2026-10-28",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4885,8 +5028,32 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-07 ~ 2026-10-28",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67389",
+      "title": "Tech IP-Up : IP 창출 캠프",
+      "description": "과학기술정보통신부, 과학기술사업화진흥원 · 공모전",
+      "category": "contest",
+      "topics": [],
+      "deadline": "2026-10-28",
+      "link": "https://thinkyou.co.kr/contest/67389/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "과학기술정보통신부, 과학기술사업화진흥원",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-01",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-01 ~ 2026-10-28",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -4908,7 +5075,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -4931,7 +5098,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4954,7 +5121,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -4977,7 +5144,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -5024,7 +5191,7 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5047,7 +5214,7 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5070,7 +5237,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5093,7 +5260,7 @@
       "startDate": "2026-09-28",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5116,7 +5283,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5232,7 +5399,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-14 ~ 2026-10-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -5376,7 +5543,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -5448,7 +5615,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -5472,7 +5639,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-23 ~ 2026-10-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -5496,7 +5663,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -5520,7 +5687,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -5544,7 +5711,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -5568,7 +5735,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -5592,7 +5759,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-05 ~ 2026-10-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -5616,7 +5783,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-02-02 ~ 2026-10-30",
       "firstSeenAt": "2026-09-13T18:11:08Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-09-13T18:11:08Z",
       "status": "active"
     },
@@ -5759,7 +5926,7 @@
       "startDate": "2026-08-18",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5782,7 +5949,7 @@
       "startDate": "2026-09-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5805,7 +5972,7 @@
       "startDate": "2026-09-08",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5828,7 +5995,7 @@
       "startDate": "2026-09-08",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5851,7 +6018,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5874,7 +6041,7 @@
       "startDate": "2026-10-07",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5897,7 +6064,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -5920,7 +6087,7 @@
       "startDate": "2026-10-07",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -6012,7 +6179,7 @@
       "startDate": "2026-10-12",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -6035,7 +6202,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -6131,7 +6298,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-23 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6155,7 +6322,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-27 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6203,7 +6370,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6227,7 +6394,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6251,7 +6418,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6275,7 +6442,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6299,7 +6466,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6323,7 +6490,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-30 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6371,7 +6538,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-17 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6397,7 +6564,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-16 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6421,7 +6588,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6445,7 +6612,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6469,7 +6636,7 @@
       "recruitmentStatus": "upcoming",
       "applicationPeriod": "2026-10-19 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -6493,7 +6660,7 @@
       "audience": "일반인, 대학생, 기타",
       "applicationPeriod": "2026-08-03 ~ 2026-10-31",
       "firstSeenAt": "2026-10-02T20:42:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-02T20:42:19Z",
       "status": "active"
     },
@@ -6565,7 +6732,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-10-19 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -6589,7 +6756,7 @@
       "audience": "일반인, 대학생, 청소년, 기타",
       "applicationPeriod": "2026-10-02 ~ 2026-10-31",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -6612,7 +6779,7 @@
       "startDate": "2026-09-28",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -6635,7 +6802,7 @@
       "startDate": "2026-09-28",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -6683,7 +6850,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-11-01",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6707,7 +6874,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-11-01",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6731,7 +6898,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-23 ~ 2026-11-01",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6755,7 +6922,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-10-01 ~ 2026-11-01",
       "firstSeenAt": "2026-09-28T21:58:22Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-09-28T21:58:22Z",
       "status": "active"
     },
@@ -6853,7 +7020,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-10-12 ~ 2026-11-01",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -6876,7 +7043,7 @@
       "startDate": "2026-10-06",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -6946,7 +7113,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-30 ~ 2026-11-02",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6970,7 +7137,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-02",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -6994,7 +7161,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-06 ~ 2026-11-02",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7018,7 +7185,7 @@
       "audience": "대학생",
       "applicationPeriod": "2026-10-01 ~ 2026-11-02",
       "firstSeenAt": "2026-09-30T13:39:54Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-09-30T13:39:54Z",
       "status": "active"
     },
@@ -7042,8 +7209,32 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-28 ~ 2026-11-03",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67388",
+      "title": "2026 충남 로컬메이드 제품개발 공모전",
+      "description": "선문대학교 앵커사업단, 식품공학·영양학부 · 공모전",
+      "category": "dev",
+      "topics": [],
+      "deadline": "2026-11-04",
+      "link": "https://thinkyou.co.kr/contest/67388/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "선문대학교 앵커사업단, 식품공학·영양학부",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-08",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-08 ~ 2026-11-04",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -7066,7 +7257,7 @@
       "audience": "일반인, 대학생, 청소년, 기타",
       "applicationPeriod": "2026-10-05 ~ 2026-11-04",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7090,7 +7281,7 @@
       "audience": "대학생, 청소년",
       "applicationPeriod": "2026-10-08 ~ 2026-11-04",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -7113,7 +7304,7 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -7136,7 +7327,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -7163,7 +7354,7 @@
       "applicationPeriod": "2026-10-06 ~ 2026-11-05 18:00 KST",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T23:58:25Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T23:58:25Z",
       "status": "active"
     },
@@ -7189,7 +7380,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-06 ~ 2026-11-05",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7213,8 +7404,32 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-08 ~ 2026-11-05",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67412",
+      "title": "「어구는 돌아오는거야!」영상·사진 공모전",
+      "description": "한국수산자원공단 · 공모전",
+      "category": "marketing",
+      "topics": [],
+      "deadline": "2026-11-05",
+      "link": "https://thinkyou.co.kr/contest/67412/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "한국수산자원공단",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-06",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-06 ~ 2026-11-05",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -7236,7 +7451,7 @@
       "startDate": "2026-10-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -7260,7 +7475,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-21 ~ 2026-11-06",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7308,7 +7523,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-06",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7332,7 +7547,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-06",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7404,7 +7619,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-23 ~ 2026-11-07",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7427,7 +7642,7 @@
       "startDate": "2026-05-13",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -7450,7 +7665,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -7473,7 +7688,7 @@
       "startDate": "2026-10-07",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -7521,7 +7736,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-08 ~ 2026-11-08",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7545,7 +7760,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-12 ~ 2026-11-08",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -7568,7 +7783,7 @@
       "startDate": "2026-11-02",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -7592,7 +7807,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-02 ~ 2026-11-09",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7616,7 +7831,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-06 ~ 2026-11-09",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7640,7 +7855,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-08 ~ 2026-11-09",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7711,7 +7926,7 @@
       "startDate": "2026-08-11",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -7757,7 +7972,7 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -7781,7 +7996,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-10",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7805,7 +8020,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-10",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7829,7 +8044,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-10",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7853,7 +8068,7 @@
       "audience": "일반인, 대학생, 청소년",
       "applicationPeriod": "2026-08-11 ~ 2026-11-10",
       "firstSeenAt": "2026-10-02T20:42:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-02T20:42:19Z",
       "status": "active"
     },
@@ -7901,7 +8116,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-08 ~ 2026-11-11",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7948,8 +8163,31 @@
       "startDate": "2026-10-08",
       "publishedAt": "2026-10-12",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_kstartup_179486",
+      "title": "2026년 남구다운 청년 창업 지원사업 통합공고(수정)",
+      "description": "대구경북고용복지연구원 · 사업화",
+      "category": "startup",
+      "topics": [],
+      "deadline": "2026-11-12",
+      "link": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179486",
+      "source": "K-Startup",
+      "sourceId": "kstartup",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+      "organizer": "대구경북고용복지연구원",
+      "sourceCategory": "사업화",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-02",
+      "publishedAt": "2026-10-13",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -7972,7 +8210,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-12",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -7996,7 +8234,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-05 ~ 2026-11-12",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8019,7 +8257,7 @@
       "startDate": "2026-09-14",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -8042,7 +8280,7 @@
       "startDate": "2026-09-21",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -8065,7 +8303,7 @@
       "startDate": "2026-09-30",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -8089,7 +8327,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-14 ~ 2026-11-13",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8161,7 +8399,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-13",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8185,8 +8423,80 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-06 ~ 2026-11-13",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67408",
+      "title": "주거실태조사 대국민 공모전",
+      "description": "국토연구원 · 공모전",
+      "category": "contest",
+      "topics": [],
+      "deadline": "2026-11-13",
+      "link": "https://thinkyou.co.kr/contest/67408/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "국토연구원",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-12",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-12 ~ 2026-11-13",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67411",
+      "title": "2026년「청소년이 바꾸는 서울」 인스타툰 공모전",
+      "description": "서울특별시립청소년활동진흥센터 · 공모전",
+      "category": "contest",
+      "topics": [],
+      "deadline": "2026-11-13",
+      "link": "https://thinkyou.co.kr/contest/67411/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "서울특별시립청소년활동진흥센터",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-13",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-13 ~ 2026-11-13",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67414",
+      "title": "2026년 멘토링 수기공모전",
+      "description": "대구광역시사회복지협의회 · 공모전",
+      "category": "activity",
+      "topics": [],
+      "deadline": "2026-11-13",
+      "link": "https://thinkyou.co.kr/contest/67414/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "대구광역시사회복지협의회",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-12",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-12 ~ 2026-11-13",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -8238,6 +8548,30 @@
       "status": "active"
     },
     {
+      "id": "auto_wevity_111615",
+      "title": "2026 대한민국 과일대전 숏폼 영상 공모전",
+      "description": "농림축산식품부 / 한국과수농협연합회 · 영상/UCC/사진",
+      "category": "marketing",
+      "topics": [],
+      "deadline": "2026-11-13",
+      "link": "https://www.wevity.com/?c=find&s=1&gbn=view&ix=111615",
+      "source": "위비티",
+      "sourceId": "wevity",
+      "sourceUrl": "https://www.wevity.com/?c=find&s=1",
+      "organizer": "농림축산식품부 / 한국과수농협연합회",
+      "sourceCategory": "영상/UCC/사진",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-12",
+      "audience": "제한없음",
+      "applicationPeriod": "2026-10-12 ~ 2026-11-13",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
+      "status": "active"
+    },
+    {
       "id": "auto_thinkyou_67197",
       "title": "2026 태권도 의류형 굿즈·체험형 굿즈 아이디어 공모전",
       "description": "전북테크노파크, 무주군 · 공모전",
@@ -8257,7 +8591,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-14",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8281,7 +8615,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-12 ~ 2026-11-15",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8305,7 +8639,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-10-06 ~ 2026-11-15",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8329,7 +8663,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-10-26 ~ 2026-11-15",
       "firstSeenAt": "2026-10-11T14:00:56Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T14:00:56Z",
       "status": "active"
     },
@@ -8355,6 +8689,30 @@
       "createdAt": "2026-09-29T01:54:58Z",
       "status": "active",
       "topics": []
+    },
+    {
+      "id": "auto_thinkyou_67390",
+      "title": "29역숏폼왕 제1회 인스탁스 영화제",
+      "description": "한국후지필름, 한국경제신문 · 공모전",
+      "category": "marketing",
+      "topics": [],
+      "deadline": "2026-11-17",
+      "link": "https://thinkyou.co.kr/contest/67390/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "한국후지필름, 한국경제신문",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-08",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-08 ~ 2026-11-17",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
+      "status": "active"
     },
     {
       "id": "auto_wevity_111506",
@@ -8400,7 +8758,7 @@
       "recruitmentStatus": "upcoming",
       "applicationPeriod": "2026-11-09 ~ 2026-11-18",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8424,7 +8782,7 @@
       "recruitmentStatus": "upcoming",
       "applicationPeriod": "2026-11-17 ~ 2026-11-19",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8448,7 +8806,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-11-17 ~ 2026-11-19",
       "firstSeenAt": "2026-10-07T19:22:00Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-07T19:22:00Z",
       "status": "active"
     },
@@ -8543,8 +8901,32 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-10 ~ 2026-11-24",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67413",
+      "title": "CCCR 전문인력_멀티 클라우드 서비스 기반 인프라 구축 및 Private AI 운영",
+      "description": "과학기술정보통신부, 정보통신산업진흥원 · 공모전",
+      "category": "dev",
+      "topics": [],
+      "deadline": "2026-11-27",
+      "link": "https://thinkyou.co.kr/contest/67413/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "과학기술정보통신부, 정보통신산업진흥원",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-06",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-06 ~ 2026-11-27",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -8567,7 +8949,7 @@
       "audience": "일반인",
       "applicationPeriod": "2026-10-07 ~ 2026-11-27",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8591,7 +8973,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-01 ~ 2026-11-29",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8660,7 +9042,7 @@
       "startDate": "2026-10-01",
       "publishedAt": "2026-10-08",
       "firstSeenAt": "2026-10-08T05:58:32Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T05:58:32Z",
       "status": "active"
     },
@@ -8684,7 +9066,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-16 ~ 2026-11-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8708,7 +9090,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-02 ~ 2026-11-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8732,8 +9114,32 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-10-02 ~ 2026-11-30",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
+      "status": "active"
+    },
+    {
+      "id": "auto_thinkyou_67385",
+      "title": "2026 레진성인공모전",
+      "description": "레진 엔터테인먼트 · 공모전",
+      "category": "contest",
+      "topics": [],
+      "deadline": "2026-11-30",
+      "link": "https://thinkyou.co.kr/contest/67385/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "레진 엔터테인먼트",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-10-12",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-10-12 ~ 2026-11-30",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
       "status": "active"
     },
     {
@@ -8756,7 +9162,7 @@
       "audience": "일반인, 대학생, 기타",
       "applicationPeriod": "2026-10-08 ~ 2026-11-30",
       "firstSeenAt": "2026-10-08T13:23:48Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-08T13:23:48Z",
       "status": "active"
     },
@@ -8827,7 +9233,7 @@
       "recruitmentStatus": "open",
       "applicationPeriod": "2026-09-15 ~ 2026-12-07",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8877,7 +9283,7 @@
       "recruitmentStatus": "upcoming",
       "applicationPeriod": "2026-12-07 ~ 2026-12-18",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -8948,7 +9354,7 @@
       "audience": "일반인, 대학생",
       "applicationPeriod": "2026-10-01 ~ 2026-12-28",
       "firstSeenAt": "2026-10-02T20:42:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-02T20:42:19Z",
       "status": "active"
     },
@@ -8971,7 +9377,7 @@
       "startDate": "2026-09-01",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -8995,7 +9401,7 @@
       "audience": "대학생",
       "applicationPeriod": "2026-11-02 ~ 2027-01-10",
       "firstSeenAt": "2026-10-12T20:18:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T20:18:19Z",
       "status": "active"
     },
@@ -9019,7 +9425,7 @@
       "audience": "제한없음, 일반인, 대학생",
       "applicationPeriod": "2026-08-01 ~ 2027-01-15",
       "firstSeenAt": "2026-09-06T12:29:51Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-09-06T12:29:51Z",
       "status": "active"
     },
@@ -9043,7 +9449,7 @@
       "recruitmentStatus": "upcoming",
       "applicationPeriod": "2026-11-01 ~ 2027-01-31",
       "firstSeenAt": "2026-10-12T00:23:39Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T00:23:39Z",
       "status": "active"
     },
@@ -9067,7 +9473,7 @@
       "audience": "제한없음",
       "applicationPeriod": "2026-06-01 ~ 2027-01-31",
       "firstSeenAt": "2026-10-02T20:42:19Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-02T20:42:19Z",
       "status": "active"
     },
@@ -9096,6 +9502,30 @@
       "status": "active"
     },
     {
+      "id": "auto_thinkyou_67417",
+      "title": "제2회 블루카이트 창작 글쓰기 대회",
+      "description": "블루카이트 출판사 · 공모전",
+      "category": "contest",
+      "topics": [],
+      "deadline": "2027-02-15",
+      "link": "https://thinkyou.co.kr/contest/67417/",
+      "source": "씽유",
+      "sourceId": "thinkyou",
+      "sourceUrl": "https://thinkyou.co.kr/contest/",
+      "organizer": "블루카이트 출판사",
+      "sourceCategory": "공모전",
+      "managedBy": "nextwave-crawler",
+      "authorUid": "crawler",
+      "authorName": "NextWave Bot",
+      "startDate": "2026-08-15",
+      "recruitmentStatus": "open",
+      "applicationPeriod": "2026-08-15 ~ 2027-02-15",
+      "firstSeenAt": "2026-10-13T09:24:12Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
+      "createdAt": "2026-10-13T09:24:12Z",
+      "status": "active"
+    },
+    {
       "id": "auto_wevity_111582",
       "title": "농업가치 확산을 위한 농심천심 대학(원)생 논문 공모전",
       "description": "농업협동조합중앙회 · 논문/리포트",
@@ -9115,7 +9545,7 @@
       "audience": "대학생, 기타",
       "applicationPeriod": "2027-02-22 ~ 2027-02-26",
       "firstSeenAt": "2026-10-12T10:44:07Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-12T10:44:07Z",
       "status": "active"
     },
@@ -9139,7 +9569,7 @@
       "audience": "대학생",
       "applicationPeriod": "2026-10-01 ~ 2027-06-30",
       "firstSeenAt": "2026-10-11T14:00:56Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T14:00:56Z",
       "status": "active"
     },
@@ -9161,7 +9591,7 @@
       "authorName": "NextWave Bot",
       "recruitmentStatus": "open",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "status": "active"
     },
@@ -9186,7 +9616,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-12T20:18:19Z"
     },
@@ -9211,7 +9641,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-13T02:03:59Z"
     },
@@ -9236,7 +9666,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-13T02:03:59Z"
     },
@@ -9260,7 +9690,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -9284,7 +9714,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -9308,7 +9738,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -9332,7 +9762,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -9356,7 +9786,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -9380,7 +9810,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -9404,7 +9834,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -9428,7 +9858,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     },
@@ -9452,7 +9882,7 @@
       "status": "archived",
       "archivedReason": "source_closed",
       "firstSeenAt": "2026-10-11T17:01:15Z",
-      "lastSeenAt": "2026-10-13T02:03:59Z",
+      "lastSeenAt": "2026-10-13T09:24:12Z",
       "createdAt": "2026-10-11T17:01:15Z",
       "archivedAt": "2026-10-11T17:01:15Z"
     }
