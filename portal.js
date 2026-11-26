@@ -165,7 +165,7 @@
     filtered.slice(0, visibleLimit).forEach((item, index) => {
       const card = el('article', 'opp-card' + (isClosed(item) ? ' archived' : ''));
       const top = el('div', 'opp-card-top'); const badge = deadlineBadge(item);
-      top.append(el('span', 'opp-card-index', 'CALL / ' + String(index + 1).padStart(3, '0')), el('span', 'opp-dday ' + badge.cls, badge.text));
+      top.append(el('span', 'opp-card-index', String(index + 1).padStart(2, '0')), el('span', 'opp-dday ' + badge.cls, badge.text));
       card.append(top, el('h3', 'opp-card-title', item.title), el('p', 'opp-card-desc', typeof item.description === 'string' && item.description ? item.description : '지원 대상과 세부 내용을 원문 공고에서 확인하세요.'));
       const meta = el('div', 'opp-card-meta'); meta.append(el('span', 'opp-tag', categories[item.category] || '기회 정보'));
       if (Array.isArray(item.topics) && item.topics.includes('health')) meta.append(el('span', 'opp-tag opp-health-tag', topics.health));
@@ -177,13 +177,13 @@
       if (item.audience) card.append(el('p', 'opp-eligibility', '참가 대상 · ' + item.audience));
       if (item.lastSeenAt) card.append(el('p', 'opp-checked', '출처 확인 ' + formatStamp(item.lastSeenAt) + ' KST'));
       const actions = el('div', 'opp-card-actions'); const link = safeURL(item.link);
-      if (link) { const anchor = el('a', 'opp-link-btn', '원문 공고 확인'); anchor.dataset.focusKey = 'opportunity:' + item.id; anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; anchor.setAttribute('aria-label', item.title + ' — 원문 공고 (새 탭)'); anchor.append(el('span', '', '↗')); actions.append(anchor); }
+      if (link) { const anchor = el('a', 'opp-link-btn', '원문 공고 확인'); anchor.dataset.focusKey = 'opportunity:' + item.id; anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; anchor.setAttribute('aria-label', item.title + ' — 원문 공고 (새 탭)'); actions.append(anchor); }
       else actions.append(el('span', 'opp-source', '원문 링크 미등록'));
-      if (Array.isArray(item.alsoListedAt)) item.alsoListedAt.forEach(other => { const url = safeURL(other.link); if (url) { const anchor = el('a', 'opp-alternate-link', (other.source || '다른 출처') + '에서도 보기 ↗'); anchor.href = url; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; actions.append(anchor); } });
+      if (Array.isArray(item.alsoListedAt)) item.alsoListedAt.forEach(other => { const url = safeURL(other.link); if (url) { const anchor = el('a', 'opp-alternate-link', (other.source || '다른 출처') + '에서도 보기'); anchor.href = url; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; actions.append(anchor); } });
       if (!item.public && currentProfile?.isAdmin === true) actions.append(deleteButton('이 기회 정보를 삭제할까요?', 'opportunities', item.id, '기회 삭제'));
       card.append(actions); fragment.append(card);
     });
-    if (filtered.length > visibleLimit) { const moreRow = el('div', 'opp-more'); const more = el('button', 'btn-secondary', '기회 ' + Math.min(12, filtered.length - visibleLimit) + '개 더 보기 ↓'); more.type = 'button'; more.dataset.focusKey = 'opportunities-more'; more.addEventListener('click', () => { visibleLimit += 12; renderOpportunities(); grid.querySelectorAll('.opp-card')[visibleLimit - 12]?.querySelector('a')?.focus({ preventScroll: true }); }); moreRow.append(more); fragment.append(moreRow); }
+    if (filtered.length > visibleLimit) { const moreRow = el('div', 'opp-more'); const more = el('button', 'btn-secondary', '기회 ' + Math.min(12, filtered.length - visibleLimit) + '개 더 보기'); more.type = 'button'; more.dataset.focusKey = 'opportunities-more'; more.addEventListener('click', () => { visibleLimit += 12; renderOpportunities(); grid.querySelectorAll('.opp-card')[visibleLimit - 12]?.querySelector('a')?.focus({ preventScroll: true }); }); moreRow.append(more); fragment.append(moreRow); }
     replaceChildrenKeepingFocus(grid, fragment);
   }
   function renderSources() {
@@ -264,7 +264,7 @@
           if (rightsChanged) { stopPrivateData(); setupMemberPortal(); }
           else $('topbar-username').textContent = profileName();
         } else {
-          stopPrivateData(); $('pending-title').textContent = '작업실의 문을 열고 있어요.'; $('pending-description').textContent = '운영진이 가입 요청을 확인 중이에요. 승인되면 이 화면이 자동으로 전환됩니다.'; showScreen('pending');
+          stopPrivateData(); $('pending-title').textContent = '가입 요청을 확인하고 있어요.'; $('pending-description').textContent = '운영진이 확인하면 이 화면이 저절로 바뀌어요.'; showScreen('pending');
         }
       }, error => profileError(error, epoch));
     } catch (error) { profileError(error, epoch); }
@@ -354,7 +354,7 @@
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => { $('login-error').textContent = '브라우저의 저장 공간 설정에 따라 로그인 상태가 유지되지 않을 수 있어요.'; });
       auth.onAuthStateChanged(user => {
         authEpoch += 1; profileUnsubscribe?.(); profileUnsubscribe = null; stopPrivateData(); currentUser = user; currentProfile = null; activateTab('opportunities');
-        if (user) { $('pending-title').textContent = '작업실을 확인하고 있어요.'; $('pending-description').textContent = '계정과 부원 승인 상태를 확인합니다.'; showScreen('pending'); handleSignedIn(user, authEpoch); }
+        if (user) { $('pending-title').textContent = '계정을 확인하고 있어요.'; $('pending-description').textContent = '부원 승인 여부를 보는 중이에요.'; showScreen('pending'); handleSignedIn(user, authEpoch); }
         else showScreen('login');
       });
     } catch (_) { $('login-error').textContent = '로그인 서비스를 연결하지 못했어요. 잠시 후 다시 방문해 주세요.'; }
@@ -426,7 +426,7 @@
   function loadAttendance() {
     if (!db || currentProfile?.isMember !== true) return;
     activeDay = seoulDate(); $('attendance-date').textContent = activeDay; $('attendance-btn').disabled = true;
-    listen('attendance-today', db.collection('attendance').doc(currentUser.uid + '_' + activeDay), doc => { $('attendance-status').replaceChildren(el('span', 'status-badge ' + (doc.exists ? 'checked' : 'not-checked'), doc.exists ? '출석 완료' : '아직 체크 전')); $('attendance-btn').disabled = doc.exists; $('attendance-btn').textContent = doc.exists ? '오늘의 출석을 기록했어요' : '오늘 출석 체크 ↗'; }, () => { $('attendance-status').textContent = '출석 상태를 확인하지 못했어요.'; $('attendance-btn').disabled = false; });
+    listen('attendance-today', db.collection('attendance').doc(currentUser.uid + '_' + activeDay), doc => { $('attendance-status').replaceChildren(el('span', 'status-badge ' + (doc.exists ? 'checked' : 'not-checked'), doc.exists ? '출석 완료' : '아직 체크 전')); $('attendance-btn').disabled = doc.exists; $('attendance-btn').textContent = doc.exists ? '오늘의 출석을 기록했어요' : '오늘 출석 체크'; }, () => { $('attendance-status').textContent = '출석 상태를 확인하지 못했어요.'; $('attendance-btn').disabled = false; });
     listen('attendance-history', db.collection('attendance').where('uid', '==', currentUser.uid), snapshot => { const records = snapshot.docs.map(doc => doc.data()).sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))).slice(0, 30); attendanceRows($('attendance-history'), records, false); }, () => attendanceError($('attendance-history')));
   }
   async function doAttendance() {

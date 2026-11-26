@@ -66,15 +66,20 @@ Google 로그인 확인은 허용 도메인인 `http://localhost:8000/portal.htm
 
 `script.js` 상단의 `NEXTWAVE_SITE`에 실제 `applyUrl`, `instagram`, `email`, `kakaoUrl`을 지정합니다. 주소가 없는 연락처는 숨기고 지원서는 준비 중 상태로 표시합니다.
 
+2기 모집 날짜가 정해지면 같은 객체의 `recruitStart`, `recruitEnd`에 시간대를 붙인 ISO 날짜(예: `'2027-02-20T00:00:00+09:00'`)를 넣습니다. 그러면 참여 안내에 카운트다운이 나타납니다. 시작 전에는 "모집 시작까지", 진행 중에는 "모집 마감까지"가 표시되고, 마감되면 숨겨집니다. `foundedYear`는 타임라인의 1기 출범 연도입니다.
+
+활동 영상은 `reel: { mp4: 'assets/reel.mp4', webm: '', poster: 'assets/reel.jpg', caption: '2026 해커톤' }`처럼 넣습니다. H.264 720p, 6~15초, 4MB 이하를 권장하고 소리는 넣지 않습니다(어차피 무음 재생). 분야 패널 영상은 `fieldVideos: { dev: 'assets/fields/dev.mp4' }`처럼 분야 키(dev, game, hw, health, startup, mkt, design)별로 넣습니다. 없는 분야는 코드로 그린 애니메이션이 그대로 나옵니다.
+
 운영 파일은 다음과 같습니다.
 
-- 홈: `index.html`, `styles.css`, `script.js`, `i18n.js`
-- WebGL 수면·프로젝트 체험: `kinetic.js`, `project-demo.js`, `rescue-demo.js`, `rescue-demo.css`
-- 공통 물결 효과음·SOUND 설정: `water-audio.js`, `sound-ui.js`
+- 공용 디자인 시스템: `site-system.css`(토큰·헤더·푸터·버튼), `site-shell.js`(모바일 메뉴)
+- 홈: `index.html`, `styles.css`, `script.js`, `i18n.js`, `wordmark.js`(첫 화면 워드마크)
+- 프로젝트 체험: `project-demo.js`, `rescue-demo.js`, `rescue-demo.css`
+- 공통 효과음·SOUND 설정: `water-audio.js`, `sound-ui.js`
 - 포털: `portal.html`, `portal.css`, `portal.js`, `firebase.config.js`
 - 공통 이미지·공개 수집본: `assets/`, `data/`
 
-홈 수면은 `kinetic.js`가 사진·텍스처 없이 실시간 3D 메시로 생성합니다. RESCUE JET은 `assets/rescue/`의 원본 모델과 `assets/vendor/three/`의 로컬 Three.js 모듈을 클릭할 때 불러옵니다. WebGL을 사용할 수 없어도 사이트 콘텐츠와 구명장치의 원본 이미지는 볼 수 있습니다. 새 배포 시 HTML에서 참조하는 CSS/JS 버전도 함께 갱신합니다.
+홈 첫 화면의 워드마크는 가변 글꼴(Archivo)의 폭 축을 `wordmark.js`가 움직이며 외부 데이터를 가져오지 않습니다. 이전 수면 실험(`kinetic.js`)은 홈에서 불러오지 않습니다. RESCUE JET은 `assets/rescue/`의 원본 모델과 `assets/vendor/three/`의 로컬 Three.js 모듈을 클릭할 때 불러옵니다. WebGL을 사용할 수 없어도 사이트 콘텐츠와 구명장치의 원본 이미지는 볼 수 있습니다. 새 배포 시 HTML에서 참조하는 CSS/JS 버전도 함께 갱신합니다.
 
 크롤러 설치·예약 활성화·선택적 Firestore 발행은 [docs/CRAWLER.md](docs/CRAWLER.md)를 참조하세요. 변경된 Firestore 규칙은 실제 프로젝트에 별도 배포해야 합니다. 개인 키 파일은 웹 루트 밖에 둡니다.
 

@@ -169,6 +169,15 @@
             if (start) start.disabled = true;
             return;
         }
+        // The page owns the palette and typeface; the fallbacks keep the game legible without them.
+        const stageStyle = root.getComputedStyle(stage);
+        const token = (name, fallback) => stageStyle.getPropertyValue(name).trim() || fallback;
+        const tone = {
+            ground: token('--game-ground', '#073a50'), grid: token('--game-grid', '#2b2c30'), range: token('--game-range', '#45464d'),
+            target: token('--game-target', '#43d8df'), light: token('--game-light', '#f0fbff'),
+            player: token('--game-player', '#a0f3df'), boost: token('--game-boost', '#a0f3df'),
+        };
+        const typeface = stageStyle.fontFamily || 'sans-serif';
         canvas.width = WIDTH;
         canvas.height = HEIGHT;
         canvas.tabIndex = 0;
@@ -223,7 +232,7 @@
             start.setAttribute('aria-pressed', String(model.state === 'running'));
             canvas.setAttribute('aria-label', text('MAYHEM 스타일 스코어 웹 실험. 방향키 또는 WASD 이동, 스페이스 대시, 엔터 가까운 표적 발사. 클릭 또는 탭 직접 조준.', 'MAYHEM style-score web experiment. Arrows or WASD move, Space dashes, Enter fires at the nearest target. Click or tap to aim.'));
             stage.dataset.state = model.state;
-            reset.setAttribute('aria-label', text('체험 초기화', 'Reset experiment'));
+            reset.setAttribute('aria-label', text('처음부터 다시 하기', 'Reset'));
             const controlLabels = {
                 up: text('위로 이동', 'Move up'), down: text('아래로 이동', 'Move down'),
                 left: text('왼쪽 이동', 'Move left'), right: text('오른쪽 이동', 'Move right'),
@@ -239,52 +248,52 @@
             const ctx = context;
             const animateDetails = decorativeMotion();
             ctx.clearRect(0, 0, WIDTH, HEIGHT);
-            ctx.fillStyle = '#073a50'; ctx.fillRect(0, 0, WIDTH, HEIGHT);
-            ctx.strokeStyle = '#2b2c30'; ctx.lineWidth = 1;
+            ctx.fillStyle = tone.ground; ctx.fillRect(0, 0, WIDTH, HEIGHT);
+            ctx.strokeStyle = tone.grid; ctx.lineWidth = 1;
             ctx.beginPath();
             for (let x = 0; x <= WIDTH; x += 60) { ctx.moveTo(x, 0); ctx.lineTo(x, HEIGHT); }
             for (let y = 0; y <= HEIGHT; y += 60) { ctx.moveTo(0, y); ctx.lineTo(WIDTH, y); }
             ctx.stroke();
             const player = model.player;
-            ctx.save(); ctx.strokeStyle = '#45464d'; ctx.setLineDash([5, 9]);
+            ctx.save(); ctx.strokeStyle = tone.range; ctx.setLineDash([5, 9]);
             ctx.beginPath(); ctx.arc(player.x, player.y, 350, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
             model.targets.forEach(target => {
                 if (!target.alive) return;
                 ctx.save(); ctx.translate(target.x, target.y);
                 ctx.rotate(target.phase + decorativeTime * 0.3);
-                ctx.fillStyle = '#43d8df'; ctx.fillRect(-11, -11, 22, 22);
-                ctx.strokeStyle = '#f0fbff'; ctx.strokeRect(-15, -15, 30, 30);
+                ctx.fillStyle = tone.target; ctx.fillRect(-11, -11, 22, 22);
+                ctx.strokeStyle = tone.light; ctx.strokeRect(-15, -15, 30, 30);
                 ctx.restore();
             });
             model.effects.forEach(effect => {
                 ctx.save(); ctx.globalAlpha = animateDetails ? clamp(effect.life / 0.38, 0, 1) : 1;
-                ctx.strokeStyle = effect.style === 3 ? '#a0f3df' : '#f0fbff';
+                ctx.strokeStyle = effect.style === 3 ? tone.boost : tone.light;
                 ctx.lineWidth = effect.style === 3 ? 3 : 2;
                 if (animateDetails) {
                     ctx.beginPath(); ctx.moveTo(effect.fromX, effect.fromY); ctx.lineTo(effect.x, effect.y); ctx.stroke();
                 }
                 ctx.beginPath(); ctx.arc(effect.x, effect.y, effect.radius * (animateDetails ? (1.2 - effect.life) : 1), 0, Math.PI * 2); ctx.stroke();
                 if (effect.count) {
-                    ctx.fillStyle = '#f0fbff'; ctx.font = 'bold 22px monospace'; ctx.textAlign = 'center';
+                    ctx.fillStyle = tone.light; ctx.font = '700 22px ' + typeface; ctx.textAlign = 'center';
                     ctx.fillText('+' + effect.earned, effect.x, effect.y - 28);
                 }
                 ctx.restore();
             });
             if (model.styleRemaining > 0) {
-                ctx.strokeStyle = '#a0f3df'; ctx.lineWidth = 4;
+                ctx.strokeStyle = tone.boost; ctx.lineWidth = 4;
                 ctx.beginPath(); ctx.arc(player.x, player.y, 27, 0, Math.PI * 2); ctx.stroke();
             }
-            ctx.fillStyle = '#a0f3df'; ctx.beginPath(); ctx.arc(player.x, player.y, 13, 0, Math.PI * 2); ctx.fill();
-            ctx.strokeStyle = '#073a50'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(player.x, player.y); ctx.lineTo(player.x + player.dx * 18, player.y + player.dy * 18); ctx.stroke();
-            ctx.font = 'bold 15px monospace'; ctx.textAlign = 'left'; ctx.fillStyle = '#f0fbff';
+            ctx.fillStyle = tone.player; ctx.beginPath(); ctx.arc(player.x, player.y, 13, 0, Math.PI * 2); ctx.fill();
+            ctx.strokeStyle = tone.ground; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(player.x, player.y); ctx.lineTo(player.x + player.dx * 18, player.y + player.dy * 18); ctx.stroke();
+            ctx.font = '700 15px ' + typeface; ctx.textAlign = 'left'; ctx.fillStyle = tone.light;
             ctx.fillText('STYLE ' + (model.styleRemaining > 0 ? '3' : '1'), 24, 31);
             ctx.fillText(model.dashCooldown > 0 ? 'DASH ' + model.dashCooldown.toFixed(1) + 's' : 'DASH READY', 24, 54);
             ctx.textAlign = 'right'; ctx.fillText(Math.ceil(model.remaining).toString().padStart(2, '0') + ' / 30 SEC', WIDTH - 24, 31);
             if (model.state !== 'running') {
-                ctx.fillStyle = 'rgba(4,39,59,.78)'; ctx.fillRect(0, 0, WIDTH, HEIGHT);
-                ctx.textAlign = 'center'; ctx.fillStyle = '#a0f3df'; ctx.font = 'bold 44px monospace';
+                ctx.save(); ctx.globalAlpha = 0.8; ctx.fillStyle = tone.ground; ctx.fillRect(0, 0, WIDTH, HEIGHT); ctx.restore();
+                ctx.textAlign = 'center'; ctx.fillStyle = tone.light; ctx.font = '700 44px ' + typeface;
                 ctx.fillText(model.state === 'ended' ? model.score + ' POINTS' : model.state === 'paused' ? 'PAUSED' : 'STYLE / SCORE', WIDTH / 2, HEIGHT / 2 - 9);
-                ctx.fillStyle = '#f0fbff'; ctx.font = '17px sans-serif';
+                ctx.fillStyle = tone.light; ctx.font = '500 20px ' + typeface;
                 ctx.fillText(text(model.state === 'paused' ? '이어하기를 눌러 계속하세요' : model.state === 'ended' ? '같은 표적 수, 다른 스타일. 다시 도전해 보세요.' : '이동하고, 대시하고, 여러 표적을 한 번에.', model.state === 'paused' ? 'Select Resume to continue' : model.state === 'ended' ? 'Same targets, different style. Try another round.' : 'Move, dash, hit several targets with one shot.'), WIDTH / 2, HEIGHT / 2 + 30);
             }
         }

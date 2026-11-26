@@ -3,32 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f8fb">
+  <meta name="theme-color" content="#020b16">
   <meta id="auth-referrer" name="referrer" content="strict-origin-when-cross-origin">
-  <title>기회 목록 — NextWave</title>
+  <title>공모전·지원사업 | NextWave</title>
   <meta name="description" content="NextWave의 해커톤·공모전 기회 목록. 출처, 마감일, 모집 상태를 확인하고 원문 공고로 이동하세요.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="기회 목록 — NextWave">
-  <meta property="og:description" content="기회를 찾고, 함께 만들고, 다음 시도로. NextWave 창업동아리 포털.">
+  <meta property="og:title" content="공모전·지원사업 | NextWave">
+  <meta property="og:description" content="NextWave가 모아 둔 해커톤·공모전·창업 지원사업 공고. 마감일과 원문 링크를 같이 볼 수 있어요.">
   <meta property="og:image" content="assets/logo.png">
   <link rel="icon" href="assets/logo.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="portal.css?v=health-20261012">
-  <link rel="stylesheet" href="stitch-directory.css?v=stitch-20261012">
-  <link rel="stylesheet" href="site-system.css?v=unified-20261012">
+  <link rel="stylesheet" href="site-system.css?v=wave01-20261126n">
+  <link rel="stylesheet" href="portal.css?v=wave01-20261126n">
   <script defer src="site-shell.js?v=unified-20261012"></script>
   <script defer src="water-audio.js?v=water-sound-20260907-2"></script>
   <script defer src="sound-ui.js?v=water-sound-20260907-2"></script>
   <script defer src="firebase.config.js?v=google-identity-20260906"></script>
-  <script defer src="portal.js?v=field-guide-20261012"></script>
+  <script defer src="portal.js?v=wave01-20261126n"></script>
+  <script defer src="i18n.js?v=wave01-20261126n"></script>
+  <script defer src="command-palette.js?v=wave01-20261126n"></script>
+  <script type="module" src="wave-scene.js?v=wave01-20261126n"></script>
 </head>
 <body id="top">
   <a class="skip-link" href="#opportunity-board">기회 정보로 건너뛰기</a>
   <header id="public-topbar" class="nw-site-header public-topbar">
-    <a class="nw-brand" href="index.html" aria-label="NextWave 홈">NEXTWAVE<span class="nw-brand-dot" aria-hidden="true"></span></a>
+    <a class="nw-brand" href="index.html" aria-label="NextWave 홈"><span>NEXT</span><span class="nw-brand-wave">WAVE</span></a>
     <nav class="nw-primary-nav desktop-nav" aria-label="주요 메뉴">
       <a class="nw-nav-link nav-link" href="index.html#about">소개</a>
       <a class="nw-nav-link nav-link" href="index.html#projects">프로젝트</a>
@@ -36,8 +37,9 @@
       <a class="nw-nav-link nav-link" href="index.html#recruitment">참여 안내</a>
     </nav>
     <div class="nw-header-actions header-actions">
-      <button class="nw-sound-button" type="button" data-sound-toggle aria-pressed="true" aria-label="물결 효과음 끄기"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span data-sound-label>SOUND ON</span></button>
-      <a class="nw-header-cta" href="portal.html#member-access">부원 로그인 <span aria-hidden="true">↗</span></a>
+      <button class="nw-icon-button nw-cmdk-button" type="button" data-cmdk-open aria-haspopup="dialog" aria-label="빠른 이동 열기"><span>빠른 이동</span><kbd data-cmdk-key>⌘K</kbd></button>
+      <button class="nw-icon-button nw-header-sound" type="button" data-sound-toggle aria-pressed="true" aria-label="물결 효과음 끄기"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="sr-only" data-sound-label>SOUND ON</span></button>
+      <a class="nw-header-cta" href="portal.html#member-access">부원 로그인</a>
       <button id="mobile-menu-toggle" class="nw-menu-toggle menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="메뉴 열기"><span></span><span></span></button>
     </div>
     <nav id="mobile-menu" class="nw-mobile-menu mobile-menu" aria-label="모바일 메뉴" hidden>
@@ -46,34 +48,32 @@
   </header>
   <main class="public-shell" id="public-shell">
     <section class="desk-intro" id="login-screen" aria-labelledby="desk-title">
+      <div class="portal-wave" data-wave-scene="compact" aria-hidden="true"></div>
       <div class="intro-copy">
-        <p class="eyebrow nw-kicker"><span class="status-dot nw-status-mark" aria-hidden="true"></span> NEXTWAVE / OPEN CALLS</p>
-        <h1 id="desk-title">대학생 창업가를 <br><span>위한, NextWave</span></h1>
-        <p class="intro-description">해커톤·공모전 공고를 출처별로 모았습니다. 제목과 기간을 살펴보고 신청 전 원문에서 최신 내용을 확인하세요.</p>
-        <a class="intro-jump" href="#opportunity-board">공고 목록 보기 <span aria-hidden="true">↓</span></a>
+        <h1 id="desk-title">공모전·지원사업</h1>
+        <p class="intro-description">해커톤, 공모전, 창업 지원사업 공고를 출처별로 모았어요. 마감일을 보고 신청 전에 원문에서 최신 내용을 꼭 확인하세요.</p>
+        <a class="intro-jump" href="#opportunity-board">공고 목록 보기</a>
 
       </div>
 
     </section>
     <section id="pending-screen" class="pending-screen" hidden aria-labelledby="pending-title">
-      <p class="eyebrow">MEMBERS ACCESS / PENDING</p>
-      <h1 id="pending-title">작업실의 문을<br>열고 있어요.</h1>
-      <p id="pending-description">운영진이 가입 요청을 확인 중이에요. 승인되면 이 화면이 자동으로 전환됩니다.</p>
+      <h1 id="pending-title">가입 요청을<br>확인하고 있어요.</h1>
+      <p id="pending-description">운영진이 확인하면 이 화면이 저절로 바뀌어요.</p>
       <button id="pending-logout" class="btn-secondary" type="button">로그아웃</button>
     </section>
     <div id="public-board-slot">
       <section id="opportunity-board" class="opportunity-board" aria-labelledby="board-title" tabindex="-1">
+        <div class="board-heading">
+          <h2 id="board-title">전체 공고</h2>
+          <div class="board-total"><strong id="opp-total">0</strong><span>살펴볼 기회</span></div>
+        </div>
         <div class="board-controls" aria-label="기회 검색과 분야 필터">
-            <p class="controls-heading">SEARCH / FILTER</p>
             <div class="board-toolbar">
               <div class="search-field"><span class="material-symbols-outlined" aria-hidden="true">search</span><label class="sr-only" for="opp-search">기회 검색</label><input id="opp-search" type="search" placeholder="주제, 기관, 공고 검색" autocomplete="off"></div>
               <label class="archive-toggle"><input id="opp-show-closed" type="checkbox"><span>마감·보관 포함</span></label>
             </div>
             <div class="opp-filters" id="opp-filters" role="group" aria-label="기회 분야 필터"><button type="button" class="opp-filter-btn active" data-filter="all" aria-pressed="true">전체</button></div>
-        </div>
-        <div class="board-heading">
-          <div><p class="eyebrow">OPEN CALLS / UPDATED FROM SOURCES</p><h2 id="board-title">전체 공고<span class="small-period">.</span></h2></div>
-          <div class="board-total"><strong id="opp-total">—</strong><span>살펴볼 기회</span></div>
         </div>
         <div class="sync-bar">
           <div class="sync-copy"><span class="status-dot" id="sync-dot" aria-hidden="true"></span><span id="opp-sync-status" role="status">공고 출처 정보를 불러오는 중</span></div>
@@ -86,62 +86,74 @@
             <div class="opp-grid" id="opp-grid" aria-busy="true"><p class="empty-state">기회를 불러오는 중이에요.</p></div>
           </div>
           <aside class="stitch-help" aria-label="기회 이용 안내">
-            <div class="stitch-help-card"><p class="stitch-help-kicker">NEXT STEP / 01</p><h3>마음에 드는 공고를 찾았다면</h3><ol><li>마감일과 모집 대상을 확인해요.</li><li>원문 링크에서 최신 내용을 확인해요.</li><li>함께할 동료를 찾아 도전해요.</li></ol><p>공고 정보는 참고용입니다. 제출 조건과 일정은 주최 기관의 원문이 기준입니다.</p></div>
+            <div class="stitch-help-card"><h3>마음에 드는 공고를 찾았다면</h3><ol><li>마감일과 모집 대상을 확인해요.</li><li>원문 링크에서 최신 내용을 확인해요.</li><li>같이 나갈 팀원을 찾아요.</li></ol><p>공고 정보는 참고용입니다. 제출 조건과 일정은 주최 기관의 원문이 기준입니다.</p></div>
                   <aside class="login-box" id="member-access" aria-labelledby="login-title">
-        <div class="card-kicker"><span>MEMBER AREA</span><span class="material-symbols-outlined" aria-hidden="true">north_east</span></div>
         <h2 id="login-title">부원 공간</h2>
         <p>공지, 채팅, 출석 기록은 승인된 부원에게 열립니다.</p>
-        <button id="login-btn" class="google-btn" type="button"><span class="material-symbols-outlined" aria-hidden="true">login</span><span id="login-label">Google로 부원 로그인</span><span aria-hidden="true">↗</span></button>
+        <button id="login-btn" class="google-btn" type="button"><span class="material-symbols-outlined" aria-hidden="true">login</span><span id="login-label">Google로 부원 로그인</span></button>
         <div id="google-signin" hidden></div>
         <p id="login-error" class="form-error" role="alert"></p>
         <div class="login-footnote">아래 기회 정보는 누구나 볼 수 있어요.</div>
       </aside>
-            <div class="stitch-help-note"><span>06 / SOURCES</span><p>K-Startup · 위비티 · 씽굿 · HOLA · DACON · NMC</p></div>
+            <div class="stitch-help-note"><h3>공고 출처</h3><p>K-Startup, 위비티, 씽굿, HOLA, DACON, NMC</p></div>
           </aside>
         </div>
-        <details class="source-details"><summary>출처와 업데이트 현황 <span aria-hidden="true">+</span></summary><p id="opp-refresh-note">공고 출처의 정보를 주기적으로 수집합니다. 새로고침은 마지막 수집 결과를 확인합니다.</p><div id="opp-sources" class="source-list"></div></details>
+        <details class="source-details"><summary>출처와 업데이트 현황 <span class="material-symbols-outlined" aria-hidden="true">expand_more</span></summary><p id="opp-refresh-note">공고 출처의 정보를 주기적으로 수집합니다. 새로고침은 마지막 수집 결과를 확인합니다.</p><div id="opp-sources" class="source-list"></div></details>
       </section>
     </div>
-  <footer class="nw-footer site-footer"><div class="nw-container nw-footer-inner"><div class="nw-footer-top"><a class="nw-brand" href="index.html" aria-label="NextWave 홈">NEXTWAVE<span class="nw-brand-dot" aria-hidden="true"></span></a><p>대학생 창업가를 위한, NextWave<br>순천향대학교 IT·창업 연합 동아리</p><a class="nw-footer-toplink" href="#top">맨 위로 ↑</a></div><div class="nw-footer-bottom"><span>© <span id="year">2026</span> NEXTWAVE IT UNION</span><nav aria-label="푸터 메뉴"><a href="index.html#projects">프로젝트</a><a href="portal.html">공모전·지원사업</a><a href="index.html#recruitment">참여 안내</a></nav><span>SOONCHUNHYANG UNIVERSITY</span></div><div class="nw-footer-extras"><a href="#member-access">부원 로그인 ↗</a></div></div></footer>
+  <footer class="nw-footer">
+    <div class="wrap">
+      <div class="nw-footer-top">
+        <div>
+          <a class="nw-brand" href="index.html" aria-label="NextWave 홈"><span>NEXT</span><span class="nw-brand-wave">WAVE</span></a>
+          <p>순천향대학교 IT·창업 연합 동아리</p>
+        </div>
+        <nav class="nw-footer-nav" aria-label="푸터 메뉴"><a href="index.html#about">소개</a><a href="index.html#projects">프로젝트</a><a href="portal.html">공모전·지원사업</a><a href="index.html#recruitment">참여 안내</a><a href="#member-access">부원 로그인</a></nav>
+      </div>
+      <div class="nw-footer-bottom">
+        <span>© <span id="year">2026</span> NextWave IT Union</span>
+        <div class="nw-footer-tools"><a class="nw-icon-button" href="#top">맨 위로</a></div>
+      </div>
+    </div>
+  </footer>
   </main>
 
   <div id="portal-app" hidden>
     <header class="portal-topbar">
-      <div class="portal-brand"><button class="mobile-menu-btn icon-btn" id="mobile-sidebar-btn" type="button" aria-label="포털 메뉴 열기" aria-controls="portal-sidebar" aria-expanded="false"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button><a href="index.html" class="nw-brand wordmark" aria-label="NextWave 홈">NEXTWAVE<span class="nw-brand-dot wordmark-dot" aria-hidden="true"></span></a><span class="topbar-label">FIELD DESK</span></div>
-      <div class="user-info"><button class="nw-sound-button portal-sound-button" type="button" data-sound-toggle aria-pressed="true" aria-label="물결 효과음 끄기"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span data-sound-label>SOUND ON</span></button><span class="user-name" id="topbar-username"></span><img id="topbar-avatar" alt="내 프로필" hidden><button id="topbar-logout" class="btn-secondary" type="button">로그아웃</button></div>
+      <div class="portal-brand"><button class="mobile-menu-btn icon-btn" id="mobile-sidebar-btn" type="button" aria-label="포털 메뉴 열기" aria-controls="portal-sidebar" aria-expanded="false"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button><a href="index.html" class="nw-brand wordmark" aria-label="NextWave 홈"><span>NEXT</span><span class="nw-brand-wave">WAVE</span></a><span class="topbar-label">부원 공간</span></div>
+      <div class="user-info"><button class="nw-icon-button portal-sound-button" type="button" data-sound-toggle aria-pressed="true" aria-label="물결 효과음 끄기"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span data-sound-label>SOUND ON</span></button><span class="user-name" id="topbar-username"></span><img id="topbar-avatar" alt="내 프로필" hidden><button id="topbar-logout" class="btn-secondary" type="button">로그아웃</button></div>
     </header>
     <button class="mobile-backdrop" id="mobile-backdrop" type="button" aria-label="메뉴 닫기" hidden></button>
     <div class="portal-layout">
       <aside class="portal-sidebar" id="portal-sidebar" aria-label="부원 메뉴">
-        <p class="eyebrow">YOUR CREW SPACE</p>
         <nav class="nav-section" aria-label="부원 공간">
-          <button class="nav-item active" type="button" data-tab="opportunities" aria-current="page"><span class="nav-number">01</span>기회 데스크<span class="material-symbols-outlined" aria-hidden="true">north_east</span></button>
+          <button class="nav-item active" type="button" data-tab="opportunities" aria-current="page"><span class="nav-number">01</span>기회 데스크<span class="material-symbols-outlined" aria-hidden="true">travel_explore</span></button>
           <button class="nav-item" type="button" data-tab="chat"><span class="nav-number">02</span>부원 채팅<span class="material-symbols-outlined" aria-hidden="true">chat</span></button>
           <button class="nav-item" type="button" data-tab="announcements"><span class="nav-number">03</span>공지사항<span class="material-symbols-outlined" aria-hidden="true">campaign</span></button>
           <button class="nav-item" type="button" data-tab="attendance"><span class="nav-number">04</span>출석 기록<span class="material-symbols-outlined" aria-hidden="true">check_circle</span></button>
           <button class="nav-item" type="button" data-tab="members"><span class="nav-number">05</span>함께하는 사람들<span class="material-symbols-outlined" aria-hidden="true">group</span></button>
           <button class="nav-item" type="button" data-tab="admin" id="admin-nav" hidden><span class="nav-number">06</span>운영 데스크<span class="material-symbols-outlined" aria-hidden="true">tune</span></button>
         </nav>
-        <div class="nav-bottom"><p>작은 시도들이 모여<br>다음 물결이 됩니다.</p><a href="index.html" class="text-link">클럽으로 돌아가기 ↗</a></div>
+        <div class="nav-bottom"><a href="index.html" class="text-link">홈으로 돌아가기</a></div>
       </aside>
       <main class="portal-main">
         <section class="tab-panel active" id="tab-opportunities" aria-label="기회 데스크">
           <div id="member-board-slot"></div>
           <section class="portal-card" id="opp-form-card" hidden>
-            <p class="eyebrow">ADD A NEW OPPORTUNITY</p><h2>직접 발견한 기회 추가</h2>
-            <form id="opp-form" class="entry-form"><label for="opp-title-input">제목</label><input id="opp-title-input" required maxlength="200" placeholder="공고 제목"><label for="opp-desc-input">설명</label><textarea id="opp-desc-input" maxlength="4000" placeholder="대상, 지원 내용, 준비할 것"></textarea><div class="form-columns"><div><label for="opp-category-input">분야</label><select id="opp-category-input"><option value="startup">창업</option><option value="support">사업 지원</option><option value="contest">공모전</option><option value="hackathon">해커톤</option><option value="dev">개발</option><option value="gamedev">게임 개발</option><option value="marketing">마케팅</option><option value="activity">대외활동</option><option value="education">교육</option><option value="internship">인턴십</option></select></div><div><label for="opp-deadline-input">마감일 (선택)</label><input type="date" id="opp-deadline-input"></div></div><label for="opp-link-input">원문 링크</label><input type="url" id="opp-link-input" maxlength="2000" placeholder="https://"><label for="opp-source-input">출처</label><input id="opp-source-input" maxlength="200" placeholder="주최 기관 또는 공식 사이트"><button id="opp-submit" class="btn-primary" type="submit">기회 등록 ↗</button></form>
+            <h2>직접 발견한 기회 추가</h2>
+            <form id="opp-form" class="entry-form"><label for="opp-title-input">제목</label><input id="opp-title-input" required maxlength="200" placeholder="공고 제목"><label for="opp-desc-input">설명</label><textarea id="opp-desc-input" maxlength="4000" placeholder="대상, 지원 내용, 준비할 것"></textarea><div class="form-columns"><div><label for="opp-category-input">분야</label><select id="opp-category-input"><option value="startup">창업</option><option value="support">사업 지원</option><option value="contest">공모전</option><option value="hackathon">해커톤</option><option value="dev">개발</option><option value="gamedev">게임 개발</option><option value="marketing">마케팅</option><option value="activity">대외활동</option><option value="education">교육</option><option value="internship">인턴십</option></select></div><div><label for="opp-deadline-input">마감일 (선택)</label><input type="date" id="opp-deadline-input"></div></div><label for="opp-link-input">원문 링크</label><input type="url" id="opp-link-input" maxlength="2000" placeholder="https://"><label for="opp-source-input">출처</label><input id="opp-source-input" maxlength="200" placeholder="주최 기관 또는 공식 사이트"><button id="opp-submit" class="btn-primary" type="submit">기회 등록</button></form>
           </section>
         </section>
-        <section class="tab-panel" id="tab-chat" hidden aria-labelledby="chat-title"><div class="panel-heading"><p class="eyebrow">02 / CONVERSATIONS</p><h1 id="chat-title">생각을 주고받는 곳.</h1><p>진행 중인 일, 막힌 문제, 작은 발견까지.</p></div><div class="portal-card chat-card"><div class="chat-messages" id="chat-messages" role="log" aria-label="부원 채팅 메시지" aria-relevant="additions text"><p class="empty-state">메시지를 불러오는 중이에요.</p></div><form id="chat-form" class="chat-input-bar"><label class="sr-only" for="chat-input">메시지</label><input id="chat-input" maxlength="2000" placeholder="동료에게 이야기를 건네세요" autocomplete="off" required><button id="chat-send" type="submit" class="btn-primary">전송 ↗</button></form></div></section>
-        <section class="tab-panel" id="tab-announcements" hidden aria-labelledby="announcements-title"><div class="panel-heading"><p class="eyebrow">03 / CLUB NOTES</p><h1 id="announcements-title">함께 알아둘 이야기.</h1></div><section class="portal-card" id="announcement-form-card" hidden><h2>공지 작성</h2><form id="announcement-form" class="entry-form"><label for="ann-title-input">제목</label><input id="ann-title-input" required maxlength="200" placeholder="공지 제목"><label for="ann-body-input">내용</label><textarea id="ann-body-input" required maxlength="10000" placeholder="부원들에게 알려주세요"></textarea><button id="ann-submit" type="submit" class="btn-primary">공지 등록 ↗</button></form></section><div class="portal-card" id="announcements-list"><p class="empty-state">공지를 불러오는 중이에요.</p></div></section>
-        <section class="tab-panel" id="tab-attendance" hidden aria-labelledby="attendance-title"><div class="panel-heading"><p class="eyebrow">04 / SHOWING UP</p><h1 id="attendance-title">오늘도, 한 걸음.</h1><p>함께한 날을 기록해요. 출석 날짜는 한국 시간 기준입니다.</p></div><div class="portal-card attendance-today"><div class="date-display" id="attendance-date"></div><div id="attendance-status" role="status"></div><button id="attendance-btn" class="btn-primary" type="button">출석 체크</button></div><div class="portal-card"><h2>나의 출석 기록</h2><div class="table-scroll"><table class="attendance-log"><thead><tr><th scope="col">날짜</th><th scope="col">시간</th><th scope="col">기록</th></tr></thead><tbody id="attendance-history"></tbody></table></div></div></section>
-        <section class="tab-panel" id="tab-members" hidden aria-labelledby="members-title"><div class="panel-heading"><p class="eyebrow">05 / PEOPLE OF NEXTWAVE</p><h1 id="members-title">각자의 파도, 함께.</h1><p>같이 만들고, 배우고, 시도하는 동료들.</p></div><div class="member-grid" id="member-grid"><p class="empty-state">부원을 불러오는 중이에요.</p></div></section>
-        <section class="tab-panel" id="tab-admin" hidden aria-labelledby="admin-title"><div class="panel-heading"><p class="eyebrow">06 / OPERATING DESK</p><h1 id="admin-title">작업실을 돌보는 일.</h1></div><section class="portal-card"><h2>부원 및 권한 관리</h2><p class="muted">가입 요청을 승인하고 부원의 이름과 권한을 관리합니다.</p><div id="admin-member-list"></div></section><section class="portal-card"><h2>전체 부원 출석 기록</h2><div class="table-scroll"><table class="attendance-log"><thead><tr><th scope="col">이름</th><th scope="col">날짜</th><th scope="col">시간</th></tr></thead><tbody id="admin-attendance-body"></tbody></table></div></section></section>
+        <section class="tab-panel" id="tab-chat" hidden aria-labelledby="chat-title"><div class="panel-heading"><h1 id="chat-title">부원 채팅</h1><p>승인된 부원끼리만 보여요.</p></div><div class="portal-card chat-card"><div class="chat-messages" id="chat-messages" role="log" aria-label="부원 채팅 메시지" aria-relevant="additions text"><p class="empty-state">메시지를 불러오는 중이에요.</p></div><form id="chat-form" class="chat-input-bar"><label class="sr-only" for="chat-input">메시지</label><input id="chat-input" maxlength="2000" placeholder="메시지를 입력하세요" autocomplete="off" required><button id="chat-send" type="submit" class="btn-primary">전송</button></form></div></section>
+        <section class="tab-panel" id="tab-announcements" hidden aria-labelledby="announcements-title"><div class="panel-heading"><h1 id="announcements-title">공지사항</h1></div><section class="portal-card" id="announcement-form-card" hidden><h2>공지 작성</h2><form id="announcement-form" class="entry-form"><label for="ann-title-input">제목</label><input id="ann-title-input" required maxlength="200" placeholder="공지 제목"><label for="ann-body-input">내용</label><textarea id="ann-body-input" required maxlength="10000" placeholder="공지 내용"></textarea><button id="ann-submit" type="submit" class="btn-primary">공지 등록</button></form></section><div class="portal-card" id="announcements-list"><p class="empty-state">공지를 불러오는 중이에요.</p></div></section>
+        <section class="tab-panel" id="tab-attendance" hidden aria-labelledby="attendance-title"><div class="panel-heading"><h1 id="attendance-title">출석</h1><p>모임에 나온 날을 기록해요. 날짜는 한국 시간 기준이에요.</p></div><div class="portal-card attendance-today"><div class="date-display" id="attendance-date"></div><div id="attendance-status" role="status"></div><button id="attendance-btn" class="btn-primary" type="button">출석 체크</button></div><div class="portal-card"><h2>나의 출석 기록</h2><div class="table-scroll"><table class="attendance-log"><thead><tr><th scope="col">날짜</th><th scope="col">시간</th><th scope="col">기록</th></tr></thead><tbody id="attendance-history"></tbody></table></div></div></section>
+        <section class="tab-panel" id="tab-members" hidden aria-labelledby="members-title"><div class="panel-heading"><h1 id="members-title">부원</h1><p>승인된 부원 목록이에요.</p></div><div class="member-grid" id="member-grid"><p class="empty-state">부원을 불러오는 중이에요.</p></div></section>
+        <section class="tab-panel" id="tab-admin" hidden aria-labelledby="admin-title"><div class="panel-heading"><h1 id="admin-title">운영 데스크</h1></div><section class="portal-card"><h2>부원 및 권한 관리</h2><p class="muted">가입 요청을 승인하고 부원의 이름과 권한을 관리합니다.</p><div id="admin-member-list"></div></section><section class="portal-card"><h2>전체 부원 출석 기록</h2><div class="table-scroll"><table class="attendance-log"><thead><tr><th scope="col">이름</th><th scope="col">날짜</th><th scope="col">시간</th></tr></thead><tbody id="admin-attendance-body"></tbody></table></div></section></section>
       </main>
     </div>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <dialog id="confirm-modal" class="confirm-modal" aria-labelledby="confirm-modal-msg"><form method="dialog"><p class="eyebrow">PLEASE CONFIRM</p><h2 id="confirm-modal-msg">이 항목을 삭제할까요?</h2><div class="confirm-modal-actions"><button type="submit" value="cancel" class="btn-secondary">취소</button><button type="submit" value="confirm" class="btn-danger">확인</button></div></form></dialog>
+  <dialog id="confirm-modal" class="confirm-modal" aria-labelledby="confirm-modal-msg"><form method="dialog"><h2 id="confirm-modal-msg">이 항목을 삭제할까요?</h2><div class="confirm-modal-actions"><button type="submit" value="cancel" class="btn-secondary">취소</button><button type="submit" value="confirm" class="btn-danger">확인</button></div></form></dialog>
   <noscript><p class="noscript-message">기회 목록과 부원 공간을 이용하려면 JavaScript를 켜 주세요. <a href="index.html">홈으로 돌아가기</a></p></noscript>
   <div id="sound-toast" class="sound-toast" role="status" aria-live="polite"></div>
 </body>

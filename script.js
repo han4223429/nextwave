@@ -1,5 +1,9 @@
 // NextWave — Our next wave. Local interactions; member authentication lives in the portal.
-window.NEXTWAVE_SITE = window.NEXTWAVE_SITE || { applyUrl: '', instagram: '', email: '', kakaoUrl: '' };
+// Site settings. Empty values hide what depends on them.
+// recruitStart / recruitEnd: ISO dates with a time zone, e.g. '2027-02-20T00:00:00+09:00'. When set, the join section shows a countdown.
+// reel: a short muted loop of real club footage, shown as a full-width band between the founders and the projects.
+//   mp4 is required (H.264, 720p, 6-15 s, under ~4 MB). webm and poster (a still from the clip) are optional. Leave mp4 empty to hide the band.
+window.NEXTWAVE_SITE = window.NEXTWAVE_SITE || { applyUrl: '', instagram: '', email: '', kakaoUrl: '', foundedYear: 2026, recruitStart: '', recruitEnd: '', reel: { mp4: '', webm: '', poster: '', caption: '' } };
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
     const $ = id => document.getElementById(id);
@@ -28,23 +32,23 @@ document.addEventListener('DOMContentLoaded', () => {
         hack: { ko: [['지나쳤던 문제를', '밤새 만든', '해결책으로.'], ['서로 다른 전공을', '하나의', '팀으로.'], ['어제의 물음표를', '내일의', '프로토타입으로.']], en: [['An overlooked problem.', 'An overnight', 'solution.'], ['Different majors.', 'One curious', 'team.'], ['Yesterday’s question.', 'Tomorrow’s', 'prototype.']] },
         mkt: { ko: [['아무도 몰랐던 것을', '모두가 궁금한', '브랜드로.'], ['우리가 만든 결과를', '사람들에게 닿는', '이야기로.'], ['작은 반응 하나를', '다음 실험의', '단서로.']], en: [['An unknown idea.', 'A brand worth', 'knowing.'], ['Something we built.', 'A story worth', 'sharing.'], ['One small response.', 'Our next', 'experiment.']] }
     };
-    let track = 'dev', variation = 0, attempts = 1;
+    let track = 'dev', variation = 0;
     function renderIdea(animate = false) {
         const text = ideas[track][isEnglish() ? 'en' : 'ko'][variation];
         $('idea-first').textContent = text[0];
         $('idea-second').replaceChildren(document.createTextNode(text[1] + ' '));
         const em = document.createElement('em'); em.textContent = text[2]; $('idea-second').append(em);
-        $('experiment-number').textContent = 'TRY / ' + String(attempts).padStart(3, '0');
+        $('experiment-number').textContent = (variation + 1) + ' / ' + ideas[track].ko.length;
         const categories = { dev: 'dev', game: 'gamedev', hack: 'hackathon', mkt: 'marketing' };
         $('track-opportunities').href = 'portal.html?category=' + categories[track];
         const descriptionKey = { dev: 'act.dev.d', game: 'act.game.d', hack: 'act.hack.d', mkt: 'act.mkt.d' }[track];
         $('track-description').textContent = window.I18N ? window.I18N.t(descriptionKey) : '';
         document.querySelector('.track-lab').dataset.track = track;
-        document.querySelectorAll('[data-track]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.track === track)));
+        document.querySelectorAll('.track-selector [data-track]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.track === track)));
         if (animate && !reducedMotion.matches && document.documentElement.dataset.motion !== 'paused') { const output = $('idea-output'); output.classList.remove('remixing'); void output.offsetWidth; output.classList.add('remixing'); }
     }
-    document.querySelectorAll('[data-track]').forEach(button => button.addEventListener('click', () => { track = button.dataset.track; variation = 0; attempts++; renderIdea(true); }));
-    $('idea-remix').addEventListener('click', () => { variation = (variation + 1) % ideas[track].ko.length; attempts++; renderIdea(true); });
+    document.querySelectorAll('.track-selector [data-track]').forEach(button => button.addEventListener('click', () => { track = button.dataset.track; variation = 0; renderIdea(true); }));
+    $('idea-remix').addEventListener('click', () => { variation = (variation + 1) % ideas[track].ko.length; renderIdea(true); });
     renderIdea();
 
     const projectTabs = [...document.querySelectorAll('[data-project-tab]')];
@@ -70,15 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault(); selectProject(projectTabs[next], true);
         });
     });
-    function openProjectLab(project) {
-        const lab = $('project-lab');
-        if (lab) lab.open = true;
-        const tab = projectTabs.find(button => button.dataset.projectTab === project);
-        if (tab) selectProject(tab);
-    }
-    document.querySelector('.archive-cover')?.addEventListener('click', () => openProjectLab('rescue'));
     document.querySelectorAll('[data-open-project]').forEach(link => {
-        link.addEventListener('click', () => openProjectLab(link.dataset.openProject));
+        link.addEventListener('click', () => {
+            const tab = projectTabs.find(button => button.dataset.projectTab === link.dataset.openProject);
+            if (tab) selectProject(tab);
+        });
     });
 
     const modal = $('member-modal'); let activeCard;
@@ -99,29 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.addEventListener('close', () => { document.body.style.overflow = ''; if (activeCard) activeCard.focus(); });
     document.addEventListener('nw:langchange', () => { renderIdea(); setupLinks(); if (modal.open && activeCard) fillProfile(activeCard); });
 
-    let queued = false;
-    function updateScroll() {
-        queued = false; const distance = document.documentElement.scrollHeight - window.innerHeight;
-        $('reading-progress').style.width = (distance > 0 ? Math.min(100, window.scrollY / distance * 100) : 0) + '%';
-        if (!reducedMotion.matches && document.documentElement.dataset.motion !== 'paused') {
-            const culture = document.querySelector('.culture-words');
-            const box = culture.getBoundingClientRect();
-            if (box.bottom > 0 && box.top < window.innerHeight) {
-                const shift = Math.max(-12, Math.min(12, (box.top / window.innerHeight - .5) * 35));
-                culture.style.setProperty('--culture-shift', shift + 'px');
-            }
-        }
-    }
-    window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(updateScroll); } }, { passive: true });
-    updateScroll();
+    // Mark the header link for the section being read.
     if ('IntersectionObserver' in window) {
         const links = document.querySelectorAll('.desktop-nav .nav-link');
         const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (!entry.isIntersecting) return; links.forEach(link => { if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); }); }); }, { rootMargin: '-10% 0px -65% 0px' });
         document.querySelectorAll('main section[id]').forEach(section => observer.observe(section));
-        const entrance = new IntersectionObserver(entries => entries.forEach(entry => {
-            if (entry.isIntersecting) { entry.target.classList.add('in-view'); entrance.unobserve(entry.target); }
-        }), { threshold: .12 });
-        document.querySelectorAll('main section:not(#home)').forEach(section => entrance.observe(section));
     }
     $('year').textContent = new Date().getFullYear();
 });
