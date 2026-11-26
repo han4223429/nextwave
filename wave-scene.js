@@ -167,7 +167,20 @@ async function mount(host) {
         grown = Math.min(1, grown + delta / 1.8);
         shape(delta);
         draw(delta);
-        request();
+        guard(delta);
+        if (!tooSlow) request();
+    }
+    // Safety net for slow phones: after the opening, if frames keep taking longer than ~45 ms for two seconds,
+    // drop the resolution once; if that is still too slow, hold a still frame (the pointer light still answers).
+    let slowTime = 0, sampled = 0, downgraded = false, tooSlow = false;
+    function guard(delta) {
+        if (grown < 1 || tooSlow) return;
+        sampled += delta;
+        slowTime = delta > 0.045 ? slowTime + delta : Math.max(0, slowTime - delta * 0.5);
+        if (sampled < 1 || slowTime < 2) return;
+        slowTime = 0;
+        if (!downgraded) { downgraded = true; renderer.setPixelRatio(1); layout(); }
+        else { tooSlow = true; host.dataset.waveMode = 'still'; }
     }
     function request() { if (!raf && visible && !document.hidden) raf = requestAnimationFrame(frame); }
 
@@ -178,7 +191,7 @@ async function mount(host) {
         pointer.tx = clamp((event.clientX - box.left) / box.width * 2 - 1, -1, 1);
         pointer.ty = clamp((event.clientY - box.top) / box.height * 2 - 1, -1, 1);
         if (still()) { pointer.x = pointer.tx; pointer.y = pointer.ty; draw(1); }
-        else request();
+        else if (tooSlow) draw(1); else request();
     }, { passive: true });
     zone.addEventListener('pointerleave', () => { pointer.tx = 0; pointer.ty = 0; request(); });
     if (!compact) addEventListener('scroll', () => {
