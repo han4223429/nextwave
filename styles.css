@@ -3,7 +3,8 @@
 
 /* Hero: only the name. The logo's wave as a live 3D sculpture fills the screen, the lettering sits across it,
    and one small line underneath says what this is. The message and the buttons come one scroll later. */
-.hero { position: relative; isolation: isolate; min-height: calc(100svh - var(--header-h)); overflow: hidden; background: var(--abyss); }
+.hero { --p: 0; position: relative; isolation: isolate; background: var(--abyss); }
+.hero-pin { position: relative; height: calc(100svh - var(--header-h)); min-height: 520px; overflow: hidden; }
 .hero-scene { position: absolute; inset: 0; z-index: -1; }
 .hero-scene canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
 /* Without WebGL the logo itself stands in for the scene. */
@@ -59,9 +60,11 @@ html[data-motion=paused] .motion-toggle::before { border-radius: 1px; background
 
 /* Founders: the club's first generation, signed in pen. */
 .founders { position: relative; overflow: hidden; border-top: 1px solid var(--tide); }
-.founders-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: end; gap: var(--s7); }
-.founders-numeral { font-family: var(--display); font-size: clamp(160px, 26vw, 400px); font-stretch: 125%; font-weight: 900; line-height: .74; letter-spacing: -.06em; color: var(--sky); }
-.founders-numeral span { margin-left: .06em; font-family: var(--font); font-size: .42em; font-weight: 800; letter-spacing: -.04em; color: var(--on-night); }
+.founders-head { display: block; }
+.zoom-one { --p: 0; position: relative; background: var(--abyss); }
+.zoom-pin { position: relative; display: grid; place-items: center; height: calc(100svh - var(--header-h)); min-height: 480px; overflow: hidden; }
+.zoom-mark { display: flex; align-items: baseline; font-family: var(--display); font-size: clamp(180px, 34vh, 380px); font-stretch: 125%; font-weight: 900; line-height: .74; letter-spacing: -.06em; color: var(--sky); user-select: none; }
+.zoom-gi { margin-left: .06em; font-family: var(--font); font-size: .42em; font-weight: 800; letter-spacing: -.04em; color: var(--on-night); }
 .founders-copy h2 { font-size: var(--fs-5); font-weight: 800; line-height: 1.15; letter-spacing: -.04em; }
 .founders-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s5); max-width: 34rem; margin-top: var(--s6); }
 .founders-facts > div { padding-top: var(--s4); border-top: 2px solid var(--tide); }
@@ -86,6 +89,28 @@ html[data-motion=paused] .motion-toggle::before { border-radius: 1px; background
 .member-role { color: var(--sky); font-weight: 700; }
 .member-meta { margin-top: var(--s1); color: var(--on-night-2); font-size: var(--fs-1); line-height: 1.5; }
 .founders-note { margin-top: var(--s6); color: var(--on-night-3); font-size: var(--fs-0); }
+
+/* Scroll scenes (scenes.js). Only when motion is on: the blocks get tall, their inner part pins, and --p drives the zoom. */
+html.js:not(.scenes-off) .hero { height: 210svh; }
+html.js:not(.scenes-off) .hero-pin { position: sticky; top: var(--header-h); }
+/* The name grows toward the reader until the screen is inside it; then the sea goes dark and the intro begins. */
+html.js:not(.scenes-off) .wordmark { scale: calc(1 + var(--p) * var(--p) * 9); transform-origin: 50% 55%; }
+html.js:not(.scenes-off) .hero-caption, html.js:not(.scenes-off) .motion-toggle { opacity: calc(1 - var(--p) * 5); }
+.scene-veil { position: absolute; inset: 0; background: var(--abyss); opacity: 0; pointer-events: none; }
+html.js:not(.scenes-off) .hero .scene-veil { opacity: calc((var(--p) - .72) * 3.6); }
+/* "1기": the 1 grows until its stroke fills the screen with the logo's sky, then fades to the founders. */
+html.js:not(.scenes-off) .zoom-one { height: 220svh; }
+html.js:not(.scenes-off) .zoom-pin { position: sticky; top: var(--header-h); }
+html.js:not(.scenes-off) .zoom-digit { display: inline-block; scale: calc(1 + var(--p) * var(--p) * var(--p) * 60); transform-origin: 58% 60%; }
+html.js:not(.scenes-off) .zoom-gi { opacity: calc(1 - var(--p) * 4); }
+html.js:not(.scenes-off) .zoom-one .scene-veil { opacity: calc((var(--p) - .82) * 6); }
+/* Things that matter grow into place as they come up the screen. */
+html.js:not(.scenes-off) [data-zoom] { --z: 0; scale: calc(.86 + var(--z) * .14); transform-origin: 50% 0; }
+/* Reveals: headings slide up out of a mask, groups rise one after another. */
+[data-reveal] { --d: 0s; }
+html.js:not(.scenes-off) [data-reveal] { transition: opacity .8s var(--ease-out) var(--d, 0s), translate 1s var(--ease-out) var(--d, 0s), clip-path 1s var(--ease-out) var(--d, 0s); }
+html.js:not(.scenes-off) [data-reveal=rise]:not(.is-in) { opacity: 0; translate: 0 40px; }
+html.js:not(.scenes-off) [data-reveal=mask]:not(.is-in) { clip-path: inset(0 0 100% 0); translate: 0 .35em; }
 
 /* Club footage: a full-width muted loop between two chapters. Only shown when a clip is configured. */
 .reel { position: relative; height: min(72svh, 640px); overflow: hidden; background: var(--deep); }
@@ -316,7 +341,6 @@ html[data-motion=paused] #idea-output.remixing p { animation: none; }
   .hero-lede { font-size: var(--fs-1); }
   .about-lede { font-size: clamp(28px, 8vw, 34px); }
   .about-grid { margin-top: var(--s6); font-size: var(--fs-1); }
-  .founders-numeral { font-size: 120px; }
   .founders-facts strong { font-size: var(--fs-2); }
   .founder-list { gap: 0; margin-top: var(--s7); max-width: none; border-top: 1px solid var(--tide); perspective: none; }
   .founder-list li { border-bottom: 1px solid var(--tide); }

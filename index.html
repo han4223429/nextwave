@@ -14,23 +14,24 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" /></noscript>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap" /></noscript>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap&text=%EC%86%90%EC%84%B1%EA%B9%80%ED%95%9C%EC%9A%A9%EC%9D%B4%ED%95%99%EC%A3%BC1%EA%B8%B0" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap&text=%EC%86%90%EC%84%B1%EA%B9%80%ED%95%9C%EC%9A%A9%EC%9D%B4%ED%95%99%EC%A3%BC1%EA%B8%B0" /></noscript>
-  <link rel="modulepreload" href="wave-scene.js?v=wave01-20261126o" />
-  <link rel="stylesheet" href="site-system.css?v=wave01-20261126o" />
-  <link rel="stylesheet" href="styles.css?v=wave01-20261126o" />
-  <link rel="stylesheet" href="rescue-demo.css?v=wave01-20261126o" />
+  <link rel="modulepreload" href="wave-scene.js?v=wave01-20261126r" />
+  <link rel="stylesheet" href="site-system.css?v=wave01-20261126r" />
+  <link rel="stylesheet" href="styles.css?v=wave01-20261126r" />
+  <link rel="stylesheet" href="rescue-demo.css?v=wave01-20261126r" />
   <script defer src="site-shell.js?v=unified-20261012"></script>
   <script defer src="water-audio.js?v=water-sound-20260907-2"></script>
   <script defer src="sound-ui.js?v=water-sound-20260907-2"></script>
-  <script defer src="i18n.js?v=wave01-20261126o"></script>
-  <script defer src="script.js?v=wave01-20261126o"></script>
-  <script defer src="wordmark.js?v=wave01-20261126o"></script>
-  <script defer src="fields.js?v=wave01-20261126o"></script>
-  <script defer src="extras.js?v=wave01-20261126o"></script>
-  <script defer src="command-palette.js?v=wave01-20261126o"></script>
-  <script defer src="ticket.js?v=wave01-20261126o"></script>
-  <script defer src="project-demo.js?v=wave01-20261126o"></script>
-  <script defer src="rescue-demo.js?v=wave01-20261126o"></script>
-  <script type="module" src="wave-scene.js?v=wave01-20261126o"></script>
+  <script defer src="i18n.js?v=wave01-20261126r"></script>
+  <script defer src="script.js?v=wave01-20261126r"></script>
+  <script defer src="wordmark.js?v=wave01-20261126r"></script>
+  <script defer src="fields.js?v=wave01-20261126r"></script>
+  <script defer src="scenes.js?v=wave01-20261126r"></script>
+  <script defer src="extras.js?v=wave01-20261126r"></script>
+  <script defer src="command-palette.js?v=wave01-20261126r"></script>
+  <script defer src="ticket.js?v=wave01-20261126r"></script>
+  <script defer src="project-demo.js?v=wave01-20261126r"></script>
+  <script defer src="rescue-demo.js?v=wave01-20261126r"></script>
+  <script type="module" src="wave-scene.js?v=wave01-20261126r"></script>
 </head>
 <body id="top">
   <script>document.documentElement.classList.add('js')</script>
@@ -61,12 +62,15 @@
   <div class="nw-progress" aria-hidden="true"><i></i></div>
 
   <main id="main-content">
-    <section id="home" class="hero" aria-label="NextWave">
+    <section id="home" class="hero" aria-label="NextWave" data-scene>
+      <div class="hero-pin">
       <div class="hero-scene" id="wave-scene" data-wave-scene="hero" aria-hidden="true"></div>
       <div class="wrap hero-stage">
         <p class="wordmark" id="wordmark" aria-hidden="true"><span class="wm-next"><i>N</i><i>E</i><i>X</i><i>T</i></span><span class="wm-wave"><i>W</i><i>A</i><i>V</i><i>E</i></span></p>
         <p class="hero-caption" data-i18n="motion.footer">순천향대학교 IT·창업 연합 동아리</p>
         <button id="motion-toggle" class="motion-toggle" type="button"><span id="motion-label">화면 멈추기</span></button>
+      </div>
+      <div class="scene-veil" aria-hidden="true"></div>
       </div>
     </section>
 
@@ -128,10 +132,12 @@
       </div>
     </section>
 
+    <div class="zoom-one" data-scene aria-hidden="true">
+      <div class="zoom-pin"><p class="zoom-mark"><span class="zoom-digit">1</span><span class="zoom-gi" data-i18n="w1.founders.gi">기</span></p><div class="scene-veil"></div></div>
+    </div>
     <section id="team" class="band founders" aria-labelledby="team-title">
       <div class="wrap">
         <div class="founders-head">
-          <p class="founders-numeral" aria-hidden="true">1<span data-i18n="w1.founders.gi">기</span></p>
           <div class="founders-copy">
             <h2 id="team-title" data-i18n="w1.founders.title">1기 창립 운영진</h2>
             <dl class="founders-facts">
@@ -206,7 +212,7 @@
 
         <article id="mayhem-project-panel" class="project" role="tabpanel" aria-labelledby="project-tab-mayhem" data-project-panel="mayhem">
           <h3 class="sr-only">MAYHEM</h3>
-          <div class="project-play">
+          <div class="project-play" data-zoom>
             <div id="mayhem-stage" class="mayhem-stage screen"><canvas id="mayhem-canvas" width="960" height="540" tabindex="0" aria-label="MAYHEM 스타일 점수 웹 실험" aria-describedby="mayhem-instructions mayhem-status">브라우저가 Canvas를 지원해야 플레이할 수 있어요. 아래 원작 영상도 볼 수 있어요.</canvas></div>
             <div class="demo-bar">
               <dl class="demo-stats">

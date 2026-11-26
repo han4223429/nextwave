@@ -31,7 +31,8 @@
         const reduce = root.matchMedia('(prefers-reduced-motion: reduce)');
         let running = !reduce.matches, visible = true, raf = 0, last = null, time = 0;
         // The opening unfold plays only when the page starts visible and moving.
-        let opened = reduce.matches || document.hidden ? 1 : 0, pointer = null, pull = 0;
+        let opened = reduce.matches || document.hidden ? 1 : 0, pointer = null, pull = 0, lastRows = null;
+        const aim = { x: 0, y: 0 };
 
         function labels() {
             html.dataset.motion = running ? 'running' : 'paused';
@@ -46,24 +47,33 @@
             const elapsed = last === null ? 0 : (now - last) / 1000;
             const delta = Math.min(0.05, elapsed);
             last = now; time += delta;
-            // Read every letter's position before writing any width.
-            const boxes = pointer ? letters.map(letter => letter.getBoundingClientRect()) : null;
-            const pitch = boxes ? boxes.reduce((sum, box) => sum + box.width, 0) / boxes.length : 1;
+            // The pointer is placed on each line by the line's own box, not by the letters' boxes. The widths are then
+            // balanced so every line keeps its total width: the line never grows or shifts, so the letter under the
+            // pointer stays under it and nothing shakes.
+            const rows = pointer ? lines.map(line => line[0].parentElement.getBoundingClientRect()) : null;
             opened = Math.min(1, opened + elapsed / 1.1);
-            pull += ((pointer ? 1 : 0) - pull) * (1 - Math.exp(-delta * 9));
+            // Rise quickly toward the pointer, settle back slowly when it leaves.
+            pull += ((pointer ? 1 : 0) - pull) * (1 - Math.exp(-delta * (pointer ? 7 : 1.6)));
+            if (pointer) { aim.x += (pointer.x - aim.x) * (1 - Math.exp(-delta * 14)); aim.y = pointer.y; }
             const unfold = 1 - (1 - opened) ** 3;
-            let n = 0;
-            lines.forEach((line, row) => line.forEach((letter, index) => {
-                let width = waveWidth(time, index, line.length, row * TAU / 8);
-                if (boxes && pull > 0.001) {
-                    const box = boxes[n];
-                    const near = pointer.y >= box.top - box.height && pointer.y <= box.bottom + box.height;
-                    const distance = near ? ((box.left + box.right) / 2 - pointer.x) / pitch : 9;
-                    width += (crestWidth(distance) - width) * pull;
+            lines.forEach((line, row) => {
+                const count = line.length;
+                let widths = line.map((letter, index) => waveWidth(time, index, count, row * TAU / 8));
+                if (pull > 0.001 && (rows || lastRows)) {
+                    const box = (rows || lastRows)[row];
+                    const near = aim.y >= box.top - box.height * 0.8 && aim.y <= box.bottom + box.height * 0.8;
+                    const at = (aim.x - box.left) / box.width * count - 0.5;
+                    const strength = near ? pull : 0;
+                    widths = widths.map((width, index) => width + (crestWidth(index - at) - width) * strength);
+                    // Hold the line's total width: share the difference across the letters, inside the font's range.
+                    for (let pass = 0; pass < 3; pass++) {
+                        const shift = (REST * count - widths.reduce((sum, width) => sum + width, 0)) / count;
+                        widths = widths.map(width => clamp(width + shift, MIN, MAX));
+                    }
                 }
-                letter.style.setProperty('--w', clamp(MIN + (width - MIN) * unfold, MIN, MAX).toFixed(1));
-                n++;
-            }));
+                line.forEach((letter, index) => letter.style.setProperty('--w', clamp(MIN + (widths[index] - MIN) * unfold, MIN, MAX).toFixed(1)));
+            });
+            if (rows) lastRows = rows;
             request();
         }
         function setRunning(next) {
@@ -73,8 +83,12 @@
             request();
         }
 
-        // The letters no longer follow the pointer: widening the letter under the cursor moved the next letter under it,
-        // which made the line shake, and letting go snapped every letter back at once. The 3D wave answers the pointer instead.
+        // The whole hero listens, so the crest starts as the pointer comes near the letters, not only on top of them.
+        const zone = mark.closest('.hero') || mark;
+        zone.addEventListener('pointermove', event => { if (!pointer) { aim.x = event.clientX; } pointer = { x: event.clientX, y: event.clientY }; request(); });
+        zone.addEventListener('pointerdown', event => { aim.x = event.clientX; pointer = { x: event.clientX, y: event.clientY }; request(); });
+        ['pointerleave', 'pointercancel'].forEach(name => zone.addEventListener(name, () => { pointer = null; }));
+        zone.addEventListener('pointerup', event => { if (event.pointerType !== 'mouse') pointer = null; });
         toggle?.addEventListener('click', () => setRunning(!running));
         reduce.addEventListener('change', event => setRunning(!event.matches));
         document.addEventListener('nw:langchange', labels);
